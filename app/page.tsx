@@ -1,33 +1,26 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <Link href="/about" className="text-gray-300 hover:text-gray-400">
-          About
+      <h1 className="text-3xl font-bold">BestCodes</h1>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Link href="/about">
+          <Image
+            src="https://avatars.githubusercontent.com/u/10091844?v=4"
+            width={200}
+            height={200}
+            alt="BestCodes"
+          />
         </Link>
-        <Link href="/blog" className="ml-3 text-gray-300 hover:text-gray-400">
-          Blog
-        </Link>
-        <Link
-          href="/contact"
-          className="ml-3 text-gray-300 hover:text-gray-400"
-        >
-          Contact
-        </Link>
-        <Link
-          href="/projects"
-          className="ml-3 text-gray-300 hover:text-gray-400"
-        >
-          Projects
-        </Link>
-        <Link href="/resume" className="ml-3 text-gray-300 hover:text-gray-400">
-          Resume
-        </Link>
-      </div>
+      </motion.div>
     </main>
   );
 }
