@@ -2,16 +2,19 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Header from "@/components/website/header";
 
 export default function Home() {
+  const { scrollY } = useScroll();
+
+  const waveImageScale = useTransform(scrollY, [0, 200], [1, 1.5]);
+  const waveImageOpacity = useTransform(scrollY, [0, 200], [1, 0]);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between dark:bg-slate-900">
       <Header />
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        style={{ scale: waveImageScale, opacity: waveImageOpacity }}
         className="flex flex-row items-center justify-center gap-4 p-16"
       >
         <Image

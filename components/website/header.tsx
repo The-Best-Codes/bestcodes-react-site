@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 export default function Header() {
   const { scrollY } = useScroll();
 
-  // Define the scroll range for the transition (e.g., 200 pixels)
+  // Define the scroll range for the transition (200 pixels)
   const scrollRange = [0, 200];
 
   const headerWidth = useTransform(scrollY, scrollRange, ["100%", "80%"]);
