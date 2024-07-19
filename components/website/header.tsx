@@ -9,7 +9,7 @@ export default function Header() {
   const scrollRange = [0, 200];
 
   const headerWidth = useTransform(scrollY, scrollRange, ["100%", "80%"]);
-  const headerTop = useTransform(scrollY, scrollRange, ["0px", "50px"]);
+  const headerTop = useTransform(scrollY, scrollRange, ["0px", "25px"]);
   const headerBorderRadius = useTransform(scrollY, scrollRange, [0, 50]);
   const logoBorderRadius = useTransform(scrollY, scrollRange, [5, 20]);
 
