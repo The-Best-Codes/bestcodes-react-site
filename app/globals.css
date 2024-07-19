@@ -67,3 +67,24 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes fadeInAndChangeColor {
+  0% {
+    opacity: 0;
+    color: black;
+  }
+  50% {
+    opacity: 1;
+    color: black;
+  }
+  100% {
+    opacity: 1;
+    color: #3b82f6;
+  }
+}
+
+.letter {
+  display: inline-block;
+  opacity: 0;
+  animation: fadeInAndChangeColor 2s forwards;
+}
