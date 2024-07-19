@@ -81,6 +81,15 @@ export default function Header() {
               className="h-8 w-8"
             />
           </Link>
+          <Link target="_blank" href={`https://dev.to/best_codes`}>
+            <Image
+              src={`/image/icons/devdotto.svg`}
+              alt="twitter"
+              width={40}
+              height={40}
+              className="h-8 w-8"
+            />
+          </Link>
         </div>
       </header>
     </motion.div>
