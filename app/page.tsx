@@ -13,6 +13,7 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import Header from "@/components/website/header";
+import ChristianCarousel from "@/components/website/christian_carousel";
 
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -130,15 +131,13 @@ export default function Home() {
                 projects in general).
               </p>
               <p>
-                {" "}
                 I am currently working on a few Bible apps, verse of the day
                 programs, etc. I&apos;ll publish them when I get around to
                 finishing them...
               </p>
-              <p>
-                Here&apos;s a carousel containing my Christian projects. I think
-                there&apos;s just one for now!
-              </p>
+              <div className="w-full flex justify-center items-center mt-4">
+                <ChristianCarousel />
+              </div>
             </CardContent>
           </Card>
         </motion.div>
