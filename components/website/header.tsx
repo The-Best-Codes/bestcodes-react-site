@@ -3,12 +3,15 @@ import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function Header() {
-  const { scrollYProgress } = useScroll();
+  const { scrollY } = useScroll();
 
-  const headerWidth = useTransform(scrollYProgress, [0, 0.2], ["100%", "80%"]);
-  const headerTop = useTransform(scrollYProgress, [0, 0.2], ["0px", "50px"]);
-  const headerBorderRadius = useTransform(scrollYProgress, [0, 0.3], [0, 50]);
-  const logoBorderRadius = useTransform(scrollYProgress, [0, 0.3], [5, 20]);
+  // Define the scroll range for the transition (e.g., 200 pixels)
+  const scrollRange = [0, 200];
+
+  const headerWidth = useTransform(scrollY, scrollRange, ["100%", "80%"]);
+  const headerTop = useTransform(scrollY, scrollRange, ["0px", "50px"]);
+  const headerBorderRadius = useTransform(scrollY, scrollRange, [0, 50]);
+  const logoBorderRadius = useTransform(scrollY, scrollRange, [5, 20]);
 
   return (
     <motion.div
