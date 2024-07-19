@@ -7,7 +7,7 @@ import Header from "@/components/website/header";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 dark:bg-slate-900">
+    <main className="flex min-h-screen flex-col items-center justify-between dark:bg-slate-900">
       <Header />
       <motion.div
         initial={{ opacity: 0 }}
@@ -23,6 +23,21 @@ export default function Home() {
         />
         <h1 className="text-9xl text-blue-500 line-clamp-1 font-bold">Hi</h1>
       </motion.div>
+      <div className="h-96">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      </div>
+      <div className="h-96">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      </div>
+      <div className="h-96">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      </div>
+      <div className="h-96">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      </div>
+      <div className="h-96">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      </div>
     </main>
   );
 }

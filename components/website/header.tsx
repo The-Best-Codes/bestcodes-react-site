@@ -1,27 +1,29 @@
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function Header() {
   const { scrollYProgress } = useScroll();
 
   const headerWidth = useTransform(scrollYProgress, [0, 0.2], ["100%", "80%"]);
+  const headerTop = useTransform(scrollYProgress, [0, 0.2], ["0px", "50px"]);
   const headerBorderRadius = useTransform(scrollYProgress, [0, 0.3], [0, 50]);
   const logoBorderRadius = useTransform(scrollYProgress, [0, 0.3], [5, 20]);
-  const headerTop = useTransform(scrollYProgress, [0, 0.1], [0, 50]);
 
   return (
     <motion.div
-      className="fixed left-0 right-0 h-16 z-50"
+      className="sticky h-16 z-50 mx-auto"
       style={{
         width: headerWidth,
         borderRadius: headerBorderRadius,
-        left: "50%",
-        x: "-50%",
         top: headerTop,
       }}
     >
       {/* Backdrop element */}
-      <div className="absolute inset-0 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm shadow-lg" style={{ borderRadius: 'inherit' }}></div>
+      <div
+        className="absolute inset-0 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm shadow-lg"
+        style={{ borderRadius: "inherit" }}
+      ></div>
 
       {/* Content */}
       <header className="relative h-full flex items-center justify-between px-6">
@@ -70,12 +72,15 @@ export default function Header() {
           </nav>
         </div>
         <div className="flex flex-row items-center gap-4">
-          <a
-            href="https://github.com/the-best-codes"
-            className="text-black dark:text-white hover:text-blue-500 hover:underline"
-          >
-            GitHub
-          </a>
+          <Link target="_blank" href={`https://github.com/the-best-codes`}>
+            <Image
+              src={`/image/icons/github.svg`}
+              alt="github"
+              width={40}
+              height={40}
+              className="h-8 w-8"
+            />
+          </Link>
         </div>
       </header>
     </motion.div>
