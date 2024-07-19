@@ -142,55 +142,37 @@ export default function Home() {
           </Card>
         </motion.div>
       </div>
-      <section className="flex flex-col items-center p-16 text-center">
-        <h2 className="text-4xl text-blue-500 font-bold mb-8">GitHub Stats</h2>
-        <Image
-          src={`https://github-readme-stats.vercel.app/api?username=The-Best-Codes&hide_rank=true&show_icons=true&theme=dark`}
-          alt="GitHub Stats"
-          width={500}
-          height={300}
-          className="rounded-lg"
-          unoptimized
-        />
-      </section>
-      <section className="flex flex-col items-center p-16 text-center">
-        <h2 className="text-4xl text-blue-500 font-bold mb-8">Projects</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-            <h3 className="text-2xl font-bold mb-2">Project 1</h3>
-            <p className="text-gray-700 dark:text-gray-300">
-              Description of project 1.
-            </p>
-            <Link href="https://github.com/BestCodes/project1" passHref>
-              <span className="text-blue-500 hover:underline mt-4 block">
-                View on GitHub
-              </span>
-            </Link>
-          </div>
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-            <h3 className="text-2xl font-bold mb-2">Project 2</h3>
-            <p className="text-gray-700 dark:text-gray-300">
-              Description of project 2.
-            </p>
-            <Link href="https://github.com/BestCodes/project2" passHref>
-              <span className="text-blue-500 hover:underline mt-4 block">
-                View on GitHub
-              </span>
-            </Link>
-          </div>
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-            <h3 className="text-2xl font-bold mb-2">Project 3</h3>
-            <p className="text-gray-700 dark:text-gray-300">
-              Description of project 3.
-            </p>
-            <Link href="https://github.com/BestCodes/project3" passHref>
-              <span className="text-blue-500 hover:underline mt-4 block">
-                View on GitHub
-              </span>
-            </Link>
-          </div>
-        </div>
-      </section>
+      <div className="h-fit w-full flex justify-center items-center p-8">
+        <motion.div
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="w-full sm:w-full md:w-3/4 lg:w-1/2"
+        >
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex flex-row items-center gap-2">
+                <Image
+                  src={`/image/emoji/technologist.png`}
+                  alt="latin cross"
+                  width={80}
+                  height={80}
+                  className="h-14 w-14"
+                />
+                <span className="text-6xl">I&apos;m a Coder</span>
+              </CardTitle>
+              <CardDescription>
+                Probably a bit obvious, credits to my username...
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-4 text-lg">
+              <p>
+                I love to code! I&apos;ve been coding for about{" "}
+                {new Date().getFullYear() - 2017} years now.
+              </p>
+            </CardContent>
+          </Card>
+        </motion.div>
+      </div>
     </main>
   );
 }
