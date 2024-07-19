@@ -101,7 +101,7 @@ export default function Home() {
         <motion.div
           initial={{ x: -100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          className="w-full sm:w-full md:w-3/4 lg:w-1/2"
+          className="w-full sm:w-full md:w-3/4 lg:w-2/3"
         >
           <Card>
             <CardHeader>
@@ -146,7 +146,7 @@ export default function Home() {
         <motion.div
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="w-full sm:w-full md:w-3/4 lg:w-1/2"
+          className="w-full sm:w-full md:w-3/4 lg:w-2/3"
         >
           <Card>
             <CardHeader>
@@ -169,6 +169,34 @@ export default function Home() {
                 I love to code! I&apos;ve been coding for about{" "}
                 {new Date().getFullYear() - 2017} years now.
               </p>
+            </CardContent>
+          </Card>
+        </motion.div>
+      </div>
+      <div className="h-fit w-full flex justify-end items-end p-8">
+        <motion.div
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="w-full sm:w-full md:w-3/4 lg:w-2/3"
+        >
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex flex-row items-center gap-2">
+                <Image
+                  src={`/image/emoji/artist.png`}
+                  alt="latin cross"
+                  width={80}
+                  height={80}
+                  className="h-14 w-14"
+                />
+                <span className="text-6xl">I&apos;m a Creator</span>
+              </CardTitle>
+              <CardDescription>
+                An un-creative catch-all word for everything else I do
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-4 text-lg">
+              <p>I&apos;m a creator!</p>
             </CardContent>
           </Card>
         </motion.div>
