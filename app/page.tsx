@@ -96,35 +96,50 @@ export default function Home() {
           </motion.span>
         </motion.div>
       </section>
-      <div className="h-fit w-full p-16">
+      <div className="h-fit w-full p-8">
         <motion.div
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+          initial={{ x: -100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
           className="w-full sm:w-full md:w-3/4 lg:w-1/2"
         >
           <Card>
             <CardHeader>
-              <CardTitle>I&apos;m a Christian</CardTitle>
+              <CardTitle className="flex flex-row items-center gap-2">
+                <Image
+                  src={`/image/emoji/latin_cross.png`}
+                  alt="latin cross"
+                  width={80}
+                  height={80}
+                  className="h-14 w-14"
+                />
+                <span className="text-6xl">I&apos;m a Christian</span>
+              </CardTitle>
               <CardDescription>
                 Sinner Saved by God&apos;s Grace
               </CardDescription>
             </CardHeader>
-            <CardContent>I&apos;m a Christian and I love to code.</CardContent>
-            <CardFooter>
-              <Link
-                href="https://github.com/The-Best-Codes"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src={`/image/icons/github.svg`}
-                  alt="github"
-                  width={40}
-                  height={40}
-                  className="h-8 w-8"
-                />
-              </Link>
-            </CardFooter>
+            <CardContent className="flex flex-col gap-4 text-lg">
+              <p>
+                I&apos;m a sinner saved by grace, redeemed by Christ&apos;s
+                love. Striving to live for God&apos;s glory and share His
+                message of hope. Imperfect but forgiven, growing in faith daily.
+              </p>
+              <p>
+                I haven&apos;t published very many of my Christian or Bible
+                related projects yet. (I haven&apos;t published many of my
+                projects in general).
+              </p>
+              <p>
+                {" "}
+                I am currently working on a few Bible apps, verse of the day
+                programs, etc. I&apos;ll publish them when I get around to
+                finishing them...
+              </p>
+              <p>
+                Here&apos;s a carousel containing my Christian projects. I think
+                there&apos;s just one for now!
+              </p>
+            </CardContent>
           </Card>
         </motion.div>
       </div>
