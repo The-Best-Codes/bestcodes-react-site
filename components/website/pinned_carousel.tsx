@@ -10,12 +10,12 @@ import {
   CarouselNext,
 } from "@/components/ui/carousel";
 
-export default function ChristianCarousel() {
+export default function PinnedCarousel() {
   const [isLoading, setIsLoading] = useState(true);
   const [carouselData, setCarouselData] = useState<any>([]);
 
   useEffect(() => {
-    const url = `/api/github/repos-by-topic?username=The-Best-Codes&topic=christianity`;
+    const url = `/api/github/pinned-repos?username=The-Best-Codes`;
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
@@ -36,7 +36,7 @@ export default function ChristianCarousel() {
         {isLoading ? (
           <CarouselItem>
             <div className="flex flex-col items-center justify-center">
-              <Skeleton className="w-64 h-64 rounded-lg" />
+              <Skeleton className="w-64 h-64 rounded-lg object-cover" />
               <Skeleton className="w-48 h-10 mt-4" />
             </div>
           </CarouselItem>

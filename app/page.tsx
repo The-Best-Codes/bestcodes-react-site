@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/card";
 import Header from "@/components/website/header";
 import ChristianCarousel from "@/components/website/christian_carousel";
+import PinnedCarousel from "@/components/website/pinned_carousel";
 
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -213,6 +214,9 @@ export default function Home() {
                 I write most of my backend in Node.js, which is not surprising
                 (since I already had experience with JavaScript.)
               </p>
+              <div className="w-full flex justify-center items-center mt-4">
+                <PinnedCarousel />
+              </div>
             </CardContent>
           </Card>
         </motion.div>
