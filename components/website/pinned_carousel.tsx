@@ -50,14 +50,14 @@ export default function PinnedCarousel() {
                 className="flex flex-col items-center justify-center"
               >
                 <Image
-                  src={project.coverImage.src}
+                  src={project?.coverImage?.src || "/image/not_found.png"}
                   alt={project.name}
                   width={256}
                   height={256}
                   unoptimized
                   className="w-64 h-64 object-cover rounded-lg"
                 />
-                <h3 className="text-xl font-bold mt-4 text-center text-blue-500 hover:underline">
+                <h3 className="text-xl font-bold mt-4 text-center text-blue-500 hover:underline max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
                   {project.name}
                 </h3>
               </Link>

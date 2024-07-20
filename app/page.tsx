@@ -214,7 +214,17 @@ export default function Home() {
                 I write most of my backend in Node.js, which is not surprising
                 (since I already had experience with JavaScript.)
               </p>
-              <div className="w-full flex justify-center items-center mt-4">
+              <div className="w-full flex flex-col gap-4 justify-center items-center mt-4">
+                <span className="text-3xl flex flex-row items-center gap-2">
+                  <Image
+                    src={`/image/emoji/pushpin.png`}
+                    alt="pushpin"
+                    width={40}
+                    height={40}
+                    className="h-10 w-10"
+                  />
+                  Pinned Projects
+                </span>
                 <PinnedCarousel />
               </div>
             </CardContent>
