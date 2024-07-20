@@ -266,6 +266,27 @@ export default function Home() {
                   print stuff.
                 </Link>
               </p>
+              <p>
+                Once upon a time, I received a challenge - if I could learn to
+                3D design, the challenger would gift me a free 3D Printer.
+              </p>
+              <p>
+                How could I turn that down? I got right to work. I began 3D
+                modeling with Blender, which wasn&apos;t the easiest thing to
+                start with. Blender targets 3D animation / film production, but
+                thankfully there are plenty of tutorials on YouTube.
+              </p>
+              <p>
+                I usually just use TinkerCad now for simpler models, but
+                I&apos;m learning a few others softwares as well (since
+                TinkerCad is quite basic).
+              </p>
+              <p>
+                Here&apos;s a few of my &apos;Highlighed Models&apos; - and no,
+                the names aren&apos;t buggy or anything. My teams account on
+                Printables seems to love double-naming models. Appearently it
+                ranks models higher on the search.
+              </p>
               <div className="w-full flex flex-col gap-4 justify-center items-center mt-4">
                 <PrintablesCarousel />
               </div>
