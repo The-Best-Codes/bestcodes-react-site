@@ -257,7 +257,15 @@ export default function Home() {
               </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col gap-4 text-lg">
-              <p>I&apos;m a creator!</p>
+              <p>
+                I design stuff. I create stuff. I{" "}
+                <Link
+                  href={`https://www.printables.com/@Best_codes`}
+                  className="text-blue-500"
+                >
+                  print stuff.
+                </Link>
+              </p>
               <div className="w-full flex flex-col gap-4 justify-center items-center mt-4">
                 <PrintablesCarousel />
               </div>
