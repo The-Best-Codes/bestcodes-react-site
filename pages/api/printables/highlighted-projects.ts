@@ -31,7 +31,7 @@ export default async function handler(
   const resDataMap = resData.map((project: any) => {
     return {
       name: project.name,
-      url: `https://www.printables.com/models/${project.id}`,
+      url: `https://www.printables.com/model/${project.id}`,
       coverImage: {
         src: `https://media.printables.com/${project.image.filePath}`,
         alt: project.name,

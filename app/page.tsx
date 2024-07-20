@@ -15,6 +15,7 @@ import {
 import Header from "@/components/website/header";
 import ChristianCarousel from "@/components/website/christian_carousel";
 import PinnedCarousel from "@/components/website/pinned_carousel";
+import PrintablesCarousel from "@/components/website/printables_carousel";
 
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -257,6 +258,9 @@ export default function Home() {
             </CardHeader>
             <CardContent className="flex flex-col gap-4 text-lg">
               <p>I&apos;m a creator!</p>
+              <div className="w-full flex flex-col gap-4 justify-center items-center mt-4">
+                <PrintablesCarousel />
+              </div>
             </CardContent>
           </Card>
         </motion.div>
