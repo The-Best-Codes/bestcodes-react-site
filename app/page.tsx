@@ -16,6 +16,7 @@ import Header from "@/components/website/header";
 import ChristianCarousel from "@/components/website/christian_carousel";
 import PinnedCarousel from "@/components/website/pinned_carousel";
 import PrintablesCarousel from "@/components/website/printables_carousel";
+import SocialMediaLinks from "@/components/website/socials";
 
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -294,6 +295,18 @@ export default function Home() {
           </Card>
         </motion.div>
       </div>
+      <section className="h-fit w-full flex justify-center items-center p-8">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          className="w-full flex flex-col gap-4 justify-center items-center"
+        >
+          <h1 className="text-6xl font-bold">
+            Where to <span className="text-blue-500">find me</span>
+          </h1>
+          <SocialMediaLinks />
+        </motion.div>
+      </section>
     </main>
   );
 }
