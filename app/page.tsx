@@ -113,7 +113,9 @@ export default function Home() {
                   height={80}
                   className="h-14 w-14"
                 />
-                <span className="text-6xl">I&apos;m a Christian</span>
+                <span className="text-6xl">
+                  I&apos;m a <span className="text-blue-500">Christian</span>
+                </span>
               </CardTitle>
               <CardDescription>
                 Sinner Saved by God&apos;s Grace
@@ -158,7 +160,9 @@ export default function Home() {
                   height={80}
                   className="h-14 w-14"
                 />
-                <span className="text-6xl">I&apos;m a Coder</span>
+                <span className="text-6xl">
+                  I&apos;m a <span className="text-blue-500">Coder</span>
+                </span>
               </CardTitle>
               <CardDescription>
                 Probably a bit obvious, credits to my username...
@@ -168,6 +172,46 @@ export default function Home() {
               <p>
                 I love to code! I&apos;ve been coding for about{" "}
                 {new Date().getFullYear() - 2017} years now.
+              </p>
+              <p>
+                My programming journey began several years ago when I received
+                an{" "}
+                <Link
+                  href="https://makeblock.com/products/buy-mbot"
+                  className="text-blue-500"
+                >
+                  mBot
+                </Link>{" "}
+                from a friend. The little robot was simple but very fun! The
+                graphic-based programming (based on Blockly by Google) made it
+                pretty easy to learn and understand coding concepts. Of course,
+                it&apos;s very limited! I wanted to learn more. You run out of
+                things to do with Blockly quite quickly.
+              </p>
+              <p>
+                Before receiving my mBot, I had already (barely) fiddled with
+                JavaScript a bit. I made a few simple HTML pages (following
+                tutorials like the famous &apos;Fav Drink&apos; on w3schools).
+                It was super fun but also super impractical! I wanted to make my
+                own useful website. Interactivity isn&apos;t everything!
+              </p>
+              <p>
+                It didn&apos;t take long for me to discover CSS. I fine-tuned my
+                styling skills with the help of AI. (Now, of course, I just use
+                frameworks with built in styling like TailwindCSS. It makes
+                things a lot more uniform and consistent.)
+              </p>
+              <p>
+                That&apos;s a nice summary of how I got started with web
+                development. I&apos;m a full-stack developer now, which, for any
+                non-programming viewers, basically means I make the frontend
+                things you appreciate (a website is frontend), and the backend
+                things you probably don&apos;t even know exist. There&apos;s a
+                lot that goes on behind the scenes!
+              </p>
+              <p>
+                I write most of my backend in Node.js, which is not surprising
+                (since I already had experience with JavaScript.)
               </p>
             </CardContent>
           </Card>
@@ -189,10 +233,12 @@ export default function Home() {
                   height={80}
                   className="h-14 w-14"
                 />
-                <span className="text-6xl">I&apos;m a Creator</span>
+                <span className="text-6xl">
+                  I&apos;m a <span className="text-blue-500">Creator</span>
+                </span>
               </CardTitle>
               <CardDescription>
-                An un-creative catch-all word for everything else I do
+                An uncreative catch-all word for everything else I do
               </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col gap-4 text-lg">
