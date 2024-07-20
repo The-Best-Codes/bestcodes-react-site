@@ -60,7 +60,7 @@ export default function Home() {
   const waveImageScale = useTransform(scrollY, [0, 200], [1, 1.5]);
   const waveImageOpacity = useTransform(scrollY, [0, 200], [1, 0]);
   return (
-    <main className="flex min-h-screen flex-col items-center dark:bg-slate-900">
+    <main className="flex min-h-screen max-w-screen overflow-x-hidden flex-col items-center dark:bg-slate-900">
       <Header />
       <div className="h-96 w-full relative max-w-screen overflow-hidden">
         <motion.div
@@ -102,7 +102,7 @@ export default function Home() {
       <div className="h-fit w-full p-8">
         <motion.div
           initial={{ x: -100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
+          whileInView={{ x: 0, opacity: 1 }}
           className="w-full sm:w-full md:w-3/4 lg:w-2/3"
         >
           <Card>
@@ -149,7 +149,7 @@ export default function Home() {
       <div className="h-fit w-full flex justify-center items-center p-8">
         <motion.div
           initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+          whileInView={{ y: 0, opacity: 1 }}
           className="w-full sm:w-full md:w-3/4 lg:w-2/3"
         >
           <Card>
@@ -234,8 +234,8 @@ export default function Home() {
       </div>
       <div className="h-fit w-full flex justify-end items-end p-8">
         <motion.div
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+          initial={{ x: 100, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
           className="w-full sm:w-full md:w-3/4 lg:w-2/3"
         >
           <Card>
