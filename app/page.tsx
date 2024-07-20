@@ -60,7 +60,7 @@ export default function Home() {
   const waveImageScale = useTransform(scrollY, [0, 200], [1, 1.5]);
   const waveImageOpacity = useTransform(scrollY, [0, 200], [1, 0]);
   return (
-    <main className="flex min-h-screen max-w-screen overflow-x-hidden flex-col items-center dark:bg-slate-900">
+    <main className="flex min-h-screen scroll-smooth max-w-screen flex-col items-center dark:bg-slate-900">
       <Header />
       <div className="h-96 w-full relative max-w-screen overflow-hidden">
         <motion.div
