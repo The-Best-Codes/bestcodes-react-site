@@ -22,10 +22,15 @@ export default async function handler(req, res) {
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({ token: cloudflareToken }),
+                    body: JSON.stringify({
+                        secret: process.env.CLOUDFLARE_TURNSTILE_SECRET_KEY,
+                        response: token,
+                    }),
                 }
-            )
+            );
+
             const data = await response.json();
+
             if (!data.success) {
                 return res.status(401).json({ error: "Invalid captcha" });
             }
