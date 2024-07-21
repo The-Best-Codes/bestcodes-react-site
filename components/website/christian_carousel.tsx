@@ -30,14 +30,14 @@ export default function ChristianCarousel() {
         align: "center",
         loop: true,
       }}
-      className="w-full max-w-xs mx-auto"
+      className="w-full max-w-40 md:max-w-xs mx-auto"
     >
       <CarouselContent>
         {isLoading ? (
           <CarouselItem>
             <div className="flex flex-col items-center justify-center">
-              <Skeleton className="w-64 h-64 rounded-lg" />
-              <Skeleton className="w-48 h-10 mt-4" />
+              <Skeleton className="w-32 h-32 md:w-64 md:h-64 rounded-lg" />
+              <Skeleton className="w-24 md:w-48 h-10 mt-4" />
             </div>
           </CarouselItem>
         ) : (
@@ -55,7 +55,7 @@ export default function ChristianCarousel() {
                   width={256}
                   height={256}
                   unoptimized
-                  className="w-64 h-64 object-cover rounded-lg"
+                  className="w-32 h-32 md:w-64 md:h-64 object-cover rounded-lg"
                 />
                 <h3 className="text-xl font-bold mt-4 text-center text-blue-500 hover:underline max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
                   {project.name}

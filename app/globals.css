@@ -170,3 +170,7 @@
     width: 0;
   }
 }
+
+#matrixCanvas {
+  max-width: 100vw;
+}

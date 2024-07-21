@@ -60,13 +60,13 @@ export default function Home() {
   const waveImageScale = useTransform(scrollY, [0, 200], [1, 1.5]);
   const waveImageOpacity = useTransform(scrollY, [0, 200], [1, 0]);
   return (
-    <main className="flex min-h-screen scroll-smooth max-w-screen flex-col items-center dark:bg-slate-900">
+    <main className="flex min-h-screen scroll-smooth max-w-screen w-full flex-col items-center dark:bg-slate-900">
       <Header />
       <div className="overflow-x-hidden">
-        <div className="h-96 w-full relative max-w-screen overflow-hidden">
+        <div className="max-w-screen w-full relative overflow-hidden">
           <motion.div
             style={{ scale: waveImageScale, opacity: waveImageOpacity }}
-            className="absolute inset-0 flex flex-row items-center justify-center gap-4 p-16"
+            className="absolute inset-0 z-10 flex flex-row items-center justify-center gap-4 p-8"
           >
             <Image
               src={`/image/emoji/waving_hand.png`}
@@ -75,11 +75,13 @@ export default function Home() {
               height={260}
               className="h-16 w-16 sm:h-16 sm:w-16 md:h-24 md:w-24 lg:h-32 lg:w-32"
             />
-            <h1 className="text-9xl text-blue-500 line-clamp-1 font-bold">
+            <h1 className="text-7xl sm:text-7xl md:text-8xl lg:text-9xl text-blue-500 line-clamp-1 font-bold">
               Hi
             </h1>
           </motion.div>
-          <MatrixThemed />
+          <div className="relative max-w-screen w-full overflow-hidden h-72 md:h-96">
+            <MatrixThemed />
+          </div>
         </div>
         <section className="flex flex-col items-center text-center p-16">
           <motion.div className="mb-4 w-fit">
@@ -93,11 +95,15 @@ export default function Home() {
               className="h-16 w-16 sm:h-16 sm:w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 rounded-full"
             />
           </motion.div>
-          <h2 className="text-8xl text-blue-500 font-bold mb-4">
+          <h2 className="text-5xl sm:text-5xl md:text-6xl lg:text-8xl text-blue-500 font-bold mb-4">
             I&apos;m BestCodes
           </h2>
           <motion.div variants={container} initial="hidden" animate="visible">
-            <motion.span variants={item} className="text-5xl" ref={textRef}>
+            <motion.span
+              variants={item}
+              className="text-xl sm:text-xl md:text-3xl lg:text-5xl"
+              ref={textRef}
+            >
               Christian, Coder, Creator
             </motion.span>
           </motion.div>
@@ -116,9 +122,9 @@ export default function Home() {
                     alt="latin cross"
                     width={80}
                     height={80}
-                    className="h-14 w-14"
+                    className="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"
                   />
-                  <span className="text-6xl dark:text-white">
+                  <span className="text-3xl sm:text-3xl md:text-4xl lg:text-6xl dark:text-white">
                     I&apos;m a <span className="text-blue-500">Christian</span>
                   </span>
                 </CardTitle>
@@ -164,9 +170,9 @@ export default function Home() {
                     alt="latin cross"
                     width={80}
                     height={80}
-                    className="h-14 w-14"
+                    className="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"
                   />
-                  <span className="text-6xl dark:text-white">
+                  <span className="text-3xl sm:text-3xl md:text-4xl lg:text-6x dark:text-white">
                     I&apos;m a <span className="text-blue-500">Coder</span>
                   </span>
                 </CardTitle>
@@ -250,9 +256,9 @@ export default function Home() {
                     alt="latin cross"
                     width={80}
                     height={80}
-                    className="h-14 w-14"
+                    className="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"
                   />
-                  <span className="text-6xl dark:text-white">
+                  <span className="text-3xl sm:text-3xl md:text-4xl lg:text-6x dark:text-white">
                     I&apos;m a <span className="text-blue-500">Creator</span>
                   </span>
                 </CardTitle>
@@ -304,7 +310,7 @@ export default function Home() {
             whileInView={{ opacity: 1 }}
             className="w-full flex flex-col gap-4 justify-center items-center"
           >
-            <h1 className="text-6xl font-bold">
+            <h1 className="text-center text-3xl sm:text-3xl md:text-4xl lg:text-6x font-bold">
               Where to <span className="text-blue-500">find me</span>
             </h1>
             <SocialMediaLinks />
@@ -316,15 +322,15 @@ export default function Home() {
             whileInView={{ scale: 1 }}
             className="w-full flex flex-col gap-4 justify-center items-center"
           >
-            <div className="flex flex-row items-center gap-2">
+            <div className="flex flex-row items-center justify-center gap-2">
               <Image
                 src={`/image/emoji/winking_face.png`}
                 alt="winking face"
                 width={80}
                 height={80}
-                className="h-14 w-14"
+                className="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"
               />
-              <h1 className="text-6xl font-bold dark:text-white">
+              <h1 className="text-center text-3xl sm:text-3xl md:text-4xl lg:text-6x font-bold dark:text-white">
                 That&apos;s all &mdash;{" "}
                 <span className="text-blue-500">for now</span>
               </h1>
