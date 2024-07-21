@@ -172,7 +172,7 @@ export default function Home() {
                     height={80}
                     className="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"
                   />
-                  <span className="text-3xl sm:text-3xl md:text-4xl lg:text-6x dark:text-white">
+                  <span className="text-3xl sm:text-3xl md:text-4xl lg:text-6xl dark:text-white">
                     I&apos;m a <span className="text-blue-500">Coder</span>
                   </span>
                 </CardTitle>
@@ -258,7 +258,7 @@ export default function Home() {
                     height={80}
                     className="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"
                   />
-                  <span className="text-3xl sm:text-3xl md:text-4xl lg:text-6x dark:text-white">
+                  <span className="text-3xl sm:text-3xl md:text-4xl lg:text-6xl dark:text-white">
                     I&apos;m a <span className="text-blue-500">Creator</span>
                   </span>
                 </CardTitle>
@@ -310,9 +310,18 @@ export default function Home() {
             whileInView={{ opacity: 1 }}
             className="w-full flex flex-col gap-4 justify-center items-center"
           >
-            <h1 className="text-center text-3xl sm:text-3xl md:text-4xl lg:text-6x font-bold">
-              Where to <span className="text-blue-500">find me</span>
-            </h1>
+            <div className="flex flex-row items-center justify-center gap-2">
+              <Image
+                src={`/image/emoji/email.png`}
+                alt="email"
+                width={80}
+                height={80}
+                className="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"
+              />
+              <h1 className="text-center text-3xl sm:text-3xl md:text-4xl lg:text-6xl font-bold">
+                Where to <span className="text-blue-500">find me</span>
+              </h1>
+            </div>
             <SocialMediaLinks />
           </motion.div>
         </section>
@@ -330,7 +339,7 @@ export default function Home() {
                 height={80}
                 className="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"
               />
-              <h1 className="text-center text-3xl sm:text-3xl md:text-4xl lg:text-6x font-bold dark:text-white">
+              <h1 className="text-center text-3xl sm:text-3xl md:text-4xl lg:text-6xl font-bold dark:text-white">
                 That&apos;s all &mdash;{" "}
                 <span className="text-blue-500">for now</span>
               </h1>
