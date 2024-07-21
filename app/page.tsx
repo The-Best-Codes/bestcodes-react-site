@@ -295,7 +295,7 @@ export default function Home() {
           </Card>
         </motion.div>
       </div>
-      <section className="h-fit w-full flex justify-center items-center p-8">
+      <section className="h-fit w-full flex justify-center items-center p-8 mt-32">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
