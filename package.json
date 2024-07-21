@@ -22,13 +22,15 @@
     "node-fetch": "^3.3.2",
     "node-html-parser": "^6.1.13",
     "react": "^18",
+    "react-comments-section": "^3.0.1",
     "react-dom": "^18",
     "react-matrix-animation": "^0.0.11",
     "react-rough-notation": "^1.0.5",
     "rough-notation": "^0.5.1",
     "simple-icons": "^13.1.0",
     "tailwind-merge": "^2.4.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",

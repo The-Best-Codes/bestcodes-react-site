@@ -308,6 +308,38 @@ export default function Home() {
           <SocialMediaLinks />
         </motion.div>
       </section>
+      <section className="h-fit w-full flex justify-center items-center p-8 mt-32">
+        <motion.div
+          initial={{ scale: 0 }}
+          whileInView={{ scale: 1 }}
+          className="w-full flex flex-col gap-4 justify-center items-center"
+        >
+          <div className="flex flex-row items-center gap-2">
+            <Image
+              src={`/image/emoji/winking_face.png`}
+              alt="winking face"
+              width={80}
+              height={80}
+              className="h-14 w-14"
+            />
+            <h1 className="text-6xl font-bold">
+              That&apos;s all &mdash;{" "}
+              <UnderlineText
+                activationType="hover"
+                color="#3b82f6"
+                strokeWidth={3}
+              >
+                <span className="text-blue-500">for now</span>
+              </UnderlineText>
+            </h1>
+          </div>
+          <p className="text-2xl w-3/4 sm:w-1/2 text-center">
+            Maybe I&apos;ll add more to this site sometime. I don&apos;t know.
+            For now, you can just check out some of my other pages on this site
+            (in the header menu).
+          </p>
+        </motion.div>
+      </section>
     </main>
   );
 }

@@ -2,27 +2,27 @@ import React, { useEffect, useRef, useState } from "react";
 import { RoughNotation } from "react-rough-notation";
 
 interface UnderlineTextProps {
-  text: string;
+  children: React.ReactNode;
   color: string;
   className?: string;
-  stokeWidth?: number;
+  strokeWidth?: number;
   padding?: number;
-  activationType: "always" | "hover" | "click";
+  activationType: "always" | "hover" | "click" | "view";
 }
 
 const UnderlineText: React.FC<UnderlineTextProps> = ({
-  text,
+  children,
   className = "",
   activationType,
   color = "",
-  stokeWidth = 2,
+  strokeWidth = 2,
   padding = 2,
 }) => {
   const [show, setShow] = useState(activationType === "always");
   const textRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    const currentRef = textRef.current; // Capture the current value
+    const currentRef = textRef.current;
 
     if (activationType === "always") {
       setShow(true);
@@ -45,8 +45,31 @@ const UnderlineText: React.FC<UnderlineTextProps> = ({
       return () => {
         currentRef?.removeEventListener("click", handleClick);
       };
+    } else if (activationType === "view") {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          setShow(entry.isIntersecting);
+        },
+        { threshold: 0.1 }
+      );
+
+      if (currentRef) {
+        observer.observe(currentRef);
+      }
+
+      return () => {
+        if (currentRef) {
+          observer.unobserve(currentRef);
+        }
+      };
     }
   }, [activationType]);
+
+  // Force redraw when children change
+  useEffect(() => {
+    setShow(false);
+    setTimeout(() => setShow(true), 0);
+  }, [children]);
 
   return (
     <span ref={textRef} className={className}>
@@ -54,10 +77,10 @@ const UnderlineText: React.FC<UnderlineTextProps> = ({
         type="underline"
         show={show}
         color={color}
-        strokeWidth={stokeWidth}
+        strokeWidth={strokeWidth}
         padding={padding}
       >
-        {text}
+        {children}
       </RoughNotation>
     </span>
   );
