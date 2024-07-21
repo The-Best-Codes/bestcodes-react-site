@@ -40,7 +40,7 @@ export default function Header() {
       </li>
       <li>
         <a
-          href="/blog"
+          href="https://dev.to/best_codes"
           className="text-black text-2xl dark:text-white hover:text-blue-500 hover:underline"
         >
           Blog
