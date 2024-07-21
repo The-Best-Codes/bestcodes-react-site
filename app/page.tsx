@@ -17,7 +17,6 @@ import ChristianCarousel from "@/components/website/christian_carousel";
 import PinnedCarousel from "@/components/website/pinned_carousel";
 import PrintablesCarousel from "@/components/website/printables_carousel";
 import SocialMediaLinks from "@/components/website/socials";
-import UnderlineText from "@/components/website/underline-text";
 
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -324,13 +323,7 @@ export default function Home() {
             />
             <h1 className="text-6xl font-bold">
               That&apos;s all &mdash;{" "}
-              <UnderlineText
-                activationType="hover"
-                color="#3b82f6"
-                strokeWidth={3}
-              >
-                <span className="text-blue-500">for now</span>
-              </UnderlineText>
+              <span className="text-blue-500">for now</span>
             </h1>
           </div>
           <p className="text-2xl w-3/4 sm:w-1/2 text-center">
