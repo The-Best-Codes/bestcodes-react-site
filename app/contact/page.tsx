@@ -92,7 +92,7 @@ export default function Contact() {
     <main className="flex min-h-screen scroll-smooth max-w-screen w-full flex-col items-center dark:bg-slate-900">
       <Header />
 
-      <section className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
+      <section className="flex flex-col items-center justify-center w-full flex-1 px-2 sm:px-4 md:px-6 lg:px-20 text-center">
         <div className="mb-8">
           <h1 className="text-5xl font-bold text-center dark:text-white">
             Contact Me
@@ -102,7 +102,7 @@ export default function Contact() {
           </p>
         </div>
         <Card className="dark:border-none w-full max-w-3xl mx-auto">
-          <CardContent className="dark:bg-slate-700 dark:text-white rounded-lg flex flex-col p-8">
+          <CardContent className="dark:bg-slate-700 dark:text-white rounded-lg flex flex-col p-4 sm:p-4 md:p-6 lg:p-8">
             {isSuccess ? (
               <div className="max-w-lg w-lg mx-auto">
                 <div className="flex items-center justify-center mb-4">
