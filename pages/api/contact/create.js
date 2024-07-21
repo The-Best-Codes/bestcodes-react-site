@@ -24,7 +24,7 @@ export default async function handler(req, res) {
                     },
                     body: JSON.stringify({
                         secret: process.env.CLOUDFLARE_TURNSTILE_SECRET_KEY,
-                        response: token,
+                        response: cloudflareToken,
                     }),
                 }
             );
