@@ -15,13 +15,16 @@ export default async function handler(req, res) {
 
     if (cloudflareToken) {
         try {
-            const response = await fetch(`/api/auth/turnstile-verify`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ cloudflareToken }),
-            });
+            const response = await fetch(
+                "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ token: cloudflareToken }),
+                }
+            )
             const data = await response.json();
             if (!data.success) {
                 return res.status(401).json({ error: "Invalid captcha" });
