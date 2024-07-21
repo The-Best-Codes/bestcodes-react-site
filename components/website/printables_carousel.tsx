@@ -65,8 +65,8 @@ export default function PrintablesCarousel() {
           ))
         )}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className="dark:bg-slate-900" />
+      <CarouselNext className="dark:bg-slate-900" />
     </Carousel>
   );
 }

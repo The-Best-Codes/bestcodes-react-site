@@ -3,7 +3,6 @@ import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ReactMatrixAnimation } from "react-matrix-animation";
 import {
   Card,
   CardHeader,
@@ -17,6 +16,7 @@ import ChristianCarousel from "@/components/website/christian_carousel";
 import PinnedCarousel from "@/components/website/pinned_carousel";
 import PrintablesCarousel from "@/components/website/printables_carousel";
 import SocialMediaLinks from "@/components/website/socials";
+import MatrixThemed from "@/components/website/matrix_themed";
 
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -40,7 +40,6 @@ const item = {
 
 export default function Home() {
   const { scrollY } = useScroll();
-
   const textRef = useRef(null);
 
   useEffect(() => {
@@ -77,7 +76,7 @@ export default function Home() {
           />
           <h1 className="text-9xl text-blue-500 line-clamp-1 font-bold">Hi</h1>
         </motion.div>
-        <ReactMatrixAnimation fontColor="#3b82f6" backgroundColor="#ffffff" />
+        <MatrixThemed />
       </div>
       <section className="flex flex-col items-center text-center p-16">
         <motion.div className="mb-4 w-fit">
@@ -106,7 +105,7 @@ export default function Home() {
           whileInView={{ x: 0, opacity: 1 }}
           className="w-full sm:w-full md:w-3/4 lg:w-2/3"
         >
-          <Card>
+          <Card className="dark:bg-slate-700 dark:border-none">
             <CardHeader>
               <CardTitle className="flex flex-row items-center gap-2">
                 <Image
@@ -116,15 +115,15 @@ export default function Home() {
                   height={80}
                   className="h-14 w-14"
                 />
-                <span className="text-6xl">
+                <span className="text-6xl dark:text-white">
                   I&apos;m a <span className="text-blue-500">Christian</span>
                 </span>
               </CardTitle>
-              <CardDescription>
+              <CardDescription className="dark:text-gray-300">
                 Sinner Saved by God&apos;s Grace
               </CardDescription>
             </CardHeader>
-            <CardContent className="flex flex-col gap-4 text-lg">
+            <CardContent className="flex flex-col gap-4 text-lg dark:text-white">
               <p>
                 I&apos;m a sinner saved by grace, redeemed by Christ&apos;s
                 love. Striving to live for God&apos;s glory and share His
@@ -153,7 +152,7 @@ export default function Home() {
           whileInView={{ y: 0, opacity: 1 }}
           className="w-full sm:w-full md:w-3/4 lg:w-2/3"
         >
-          <Card>
+          <Card className="dark:bg-slate-700 dark:border-none">
             <CardHeader>
               <CardTitle className="flex flex-row items-center gap-2">
                 <Image
@@ -163,15 +162,15 @@ export default function Home() {
                   height={80}
                   className="h-14 w-14"
                 />
-                <span className="text-6xl">
+                <span className="text-6xl dark:text-white">
                   I&apos;m a <span className="text-blue-500">Coder</span>
                 </span>
               </CardTitle>
-              <CardDescription>
+              <CardDescription className="dark:text-gray-300">
                 Probably a bit obvious, credits to my username...
               </CardDescription>
             </CardHeader>
-            <CardContent className="flex flex-col gap-4 text-lg">
+            <CardContent className="flex flex-col gap-4 text-lg dark:text-white">
               <p>
                 I love to code! I&apos;ve been coding for about{" "}
                 {new Date().getFullYear() - 2017} years now.
@@ -239,7 +238,7 @@ export default function Home() {
           whileInView={{ x: 0, opacity: 1 }}
           className="w-full sm:w-full md:w-3/4 lg:w-2/3"
         >
-          <Card>
+          <Card className="dark:bg-slate-700 dark:border-none">
             <CardHeader>
               <CardTitle className="flex flex-row items-center gap-2">
                 <Image
@@ -249,15 +248,15 @@ export default function Home() {
                   height={80}
                   className="h-14 w-14"
                 />
-                <span className="text-6xl">
+                <span className="text-6xl dark:text-white">
                   I&apos;m a <span className="text-blue-500">Creator</span>
                 </span>
               </CardTitle>
-              <CardDescription>
+              <CardDescription className="dark:text-gray-300">
                 An uncreative catch-all word for everything else I do
               </CardDescription>
             </CardHeader>
-            <CardContent className="flex flex-col gap-4 text-lg">
+            <CardContent className="flex flex-col gap-4 text-lg dark:text-white">
               <p>
                 I design stuff. I create stuff. I{" "}
                 <Link
@@ -295,7 +294,7 @@ export default function Home() {
           </Card>
         </motion.div>
       </div>
-      <section className="h-fit w-full flex justify-center items-center p-8 mt-32">
+      <section className="h-fit w-full flex justify-center items-center p-8 mt-32 dark:text-white">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -321,12 +320,12 @@ export default function Home() {
               height={80}
               className="h-14 w-14"
             />
-            <h1 className="text-6xl font-bold">
+            <h1 className="text-6xl font-bold dark:text-white">
               That&apos;s all &mdash;{" "}
               <span className="text-blue-500">for now</span>
             </h1>
           </div>
-          <p className="text-2xl w-3/4 sm:w-1/2 text-center">
+          <p className="text-2xl w-3/4 sm:w-1/2 text-center dark:text-white">
             Maybe I&apos;ll add more to this site sometime. I don&apos;t know.
             For now, you can just check out some of my other pages on this site
             (in the header menu).

@@ -81,7 +81,7 @@ export default function Header() {
               alt="github"
               width={40}
               height={40}
-              className="h-8 w-8"
+              className="h-8 w-8 dark:invert"
             />
           </Link>
           <Link target="_blank" href={`https://dev.to/best_codes`}>
@@ -90,7 +90,7 @@ export default function Header() {
               alt="twitter"
               width={40}
               height={40}
-              className="h-8 w-8"
+              className="h-8 w-8 dark:invert"
             />
           </Link>
         </div>
