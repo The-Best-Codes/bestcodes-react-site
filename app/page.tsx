@@ -17,6 +17,7 @@ import ChristianCarousel from "@/components/website/christian_carousel";
 import PinnedCarousel from "@/components/website/pinned_carousel";
 import PrintablesCarousel from "@/components/website/printables_carousel";
 import SocialMediaLinks from "@/components/website/socials";
+import UnderlineText from "@/components/website/underline-text";
 
 const container = {
   hidden: { opacity: 1, scale: 0 },

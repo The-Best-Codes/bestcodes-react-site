@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
+import UnderlineText from "@/components/website/underline-text";
 
 const socialLinks = [
   {
@@ -55,10 +56,14 @@ export default function SocialMediaLinks() {
                   alt={link.icon.split(".")[0]}
                   width={400}
                   height={400}
-                  className="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 lg:h-32 lg:w-32"
+                  className="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 lg:h-32 lg:w-32 hover:scale-105 hover:drop-shadow-2xl transition-transform"
                 />
                 <span className="text-sm sm:text-md text-blue-500 text-center">
-                  {link.username}
+                  <UnderlineText
+                    color="#3b82f6"
+                    activationType="hover"
+                    text={link.username}
+                  />
                 </span>
               </div>
             </Link>
