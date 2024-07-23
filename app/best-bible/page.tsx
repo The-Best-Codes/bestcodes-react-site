@@ -1,15 +1,16 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import Header from "@/components/website/header";
 import SyntaxHighlighter from "@/components/website/code_syntax";
 
 export default function BestBible() {
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
       <Header />
       <div className="py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden transition-colors duration-300">
+        <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden ">
           <div className="p-6 sm:p-8">
             <h1 className="text-3xl sm:text-4xl font-bold text-center mb-6 text-gray-900 dark:text-white">
               Best Bible
@@ -29,7 +30,7 @@ export default function BestBible() {
               ))}
             </div>
 
-            <div className="flex justify-center mb-8">
+            <div className="flex flex-col w-full items-center gap-6 justify-center mb-8">
               <Image
                 src="https://github.com/The-Best-Codes/best-bible/blob/main/.image/best-bible-js-logo.png?raw=true"
                 alt="Best Bible Logo"
@@ -38,6 +39,9 @@ export default function BestBible() {
                 height={200}
                 className="rounded-2xl"
               />
+              <Button className="w-fit text-3xl bg-blue-500 h-16">
+                <Link href={`/best-bible/demo`}>Usage Demo</Link>
+              </Button>
             </div>
 
             <p className="text-center italic mb-8 text-gray-600 dark:text-gray-300">
