@@ -5,6 +5,9 @@ import "prismjs/components/prism-javascript";
 import "prismjs/components/prism-jsx";
 import "prismjs/components/prism-typescript";
 import "prismjs/components/prism-python";
+import "prismjs/components/prism-markup";
+import "prismjs/components/prism-markdown";
+import "prismjs/components/prism-json";
 import "prismjs/components/prism-css";
 import "prismjs/components/prism-http";
 import "prismjs/components/prism-bash";
@@ -55,9 +58,9 @@ const SyntaxHighlighter = ({ language, children, className }: any) => {
         disabled={copyStatus !== "idle"}
         className={`absolute ${
           isMultiline
-            ? "top-2 right-2"
+            ? "top-4 right-2"
             : "top-1/2 right-2 transform -translate-y-1/2"
-        } p-2 bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400`}
+        } p-2 bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-300 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400`}
       >
         {renderCopyButton()}
       </button>
