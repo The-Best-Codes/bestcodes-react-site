@@ -33,12 +33,12 @@ export default function BestBible() {
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex flex-col items-center">
       <Header />
       <div className="flex flex-col w-full max-w-screen bg-gray-200 dark:bg-gray-700 shadow-xl rounded-xl sm:w-3/4 md:w-1/2 p-6 mt-16 mb-8">
-      <div className="flex flex-col justify-center items-center mb-8">
-        <h1 className="text-3xl sm:text-4xl font-bold text-center mb-6 text-gray-900 dark:text-white">
-          Bible Search | Demo
-        </h1>
-        <p className="text-gray-900 dark:text-white">Using best-bible</p>
-      </div>
+        <div className="flex flex-col justify-center items-center mb-8">
+          <h1 className="text-3xl sm:text-4xl font-bold text-center mb-6 text-gray-900 dark:text-white">
+            Bible Search | Demo
+          </h1>
+          <p className="text-gray-900 dark:text-white">Using best-bible</p>
+        </div>
 
         <div className="flex flex-col gap-4 mb-6">
           <input
@@ -75,7 +75,7 @@ export default function BestBible() {
             <p className="text-gray-900 dark:text-white">{result}</p>
             {latency !== null && (
               <p className="text-gray-500 dark:text-gray-400 text-sm">
-                Latency: {latency.toFixed(8)} ms
+                Latency: {latency} ms
               </p>
             )}
           </div>
@@ -85,9 +85,7 @@ export default function BestBible() {
           <div className="p-4 bg-red-500 text-white rounded-md shadow-md">
             <p>{error}</p>
             {latency !== null && (
-              <p className="text-gray-100 text-sm">
-                Latency: {latency.toFixed(8)} ms
-              </p>
+              <p className="text-gray-100 text-sm">Latency: {latency} ms</p>
             )}
           </div>
         )}
