@@ -3,13 +3,6 @@ import { useState } from "react";
 import Header from "@/components/website/header";
 import { getVerse, getBibleBooks } from "best-bible";
 
-/**
- * Calculates the Levenshtein distance between two strings.
- *
- * @param {string} a - The first string.
- * @param {string} b - The second string.
- * @return {number} The Levenshtein distance between the two strings.
- */
 function levenshteinDistance(a: string, b: string) {
   const matrix = [];
   for (let i = 0; i <= b.length; i++) {
