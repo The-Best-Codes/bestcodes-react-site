@@ -3,7 +3,6 @@ import { useState } from "react";
 import Header from "@/components/website/header";
 import { getVerse, getBibleBooks } from "best-bible";
 
-// Levenshtein distance function
 function levenshteinDistance(a: string, b: string) {
   const matrix = [];
   for (let i = 0; i <= b.length; i++) {
