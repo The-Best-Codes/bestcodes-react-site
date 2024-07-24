@@ -1,32 +1,87 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import Header from "@/components/website/header";
-import { getVerse } from "best-bible";
+import { getVerse, getBibleBooks } from "best-bible";
+
+// Levenshtein distance function
+function levenshteinDistance(a: string, b: string) {
+  const matrix = [];
+  for (let i = 0; i <= b.length; i++) {
+    matrix[i] = [i];
+  }
+  for (let j = 0; j <= a.length; j++) {
+    matrix[0][j] = j;
+  }
+  for (let i = 1; i <= b.length; i++) {
+    for (let j = 1; j <= a.length; j++) {
+      if (b.charAt(i - 1) === a.charAt(j - 1)) {
+        matrix[i][j] = matrix[i - 1][j - 1];
+      } else {
+        matrix[i][j] = Math.min(
+          matrix[i - 1][j - 1] + 1,
+          matrix[i][j - 1] + 1,
+          matrix[i - 1][j] + 1
+        );
+      }
+    }
+  }
+  return matrix[b.length][a.length];
+}
 
 export default function BestBible() {
-  const [book, setBook] = useState("");
-  const [chapter, setChapter] = useState("");
-  const [verse, setVerse] = useState<any>("");
+  const [input, setInput] = useState<any>("");
   const [result, setResult] = useState<any>("");
-  const [error, setError] = useState("");
-  const [latency, setLatency] = useState<number | null>(null);
+  const [error, setError] = useState<any>("");
+  const [latency, setLatency] = useState<any>(null);
 
   const handleSearch = async () => {
     const start = performance.now();
     try {
-      const verseResult = getVerse(book, parseInt(chapter), parseInt(verse));
+      const parsed = parseInput(input);
+      if (!parsed) {
+        throw new Error("Invalid input format");
+      }
+      const { book, chapter, verse } = parsed;
+      const verseResult = getVerse(book, chapter, verse);
       const end = performance.now();
       setResult(verseResult);
       setError("");
       setLatency(end - start);
-    } catch (err) {
+    } catch (err: any) {
       const end = performance.now();
       setResult("");
-      setError("The verse does not exist.");
+      setError(err.message);
       setLatency(end - start);
     }
+  };
+
+  const parseInput = (input: string) => {
+    const regex = /^(\d*\s*[a-zA-Z]+)\s*(\d+)[:.,]?\s*(\d+)$/;
+    const match = input.match(regex);
+    if (!match) return null;
+
+    let [, book, chapter, verse] = match;
+    book = book.trim();
+
+    const bibleBooks = getBibleBooks();
+    let closestBook = bibleBooks.reduce(
+      (closest, current) => {
+        const distance = levenshteinDistance(
+          book.toLowerCase(),
+          current.toLowerCase()
+        );
+        return distance < closest.distance
+          ? { name: current, distance }
+          : closest;
+      },
+      { name: "", distance: Infinity }
+    );
+
+    return {
+      book: closestBook.name,
+      chapter: parseInt(chapter),
+      verse: parseInt(verse),
+    };
   };
 
   return (
@@ -43,23 +98,9 @@ export default function BestBible() {
         <div className="flex flex-col gap-4 mb-6">
           <input
             type="text"
-            placeholder="Book"
-            value={book}
-            onChange={(e) => setBook(e.target.value)}
-            className="p-2 rounded-md"
-          />
-          <input
-            type="number"
-            placeholder="Chapter"
-            value={chapter}
-            onChange={(e) => setChapter(e.target.value)}
-            className="p-2 rounded-md"
-          />
-          <input
-            type="number"
-            placeholder="Verse"
-            value={verse}
-            onChange={(e) => setVerse(e.target.value)}
+            placeholder="Enter verse (e.g., John 3:16 or John 3 16)"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
             className="p-2 rounded-md"
           />
           <button
@@ -75,7 +116,7 @@ export default function BestBible() {
             <p className="text-gray-900 dark:text-white">{result}</p>
             {latency !== null && (
               <p className="text-gray-500 dark:text-gray-400 text-sm">
-                Latency: {latency} ms
+                Latency: {latency.toFixed(2)} ms
               </p>
             )}
           </div>
@@ -85,7 +126,9 @@ export default function BestBible() {
           <div className="p-4 bg-red-500 text-white rounded-md shadow-md">
             <p>{error}</p>
             {latency !== null && (
-              <p className="text-gray-100 text-sm">Latency: {latency} ms</p>
+              <p className="text-gray-100 text-sm">
+                Latency: {latency.toFixed(2)} ms
+              </p>
             )}
           </div>
         )}
