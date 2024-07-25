@@ -48,14 +48,14 @@ export default async function handler(req, res) {
             port: 465,
             secure: true,
             auth: {
-                user: "bestcodes.official@gmail.com",
+                user: process.env.GMAIL_USER,
                 pass: process.env.GMAIL_PSW,
             },
         });
 
         const mailOptions = {
-            from: `BestCodes Website <bestcodes.official@gmail.com>`,
-            to: "bestcodes.official@gmail.com",
+            from: `BestCodes Website <${process.env.GMAIL_USER}>`,
+            to: `${process.env.GMAIL_USER}`,
             subject: `New Submission of BestCodes Contact Form - From ${name}`,
             text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
             html: `<p>Name: ${name}</p><p>Email: ${email}</p><p>Message: ${message}</p>`,
