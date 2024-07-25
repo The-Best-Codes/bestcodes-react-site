@@ -58,7 +58,6 @@ export default async function handler(req, res) {
             to: `${process.env.GMAIL_USER}`,
             subject: `New Submission of BestCodes Contact Form - From ${name}`,
             text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
-            html: `<p>Name: ${name}</p><p>Email: ${email}</p><p>Message: ${message}</p>`,
         };
 
         await transporter.sendMail(mailOptions);
@@ -68,6 +67,4 @@ export default async function handler(req, res) {
         console.error(error);
         return res.status(500).json({ error: "Failed to send email" });
     }
-
-    return res.status(500).json({ error: "Internal server error" });
 }
