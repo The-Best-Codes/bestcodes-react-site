@@ -22,7 +22,7 @@
     "cloudflare": "^3.5.0",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.1.7",
-    "framer-motion": "^11.3.7",
+    "framer-motion": "^11.3.24",
     "js-levenshtein": "^1.1.6",
     "lucide-react": "^0.408.0",
     "next": "14.2.5",
