@@ -136,6 +136,7 @@ export default function Home() {
         100 - (levenshtein(targetText, inputText) / targetText.length) * 100;
       setAccuracy(Math.round(accuracyPercentage * 100) / 100);
 
+      setMaxLetterTime(0);
       analyzeWordData(startTime, endTime);
     }
   };
@@ -165,17 +166,17 @@ export default function Home() {
     const avgLetterTimes = Object.entries(letterTimes)
       .map(([letter, times]) => ({
         letter,
-        time: (
-          times.reduce((sum, time) => sum + time, 0) / times.length
-        ).toFixed(2) as unknown as number,
+        time: Number(
+          (times.reduce((sum, time) => sum + time, 0) / times.length).toFixed(2)
+        ),
       }))
       .sort((a, b) => a.letter.localeCompare(b.letter));
 
     setLetterStats(avgLetterTimes);
 
-    // Calculate the maximum letter time
+    // Calculate and set the maximum letter time
     const maxTime = Math.max(...avgLetterTimes.map((item) => item.time));
-    setMaxLetterTime(maxTime);
+    setMaxLetterTime(maxTime.toFixed(2) as unknown as number);
   };
 
   const handleReset = () => {
@@ -185,6 +186,7 @@ export default function Home() {
     setWpm(null);
     setAccuracy(null);
     setLetterStats([]);
+    setMaxLetterTime(0);
     inputRef.current?.focus();
   };
 
@@ -262,7 +264,7 @@ export default function Home() {
                 <ResponsiveContainer width="100%" height={300}>
                   <BarChart data={letterStats}>
                     <XAxis dataKey="letter" />
-                    <YAxis domain={[0, (maxLetterTime * 1.1).toFixed(0)]} />
+                    <YAxis domain={[0, maxLetterTime * 1.1]} />
                     <Tooltip />
                     <Bar dataKey="time" fill="#8884d8" />
                   </BarChart>
