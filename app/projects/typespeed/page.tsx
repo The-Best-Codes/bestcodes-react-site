@@ -264,7 +264,7 @@ export default function Home() {
                 <ResponsiveContainer width="100%" height={300}>
                   <BarChart data={letterStats}>
                     <XAxis dataKey="letter" />
-                    <YAxis domain={[0, maxLetterTime * 1.1]} />
+                    <YAxis domain={[0, (maxLetterTime * 1.1).toFixed(0)]} />
                     <Tooltip />
                     <Bar dataKey="time" fill="#8884d8" />
                   </BarChart>
