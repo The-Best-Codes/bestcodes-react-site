@@ -1,38 +1,41 @@
-import React, { useState, useEffect, Key } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { ReactMatrixAnimation } from "react-matrix-animation";
 
-const MatrixThemed = () => {
-  const [darkModeState, setDarkModeState] = useState(false);
-  const [key, setKey] = useState<Key>(0);
+const MatrixThemed = React.memo(() => {
+  const [theme, setTheme] = useState(() => 
+    window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+  );
+  const prevThemeRef = useRef(theme);
+
+  const checkSystemTheme = useCallback(() => {
+    const newTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+    if (newTheme !== prevThemeRef.current) {
+      setTheme(newTheme);
+      prevThemeRef.current = newTheme;
+    }
+  }, []);
 
   useEffect(() => {
-    const checkSystemTheme = () => {
-      const isDarkMode = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-      if (isDarkMode !== darkModeState) {
-        setDarkModeState(isDarkMode);
-        setKey((prevKey: any) => prevKey + 1);
-      }
-    };
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    mediaQuery.addListener(checkSystemTheme);
 
     // Initial check
     checkSystemTheme();
 
-    // Set up interval to check every second
-    const intervalId = setInterval(checkSystemTheme, 1000);
-
-    // Clean up interval on component unmount
-    return () => clearInterval(intervalId);
-  }, [darkModeState]);
+    return () => mediaQuery.removeListener(checkSystemTheme);
+  }, [checkSystemTheme]);
 
   return (
     <ReactMatrixAnimation
-      key={key}
+      key={theme}
       fontColor="#3b82f6"
-      backgroundColor={darkModeState ? "#000000" : "#ffffff"}
+      backgroundColor={theme === "dark" ? "#000000" : "#ffffff"}
     />
   );
-};
+});
 
-export default React.memo(MatrixThemed);
+MatrixThemed.displayName = 'MatrixThemed';
+
+export default MatrixThemed;
