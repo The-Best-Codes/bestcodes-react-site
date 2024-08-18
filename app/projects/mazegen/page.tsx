@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { RefreshCcw, Printer } from "lucide-react";
 import Head from "next/head";
 
 interface Cell {
@@ -23,6 +24,7 @@ const MazeGenerator: React.FC = () => {
   const [currentWidth, setCurrentWidth] = useState<number>(20);
   const [currentHeight, setCurrentHeight] = useState<number>(20);
   const [currentCellSize, setCurrentCellSize] = useState<number>(20);
+  const [firstMazeGenerated, setFirstMazeGenerated] = useState<boolean>(false);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -221,7 +223,7 @@ const MazeGenerator: React.FC = () => {
 
     // Draw solution
     if (showSolution) {
-      ctx.strokeStyle = "blue";
+      ctx.strokeStyle = "orange";
       ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.moveTo(currentCellSize / 2, currentCellSize / 2);
@@ -325,7 +327,7 @@ const MazeGenerator: React.FC = () => {
 
         // Draw solution
         if (showSolution) {
-          ctx.strokeStyle = "blue";
+          ctx.strokeStyle = "orange";
           ctx.lineWidth = 2;
           ctx.beginPath();
           ctx.moveTo(currentCellSize / 2, currentCellSize / 2);
@@ -350,6 +352,13 @@ const MazeGenerator: React.FC = () => {
       printWindow.document.close();
     }
   };
+
+  useEffect(() => {
+    if (!firstMazeGenerated) {
+      generateMaze();
+      setFirstMazeGenerated(true);
+    }
+  }, [firstMazeGenerated, generateMaze]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -377,14 +386,14 @@ const MazeGenerator: React.FC = () => {
   ]);
 
   return (
-    <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 dark:bg-gray-900 dark:text-gray-100">
       <Head>
         <title>Maze Generator</title>
         <meta name="description" content="High-performance maze generator" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
+      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden dark:bg-gray-800">
         <div className="px-6 py-8">
           <h1 className="text-3xl font-bold text-center mb-8">
             Maze Generator
@@ -397,6 +406,7 @@ const MazeGenerator: React.FC = () => {
                 id="width"
                 type="number"
                 value={width}
+                className="dark:text-white dark:bg-gray-800 dark:border-gray-700"
                 onChange={(e) => setWidth(parseInt(e.target.value))}
                 min="5"
                 max="500"
@@ -408,6 +418,7 @@ const MazeGenerator: React.FC = () => {
                 id="height"
                 type="number"
                 value={height}
+                className="dark:text-white dark:bg-gray-800 dark:border-gray-700"
                 onChange={(e) => setHeight(parseInt(e.target.value))}
                 min="5"
                 max="500"
@@ -419,6 +430,7 @@ const MazeGenerator: React.FC = () => {
                 id="cellSize"
                 type="number"
                 value={cellSize}
+                className="dark:text-white dark:bg-gray-800 dark:border-gray-700"
                 onChange={(e) => setCellSize(parseInt(e.target.value))}
                 min="5"
                 max="100"
@@ -427,15 +439,27 @@ const MazeGenerator: React.FC = () => {
           </div>
 
           <div className="flex justify-between items-center mb-8">
-            <Button onClick={generateMaze}>Generate New Maze</Button>
-            <Button onClick={printMaze}>Print Maze</Button>
+            <div className="flex items-center space-x-2">
+              <Button onClick={generateMaze}>
+                <RefreshCcw className="mr-2" />
+                <span className="hidden sm:block">Generate</span>
+              </Button>
+              <Button onClick={printMaze}>
+                <Printer className="mr-2" />
+                <span className="hidden sm:block">Print</span>
+              </Button>
+            </div>
             <div className="flex items-center space-x-2">
               <Switch
+                className="dark:data-[state=unchecked]:bg-slate-700 dark:data-[state=unchecked]:border-slate-600 dark:data-[state=checked]:bg-slate-800 dark:data-[state=checked]:text-slate-100 dark:data-[state=checked]:border-slate-500"
                 id="show-solution"
                 checked={showSolution}
                 onCheckedChange={setShowSolution}
               />
-              <Label htmlFor="show-solution">Show Solution</Label>
+              <Label htmlFor="show-solution">
+                <span className="hidden sm:block">Show Solution</span>
+                <span className="sm:hidden">Solve</span>
+              </Label>
             </div>
           </div>
 
@@ -444,7 +468,7 @@ const MazeGenerator: React.FC = () => {
               ref={canvasRef}
               width={currentWidth * currentCellSize}
               height={currentHeight * currentCellSize}
-              className="border border-black mx-auto"
+              className="border border-black mx-auto dark:invert dark:hue-rotate-180"
             />
           </div>
         </div>
