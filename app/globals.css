@@ -226,3 +226,24 @@
   min-height: 200px;
   max-height: none !important;
 }
+
+.dark-mode .ql-container {
+  background: #0f172a;
+  color: white;
+  border: 1px solid #334155 !important;
+}
+
+.dark-mode .ql-toolbar {
+  border: 1px solid #334155 !important;
+  color: white;
+  stroke: white;
+}
+
+.dark-mode .ql-toolbar * {
+  color: white !important;
+  stroke: white !important;
+}
+
+.dark-mode .ql-picker-options {
+  background-color: #0f172a !important;
+}
