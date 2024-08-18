@@ -129,8 +129,8 @@ export default function Header() {
             initial="closed"
             animate={isMenuOpen ? "open" : "closed"}
             variants={{
-              open: { height: "auto", opacity: 1 },
-              closed: { height: 0, opacity: 0 },
+              open: { maxHeight: "500px", opacity: 1 },
+              closed: { maxHeight: 0, opacity: 0 },
             }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="overflow-hidden"
