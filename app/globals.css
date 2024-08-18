@@ -118,7 +118,7 @@
 
     @media (prefers-color-scheme: dark) {
       * {
-        scrollbar-color: #5f6368 transparent;
+        scrollbar-color: #252525 transparent;
       }
     }
   }
@@ -143,26 +143,26 @@
     color: #80868b;
   }
 
+  ::-webkit-scrollbar-thumb:active {
+    color: #5f6368;
+  }
+
   @media (prefers-color-scheme: dark) {
     ::-webkit-scrollbar {
-      background: #5f6368;
+      background: #0f172a;
     }
 
     ::-webkit-scrollbar-thumb {
-      color: #a8a8a8;
+      color: #252525;
     }
 
     :hover::-webkit-scrollbar-thumb {
-      color: #c2c2c2;
+      color: #80868b;
     }
 
     ::-webkit-scrollbar-thumb:active {
-      color: #8c8c8c;
+      color: #5f6368;
     }
-  }
-
-  ::-webkit-scrollbar-thumb:active {
-    color: #5f6368;
   }
 
   ::-webkit-scrollbar-button {
