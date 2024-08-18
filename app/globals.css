@@ -171,6 +171,48 @@
   }
 }
 
+::selection {
+  color: #00fff9;
+  text-shadow: 2px 2px #ff00c1, -2px -2px #00fff9, 0 0 20px rgba(0, 0, 0, 0.5);
+  animation: glitch 0.3s infinite;
+}
+
+::-moz-selection {
+  color: #00fff9;
+  text-shadow: 2px 2px #ff00c1, -2px -2px #00fff9, 0 0 20px rgba(0, 0, 0, 0.5);
+  animation: glitch 0.3s infinite;
+}
+
+@media (prefers-color-scheme: dark) {
+  ::selection {
+    background: transparent;
+    color: #00fff9;
+    text-shadow: 2px 2px #ff00c1, -2px -2px #00fff9,
+      0 0 20px rgba(255, 255, 255, 0.5);
+  }
+
+  ::-moz-selection {
+    background: transparent;
+    color: #00fff9;
+    text-shadow: 2px 2px #ff00c1, -2px -2px #00fff9,
+      0 0 20px rgba(255, 255, 255, 0.5);
+  }
+}
+
+@media (prefers-reduced-motion) {
+  ::selection {
+    color: blue;
+    text-shadow: none;
+    animation: none;
+  }
+
+  ::-moz-selection {
+    color: blue;
+    text-shadow: none;
+    animation: none;
+  }
+}
+
 #matrixCanvas {
   max-width: 100vw;
 }
