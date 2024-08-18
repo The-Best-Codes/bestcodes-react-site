@@ -216,3 +216,13 @@
 #matrixCanvas {
   max-width: 100vw;
 }
+
+/* Remove fixed height and scrollbar from Quill editor */
+.ql-container {
+  height: auto !important;
+}
+
+.ql-editor {
+  min-height: 200px;
+  max-height: none !important;
+}
