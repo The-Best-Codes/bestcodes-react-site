@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Key } from "react";
 import { ReactMatrixAnimation } from "react-matrix-animation";
 
-export default function MatrixThemed() {
+const MatrixThemed = () => {
   const [darkModeState, setDarkModeState] = useState(false);
   const [key, setKey] = useState<Key>(0);
 
@@ -33,4 +33,6 @@ export default function MatrixThemed() {
       backgroundColor={darkModeState ? "#000000" : "#ffffff"}
     />
   );
-}
+};
+
+export default React.memo(MatrixThemed);
