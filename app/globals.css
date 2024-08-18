@@ -171,7 +171,7 @@
   }
 }
 
-::selection {
+/* ::selection {
   color: #00fff9;
   text-shadow: 2px 2px #ff00c1, -2px -2px #00fff9, 0 0 20px rgba(0, 0, 0, 0.5);
   animation: glitch 0.3s infinite;
@@ -211,7 +211,7 @@
     text-shadow: none;
     animation: none;
   }
-}
+} */
 
 #matrixCanvas {
   max-width: 100vw;
