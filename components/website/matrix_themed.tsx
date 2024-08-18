@@ -2,12 +2,16 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { ReactMatrixAnimation } from "react-matrix-animation";
 
 const MatrixThemed = React.memo(() => {
-  const [theme, setTheme] = useState(() => 
-    window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+  const [theme, setTheme] = useState(() =>
+    (typeof window === "undefined" ? "dark" : undefined) ||
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light"
   );
   const prevThemeRef = useRef(theme);
 
   const checkSystemTheme = useCallback(() => {
+    if (typeof window === "undefined") return;
     const newTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light";
@@ -18,6 +22,7 @@ const MatrixThemed = React.memo(() => {
   }, []);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     mediaQuery.addListener(checkSystemTheme);
 
@@ -36,6 +41,6 @@ const MatrixThemed = React.memo(() => {
   );
 });
 
-MatrixThemed.displayName = 'MatrixThemed';
+MatrixThemed.displayName = "MatrixThemed";
 
 export default MatrixThemed;
