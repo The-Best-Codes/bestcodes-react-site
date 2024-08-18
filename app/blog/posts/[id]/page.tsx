@@ -4,6 +4,7 @@ import { useRouter, useParams } from "next/navigation";
 import { api } from "@/lib/api";
 import { Post } from "@/types";
 import BlogPost from "@/components/blog/BlogPost";
+import Header from "@/components/website/header";
 
 export default function PostPage() {
   const [post, setPost] = useState<Post | null>(null);
@@ -25,8 +26,11 @@ export default function PostPage() {
   }
 
   return (
-    <main className="container mx-auto max-w-4xl py-8">
-      <BlogPost post={post} />
+    <main className="flex min-h-screen scroll-smooth max-w-screen w-full flex-col items-center dark:bg-slate-900">
+      <Header />
+      <div className="w-full rounded-lg max-w-screen-lg mt-8 px-8 py-8 bg-gray-50 dark:bg-slate-800">
+        <BlogPost post={post} />
+      </div>
     </main>
   );
 }

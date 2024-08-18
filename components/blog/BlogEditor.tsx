@@ -50,9 +50,28 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ post }) => {
   const handleSaveDraft = async () => {
     try {
       if (post) {
-        await api.updatePost(post.id, { title, content, status: "draft" });
+        const username = prompt("Please enter your username");
+        const password = prompt("Please enter your password");
+        if (!username || !password) {
+          return;
+        }
+        await api.updatePost(
+          post.id,
+          { title, content, status: "draft" },
+          username,
+          password
+        );
       } else {
-        await api.createPost({ title, content, status: "draft" });
+        const username = prompt("Please enter your username");
+        const password = prompt("Please enter your password");
+        if (!username || !password) {
+          return;
+        }
+        await api.createPost(
+          { title, content, status: "draft" },
+          username,
+          password
+        );
       }
       router.push("/blog");
     } catch (error) {
@@ -63,9 +82,28 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ post }) => {
   const handlePublish = async () => {
     try {
       if (post) {
-        await api.updatePost(post.id, { title, content, status: "published" });
+        const username = prompt("Please enter your username");
+        const password = prompt("Please enter your password");
+        if (!username || !password) {
+          return;
+        }
+        await api.updatePost(
+          post.id,
+          { title, content, status: "published" },
+          username,
+          password
+        );
       } else {
-        await api.createPost({ title, content, status: "published" });
+        const username = prompt("Please enter your username");
+        const password = prompt("Please enter your password");
+        if (!username || !password) {
+          return;
+        }
+        await api.createPost(
+          { title, content, status: "published" },
+          username,
+          password
+        );
       }
       router.push("/blog");
     } catch (error) {
@@ -85,10 +123,10 @@ const BlogEditor: React.FC<BlogEditorProps> = ({ post }) => {
           />
           <div className="flex space-x-2">
             <Button variant="outline" onClick={handleSaveDraft}>
-              Save Draft
+              {post ? "Save Draft" : "Save as Draft"}
             </Button>
             <Button variant="outline" onClick={handlePublish}>
-              Publish
+              {post ? "Update" : "Publish"}
             </Button>
           </div>
         </div>
