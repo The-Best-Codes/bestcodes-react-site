@@ -16,6 +16,8 @@ import PinnedCarousel from "@/components/website/pinned_carousel";
 import PrintablesCarousel from "@/components/website/printables_carousel";
 import SocialMediaLinks from "@/components/website/socials";
 import MatrixThemed from "@/components/website/matrix_themed";
+import ExploreMorePages from "@/components/website/explore_pages";
+import Footer from "@/components/website/footer";
 
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -346,11 +348,13 @@ export default function Home() {
             <p className="text-2xl w-3/4 sm:w-1/2 text-center dark:text-white">
               Maybe I&apos;ll add more to this site sometime. I don&apos;t know.
               For now, you can just check out some of my other pages on this
-              site (in the header menu).
+              site.
             </p>
           </motion.div>
         </section>
       </div>
+      <ExploreMorePages currentPath="/" />
+      <Footer />
     </main>
   );
 }

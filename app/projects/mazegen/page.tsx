@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { RefreshCcw, Printer } from "lucide-react";
+import Header from "@/components/website/header";
 import Head from "next/head";
 
 interface Cell {
@@ -386,94 +387,97 @@ const MazeGenerator: React.FC = () => {
   ]);
 
   return (
-    <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 dark:bg-gray-900 dark:text-gray-100">
-      <Head>
-        <title>Maze Generator</title>
-        <meta name="description" content="High-performance maze generator" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <main className="min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-gray-100">
+      <Header />
+      <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <Head>
+          <title>Maze Generator</title>
+          <meta name="description" content="High-performance maze generator" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
 
-      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden dark:bg-gray-800">
-        <div className="px-6 py-8">
-          <h1 className="text-3xl font-bold text-center mb-8">
-            Maze Generator
-          </h1>
+        <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden dark:bg-gray-800">
+          <div className="px-6 py-8">
+            <h1 className="text-3xl font-bold text-center mb-8">
+              Maze Generator
+            </h1>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-            <div>
-              <Label htmlFor="width">Width</Label>
-              <Input
-                id="width"
-                type="number"
-                value={width}
-                className="dark:text-white dark:bg-gray-800 dark:border-gray-700"
-                onChange={(e) => setWidth(parseInt(e.target.value))}
-                min="5"
-                max="500"
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+              <div>
+                <Label htmlFor="width">Width</Label>
+                <Input
+                  id="width"
+                  type="number"
+                  value={width}
+                  className="dark:text-white dark:bg-gray-800 dark:border-gray-700"
+                  onChange={(e) => setWidth(parseInt(e.target.value))}
+                  min="5"
+                  max="500"
+                />
+              </div>
+              <div>
+                <Label htmlFor="height">Height</Label>
+                <Input
+                  id="height"
+                  type="number"
+                  value={height}
+                  className="dark:text-white dark:bg-gray-800 dark:border-gray-700"
+                  onChange={(e) => setHeight(parseInt(e.target.value))}
+                  min="5"
+                  max="500"
+                />
+              </div>
+              <div>
+                <Label htmlFor="cellSize">Cell Size</Label>
+                <Input
+                  id="cellSize"
+                  type="number"
+                  value={cellSize}
+                  className="dark:text-white dark:bg-gray-800 dark:border-gray-700"
+                  onChange={(e) => setCellSize(parseInt(e.target.value))}
+                  min="5"
+                  max="100"
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-between items-center mb-8">
+              <div className="flex items-center space-x-2">
+                <Button onClick={generateMaze}>
+                  <RefreshCcw className="mr-2" />
+                  <span className="hidden sm:block">Generate</span>
+                </Button>
+                <Button onClick={printMaze}>
+                  <Printer className="mr-2" />
+                  <span className="hidden sm:block">Print</span>
+                </Button>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Switch
+                  className="dark:data-[state=unchecked]:bg-slate-700 dark:data-[state=unchecked]:border-slate-600 dark:data-[state=checked]:bg-slate-800 dark:data-[state=checked]:text-slate-100 dark:data-[state=checked]:border-slate-500"
+                  id="show-solution"
+                  checked={showSolution}
+                  onCheckedChange={setShowSolution}
+                />
+                <Label htmlFor="show-solution">
+                  <span className="hidden sm:block">Show Solution</span>
+                  <span className="sm:hidden">Solve</span>
+                </Label>
+              </div>
+            </div>
+
+            <div className="flex max-w-full p-4 overflow-auto">
+              <canvas
+                ref={canvasRef}
+                width={currentWidth * currentCellSize}
+                height={currentHeight * currentCellSize}
+                className="border border-black mx-auto dark:invert dark:hue-rotate-180"
               />
             </div>
-            <div>
-              <Label htmlFor="height">Height</Label>
-              <Input
-                id="height"
-                type="number"
-                value={height}
-                className="dark:text-white dark:bg-gray-800 dark:border-gray-700"
-                onChange={(e) => setHeight(parseInt(e.target.value))}
-                min="5"
-                max="500"
-              />
-            </div>
-            <div>
-              <Label htmlFor="cellSize">Cell Size</Label>
-              <Input
-                id="cellSize"
-                type="number"
-                value={cellSize}
-                className="dark:text-white dark:bg-gray-800 dark:border-gray-700"
-                onChange={(e) => setCellSize(parseInt(e.target.value))}
-                min="5"
-                max="100"
-              />
-            </div>
-          </div>
-
-          <div className="flex justify-between items-center mb-8">
-            <div className="flex items-center space-x-2">
-              <Button onClick={generateMaze}>
-                <RefreshCcw className="mr-2" />
-                <span className="hidden sm:block">Generate</span>
-              </Button>
-              <Button onClick={printMaze}>
-                <Printer className="mr-2" />
-                <span className="hidden sm:block">Print</span>
-              </Button>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Switch
-                className="dark:data-[state=unchecked]:bg-slate-700 dark:data-[state=unchecked]:border-slate-600 dark:data-[state=checked]:bg-slate-800 dark:data-[state=checked]:text-slate-100 dark:data-[state=checked]:border-slate-500"
-                id="show-solution"
-                checked={showSolution}
-                onCheckedChange={setShowSolution}
-              />
-              <Label htmlFor="show-solution">
-                <span className="hidden sm:block">Show Solution</span>
-                <span className="sm:hidden">Solve</span>
-              </Label>
-            </div>
-          </div>
-
-          <div className="flex max-w-full p-4 overflow-auto">
-            <canvas
-              ref={canvasRef}
-              width={currentWidth * currentCellSize}
-              height={currentHeight * currentCellSize}
-              className="border border-black mx-auto dark:invert dark:hue-rotate-180"
-            />
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 
