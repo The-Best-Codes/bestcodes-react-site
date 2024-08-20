@@ -40,7 +40,11 @@ const socialLinks = [
     icon: "x.svg",
     username: "@the_best_codes",
   },
-  { href: "mailto:best-codes@proton.me", icon: "email.svg", username: "Email" },
+  {
+    href: "mailto:best-codes@proton.me",
+    icon: "email.svg",
+    username: "Email Me",
+  },
 ];
 
 export default function SocialMediaLinks() {
@@ -53,7 +57,7 @@ export default function SocialMediaLinks() {
               <div className="flex flex-col items-center justify-center gap-2">
                 <Image
                   src={`/image/icons/${link.icon}`}
-                  alt={link.icon.split(".")[0]}
+                  alt={`${link.icon.split(".")[0]} icon`}
                   width={400}
                   height={400}
                   className="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 lg:h-32 lg:w-32 hover:scale-105 hover:drop-shadow-2xl transition-transform dark:invert"

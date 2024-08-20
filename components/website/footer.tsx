@@ -49,6 +49,10 @@ export default function Footer() {
         </div>
       </div>
       <motion.button
+        aria-label="Scroll to top"
+        type="button"
+        role="button"
+        title="Scroll to top"
         className="fixed bottom-4 right-4 bg-blue-500 text-white p-3 rounded-full shadow-lg transition-shadow duration-300"
         onClick={scrollToTop}
         initial={{ y: 20, opacity: 0 }}

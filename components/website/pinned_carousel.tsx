@@ -51,7 +51,7 @@ export default function PinnedCarousel() {
               >
                 <Image
                   src={project?.coverImage?.src || "/image/not_found.png"}
-                  alt={project.name}
+                  alt={`${project.name} cover image`}
                   width={256}
                   height={256}
                   unoptimized

@@ -115,7 +115,7 @@ export default function Home() {
             whileInView={{ x: 0, opacity: 1 }}
             className="w-full sm:w-full md:w-3/4 lg:w-2/3"
           >
-            <Card className="dark:bg-slate-700 dark:border-none">
+            <Card className="dark:bg-slate-800 dark:border-none">
               <CardHeader>
                 <CardTitle className="flex flex-row items-center gap-2">
                   <Image
@@ -163,7 +163,7 @@ export default function Home() {
             whileInView={{ y: 0, opacity: 1 }}
             className="w-full sm:w-full md:w-3/4 lg:w-2/3"
           >
-            <Card className="dark:bg-slate-700 dark:border-none">
+            <Card className="dark:bg-slate-800 dark:border-none">
               <CardHeader>
                 <CardTitle className="flex flex-row items-center gap-2">
                   <Image
@@ -249,7 +249,7 @@ export default function Home() {
             whileInView={{ x: 0, opacity: 1 }}
             className="w-full sm:w-full md:w-3/4 lg:w-2/3"
           >
-            <Card className="dark:bg-slate-700 dark:border-none">
+            <Card className="dark:bg-slate-800 dark:border-none">
               <CardHeader>
                 <CardTitle className="flex flex-row items-center gap-2">
                   <Image

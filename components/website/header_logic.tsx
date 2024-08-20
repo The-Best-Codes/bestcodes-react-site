@@ -43,6 +43,8 @@ export default function HeaderMain() {
     return (
       <SignInButton mode="modal">
         <Button
+          aria-label="Sign in"
+          title="Sign in"
           variant="outline"
           className="rounded-full dark:text-white dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700 dark:hover:text-white"
           size={"icon"}
