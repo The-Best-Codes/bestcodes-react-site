@@ -18,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
+import ExploreMorePages from "@/components/website/explore_pages";
 import { Check } from "lucide-react";
 
 const formSchema = z.object({
@@ -177,6 +178,7 @@ export default function Contact() {
           </CardContent>
         </Card>
       </section>
+      <ExploreMorePages currentPath="/contact" />
     </main>
   );
 }
