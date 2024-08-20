@@ -42,7 +42,11 @@ export default function HeaderMain() {
 
     return (
       <SignInButton mode="modal">
-        <Button variant="outline" className="rounded-full dark:text-white dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700 dark:hover:text-white" size={"icon"}>
+        <Button
+          variant="outline"
+          className="rounded-full dark:text-white dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700 dark:hover:text-white"
+          size={"icon"}
+        >
           <User />
         </Button>
       </SignInButton>
@@ -159,6 +163,9 @@ export default function HeaderMain() {
           >
             <nav className="px-6 py-4">
               <NavItems />
+              <div className="mt-4 flex flex-row items-center gap-4">
+                <AuthButton />
+              </div>
             </nav>
           </motion.div>
         )}
