@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Menu, X, User } from "lucide-react";
+import { Menu, X, User, Loader2 } from "lucide-react";
 import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 
@@ -33,7 +33,7 @@ export default function HeaderMain() {
 
   const AuthButton = () => {
     if (!isLoaded) {
-      return null;
+      return <Loader2 className="w-6 h-6 dark:text-white animate-spin" />;
     }
 
     if (isSignedIn) {
