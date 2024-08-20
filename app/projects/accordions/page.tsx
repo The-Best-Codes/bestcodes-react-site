@@ -34,7 +34,7 @@ import {
   FolderOpen,
   Loader2,
   Check,
-  ArrowLeft
+  ArrowLeft,
 } from "lucide-react";
 
 interface AccordionItem {
@@ -323,81 +323,83 @@ const AccordionEditor: React.FC = () => {
 
   if (!showEditor) {
     return (
-      <div className="container mx-auto p-4">
-        <h1 className="text-2xl font-bold mb-4">Accordion Editor</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Card>
+      <main className="min-h-screen w-full scroll-smooth dark:bg-slate-900 dark:text-slate-300">
+        <div className="container mx-auto p-4">
+          <h1 className="text-2xl font-bold mb-4">Accordion Editor</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Card className="dark:border-none dark:bg-slate-700 dark:text-white">
+              <CardHeader>
+                <CardTitle>Create New Project</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Button onClick={createNewProject}>
+                  <FilePlus className="w-4 h-4 mr-2" /> Create New
+                </Button>
+              </CardContent>
+            </Card>
+            <Card className="dark:border-none dark:bg-slate-700 dark:text-white">
+              <CardHeader>
+                <CardTitle>Import Existing File</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Input
+                  type="file"
+                  accept=".html"
+                  id="fileInput"
+                  onChange={handleFileUpload}
+                  className="hidden"
+                />
+                <Button
+                  onClick={() => document.getElementById("fileInput")?.click()}
+                >
+                  <FileUp className="w-4 h-4 mr-2" /> Upload File
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+          <Card className="mt-4 dark:border-none dark:bg-slate-700 dark:text-white">
             <CardHeader>
-              <CardTitle>Create New Project</CardTitle>
+              <CardTitle>Recent Projects</CardTitle>
             </CardHeader>
             <CardContent>
-              <Button onClick={createNewProject}>
-                <FilePlus className="w-4 h-4 mr-2" /> Create New
-              </Button>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle>Import Existing File</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Input
-                type="file"
-                accept=".html"
-                id="fileInput"
-                onChange={handleFileUpload}
-                className="mb-2"
-              />
-              <Button
-                onClick={() => document.getElementById("fileInput")?.click()}
-              >
-                <FileUp className="w-4 h-4 mr-2" /> Upload File
-              </Button>
+              {projects.length === 0 ? (
+                <p>No recent projects</p>
+              ) : (
+                <ul>
+                  {projects.map((project) => (
+                    <li
+                      key={project.id}
+                      className="flex items-center justify-between mb-2"
+                    >
+                      <span>{project.name}</span>
+                      <div>
+                        <Button
+                          onClick={() => openProject(project)}
+                          className="mr-2"
+                        >
+                          <FolderOpen className="w-4 h-4 mr-2" /> Open
+                        </Button>
+                        <Button
+                          onClick={() => deleteProject(project.id)}
+                          variant="destructive"
+                        >
+                          <Trash2 className="w-4 h-4 mr-2" /> Delete
+                        </Button>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </CardContent>
           </Card>
         </div>
-        <Card className="mt-4">
-          <CardHeader>
-            <CardTitle>Recent Projects</CardTitle>
-          </CardHeader>
-          <CardContent>
-            {projects.length === 0 ? (
-              <p>No recent projects</p>
-            ) : (
-              <ul>
-                {projects.map((project) => (
-                  <li
-                    key={project.id}
-                    className="flex items-center justify-between mb-2"
-                  >
-                    <span>{project.name}</span>
-                    <div>
-                      <Button
-                        onClick={() => openProject(project)}
-                        className="mr-2"
-                      >
-                        <FolderOpen className="w-4 h-4 mr-2" /> Open
-                      </Button>
-                      <Button
-                        onClick={() => deleteProject(project.id)}
-                        variant="destructive"
-                      >
-                        <Trash2 className="w-4 h-4 mr-2" /> Delete
-                      </Button>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </CardContent>
-        </Card>
-      </div>
+      </main>
     );
   }
 
   return (
-    <>
-      <Button className="absolute top-4 right-4" onClick={saveProject}>
+    <main className="min-h-screen w-full scroll-smooth dark:bg-slate-900 dark:text-slate-300">
+      <Button className="absolute top-4 right-4 z-10 dark:bg-slate-300 dark:text-slate-900 dark:hover:bg-slate-400" onClick={saveProject}>
         {savingStatus === "idle" ? (
           <Save className="w-4 h-4 mr-2" />
         ) : savingStatus === "saving" ? (
@@ -409,7 +411,7 @@ const AccordionEditor: React.FC = () => {
       </Button>
 
       <Button
-        className="absolute top-4 left-4"
+        className="absolute top-4 left-4 z-10 dark:bg-slate-300 dark:text-slate-900 dark:hover:bg-slate-400"
         onClick={() => setShowEditor(false)}
       >
         <ArrowLeft className="w-4 h-4 mr-2" /> Back
@@ -423,7 +425,7 @@ const AccordionEditor: React.FC = () => {
             } lg:pr-4 max-h-screen overflow-auto p-4`}
           >
             {/* Editor Section */}
-            <Card className="mb-6">
+            <Card className="mb-6 dark:border-none dark:bg-slate-700 dark:text-white">
               <CardHeader>
                 <CardTitle>Page Header</CardTitle>
               </CardHeader>
@@ -433,21 +435,21 @@ const AccordionEditor: React.FC = () => {
                   id="header"
                   value={header}
                   onChange={(e) => setHeader(e.target.value)}
-                  className="mb-2"
+                  className="mb-2 dark:bg-slate-700 dark:text-white dark:border-slate-500"
                 />
                 <Label htmlFor="subheader">Subheader</Label>
                 <Input
                   id="subheader"
                   value={subheader}
                   onChange={(e) => setSubheader(e.target.value)}
-                  className="mb-2"
+                  className="mb-2 dark:bg-slate-700 dark:text-white dark:border-slate-500"
                 />
                 <Label htmlFor="description">Description</Label>
                 <Textarea
                   id="description"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="mb-2"
+                  className="mb-2 dark:bg-slate-700 dark:text-white dark:border-slate-500"
                 />
               </CardContent>
             </Card>
@@ -466,7 +468,7 @@ const AccordionEditor: React.FC = () => {
                             <Card
                               ref={provided.innerRef}
                               {...provided.draggableProps}
-                              className="mb-4"
+                              className="mb-4 dark:bg-slate-700 dark:text-white dark:border-slate-500"
                             >
                               <CardContent className="pt-4">
                                 <div className="flex items-center mb-2">
@@ -485,7 +487,7 @@ const AccordionEditor: React.FC = () => {
                                         e.target.value
                                       )
                                     }
-                                    className="flex-grow"
+                                    className="flex-grow dark:bg-slate-700 dark:text-white dark:border-slate-500"
                                     placeholder="Enter question"
                                   />
                                   <Dialog open={itemToDelete === item.id}>
@@ -535,7 +537,7 @@ const AccordionEditor: React.FC = () => {
                                       e.target.value
                                     )
                                   }
-                                  className="mt-2"
+                                  className="mt-2 dark:bg-slate-700 dark:text-white dark:border-slate-500"
                                   placeholder="Enter answer"
                                 />
                               </CardContent>
@@ -550,20 +552,20 @@ const AccordionEditor: React.FC = () => {
               </DragDropContext>
             </div>
             <div className="flex flex-col flex-wrap">
-              <Button onClick={addItem} className="my-4">
+              <Button onClick={addItem} className="my-4 dark:bg-slate-600">
                 Add New Question
               </Button>
               <div className="space-x-2 w-full flex flex-row items-center justify-start">
-                <Button onClick={copyHTML}>
+                <Button className="dark:bg-slate-600" onClick={copyHTML}>
                   <Copy className="w-4 h-4 mr-2" /> Copy
                 </Button>
-                <Button onClick={downloadHTML}>
+                <Button className="dark:bg-slate-600" onClick={downloadHTML}>
                   <Download className="w-4 h-4 mr-2" /> Download
                 </Button>
-                <Button onClick={openHTML}>
+                <Button className="dark:bg-slate-600" onClick={openHTML}>
                   <ArrowUpRightFromSquare className="w-4 h-4 mr-2" /> Open
                 </Button>
-                <Button onClick={() => setShowPreview(!showPreview)}>
+                <Button className="dark:bg-slate-600" onClick={() => setShowPreview(!showPreview)}>
                   {showPreview ? (
                     <>
                       <EyeOff className="w-4 h-4 mr-2" /> Hide Preview
@@ -597,7 +599,7 @@ const AccordionEditor: React.FC = () => {
           )}
         </div>
       </div>
-    </>
+    </main>
   );
 };
 
