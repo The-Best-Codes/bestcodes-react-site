@@ -20,6 +20,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import ExploreMorePages from "@/components/website/explore_pages";
 import { Check } from "lucide-react";
+import Footer from "@/components/website/footer";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -83,7 +84,7 @@ export default function Contact() {
     <main className="flex min-h-screen scroll-smooth max-w-screen w-full flex-col items-center dark:bg-slate-900">
       <Header />
 
-      <section className="flex flex-col items-center justify-center w-full flex-1 px-2 sm:px-4 md:px-6 lg:px-20 text-center">
+      <section className="flex flex-col items-center justify-center w-full flex-1 px-2 sm:px-4 md:px-6 lg:px-20 text-center mt-10">
         <div className="mb-8">
           <h1 className="text-5xl font-bold text-center dark:text-white">
             Contact Me
@@ -179,6 +180,7 @@ export default function Contact() {
         </Card>
       </section>
       <ExploreMorePages currentPath="/contact" />
+      <Footer />
     </main>
   );
 }
