@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Header from "@/components/website/header";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -21,6 +21,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import ExploreMorePages from "@/components/website/explore_pages";
 import { Check } from "lucide-react";
 import Footer from "@/components/website/footer";
+import { setup } from "@/lib/csrf";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -39,16 +40,6 @@ export default function Contact() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
   const turnstileRef = useRef<any>(null);
-  const [csrfToken, setCsrfToken] = useState("");
-
-  useEffect(() => {
-    const fetchCsrfToken = async () => {
-      const response = await fetch('/api/csrf');
-      const data = await response.json();
-      setCsrfToken(data.csrfToken);
-    };
-    fetchCsrfToken();
-  }, []);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -63,7 +54,7 @@ export default function Contact() {
     setIsSubmitting(true);
     setIsError(false);
 
-    if (!turnstileRef.current || !csrfToken) {
+    if (!turnstileRef.current) {
       setIsSubmitting(false);
       setIsError(true);
       return;
@@ -75,11 +66,6 @@ export default function Contact() {
       const response = await axios.post("/api/contact/create", {
         ...values,
         cloudflareToken,
-        csrfToken,
-      }, {
-        headers: {
-          'X-CSRF-Token': csrfToken
-        }
       });
       if (response.status === 200) {
         setIsSuccess(true);
@@ -125,7 +111,6 @@ export default function Contact() {
                   onSubmit={form.handleSubmit(onSubmit)}
                   className="space-y-8 w-full"
                 >
-                  <input type="hidden" name="csrfToken" value={csrfToken} />
                   <FormField
                     control={form.control}
                     name="name"
@@ -200,3 +185,7 @@ export default function Contact() {
     </main>
   );
 }
+
+export const getServerSideProps = setup(async ({ req, res }: any) => {
+  return { props: {} };
+});
