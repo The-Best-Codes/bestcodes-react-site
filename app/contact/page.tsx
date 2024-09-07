@@ -34,7 +34,7 @@ const formSchema = z.object({
   }),
 });
 
-export default function Contact() {
+export default function Contact({ csrfToken }: { csrfToken: string }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -65,6 +65,7 @@ export default function Contact() {
       const response = await axios.post("/api/contact/create", {
         ...values,
         cloudflareToken,
+        csrfToken,
       });
       if (response.status === 200) {
         setIsSuccess(true);
@@ -110,6 +111,7 @@ export default function Contact() {
                   onSubmit={form.handleSubmit(onSubmit)}
                   className="space-y-8 w-full"
                 >
+                  <input type="hidden" name="csrfToken" value={csrfToken} />
                   <FormField
                     control={form.control}
                     name="name"
@@ -183,4 +185,12 @@ export default function Contact() {
       <Footer />
     </main>
   );
+}
+
+export async function getServerSideProps(context: any) {
+  const csrf = require('next-csrf')({ secret: process.env.CSRF_SECRET_KEY });
+  const csrfToken = await csrf.createToken();
+  return {
+    props: { csrfToken }
+  };
 }

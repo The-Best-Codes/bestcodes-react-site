@@ -1,11 +1,18 @@
-// pages/api/contact/create.js
-
 import nodeMailer from "nodemailer";
+import { initMiddleware, csrf } from 'next-csrf';
+
+const csrfProtection = initMiddleware(
+  csrf({
+    secret: process.env.CSRF_SECRET_KEY,
+  })
+);
 
 export default async function handler(req, res) {
     if (req.method !== "POST") {
         return res.status(405).json({ error: "Method not allowed" });
     }
+
+    await csrfProtection(req, res);
 
     const { name, email, message, cloudflareToken } = req.body;
 
@@ -57,7 +64,9 @@ export default async function handler(req, res) {
             from: `BestCodes Website <${process.env.GMAIL_USER}>`,
             to: `${process.env.GMAIL_USER}`,
             subject: `New Submission of BestCodes Contact Form - From ${name}`,
-            text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+            text: `Name: ${name}
+Email: ${email}
+Message: ${message}`,
         };
 
         await transporter.sendMail(mailOptions);
