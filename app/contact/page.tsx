@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Header from "@/components/website/header";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -34,11 +34,18 @@ const formSchema = z.object({
   }),
 });
 
-export default function Contact({ csrfToken }: { csrfToken: string }) {
+export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
   const turnstileRef = useRef<any>(null);
+  const [csrfToken, setCsrfToken] = useState("");
+
+  useEffect(() => {
+    fetch("/api/csrf-token")
+      .then((res) => res.json())
+      .then((data) => setCsrfToken(data.csrfToken));
+  }, []);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -66,6 +73,10 @@ export default function Contact({ csrfToken }: { csrfToken: string }) {
         ...values,
         cloudflareToken,
         csrfToken,
+      }, {
+        headers: {
+          'X-CSRF-Token': csrfToken,
+        },
       });
       if (response.status === 200) {
         setIsSuccess(true);
@@ -185,12 +196,4 @@ export default function Contact({ csrfToken }: { csrfToken: string }) {
       <Footer />
     </main>
   );
-}
-
-export async function getServerSideProps(context: any) {
-  const csrf = require('next-csrf')({ secret: process.env.CSRF_SECRET_KEY });
-  const csrfToken = await csrf.createToken();
-  return {
-    props: { csrfToken }
-  };
 }
