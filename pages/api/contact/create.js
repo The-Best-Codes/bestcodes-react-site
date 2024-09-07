@@ -1,17 +1,24 @@
 // pages/api/contact/create.js
 
 import nodeMailer from "nodemailer";
-import { csrf } from 'next-csrf';
+import { validateToken } from 'next-csrf';
 
-const handler = async (req, res) => {
+export default async function handler(req, res) {
     if (req.method !== "POST") {
         return res.status(405).json({ error: "Method not allowed" });
     }
 
-    const { name, email, message, cloudflareToken } = req.body;
+    const { name, email, message, cloudflareToken, csrfToken } = req.body;
 
-    if (!name || !email || !message) {
+    if (!name || !email || !message || !csrfToken) {
         return res.status(400).json({ error: "All fields are required" });
+    }
+
+    // Validate CSRF token
+    try {
+        await validateToken(csrfToken);
+    } catch (error) {
+        return res.status(403).json({ error: "Invalid CSRF token" });
     }
 
     if (cloudflareToken) {
@@ -68,6 +75,4 @@ const handler = async (req, res) => {
         console.error(error);
         return res.status(500).json({ error: "Failed to send email" });
     }
-};
-
-export default csrf(handler);
+}

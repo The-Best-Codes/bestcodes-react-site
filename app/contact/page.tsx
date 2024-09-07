@@ -42,9 +42,12 @@ export default function Contact() {
   const [csrfToken, setCsrfToken] = useState("");
 
   useEffect(() => {
-    fetch("/api/csrf-token")
-      .then((res) => res.json())
-      .then((data) => setCsrfToken(data.csrfToken));
+    const fetchCsrfToken = async () => {
+      const response = await fetch('/api/csrf');
+      const data = await response.json();
+      setCsrfToken(data.csrfToken);
+    };
+    fetchCsrfToken();
   }, []);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -60,7 +63,7 @@ export default function Contact() {
     setIsSubmitting(true);
     setIsError(false);
 
-    if (!turnstileRef.current) {
+    if (!turnstileRef.current || !csrfToken) {
       setIsSubmitting(false);
       setIsError(true);
       return;
@@ -75,8 +78,8 @@ export default function Contact() {
         csrfToken,
       }, {
         headers: {
-          'X-CSRF-Token': csrfToken,
-        },
+          'X-CSRF-Token': csrfToken
+        }
       });
       if (response.status === 200) {
         setIsSuccess(true);
