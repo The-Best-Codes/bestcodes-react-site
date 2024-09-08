@@ -1,7 +1,8 @@
-import nodeMailer from "nodemailer";
-import { csrf } from "@/lib/csrf";
+// pages/api/contact/create.js
 
-async function handler(req, res) {
+import nodeMailer from "nodemailer";
+
+export default async function handler(req, res) {
     try {
         if (req.method !== "POST") {
             return res.status(405).json({ error: "Method not allowed" });
@@ -73,5 +74,3 @@ async function handler(req, res) {
         return res.status(500).json({ error: "Internal server error" });
     }
 }
-
-export default csrf(handler);

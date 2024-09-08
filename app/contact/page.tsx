@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Header from "@/components/website/header";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -39,20 +39,6 @@ export default function Contact() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
   const turnstileRef = useRef<any>(null);
-  const [csrfToken, setCsrfToken] = useState("");
-
-  useEffect(() => {
-    const fetchCsrfToken = async () => {
-      try {
-        const response = await axios.get('/api/csrf-token');
-        setCsrfToken(response.data.token);
-      } catch (error) {
-        console.error("Failed to fetch CSRF token", error);
-        setIsError(true);
-      }
-    };
-    fetchCsrfToken();
-  }, []);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -79,7 +65,6 @@ export default function Contact() {
       const response = await axios.post("/api/contact/create", {
         ...values,
         cloudflareToken,
-        csrfToken
       });
       if (response.status === 200) {
         setIsSuccess(true);
