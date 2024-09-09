@@ -12,6 +12,7 @@ import {
   getChapterCount,
   getVerseCount,
   bibleStats,
+  // @ts-ignore
 } from "best-bible";
 
 export default function BestBible() {
