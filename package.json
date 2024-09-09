@@ -29,7 +29,7 @@
     "@tailwindcss/typography": "^0.5.14",
     "@types/react-beautiful-dnd": "^13.1.8",
     "axios": "^1.7.4",
-    "best-bible": "^1.5.9",
+    "best-bible": "^1.6.0",
     "class-variance-authority": "^0.7.0",
     "cloudflare": "^3.5.0",
     "clsx": "^2.1.1",
