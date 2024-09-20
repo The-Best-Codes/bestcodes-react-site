@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { motion, AnimatePresence } from "framer-motion";
-import { Tilt } from "react-tilt";
+import { motion, AnimatePresence, useMotionTemplate, useMotionValue } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Loader2 } from "lucide-react";
@@ -10,18 +9,6 @@ interface Page {
   name: string;
   path: string;
 }
-
-const defaultTiltOptions = {
-  reverse: false,
-  max: 35,
-  perspective: 1000,
-  scale: 1.1,
-  speed: 1000,
-  transition: true,
-  axis: null,
-  reset: true,
-  easing: "cubic-bezier(.03,.98,.52,.99)",
-};
 
 const ExploreMorePages: React.FC<{ currentPath: string }> = ({
   currentPath,
@@ -112,48 +99,77 @@ const ExploreMorePages: React.FC<{ currentPath: string }> = ({
             exit={{ opacity: 0 }}
           >
             {pages.map((page, index) => (
-              <motion.div
-                key={page.path}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <Tilt options={defaultTiltOptions}>
-                  <Card className="h-full bg-white dark:bg-slate-800 dark:border-slate-700 transition-all duration-300 transform hover:shadow-xl dark:hover:shadow-gray-700 dark:hover:shadow-md">
-                    <CardHeader>
-                      <CardTitle
-                        className="text-xl text-gray-800 dark:text-gray-100 truncate"
-                        title={page.name}
-                      >
-                        {page.name}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="flex justify-between items-center">
-                      <p
-                        className="text-sm text-gray-500 dark:text-gray-400 truncate flex-grow mr-2"
-                        title={page.path}
-                      >
-                        {page.path}
-                      </p>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        asChild
-                        className="bg-white text-gray-800 border-gray-300 hover:bg-gray-100 dark:bg-slate-700 dark:text-gray-100 dark:border-slate-600 dark:hover:bg-slate-600 transition-colors duration-200 flex-shrink-0"
-                      >
-                        <a href={page.path} className="flex items-center">
-                          Visit <ChevronRight className="ml-2 h-4 w-4" />
-                        </a>
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </Tilt>
-              </motion.div>
+              <PageCard key={page.path} page={page} index={index} />
             ))}
           </motion.div>
         )}
       </AnimatePresence>
     </section>
+  );
+};
+
+const PageCard: React.FC<{ page: Page; index: number }> = ({ page, index }) => {
+  let mouseX = useMotionValue(0);
+  let mouseY = useMotionValue(0);
+
+  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
+    let { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+    >
+      <div
+        className="group relative rounded-xl bg-white dark:bg-slate-800 shadow-md overflow-hidden"
+        onMouseMove={handleMouseMove}
+      >
+        <motion.div
+          className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100"
+          style={{
+            background: useMotionTemplate`
+              radial-gradient(
+                150px circle at ${mouseX}px ${mouseY}px,
+                rgba(14, 165, 233, 0.15),
+                transparent 80%
+              )
+            `,
+          }}
+        />
+        <Card className="h-full border-0 bg-transparent">
+          <CardHeader>
+            <CardTitle
+              className="text-xl text-gray-800 dark:text-gray-100 truncate"
+              title={page.name}
+            >
+              {page.name}
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="flex justify-between items-center">
+            <p
+              className="text-sm text-gray-500 dark:text-gray-400 truncate flex-grow mr-2"
+              title={page.path}
+            >
+              {page.path}
+            </p>
+            <Button
+              variant="outline"
+              size="sm"
+              asChild
+              className="bg-white text-gray-800 border-gray-300 hover:bg-gray-100 dark:bg-slate-700 dark:text-gray-100 dark:border-slate-600 dark:hover:bg-slate-600 dark:hover:text-white transition-colors duration-200 flex-shrink-0"
+            >
+              <a href={page.path} className="flex items-center">
+                Visit <ChevronRight className="ml-2 h-4 w-4" />
+              </a>
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    </motion.div>
   );
 };
 
