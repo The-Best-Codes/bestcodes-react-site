@@ -80,6 +80,7 @@ const AccordionEditor: React.FC = () => {
     if (showEditor) {
       setHtmlContent(getHTML());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [header, subheader, description, items, showEditor]);
 
   useEffect(() => {
@@ -90,6 +91,7 @@ const AccordionEditor: React.FC = () => {
 
       return () => clearInterval(autoSave);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentProject, header, subheader, description, items]);
 
   const addItem = () => {
@@ -399,7 +401,10 @@ const AccordionEditor: React.FC = () => {
 
   return (
     <main className="min-h-screen w-full scroll-smooth dark:bg-slate-900 dark:text-slate-300">
-      <Button className="absolute top-4 right-4 z-10 dark:bg-slate-300 dark:text-slate-900 dark:hover:bg-slate-400" onClick={saveProject}>
+      <Button
+        className="absolute top-4 right-4 z-10 dark:bg-slate-300 dark:text-slate-900 dark:hover:bg-slate-400"
+        onClick={saveProject}
+      >
         {savingStatus === "idle" ? (
           <Save className="w-4 h-4 mr-2" />
         ) : savingStatus === "saving" ? (
@@ -565,7 +570,10 @@ const AccordionEditor: React.FC = () => {
                 <Button className="dark:bg-slate-600" onClick={openHTML}>
                   <ArrowUpRightFromSquare className="w-4 h-4 mr-2" /> Open
                 </Button>
-                <Button className="dark:bg-slate-600" onClick={() => setShowPreview(!showPreview)}>
+                <Button
+                  className="dark:bg-slate-600"
+                  onClick={() => setShowPreview(!showPreview)}
+                >
                   {showPreview ? (
                     <>
                       <EyeOff className="w-4 h-4 mr-2" /> Hide Preview
