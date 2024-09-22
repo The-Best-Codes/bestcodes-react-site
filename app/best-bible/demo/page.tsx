@@ -1,5 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
 import Header from "@/components/website/header";
 import SyntaxHighlighter from "@/components/website/code_syntax";
 import {
