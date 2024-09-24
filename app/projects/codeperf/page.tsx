@@ -193,15 +193,20 @@ const factorial = (n) => {
     const percentage = (iterations / bestPerformance) * 100;
     return `${percentage.toFixed(2)}%`;
   };
+
   return (
-    <div className="container mx-auto p-4 min-h-screen flex flex-col">
-      <h1 className="text-3xl font-bold mb-6">Code Performance Analyzer</h1>
+    <div className="w-full p-4 min-h-screen flex flex-col bg-white dark:bg-gray-900 text-black dark:text-white">
+      <h1 className="text-3xl font-bold mb-6 dark:text-white">
+        Code Performance Analyzer
+      </h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-grow">
-        <Card className="flex flex-col h-[calc(100vh-10rem)] lg:h-auto">
+        <Card className="flex flex-col h-[calc(100vh-10rem)] lg:h-auto bg-white dark:bg-gray-800 dark:border-none">
           <CardHeader>
-            <CardTitle>Code Editor</CardTitle>
-            <CardDescription>Write and edit your code here</CardDescription>
+            <CardTitle className="dark:text-white">Code Editor</CardTitle>
+            <CardDescription className="dark:text-gray-300">
+              Write and edit your code here
+            </CardDescription>
           </CardHeader>
           <CardContent className="flex-grow overflow-hidden">
             <Tabs
@@ -209,10 +214,19 @@ const factorial = (n) => {
               onValueChange={setActiveTab}
               className="h-full flex flex-col"
             >
-              <TabsList className="justify-start overflow-x-auto">
-                <TabsTrigger value="global">Global Code</TabsTrigger>
+              <TabsList className="justify-start overflow-x-auto bg-gray-100 dark:bg-gray-700">
+                <TabsTrigger
+                  value="global"
+                  className="data-[state=active]:bg-white dark:data-[state=active]:bg-gray-600 dark:text-white dark:data-[state=active]:text-white"
+                >
+                  Global Code
+                </TabsTrigger>
                 {miniCodes.map((miniCode) => (
-                  <TabsTrigger key={miniCode.id} value={`mini-${miniCode.id}`}>
+                  <TabsTrigger
+                    key={miniCode.id}
+                    value={`mini-${miniCode.id}`}
+                    className="data-[state=active]:bg-white dark:data-[state=active]:bg-gray-600 dark:text-white dark:data-[state=active]:text-white"
+                  >
                     Code {miniCode.id}
                   </TabsTrigger>
                 ))}
@@ -230,6 +244,7 @@ const factorial = (n) => {
                       fontFamily: '"Fira code", "Fira Mono", monospace',
                       fontSize: 12,
                       height: "100%",
+                      backgroundColor: "white",
                     }}
                   />
                 </TabsContent>
@@ -257,6 +272,7 @@ const factorial = (n) => {
                           fontFamily: '"Fira code", "Fira Mono", monospace',
                           fontSize: 12,
                           height: "100%",
+                          backgroundColor: "white",
                         }}
                       />
                       <Button
@@ -274,10 +290,17 @@ const factorial = (n) => {
             </Tabs>
           </CardContent>
           <CardFooter>
-            <Button onClick={addMiniCode} className="mr-2">
+            <Button
+              onClick={addMiniCode}
+              className="mr-2 dark:bg-gray-700 dark:text-white"
+            >
               <Plus className="h-4 w-4 mr-2" /> Add Mini Code
             </Button>
-            <Button onClick={runCode} disabled={isRunning}>
+            <Button
+              onClick={runCode}
+              disabled={isRunning}
+              className="dark:bg-gray-700 dark:text-white"
+            >
               {isRunning ? (
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />
               ) : (
@@ -288,10 +311,12 @@ const factorial = (n) => {
           </CardFooter>
         </Card>
 
-        <Card className="flex flex-col h-[calc(100vh-10rem)] lg:h-auto">
+        <Card className="flex flex-col h-[calc(100vh-10rem)] lg:h-auto bg-white dark:bg-gray-800 dark:border-none">
           <CardHeader>
-            <CardTitle>Performance Results</CardTitle>
-            <CardDescription>
+            <CardTitle className="dark:text-white">
+              Performance Results
+            </CardTitle>
+            <CardDescription className="dark:text-gray-300">
               Iterations per second for each code snippet
             </CardDescription>
           </CardHeader>
@@ -299,7 +324,7 @@ const factorial = (n) => {
             {isRunning && (
               <div className="mb-4">
                 <Progress value={progress} className="w-full" />
-                <p className="text-sm text-center mt-2">
+                <p className="text-sm text-center mt-2 dark:text-gray-300">
                   {Math.ceil((progress / 100) * miniCodes.length) === 0
                     ? "Initializing..."
                     : `Running code ${Math.ceil(
@@ -319,22 +344,30 @@ const factorial = (n) => {
                 </AlertDescription>
               </Alert>
             )}
-            <ChartContainer config={chartConfig}>
-              <BarChart data={results}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="id" />
-                <YAxis />
-                <ChartTooltip content={<ChartTooltipContent />} />
-                <Bar
-                  dataKey="iterations"
-                  fill="var(--color-iterations)"
-                  radius={8}
-                />
-              </BarChart>
-            </ChartContainer>
+            {results.length > 0 && (
+              <ChartContainer config={chartConfig}>
+                <BarChart data={results}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="id" />
+                  <YAxis />
+                  <ChartTooltip content={<ChartTooltipContent />} />
+                  <Bar
+                    dataKey="iterations"
+                    fill="var(--color-iterations)"
+                    radius={8}
+                  />
+                </BarChart>
+              </ChartContainer>
+            )}
+            {results.length === 0 && (
+              <div className="flex h-full items-center justify-center dark:text-gray-300">
+                No results yet &middot; Click &quot;Run Tests&quot; to get
+                started
+              </div>
+            )}
           </CardContent>
           <CardFooter className="flex-col items-start gap-2 text-sm">
-            <div className="flex gap-2 font-medium leading-none text-xl">
+            <div className="flex gap-2 font-medium leading-none text-xl dark:text-white">
               {results.length > 0 && (
                 <>
                   Best performance: Code{" "}
@@ -348,11 +381,14 @@ const factorial = (n) => {
             </div>
             {results.length > 0 && (
               <div className="mt-4">
-                <h3 className="font-semibold text-lg mb-2">
+                <h3 className="font-semibold text-lg mb-2 dark:text-white">
                   Performance Comparison:
                 </h3>
                 {results.map((result) => (
-                  <p className="mb-2 text-base" key={result.id}>
+                  <p
+                    className="mb-2 text-base dark:text-gray-300"
+                    key={result.id}
+                  >
                     Code {result.id}:{" "}
                     <span className="font-bold">
                       {getPerformanceComparison(result.iterations)}
