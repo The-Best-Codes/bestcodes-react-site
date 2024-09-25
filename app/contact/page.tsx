@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Header from "@/components/website/header";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -48,6 +48,12 @@ export default function Contact() {
       message: "",
     },
   });
+
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.title = "BestCodes' Website | Contact Me";
+    }
+  }, []);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
