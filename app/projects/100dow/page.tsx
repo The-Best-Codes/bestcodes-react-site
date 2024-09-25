@@ -1,13 +1,21 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { motion } from "framer-motion";
-import { ChevronDown, Award, Smile } from "lucide-react";
+import { ChevronDown, Award, Smile, Loader } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import dynamic from "next/dynamic";
 
 const Confetti = dynamic(() => import("react-confetti"), { ssr: false });
 
 const CongratulationsPage: React.FC = () => {
+  return (
+    <Suspense fallback={<Loader />}>
+      <CongratulationsPageContent />
+    </Suspense>
+  );
+};
+
+const CongratulationsPageContent: React.FC = () => {
   const searchParams = useSearchParams();
   const [name, setName] = useState("Congrats");
   const [showConfetti, setShowConfetti] = useState(false);
