@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { motion, AnimatePresence, useMotionTemplate, useMotionValue } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useMotionTemplate,
+  useMotionValue,
+} from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import SitePathNames from "@/public/assets/explore_pages/names.json";
 import { ChevronRight, Loader2 } from "lucide-react";
 
 interface Page {
@@ -27,7 +33,7 @@ const ExploreMorePages: React.FC<{ currentPath: string }> = ({
 
         const pagesPromises = items.map(async (item: any) => {
           if (item.type === "file" && item.name === "page.tsx") {
-            return { name: "Home", path: "/" };
+            return { name: getPageName("/"), path: "/" };
           } else if (item.type === "dir") {
             const folderContents = await axios.get(item.url);
             const hasPageFile = folderContents.data.some(
@@ -35,7 +41,10 @@ const ExploreMorePages: React.FC<{ currentPath: string }> = ({
             );
 
             if (hasPageFile) {
-              return { name: item.name, path: `/${item.name}` };
+              return {
+                name: getPageName(`/${item.name}`),
+                path: `/${item.name}`,
+              };
             }
 
             const nestedPagesPromises = folderContents.data
@@ -47,9 +56,10 @@ const ExploreMorePages: React.FC<{ currentPath: string }> = ({
                     (file: any) => file.name === "page.tsx"
                   )
                 ) {
+                  const path = `/${item.name}/${subItem.name}`;
                   return {
-                    name: `${item.name} - ${subItem.name}`,
-                    path: `/${item.name}/${subItem.name}`,
+                    name: getPageName(path),
+                    path: path,
                   };
                 }
                 return null;
@@ -75,6 +85,23 @@ const ExploreMorePages: React.FC<{ currentPath: string }> = ({
 
     fetchPages();
   }, [currentPath]);
+
+  const getPageName = (path: string): string => {
+    try {
+      const pageInfo = SitePathNames.find((item) => item.path === path);
+      if (pageInfo) {
+        return pageInfo.name;
+      }
+      // Fallback: Generate name from path
+      const parts = path.split("/").filter(Boolean);
+      return parts.length > 0
+        ? parts[parts.length - 1].replace(/-/g, " ")
+        : "Unknown";
+    } catch (error) {
+      console.error("Error getting page name:", error);
+      return "Unknown";
+    }
+  };
 
   return (
     <section className="mt-16 mb-8 px-4 max-w-7xl mx-auto">
@@ -112,7 +139,11 @@ const PageCard: React.FC<{ page: Page; index: number }> = ({ page, index }) => {
   let mouseX = useMotionValue(0);
   let mouseY = useMotionValue(0);
 
-  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
+  function handleMouseMove({
+    currentTarget,
+    clientX,
+    clientY,
+  }: React.MouseEvent) {
     let { left, top } = currentTarget.getBoundingClientRect();
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);

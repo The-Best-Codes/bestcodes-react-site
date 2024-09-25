@@ -40,7 +40,7 @@ export default function BestBible() {
                 className="rounded-2xl"
               />
               <Button className="w-fit text-3xl bg-blue-500 h-16">
-                <Link href={`/best-bible/demo`}>Usage Demo</Link>
+                <Link href={`/projects/bestbible/demo`}>Usage Demo</Link>
               </Button>
             </div>
 

@@ -1,0 +1,34 @@
+[
+  {
+    "path": "/",
+    "name": "Home"
+  },
+  {
+    "path": "/contact",
+    "name": "Contact"
+  },
+  {
+    "path": "/blog",
+    "name": "Blog"
+  },
+  {
+    "path": "/projects/accordions",
+    "name": "Accordion FAQ Generator"
+  },
+  {
+    "path": "/projects/codeperf",
+    "name": "CodePerf"
+  },
+  {
+    "path": "/projects/bestbible",
+    "name": "Best Bible"
+  },
+  {
+    "path": "/projects/mazegen",
+    "name": "Maze Maker"
+  },
+  {
+    "path": "/projects/typespeed",
+    "name": "Typing Speed Test"
+  }
+]
