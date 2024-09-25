@@ -110,8 +110,10 @@ const Section3 = () => {
       viewport={{ once: false }}
     >
       <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ duration: 2, loop: Infinity, ease: "easeInOut" }}
+        initial={{ rotate: 360 }}
+        whileInView={{ rotate: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        viewport={{ once: false }}
       >
         <Award size={120} className="text-yellow-300 mb-8" />
       </motion.div>
