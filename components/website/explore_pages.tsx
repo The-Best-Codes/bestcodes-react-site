@@ -9,7 +9,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import SitePathNames from "@/public/assets/explore_pages/names.json";
-import { ChevronRight, Loader2 } from "lucide-react";
+import { ChevronRight, Loader2, AlertCircle } from "lucide-react";
 
 interface Page {
   name: string;
@@ -21,10 +21,12 @@ const ExploreMorePages: React.FC<{ currentPath: string }> = ({
 }) => {
   const [pages, setPages] = useState<Page[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchPages = async () => {
       setIsLoading(true);
+      setError(null);
       try {
         const response = await axios.get(
           "https://api.github.com/repos/The-Best-Codes/bestcodes-react-site/contents/app"
@@ -78,6 +80,7 @@ const ExploreMorePages: React.FC<{ currentPath: string }> = ({
         setPages(validPages.filter((page) => page.path !== currentPath));
       } catch (error) {
         console.error("Error fetching pages:", error);
+        setError("Failed to fetch pages. Please try again later.");
       } finally {
         setIsLoading(false);
       }
@@ -117,6 +120,27 @@ const ExploreMorePages: React.FC<{ currentPath: string }> = ({
             className="flex justify-center items-center h-64"
           >
             <Loader2 className="h-16 w-16 animate-spin text-gray-900 dark:text-gray-100" />
+          </motion.div>
+        ) : error ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="flex flex-col justify-center items-center h-64"
+          >
+            <AlertCircle className="h-16 w-16 text-red-500 mb-4" />
+            <p className="text-center text-red-500">{error}</p>
+          </motion.div>
+        ) : pages.length === 0 ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="flex justify-center items-center h-64"
+          >
+            <p className="text-center text-gray-500 dark:text-gray-400">
+              No other pages available to explore.
+            </p>
           </motion.div>
         ) : (
           <motion.div
