@@ -34,5 +34,9 @@
   {
     "path": "/projects/100dow",
     "name": "100 Days of Wordle!"
+  },
+  {
+    "path": "/projects/scrollanim",
+    "name": "Scroll Driven Animation Demo"
   }
 ]
