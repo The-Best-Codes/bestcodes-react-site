@@ -124,6 +124,7 @@ export default function Home() {
                     width={80}
                     height={80}
                     className="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"
+                    unoptimized
                   />
                   <span className="text-3xl sm:text-3xl md:text-4xl lg:text-6xl dark:text-white">
                     I&apos;m a <span className="text-blue-500">Christian</span>
@@ -172,6 +173,7 @@ export default function Home() {
                     width={80}
                     height={80}
                     className="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"
+                    unoptimized
                   />
                   <span className="text-3xl sm:text-3xl md:text-4xl lg:text-6xl dark:text-white">
                     I&apos;m a <span className="text-blue-500">Coder</span>
@@ -234,6 +236,7 @@ export default function Home() {
                       width={40}
                       height={40}
                       className="h-10 w-10"
+                      unoptimized
                     />
                     Pinned Projects
                   </span>
@@ -258,6 +261,7 @@ export default function Home() {
                     width={80}
                     height={80}
                     className="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"
+                    unoptimized
                   />
                   <span className="text-3xl sm:text-3xl md:text-4xl lg:text-6xl dark:text-white">
                     I&apos;m a <span className="text-blue-500">Creator</span>
@@ -318,6 +322,7 @@ export default function Home() {
                 width={80}
                 height={80}
                 className="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"
+                unoptimized
               />
               <h1 className="text-center text-3xl sm:text-3xl md:text-4xl lg:text-6xl font-bold">
                 Where to <span className="text-blue-500">find me</span>
@@ -339,6 +344,7 @@ export default function Home() {
                 width={80}
                 height={80}
                 className="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"
+                unoptimized
               />
               <h1 className="text-center text-3xl sm:text-3xl md:text-4xl lg:text-6xl font-bold dark:text-white">
                 That&apos;s all &mdash;{" "}
