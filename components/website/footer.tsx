@@ -26,6 +26,17 @@ export default function Footer() {
     });
   };
 
+  const buttonVariants = {
+    hidden: {
+      opacity: 0,
+      scale: 0,
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+    },
+  };
+
   return (
     <footer className="bg-white dark:bg-slate-900 py-8 w-full">
       <div className="px-4 w-full">
@@ -40,10 +51,10 @@ export default function Footer() {
         type="button"
         onClick={scrollToTop}
         className="fixed bottom-4 right-4 bg-blue-600 text-white p-3 rounded-full shadow-lg transition-all duration-300"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isVisible ? 1 : 0 }}
-        whileHover={{ scale: 1.1 }}
-        transition={{ duration: 0.3 }}
+        variants={buttonVariants}
+        initial="hidden"
+        animate={isVisible ? "visible" : "hidden"}
+        transition={{ opacity: { duration: 0.5 }, scale: { duration: 0.3 } }}
       >
         <ArrowUp className="w-6 h-6" />
       </motion.button>
