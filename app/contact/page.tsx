@@ -125,7 +125,7 @@ export default function Contact() {
                         <FormControl>
                           <Input
                             placeholder="Your name"
-                            className="text-black"
+                            className="text-black dark:text-white dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-300"
                             {...field}
                           />
                         </FormControl>
@@ -142,7 +142,7 @@ export default function Contact() {
                         <FormControl>
                           <Input
                             placeholder="Your email"
-                            className="text-black"
+                            className="text-black dark:text-white dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-300"
                             {...field}
                           />
                         </FormControl>
@@ -159,7 +159,7 @@ export default function Contact() {
                         <FormControl>
                           <Textarea
                             placeholder="Your message"
-                            className="max-h-96 text-black"
+                            className="max-h-96 text-black dark:text-white dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-300"
                             {...field}
                           />
                         </FormControl>
