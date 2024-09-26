@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Menu, X, User, Loader2 } from "lucide-react";
 import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
+import UnderlineText from "@/components/website/underline-text";
 
 export default function HeaderMain() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -58,28 +59,46 @@ export default function HeaderMain() {
   const NavItems = () => (
     <ul className={`flex ${isMobile ? "flex-col space-y-4" : "space-x-4"}`}>
       <li>
-        <a
+        <Link
           href="/"
           className="text-black text-2xl dark:text-white hover:text-blue-500 hover:underline"
         >
-          Home
-        </a>
+          <UnderlineText
+            color="#3b82f6"
+            animationDuration={300}
+            activationType="hover"
+          >
+            Home
+          </UnderlineText>
+        </Link>
       </li>
       <li>
-        <a
+        <Link
           href="https://dev.to/best_codes"
           className="text-black text-2xl dark:text-white hover:text-blue-500 hover:underline"
         >
-          Blog
-        </a>
+          <UnderlineText
+            color="#3b82f6"
+            animationDuration={300}
+            activationType="hover"
+          >
+            Blog
+          </UnderlineText>
+        </Link>
       </li>
       <li>
-        <a
+        <Link
           href="/contact"
-          className="text-black text-2xl dark:text-white hover:text-blue-500 hover:underline"
+          className="text-black text-2xl dark:text-white hover:text-blue-500"
         >
-          Contact
-        </a>
+          <UnderlineText
+            color="#3b82f6"
+            animationDuration={300}
+            activationType="hover"
+          >
+            Contact
+          </UnderlineText>
+        </Link>
       </li>
     </ul>
   );

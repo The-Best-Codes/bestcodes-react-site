@@ -8,6 +8,8 @@ interface UnderlineTextProps {
   strokeWidth?: number;
   padding?: number;
   activationType: "always" | "hover" | "click" | "view";
+  animationDelay?: number;
+  animationDuration?: number;
 }
 
 const UnderlineText: React.FC<UnderlineTextProps> = ({
@@ -17,6 +19,8 @@ const UnderlineText: React.FC<UnderlineTextProps> = ({
   color = "",
   strokeWidth = 2,
   padding = 2,
+  animationDelay = 0,
+  animationDuration = 500,
 }) => {
   const [show, setShow] = useState(activationType === "always");
   const textRef = useRef<HTMLSpanElement>(null);
@@ -26,22 +30,9 @@ const UnderlineText: React.FC<UnderlineTextProps> = ({
 
     if (activationType === "always") {
       setShow(true);
-    } else if (activationType === "hover") {
-      const handleMouseEnter = () => setShow(true);
-      const handleMouseLeave = () => setShow(false);
-
-      currentRef?.addEventListener("mouseenter", handleMouseEnter);
-      currentRef?.addEventListener("mouseleave", handleMouseLeave);
-
-      return () => {
-        currentRef?.removeEventListener("mouseenter", handleMouseEnter);
-        currentRef?.removeEventListener("mouseleave", handleMouseLeave);
-      };
     } else if (activationType === "click") {
       const handleClick = () => setShow((prevShow) => !prevShow);
-
       currentRef?.addEventListener("click", handleClick);
-
       return () => {
         currentRef?.removeEventListener("click", handleClick);
       };
@@ -52,11 +43,9 @@ const UnderlineText: React.FC<UnderlineTextProps> = ({
         },
         { threshold: 0.1 }
       );
-
       if (currentRef) {
         observer.observe(currentRef);
       }
-
       return () => {
         if (currentRef) {
           observer.unobserve(currentRef);
@@ -65,20 +54,33 @@ const UnderlineText: React.FC<UnderlineTextProps> = ({
     }
   }, [activationType]);
 
-  // Force redraw when children change
-  useEffect(() => {
-    setShow(false);
-    setTimeout(() => setShow(true), 0);
-  }, [children]);
+  const handleMouseEnter = () => {
+    if (activationType === "hover") {
+      setShow(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (activationType === "hover") {
+      setShow(false);
+    }
+  };
 
   return (
-    <span ref={textRef} className={className}>
+    <span
+      ref={textRef}
+      className={className}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <RoughNotation
         type="underline"
         show={show}
         color={color}
         strokeWidth={strokeWidth}
         padding={padding}
+        animationDelay={animationDelay}
+        animationDuration={animationDuration}
       >
         {children}
       </RoughNotation>
