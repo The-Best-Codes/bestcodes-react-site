@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { ReactMatrixAnimation } from "react-matrix-animation";
+import { ReactMatrixAnimation } from "@/components/website/matrix_component";
 
 const MatrixThemed = React.memo(() => {
   const [theme, setTheme] = useState(() =>
@@ -35,7 +35,7 @@ const MatrixThemed = React.memo(() => {
   return (
     <ReactMatrixAnimation
       key={theme}
-      fontColor="#3b82f6"
+      textColor="#3b82f6"
       backgroundColor={theme === "dark" ? "#000000" : "#ffffff"}
     />
   );
