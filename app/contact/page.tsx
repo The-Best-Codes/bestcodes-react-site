@@ -99,8 +99,8 @@ export default function Contact() {
             Fill out the simple form below to send me a message
           </p>
         </div>
-        <Card className="dark:border-none w-full max-w-3xl mx-auto">
-          <CardContent className="dark:bg-slate-700 dark:text-white rounded-lg flex flex-col p-4 sm:p-4 md:p-6 lg:p-8">
+        <Card className="dark:bg-slate-800 dark:text-white dark:border-none w-full max-w-3xl mx-auto">
+          <CardContent className="rounded-lg flex flex-col p-4 sm:p-4 md:p-6 lg:p-8">
             {isSuccess ? (
               <div className="max-w-lg w-lg mx-auto">
                 <div className="flex items-center justify-center mb-4">
