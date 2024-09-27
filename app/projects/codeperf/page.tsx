@@ -196,9 +196,9 @@ const factorial = (n) => {
 
   return (
     <div className="w-full p-4 min-h-screen flex flex-col bg-white dark:bg-gray-900 text-black dark:text-white">
-      <h1 className="text-3xl font-bold mb-6 dark:text-white">
+      <h2 className="text-3xl font-bold mb-6 dark:text-white">
         Code Performance Analyzer
-      </h1>
+      </h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-grow">
         <Card className="flex flex-col h-[calc(100vh-10rem)] lg:h-auto bg-white dark:bg-gray-800 dark:border-none">
@@ -291,12 +291,14 @@ const factorial = (n) => {
           </CardContent>
           <CardFooter>
             <Button
+              aria-label="Add Mini Code"
               onClick={addMiniCode}
               className="mr-2 dark:bg-gray-700 dark:text-white"
             >
               <Plus className="h-4 w-4 mr-2" /> Add Mini Code
             </Button>
             <Button
+              aria-label="Run Code"
               onClick={runCode}
               disabled={isRunning}
               className="dark:bg-gray-700 dark:text-white"
