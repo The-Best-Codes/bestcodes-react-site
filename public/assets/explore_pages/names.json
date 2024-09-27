@@ -24,6 +24,10 @@
     "name": "Best Bible"
   },
   {
+    "path": "/projects/bestbible/demo",
+    "name": "Best Bible Usage Demo"
+  },
+  {
     "path": "/projects/mazegen",
     "name": "Maze Maker"
   },

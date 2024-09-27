@@ -8,7 +8,6 @@ import {
 } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import SitePathNames from "@/public/assets/explore_pages/names.json";
 import { ChevronRight, Loader2, AlertCircle } from "lucide-react";
 
 interface Page {
@@ -28,56 +27,9 @@ const ExploreMorePages: React.FC<{ currentPath: string }> = ({
       setIsLoading(true);
       setError(null);
       try {
-        const response = await axios.get(
-          "https://api.github.com/repos/The-Best-Codes/bestcodes-react-site/contents/app"
-        );
-        const items = response.data;
-
-        const pagesPromises = items.map(async (item: any) => {
-          if (item.type === "file" && item.name === "page.tsx") {
-            return { name: getPageName("/"), path: "/" };
-          } else if (item.type === "dir") {
-            const folderContents = await axios.get(item.url);
-            const hasPageFile = folderContents.data.some(
-              (file: any) => file.name === "page.tsx"
-            );
-
-            if (hasPageFile) {
-              return {
-                name: getPageName(`/${item.name}`),
-                path: `/${item.name}`,
-              };
-            }
-
-            const nestedPagesPromises = folderContents.data
-              .filter((subItem: any) => subItem.type === "dir")
-              .map(async (subItem: any) => {
-                const subFolderContents = await axios.get(subItem.url);
-                if (
-                  subFolderContents.data.some(
-                    (file: any) => file.name === "page.tsx"
-                  )
-                ) {
-                  const path = `/${item.name}/${subItem.name}`;
-                  return {
-                    name: getPageName(path),
-                    path: path,
-                  };
-                }
-                return null;
-              });
-
-            const nestedPages = await Promise.all(nestedPagesPromises);
-            return nestedPages.filter((page): page is Page => page !== null);
-          }
-          return null;
-        });
-
-        const pagesResults = await Promise.all(pagesPromises);
-        const validPages = pagesResults
-          .flat()
-          .filter((page): page is Page => page !== null);
-        setPages(validPages.filter((page) => page.path !== currentPath));
+        const response = await axios.get("/api/explore_pages");
+        const allPages = response.data;
+        setPages(allPages.filter((page: Page) => page.path !== currentPath));
       } catch (error) {
         console.error("Error fetching pages:", error);
         setError("Failed to fetch pages. Please try again later.");
@@ -88,23 +40,6 @@ const ExploreMorePages: React.FC<{ currentPath: string }> = ({
 
     fetchPages();
   }, [currentPath]);
-
-  const getPageName = (path: string): string => {
-    try {
-      const pageInfo = SitePathNames.find((item) => item.path === path);
-      if (pageInfo) {
-        return pageInfo.name;
-      }
-      // Fallback: Generate name from path
-      const parts = path.split("/").filter(Boolean);
-      return parts.length > 0
-        ? parts[parts.length - 1].replace(/-/g, " ")
-        : "Unknown";
-    } catch (error) {
-      console.error("Error getting page name:", error);
-      return "Unknown";
-    }
-  };
 
   return (
     <section className="mt-16 mb-8 px-4 max-w-7xl mx-auto">

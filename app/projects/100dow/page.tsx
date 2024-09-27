@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState, Suspense } from "react";
+import Header from "@/components/website/header";
 import { motion } from "framer-motion";
 import { ChevronDown, Award, Smile, Loader } from "lucide-react";
 import { useSearchParams } from "next/navigation";
@@ -46,6 +47,7 @@ const CongratulationsPageContent: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 to-green-600 text-white">
+      <Header />
       {showConfetti && <Confetti style={{ position: "fixed" }} />}
       <Section1 />
       <Section2 />
