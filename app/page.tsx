@@ -76,7 +76,7 @@ export default function Home() {
               height={260}
               className="h-16 w-16 sm:h-16 sm:w-16 md:h-24 md:w-24 lg:h-32 lg:w-32"
             />
-            <h1 className="text-7xl sm:text-7xl md:text-8xl lg:text-9xl text-white line-clamp-1 font-bold">
+            <h1 className="text-7xl sm:text-7xl md:text-8xl lg:text-9xl text-black dark:text-white line-clamp-1 font-bold">
               Hi
             </h1>
           </motion.div>
