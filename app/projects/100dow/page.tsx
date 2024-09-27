@@ -32,7 +32,10 @@ const CongratulationsPageContent: React.FC = () => {
     document.body.style.overflowX = "hidden";
 
     const handleScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 300
+      ) {
         setShowConfetti(true);
       }
     };
@@ -46,7 +49,7 @@ const CongratulationsPageContent: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 to-green-600 text-white">
+    <div className="min-h-screen bg-gradient-to-br from-purple-600 to-green-600 text-white pb-8">
       <Header />
       {showConfetti && <Confetti style={{ position: "fixed" }} />}
       <Section1 />

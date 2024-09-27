@@ -15,8 +15,9 @@ interface Page {
   path: string;
 }
 
-const ExploreMorePages: React.FC<{ currentPath: string }> = ({
+const ExploreMorePages: React.FC<{ currentPath: string, className?: string }> = ({
   currentPath,
+  className,
 }) => {
   const [pages, setPages] = useState<Page[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -42,7 +43,7 @@ const ExploreMorePages: React.FC<{ currentPath: string }> = ({
   }, [currentPath]);
 
   return (
-    <section className="mt-16 mb-8 px-4 max-w-7xl mx-auto">
+    <section className={`mt-16 mb-8 px-4 max-w-7xl mx-auto ${className}`}>
       <h2 className="text-3xl font-bold text-center mb-8 dark:text-white">
         Explore More Pages
       </h2>
