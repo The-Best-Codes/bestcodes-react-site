@@ -25,7 +25,7 @@ export default function Home() {
   );
   const bgColor = useTransform(scrollYProgress,
     [0, 0.5, 0.6, 1],
-    ["#8B5CF6", "#EC4899", "linear-gradient(to bottom, #3B82F6, #10B981)", "linear-gradient(to bottom, #3B82F6, #10B981)"]
+    ["#8B5CF6", "#EC4899", "#3B82F6", "#3B82F6"]
   );
 
   // Transforms for the text
