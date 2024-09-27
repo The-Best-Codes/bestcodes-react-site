@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Menu, X, User, Loader2 } from "lucide-react";
+import { Menu, X /* User, Loader2 */ } from "lucide-react";
 //import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import UnderlineText from "@/components/website/underline-text";
@@ -140,13 +140,19 @@ export default function HeaderMain() {
             )}
           </div>
           {isMobile ? (
-            <button onClick={toggleMenu} className="text-2xl">
+            <Button
+              aria-label="Menu"
+              variant="ghost"
+              size="icon"
+              onClick={toggleMenu}
+              className="text-2xl text-black dark:text-white"
+            >
               {isMenuOpen ? (
-                <X className="dark:invert" />
+                <X />
               ) : (
-                <Menu className="dark:invert" />
+                <Menu />
               )}
-            </button>
+            </Button>
           ) : (
             <div className="flex flex-row items-center gap-4">
               <Link target="_blank" href={`https://github.com/the-best-codes`}>
