@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Menu, X, User, Loader2 } from "lucide-react";
-import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
+//import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import UnderlineText from "@/components/website/underline-text";
 
@@ -11,7 +11,7 @@ export default function HeaderMain() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const { scrollY } = useScroll();
-  const { isLoaded, isSignedIn, user } = useUser();
+  //const { isLoaded, isSignedIn, user } = useUser();
 
   const scrollRange = [0, 200];
   const headerWidth = useTransform(scrollY, scrollRange, ["100%", "80%"]);
@@ -32,7 +32,7 @@ export default function HeaderMain() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const AuthButton = () => {
+  /* const AuthButton = () => {
     if (!isLoaded) {
       return <Loader2 className="w-6 h-6 dark:text-white animate-spin" />;
     }
@@ -54,7 +54,7 @@ export default function HeaderMain() {
         </Button>
       </SignInButton>
     );
-  };
+  }; */
 
   const NavItems = () => (
     <ul className={`flex ${isMobile ? "flex-col space-y-4" : "space-x-4"}`}>
@@ -167,7 +167,7 @@ export default function HeaderMain() {
                   className="h-8 w-8 dark:invert"
                 />
               </Link>
-              <AuthButton />
+              {/* <AuthButton /> */}
             </div>
           )}
         </header>
@@ -185,7 +185,7 @@ export default function HeaderMain() {
             <nav className="px-6 py-4">
               <NavItems />
               <div className="mt-4 flex flex-row items-center gap-4">
-                <AuthButton />
+                {/* <AuthButton /> */}
               </div>
             </nav>
           </motion.div>
