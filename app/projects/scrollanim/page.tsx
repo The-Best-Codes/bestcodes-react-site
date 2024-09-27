@@ -1,7 +1,7 @@
 "use client";
-
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Header from "@/components/website/header";
 
 export default function Home() {
   const ref = useRef(null);
@@ -43,7 +43,8 @@ export default function Home() {
   );
 
   return (
-    <div ref={ref} className="h-[600vh] relative">
+    <div ref={ref} className="h-[800vh] relative">
+      <Header />
       <motion.div
         className="fixed inset-0"
         style={{
