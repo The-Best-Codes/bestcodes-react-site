@@ -11,34 +11,41 @@ export default function Home() {
   });
 
   // Transform for the background element
-  const bgScale = useTransform(scrollYProgress, 
-    [0, 0.3, 0.4, 0.5, 0.6, 1], 
+  const bgScale = useTransform(
+    scrollYProgress,
+    [0, 0.3, 0.4, 0.5, 0.6, 1],
     [1, 0.1, 0.1, 0, 1, 1]
   );
-  const bgBorderRadius = useTransform(scrollYProgress, 
-    [0.25, 0.3, 0.6, 1], 
+  const bgBorderRadius = useTransform(
+    scrollYProgress,
+    [0.25, 0.3, 0.6, 1],
     ["50%", "20%", "20%", "50%"]
   );
-  const bgRotate = useTransform(scrollYProgress,
+  const bgRotate = useTransform(
+    scrollYProgress,
     [0.3, 0.4, 0.5, 0.6],
     [0, 180, 360, 0]
   );
-  const bgColor = useTransform(scrollYProgress,
+  const bgColor = useTransform(
+    scrollYProgress,
     [0, 0.5, 0.6, 1],
     ["#8B5CF6", "#EC4899", "#3B82F6", "#3B82F6"]
   );
 
   // Transforms for the text
-  const textScale = useTransform(scrollYProgress, 
-    [0, 0.3, 0.5, 0.6, 1], 
+  const textScale = useTransform(
+    scrollYProgress,
+    [0, 0.3, 0.5, 0.6, 1],
     [1, 5, 5, 1, 1]
   );
-  const textOpacity = useTransform(scrollYProgress, 
-    [0, 0.15, 0.3, 0.5, 0.6, 1], 
+  const textOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.15, 0.3, 0.5, 0.6, 1],
     [1, 0.5, 0, 0, 1, 1]
   );
-  const textY = useTransform(scrollYProgress, 
-    [0, 0.3, 0.5, 0.6, 1], 
+  const textY = useTransform(
+    scrollYProgress,
+    [0, 0.3, 0.5, 0.6, 1],
     ["0%", "50%", "50%", "0%", "0%"]
   );
 
