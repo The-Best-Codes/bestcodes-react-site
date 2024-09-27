@@ -13,6 +13,7 @@ import "prismjs/components/prism-css";
 import "prismjs/components/prism-http";
 import "prismjs/components/prism-bash";
 import { Copy, Check, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const SyntaxHighlighter = ({ language, children, className }: any) => {
   const [copyStatus, setCopyStatus] = useState("idle");
@@ -54,7 +55,9 @@ const SyntaxHighlighter = ({ language, children, className }: any) => {
       >
         <code>{children}</code>
       </pre>
-      <button
+      <Button
+        aria-label="Copy code to clipboard"
+        size="icon"
         onClick={copyToClipboard}
         disabled={copyStatus !== "idle"}
         className={`absolute ${
@@ -64,7 +67,7 @@ const SyntaxHighlighter = ({ language, children, className }: any) => {
         } p-2 bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-300 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400`}
       >
         {renderCopyButton()}
-      </button>
+      </Button>
     </div>
   );
 };

@@ -39,7 +39,10 @@ export default function BestBible() {
                 height={200}
                 className="rounded-2xl"
               />
-              <Button className="w-fit text-3xl bg-blue-500 h-16">
+              <Button
+                aria-label="Usage Demo"
+                className="w-fit text-3xl bg-blue-500 h-16"
+              >
                 <Link href={`/projects/bestbible/demo`}>Usage Demo</Link>
               </Button>
             </div>
