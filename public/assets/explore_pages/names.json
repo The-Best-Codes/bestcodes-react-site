@@ -42,5 +42,13 @@
   {
     "path": "/projects/scrollanim",
     "name": "Scroll Driven Animation Demo"
+  },
+  {
+    "path": "/projects/randtoken",
+    "name": "Password / Token Generator"
+  },
+  {
+    "path": "/projects/randtoken/stream",
+    "name": "Token Streaming"
   }
 ]
