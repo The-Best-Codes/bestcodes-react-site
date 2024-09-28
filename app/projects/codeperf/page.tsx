@@ -24,6 +24,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { Progress } from "@/components/ui/progress";
+import Header from "@/components/website/header";
 
 const CodePerformanceTester: React.FC = () => {
   const [globalCode, setGlobalCode] = useState<string>(`// Global code here
@@ -194,215 +195,218 @@ const factorial = (n) => {
   };
 
   return (
-    <div className="w-full p-4 min-h-screen flex flex-col bg-white dark:bg-gray-900 text-black dark:text-white">
-      <h2 className="text-3xl font-bold mb-6 dark:text-white">
-        Code Performance Analyzer
-      </h2>
+    <main className="min-h-screen h-full w-full flex flex-col bg-gray-100 dark:bg-gray-900">
+      <Header />
+      <div className="w-full h-full p-4 flex flex-grow flex-col bg-white dark:bg-gray-900 text-black dark:text-white">
+        <h2 className="text-3xl font-bold mb-6 dark:text-white">
+          Code Performance Analyzer
+        </h2>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-grow">
-        <Card className="flex flex-col h-[calc(100vh-10rem)] lg:h-auto bg-white dark:bg-gray-800 dark:border-none">
-          <CardHeader>
-            <CardTitle className="dark:text-white">Code Editor</CardTitle>
-            <CardDescription className="dark:text-gray-300">
-              Write and edit your code here
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="flex-grow overflow-hidden">
-            <Tabs
-              value={activeTab}
-              onValueChange={setActiveTab}
-              className="h-full flex flex-col"
-            >
-              <TabsList className="justify-start overflow-x-auto bg-gray-100 dark:bg-gray-700">
-                <TabsTrigger
-                  value="global"
-                  className="data-[state=active]:bg-white dark:data-[state=active]:bg-gray-600 dark:text-white dark:data-[state=active]:text-white"
-                >
-                  Global Code
-                </TabsTrigger>
-                {miniCodes.map((miniCode) => (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-grow">
+          <Card className="flex flex-col h-[calc(100vh-10rem)] lg:h-auto bg-white dark:bg-gray-800 dark:border-none">
+            <CardHeader>
+              <CardTitle className="dark:text-white">Code Editor</CardTitle>
+              <CardDescription className="dark:text-gray-300">
+                Write and edit your code here
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex-grow overflow-hidden">
+              <Tabs
+                value={activeTab}
+                onValueChange={setActiveTab}
+                className="h-full flex flex-col"
+              >
+                <TabsList className="justify-start overflow-x-auto bg-gray-100 dark:bg-gray-700">
                   <TabsTrigger
-                    key={miniCode.id}
-                    value={`mini-${miniCode.id}`}
+                    value="global"
                     className="data-[state=active]:bg-white dark:data-[state=active]:bg-gray-600 dark:text-white dark:data-[state=active]:text-white"
                   >
-                    Code {miniCode.id}
+                    Global Code
                   </TabsTrigger>
-                ))}
-              </TabsList>
-              <div className="flex-grow overflow-auto">
-                <TabsContent value="global" className="h-full mt-0">
-                  <Editor
-                    value={globalCode}
-                    onValueChange={(code) => setGlobalCode(code)}
-                    highlight={(code) =>
-                      highlight(code, languages.javascript, "javascript")
-                    }
-                    padding={10}
-                    style={{
-                      fontFamily: '"Fira code", "Fira Mono", monospace',
-                      fontSize: 12,
-                      height: "100%",
-                      backgroundColor: "white",
-                    }}
-                  />
-                </TabsContent>
-                {miniCodes.map((miniCode) => (
-                  <TabsContent
-                    key={miniCode.id}
-                    value={`mini-${miniCode.id}`}
-                    className="h-full mt-0"
-                  >
-                    <div className="relative h-full">
-                      <Editor
-                        value={miniCode.code}
-                        onValueChange={(code) =>
-                          setMiniCodes(
-                            miniCodes.map((c) =>
-                              c.id === miniCode.id ? { ...c, code: code } : c
-                            )
-                          )
-                        }
-                        highlight={(code) =>
-                          highlight(code, languages.javascript, "javascript")
-                        }
-                        padding={10}
-                        style={{
-                          fontFamily: '"Fira code", "Fira Mono", monospace',
-                          fontSize: 12,
-                          height: "100%",
-                          backgroundColor: "white",
-                        }}
-                      />
-                      <Button
-                        variant="destructive"
-                        size="icon"
-                        className="absolute top-2 right-2"
-                        onClick={() => removeMiniCode(miniCode.id)}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </div>
+                  {miniCodes.map((miniCode) => (
+                    <TabsTrigger
+                      key={miniCode.id}
+                      value={`mini-${miniCode.id}`}
+                      className="data-[state=active]:bg-white dark:data-[state=active]:bg-gray-600 dark:text-white dark:data-[state=active]:text-white"
+                    >
+                      Code {miniCode.id}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+                <div className="flex-grow overflow-auto">
+                  <TabsContent value="global" className="h-full mt-0">
+                    <Editor
+                      value={globalCode}
+                      onValueChange={(code) => setGlobalCode(code)}
+                      highlight={(code) =>
+                        highlight(code, languages.javascript, "javascript")
+                      }
+                      padding={10}
+                      style={{
+                        fontFamily: '"Fira code", "Fira Mono", monospace',
+                        fontSize: 12,
+                        height: "100%",
+                        backgroundColor: "white",
+                      }}
+                    />
                   </TabsContent>
-                ))}
-              </div>
-            </Tabs>
-          </CardContent>
-          <CardFooter>
-            <Button
-              aria-label="Add Mini Code"
-              onClick={addMiniCode}
-              className="mr-2 dark:bg-gray-700 dark:text-white"
-            >
-              <Plus className="h-4 w-4 mr-2" /> Add Mini Code
-            </Button>
-            <Button
-              aria-label="Run Code"
-              onClick={runCode}
-              disabled={isRunning}
-              className="dark:bg-gray-700 dark:text-white"
-            >
-              {isRunning ? (
-                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-              ) : (
-                <Play className="h-4 w-4 mr-2" />
-              )}
-              {isRunning ? "Running..." : "Run Tests"}
-            </Button>
-          </CardFooter>
-        </Card>
+                  {miniCodes.map((miniCode) => (
+                    <TabsContent
+                      key={miniCode.id}
+                      value={`mini-${miniCode.id}`}
+                      className="h-full mt-0"
+                    >
+                      <div className="relative h-full">
+                        <Editor
+                          value={miniCode.code}
+                          onValueChange={(code) =>
+                            setMiniCodes(
+                              miniCodes.map((c) =>
+                                c.id === miniCode.id ? { ...c, code: code } : c
+                              )
+                            )
+                          }
+                          highlight={(code) =>
+                            highlight(code, languages.javascript, "javascript")
+                          }
+                          padding={10}
+                          style={{
+                            fontFamily: '"Fira code", "Fira Mono", monospace',
+                            fontSize: 12,
+                            height: "100%",
+                            backgroundColor: "white",
+                          }}
+                        />
+                        <Button
+                          variant="destructive"
+                          size="icon"
+                          className="absolute top-2 right-2"
+                          onClick={() => removeMiniCode(miniCode.id)}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </TabsContent>
+                  ))}
+                </div>
+              </Tabs>
+            </CardContent>
+            <CardFooter>
+              <Button
+                aria-label="Add Mini Code"
+                onClick={addMiniCode}
+                className="mr-2 dark:bg-gray-700 dark:text-white"
+              >
+                <Plus className="h-4 w-4 mr-2" /> Add Mini Code
+              </Button>
+              <Button
+                aria-label="Run Code"
+                onClick={runCode}
+                disabled={isRunning}
+                className="dark:bg-gray-700 dark:text-white"
+              >
+                {isRunning ? (
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                ) : (
+                  <Play className="h-4 w-4 mr-2" />
+                )}
+                {isRunning ? "Running..." : "Run Tests"}
+              </Button>
+            </CardFooter>
+          </Card>
 
-        <Card className="flex flex-col h-[calc(100vh-10rem)] lg:h-auto bg-white dark:bg-gray-800 dark:border-none">
-          <CardHeader>
-            <CardTitle className="dark:text-white">
-              Performance Results
-            </CardTitle>
-            <CardDescription className="dark:text-gray-300">
-              Iterations per second for each code snippet
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="flex-grow overflow-auto">
-            {isRunning && (
-              <div className="mb-4">
-                <Progress value={progress} className="w-full" />
-                <p className="text-sm text-center mt-2 dark:text-gray-300">
-                  {Math.ceil((progress / 100) * miniCodes.length) === 0
-                    ? "Initializing..."
-                    : `Running code ${Math.ceil(
-                        (progress / 100) * miniCodes.length
-                      )} of ${miniCodes.length}`}
-                </p>
-              </div>
-            )}
-            {error !== null && (
-              <Alert variant="destructive" className="mb-4">
-                <AlertCircle className="h-4 w-4" />
-                <AlertTitle>An Error Occurred</AlertTitle>
-                <AlertDescription>
-                  {error !== "{}"
-                    ? error
-                    : "One or more code snippets failed to run."}
-                </AlertDescription>
-              </Alert>
-            )}
-            {results.length > 0 && (
-              <ChartContainer config={chartConfig}>
-                <BarChart data={results}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="id" />
-                  <YAxis />
-                  <ChartTooltip content={<ChartTooltipContent />} />
-                  <Bar
-                    dataKey="iterations"
-                    fill="var(--color-iterations)"
-                    radius={8}
-                  />
-                </BarChart>
-              </ChartContainer>
-            )}
-            {results.length === 0 && (
-              <div className="flex h-full items-center justify-center dark:text-gray-300">
-                No results yet &middot; Click &quot;Run Tests&quot; to get
-                started
-              </div>
-            )}
-          </CardContent>
-          <CardFooter className="flex-col items-start gap-2 text-sm">
-            <div className="flex gap-2 font-medium leading-none text-xl dark:text-white">
-              {results.length > 0 && (
-                <>
-                  Best performance: Code{" "}
-                  {
-                    results.reduce((max, obj) =>
-                      obj.iterations > max.iterations ? obj : max
-                    ).id
-                  }
-                </>
-              )}
-            </div>
-            {results.length > 0 && (
-              <div className="mt-4">
-                <h3 className="font-semibold text-lg mb-2 dark:text-white">
-                  Performance Comparison:
-                </h3>
-                {results.map((result) => (
-                  <p
-                    className="mb-2 text-base dark:text-gray-300"
-                    key={result.id}
-                  >
-                    Code {result.id}:{" "}
-                    <span className="font-bold">
-                      {getPerformanceComparison(result.iterations)}
-                    </span>{" "}
-                    of best performance
+          <Card className="flex flex-col h-[calc(100vh-10rem)] lg:h-auto bg-white dark:bg-gray-800 dark:border-none">
+            <CardHeader>
+              <CardTitle className="dark:text-white">
+                Performance Results
+              </CardTitle>
+              <CardDescription className="dark:text-gray-300">
+                Iterations per second for each code snippet
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex-grow overflow-auto">
+              {isRunning && (
+                <div className="mb-4">
+                  <Progress value={progress} className="w-full" />
+                  <p className="text-sm text-center mt-2 dark:text-gray-300">
+                    {Math.ceil((progress / 100) * miniCodes.length) === 0
+                      ? "Initializing..."
+                      : `Running code ${Math.ceil(
+                          (progress / 100) * miniCodes.length
+                        )} of ${miniCodes.length}`}
                   </p>
-                ))}
+                </div>
+              )}
+              {error !== null && (
+                <Alert variant="destructive" className="mb-4">
+                  <AlertCircle className="h-4 w-4" />
+                  <AlertTitle>An Error Occurred</AlertTitle>
+                  <AlertDescription>
+                    {error !== "{}"
+                      ? error
+                      : "One or more code snippets failed to run."}
+                  </AlertDescription>
+                </Alert>
+              )}
+              {results.length > 0 && (
+                <ChartContainer config={chartConfig}>
+                  <BarChart data={results}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="id" />
+                    <YAxis />
+                    <ChartTooltip content={<ChartTooltipContent />} />
+                    <Bar
+                      dataKey="iterations"
+                      fill="var(--color-iterations)"
+                      radius={8}
+                    />
+                  </BarChart>
+                </ChartContainer>
+              )}
+              {results.length === 0 && (
+                <div className="flex h-full items-center justify-center dark:text-gray-300">
+                  No results yet &middot; Click &quot;Run Tests&quot; to get
+                  started
+                </div>
+              )}
+            </CardContent>
+            <CardFooter className="flex-col items-start gap-2 text-sm">
+              <div className="flex gap-2 font-medium leading-none text-xl dark:text-white">
+                {results.length > 0 && (
+                  <>
+                    Best performance: Code{" "}
+                    {
+                      results.reduce((max, obj) =>
+                        obj.iterations > max.iterations ? obj : max
+                      ).id
+                    }
+                  </>
+                )}
               </div>
-            )}
-          </CardFooter>
-        </Card>
+              {results.length > 0 && (
+                <div className="mt-4">
+                  <h3 className="font-semibold text-lg mb-2 dark:text-white">
+                    Performance Comparison:
+                  </h3>
+                  {results.map((result) => (
+                    <p
+                      className="mb-2 text-base dark:text-gray-300"
+                      key={result.id}
+                    >
+                      Code {result.id}:{" "}
+                      <span className="font-bold">
+                        {getPerformanceComparison(result.iterations)}
+                      </span>{" "}
+                      of best performance
+                    </p>
+                  ))}
+                </div>
+              )}
+            </CardFooter>
+          </Card>
+        </div>
       </div>
-    </div>
+    </main>
   );
 };
 
