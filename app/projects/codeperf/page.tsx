@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs";
