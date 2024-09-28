@@ -23,13 +23,15 @@ const STLViewer = dynamic(() => import("@/components/stlview/STLViewer"), {
   ssr: false,
 });
 
-export const HomePage = () => {
+const HomePage: React.FC = () => {
   return (
     <Suspense fallback={<Loader2 className="animate-spin" />}>
       <HomePageContent />
     </Suspense>
   );
 };
+
+export default HomePage;
 
 const HomePageContent: React.FC = () => {
   const searchParams = useSearchParams();
