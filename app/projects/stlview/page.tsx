@@ -8,7 +8,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   Select,
-  SelectContent,,,
+  SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -25,7 +25,13 @@ const STLViewer = dynamic(() => import("@/components/stlview/STLViewer"), {
 
 const HomePage: React.FC = () => {
   return (
-    <Suspense fallback={<Loader2 className="animate-spin" />}>
+    <Suspense
+      fallback={
+        <div className="h-screen w-full flex items-center justify-center">
+          <Loader2 className="animate-spin w-32 h-32" />
+        </div>
+      }
+    >
       <HomePageContent />
     </Suspense>
   );
