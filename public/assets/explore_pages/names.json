@@ -50,5 +50,9 @@
   {
     "path": "/projects/randtoken/stream",
     "name": "Token Streaming"
+  },
+  {
+    "path": "/projects/stlview",
+    "name": "3D STL Viewer"
   }
 ]
