@@ -7,6 +7,7 @@ import { Check, X, Copy, RefreshCw } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Header from "@/components/website/header";
+import Head from "next/head";
 
 const RandomTokenGenerator = () => {
   const [token, setToken] = useState("");
@@ -85,6 +86,13 @@ const RandomTokenGenerator = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      <Head>
+        <title>Random Password / Token Generator | BestCodes</title>
+        <meta
+          name="description"
+          content="Free, customizable, and secure password / token generator"
+        />
+      </Head>
       <Header />
       <div className="p-8">
         <h1 className="text-4xl font-bold mb-8">Random Token Generator</h1>
