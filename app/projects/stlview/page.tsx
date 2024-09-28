@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import dynamic from "next/dynamic";
 import { Input } from "@/components/ui/input";
@@ -23,7 +23,15 @@ const STLViewer = dynamic(() => import("@/components/stlview/STLViewer"), {
   ssr: false,
 });
 
-export default function Home() {
+export const HomePage = () => {
+  return (
+    <Suspense fallback={<Loader2 className="animate-spin" />}>
+      <HomePageContent />
+    </Suspense>
+  );
+};
+
+const HomePageContent: React.FC = () => {
   const searchParams = useSearchParams();
   const [url, setUrl] = useState("");
   const [loadedUrl, setLoadedUrl] = useState("");
@@ -119,7 +127,9 @@ export default function Home() {
                   />
                 </div>
                 <div className="flex flex-col space-y-2">
-                  <Label htmlFor="url"><span className="italic">Or</span>  Upload File</Label>
+                  <Label htmlFor="url">
+                    <span className="italic">Or</span> Upload File
+                  </Label>
                   <div className="flex items-center space-x-2">
                     <Button
                       type="button"
@@ -228,4 +238,4 @@ export default function Home() {
       />
     </main>
   );
-}
+};
