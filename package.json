@@ -1,6 +1,6 @@
 {
   "name": "bestcodes_vercel_site",
-  "version": "0.2.21",
+  "version": "0.2.22",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -32,7 +32,7 @@
     "@tailwindcss/typography": "^0.5.15",
     "@types/three": "^0.169.0",
     "axios": "^1.7.7",
-    "best-bible": "^1.6.4",
+    "best-bible": "^1.6.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^2.28.0",
