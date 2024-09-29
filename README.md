@@ -9,7 +9,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## BestCodes Website - React
 This is the open source code for my website. I used `framer-motion` for the animations, `nodemailer` for the contact page, and tailwind for styling.
 Check it out here:
-**[https://bestcodes.vercel.app](https://bestcodes.vercel.app)**
+**[https://bestcodes.dev](https://bestcodes.dev)**
 
 ---
 
