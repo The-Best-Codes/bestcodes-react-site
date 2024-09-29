@@ -50,7 +50,7 @@ export default function Footer() {
         aria-label="Scroll to top"
         type="button"
         onClick={scrollToTop}
-        className="fixed bottom-4 right-4 bg-blue-600 text-white p-3 rounded-full shadow-lg transition-all duration-300"
+        className="fixed bottom-4 right-4 bg-blue-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 hidden sm:block"
         variants={buttonVariants}
         initial="hidden"
         animate={isVisible ? "visible" : "hidden"}
