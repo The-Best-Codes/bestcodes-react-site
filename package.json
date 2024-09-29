@@ -1,7 +1,11 @@
 {
-  "name": "bestcodes_vercel_site",
-  "version": "0.2.22",
+  "name": "bestcodes-react-site",
+  "version": "0.2.23",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/The-Best-Codes/bestcodes-react-site.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
