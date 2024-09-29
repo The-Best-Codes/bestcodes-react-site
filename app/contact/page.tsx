@@ -49,12 +49,6 @@ export default function Contact() {
     },
   });
 
-  useEffect(() => {
-    if (typeof document !== "undefined") {
-      document.title = "BestCodes' Website | Contact Me";
-    }
-  }, []);
-
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     setIsError(false);
