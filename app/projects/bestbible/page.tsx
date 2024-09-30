@@ -25,7 +25,6 @@ export default function BestBible() {
                   width={100}
                   height={20}
                   className="h-8 w-auto"
-                  unoptimized
                 />
               ))}
             </div>
@@ -34,7 +33,6 @@ export default function BestBible() {
               <Image
                 src="https://github.com/The-Best-Codes/best-bible/blob/main/.image/best-bible-js-logo.png?raw=true"
                 alt="Best Bible Logo"
-                unoptimized
                 width={200}
                 height={200}
                 className="rounded-2xl"
