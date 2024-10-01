@@ -1,6 +1,6 @@
 {
   "name": "bestcodes-react-site",
-  "version": "0.2.26",
+  "version": "0.2.27",
   "private": true,
   "repository": {
     "type": "git",
@@ -49,6 +49,7 @@
     "node-html-parser": "^6.1.13",
     "nodemailer": "^6.9.15",
     "prismjs": "^1.29.0",
+    "qrcode.react": "^4.0.1",
     "react": "^18.3.1",
     "react-confetti": "^6.1.0",
     "react-day-picker": "^8.10.1",
