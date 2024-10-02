@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { ReactMatrixAnimation } from "@/components/website/matrix_component";
 
@@ -24,12 +25,12 @@ const MatrixThemed = React.memo(() => {
   useEffect(() => {
     if (typeof window === "undefined") return;
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    mediaQuery.addListener(checkSystemTheme);
+    mediaQuery.addEventListener("change", checkSystemTheme);
 
     // Initial check
     checkSystemTheme();
 
-    return () => mediaQuery.removeListener(checkSystemTheme);
+    return () => mediaQuery.removeEventListener("change", checkSystemTheme);
   }, [checkSystemTheme]);
 
   return (

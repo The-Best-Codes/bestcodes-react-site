@@ -21,6 +21,7 @@ const hexToRgba = (hex: string, alpha = 1) => {
 export const ReactMatrixAnimation = ({
   backgroundColor = "rgba(0, 0, 0, 0.05)",
   textColor = "#0F0",
+  delay = 60,
 }) => {
   const [loading, setLoading] = useState(true);
   const canvasRef = useRef(null);
@@ -82,7 +83,7 @@ export const ReactMatrixAnimation = ({
       }
     }
 
-    const interval = setInterval(draw, 33);
+    const interval = setInterval(draw, delay);
 
     const handleResize = () => {
       resizeCanvas();
@@ -97,7 +98,7 @@ export const ReactMatrixAnimation = ({
       clearInterval(interval);
       window.removeEventListener("resize", handleResize);
     };
-  }, [backgroundColor, textColor]);
+  }, [backgroundColor, delay, textColor]);
 
   return (
     <div ref={containerRef} className="w-full h-full">
