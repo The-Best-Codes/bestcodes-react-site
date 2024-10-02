@@ -62,5 +62,9 @@
   {
     "path": "/projects/qrcode",
     "name": "QR Code Generator"
+  },
+  {
+    "path": "/random/susssandwich",
+    "name": "Random Shoutout to SussSandwich"
   }
 ]

@@ -5,7 +5,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Random Shoutout to a Random Cool Person - SussSandwich",
-  description: "Generate a random shoutout to a random cool person",
+  description:
+    "SussSandwich is a cool friend, so I'm making a random shoutout!",
 };
 
 export default function RootLayout({
