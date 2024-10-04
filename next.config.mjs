@@ -10,7 +10,8 @@ const nextConfig = {
                 "protocol": "http",
                 "hostname": "*"
             }
-        ]
+        ],
+        "formats": ["image/avif", "image/webp"],
     }
 };
 
