@@ -1,6 +1,6 @@
 {
   "name": "bestcodes-react-site",
-  "version": "0.2.35",
+  "version": "0.2.36",
   "private": true,
   "repository": {
     "type": "git",
@@ -44,7 +44,7 @@
     "framer-motion": "^11.9.0",
     "js-levenshtein": "^1.1.6",
     "lucide-react": "^0.447.0",
-    "next": "^14.2.14",
+    "next": "^14.2.15",
     "node-fetch": "^3.3.2",
     "node-html-parser": "^6.1.13",
     "nodemailer": "^6.9.15",
