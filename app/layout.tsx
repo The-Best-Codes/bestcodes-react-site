@@ -25,6 +25,19 @@ export const metadata: Metadata = {
   ],
   creator: "BestCodes",
   publisher: "BestCodes",
+  openGraph: {
+    title: "BestCodes' Website - Christian, Coder, Creator | Home",
+    description: "BestCodes' Official Website | Christian, Coder, Creator",
+    url: "https://bestcodes.dev",
+    siteName: "BestCodes' Website",
+    images: [
+      {
+        url: "https://bestcodes.dev/image/og-image.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -35,7 +48,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>{children}</body>
-      {/* <GoogleAnalytics gaId="G-0KLZV1DQKW" /> */}
+      {/* <GoogleAnalytics gaId="" /> */}
     </html>
   );
 }
