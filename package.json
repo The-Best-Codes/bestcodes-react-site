@@ -1,6 +1,6 @@
 {
   "name": "bestcodes-react-site",
-  "version": "0.2.36",
+  "version": "0.2.37",
   "private": true,
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
     "@hello-pangea/dnd": "^17.0.0",
     "@hookform/resolvers": "^3.9.0",
     "@marsidev/react-turnstile": "^1.0.2",
-    "@next/third-parties": "^14.2.15",
+    "@next/third-parties": "^15.0.1",
     "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-label": "^2.1.0",
@@ -44,7 +44,7 @@
     "framer-motion": "^11.11.9",
     "js-levenshtein": "^1.1.6",
     "lucide-react": "^0.453.0",
-    "next": "^14.2.15",
+    "next": "^15.0.1",
     "node-fetch": "^3.3.2",
     "node-html-parser": "^6.1.13",
     "nodemailer": "^6.9.15",
@@ -71,7 +71,7 @@
     "@types/prismjs": "^1.26.4",
     "@types/react": "^18.3.11",
     "@types/sqlite3": "^3.1.11",
-    "eslint-config-next": "^14.2.15",
+    "eslint-config-next": "^15.0.1",
     "tailwindcss": "^3.4.14"
   }
 }
