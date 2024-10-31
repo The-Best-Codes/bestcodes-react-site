@@ -16,7 +16,13 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Loader2, Play, Plus, Trash2, AlertCircle } from "lucide-react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+} from "recharts";
 import {
   ChartConfig,
   ChartContainer,
@@ -99,84 +105,82 @@ const factorial = (n) => {
   };
 
   const runCode = useCallback(async () => {
-    setIsRunning(true);
-    setError(null);
-    setProgress(0);
-    const newResults = [];
+    if (typeof window !== "undefined" && typeof Worker !== "undefined") {
+      setIsRunning(true);
+      setError(null);
+      setProgress(0);
+      const newResults = [];
 
-    try {
-      const workerBlob = new Blob(
-        [await fetch("/assets/codeperf/worker.js").then((res) => res.text())],
-        { type: "application/javascript" }
-      );
-      const workerUrl = URL.createObjectURL(workerBlob);
+      try {
+        const workerUrl = `/assets/codeperf/worker.js`;
 
-      for (let i = 0; i < miniCodes.length; i++) {
-        const miniCode = miniCodes[i];
-        const fullCode = `
+        for (let i = 0; i < miniCodes.length; i++) {
+          const miniCode = miniCodes[i];
+          const fullCode = `
           ${globalCode}
           ${miniCode.code}
         `;
 
-        let totalIterations = 0;
-        let totalTime = 0;
-        const numRuns = 5;
-        const runTime = 200;
+          let totalIterations = 0;
+          let totalTime = 0;
+          const numRuns = 5;
+          const runTime = 200;
 
-        for (let run = 0; run < numRuns; run++) {
-          const worker = new Worker(workerUrl);
+          for (let run = 0; run < numRuns; run++) {
+            const worker: Worker = new Worker(workerUrl);
 
-          try {
-            const result = await new Promise<{
-              iterations: number;
-              timeElapsed: number;
-            }>((resolve, reject) => {
-              worker.onmessage = (e) => {
-                if (e.data.error) {
-                  reject(new Error(e.data.error));
-                } else {
-                  resolve(e.data);
-                }
-              };
-              worker.onerror = reject;
-              worker.postMessage({ code: fullCode, runTime });
-            });
+            try {
+              const result = await new Promise<{
+                iterations: number;
+                timeElapsed: number;
+              }>((resolve, reject) => {
+                worker.onmessage = (e) => {
+                  if (e.data.error) {
+                    reject(new Error(e.data.error));
+                  } else {
+                    resolve(e.data);
+                  }
+                };
+                worker.onerror = reject;
+                worker.postMessage({ code: fullCode, runTime });
+              });
 
-            totalIterations += result.iterations;
-            totalTime += result.timeElapsed;
-          } catch (error) {
-            console.error(
-              `Error in worker execution for ${miniCode.id}, run ${run + 1}:`,
-              error
-            );
-            // I might want to handle this error differently, e.g., skip this run or the entire miniCode
-            setError(JSON.stringify(error) || "Unknown error");
-          } finally {
-            worker.terminate();
+              totalIterations += result.iterations;
+              totalTime += result.timeElapsed;
+            } catch (error) {
+              console.error(
+                `Error in worker execution for ${miniCode.id}, run ${run + 1}:`,
+                error
+              );
+              // I might want to handle this error differently, e.g., skip this run or the entire miniCode
+              setError(JSON.stringify(error) || "Unknown error");
+            } finally {
+              worker.terminate();
+            }
           }
+
+          const averageIterationsPerSecond = Math.round(
+            (totalIterations / totalTime) * 1000
+          );
+
+          newResults.push({
+            id: miniCode.id,
+            iterations: averageIterationsPerSecond,
+          });
+
+          setProgress(((i + 1) / miniCodes.length) * 100);
+          await new Promise((resolve) => setTimeout(resolve, 10));
         }
 
-        const averageIterationsPerSecond = Math.round(
-          (totalIterations / totalTime) * 1000
-        );
-
-        newResults.push({
-          id: miniCode.id,
-          iterations: averageIterationsPerSecond,
-        });
-
-        setProgress(((i + 1) / miniCodes.length) * 100);
-        await new Promise((resolve) => setTimeout(resolve, 10));
+        URL.revokeObjectURL(workerUrl);
+        setResults(newResults);
+      } catch (error) {
+        console.error("Error in runCode:", error);
+        // Handle the error, e.g., show an error message to the user
+        setError(JSON.stringify(error) || "Unknown error");
+      } finally {
+        setIsRunning(false);
       }
-
-      URL.revokeObjectURL(workerUrl);
-      setResults(newResults);
-    } catch (error) {
-      console.error("Error in runCode:", error);
-      // Handle the error, e.g., show an error message to the user
-      setError(JSON.stringify(error) || "Unknown error");
-    } finally {
-      setIsRunning(false);
     }
   }, [globalCode, miniCodes]);
 
@@ -350,17 +354,17 @@ const factorial = (n) => {
               )}
               {results.length > 0 && (
                 <ChartContainer config={chartConfig}>
-                  <BarChart data={results}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="id" />
-                    <YAxis />
-                    <ChartTooltip content={<ChartTooltipContent />} />
-                    <Bar
-                      dataKey="iterations"
-                      fill="var(--color-iterations)"
-                      radius={8}
-                    />
-                  </BarChart>
+                    <BarChart data={results} className="w-full h-full" width={800} height={500}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="id" />
+                      <YAxis />
+                      <ChartTooltip content={<ChartTooltipContent />} />
+                      <Bar
+                        dataKey="iterations"
+                        fill="var(--color-iterations)"
+                        radius={8}
+                      />
+                    </BarChart>
                 </ChartContainer>
               )}
               {results.length === 0 && (
