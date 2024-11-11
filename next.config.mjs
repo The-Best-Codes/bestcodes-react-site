@@ -12,7 +12,7 @@ const nextConfig = {
             }
         ],
         "formats": ["image/avif", "image/webp"],
-    }
+    },
 };
 
 export default nextConfig;
