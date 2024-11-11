@@ -31,6 +31,7 @@ export const metadata: Metadata = {
     "codequill",
     "best-bible",
     "best-holiday",
+    "math",
   ],
   creator: "BestCodes",
   publisher: "BestCodes",
