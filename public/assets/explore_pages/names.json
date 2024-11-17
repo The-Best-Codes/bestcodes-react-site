@@ -66,5 +66,9 @@
   {
     "path": "/random/susssandwich",
     "name": "Random Shoutout to SussSandwich"
+  },
+  {
+    "path": "/math/sine-cosine-visual",
+    "name": "Sine and Cosine Visualizer"
   }
 ]
