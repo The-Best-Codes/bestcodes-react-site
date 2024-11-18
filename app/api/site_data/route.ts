@@ -15,7 +15,6 @@ export async function GET() {
       } finally {
         fs.closeSync(fd);
       }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       throw new Error(`Failed to read package.json: ${error.message}`);
     }
