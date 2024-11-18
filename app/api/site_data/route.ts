@@ -4,10 +4,21 @@ import path from "path";
 
 export async function GET() {
   try {
-    // Read package.json
-    const packageJson = JSON.parse(
-      fs.readFileSync(path.join(process.cwd(), "package.json"), "utf8")
-    );
+    // Read package.json using file descriptor
+    const packageJsonPath = path.join(process.cwd(), "package.json");
+    let packageJson;
+    try {
+      const fd = fs.openSync(packageJsonPath, "r");
+      try {
+        const buffer = fs.readFileSync(fd);
+        packageJson = JSON.parse(buffer.toString("utf8"));
+      } finally {
+        fs.closeSync(fd);
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      throw new Error(`Failed to read package.json: ${error.message}`);
+    }
 
     // Calculate statistics
     const stats = {
@@ -38,7 +49,7 @@ export async function GET() {
     console.error("Error generating site data:", error);
     return NextResponse.json(
       { error: "Failed to generate site data" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -71,7 +82,13 @@ function getTotalLineCount(dir: string): number {
 
   for (const file of files) {
     const filePath = path.join(dir, file);
-    const stat = fs.statSync(filePath);
+    let stat;
+    try {
+      stat = fs.statSync(filePath);
+    } catch (error) {
+      console.warn(`Failed to stat file ${filePath}:`, error);
+      continue;
+    }
 
     if (
       stat.isDirectory() &&
@@ -80,8 +97,21 @@ function getTotalLineCount(dir: string): number {
     ) {
       count += getTotalLineCount(filePath);
     } else if (stat.isFile() && !file.startsWith(".")) {
-      const content = fs.readFileSync(filePath, "utf8");
-      count += content.split("\n").length;
+      try {
+        // Open file with read-only flag
+        const fd = fs.openSync(filePath, "r");
+        try {
+          // Read the entire file using the file descriptor
+          const buffer = fs.readFileSync(fd);
+          const content = buffer.toString("utf8");
+          count += content.split("\n").length;
+        } finally {
+          // Always close the file descriptor
+          fs.closeSync(fd);
+        }
+      } catch (error) {
+        console.warn(`Failed to read file ${filePath}:`, error);
+      }
     }
   }
 
