@@ -2,7 +2,7 @@ self.onmessage = function (e) {
   // Verify message origin
   const allowedOrigins = ["https://bestcodes.dev"];
 
-  if (!allowedOrigins.includes(e.origin)) {
+  if (!allowedOrigins.includes(e.origin) && e.origin) {
     console.error("Received message from untrusted origin:", e.origin);
     return;
   }
