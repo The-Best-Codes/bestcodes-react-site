@@ -1,8 +1,6 @@
 self.onmessage = function (e) {
   // Verify message origin
-  const allowedOrigins = [
-    location.origin, // Same origin as where the worker is hosted
-  ];
+  const allowedOrigins = ["https://bestcodes.dev"];
 
   if (!allowedOrigins.includes(e.origin)) {
     console.error("Received message from untrusted origin:", e.origin);
