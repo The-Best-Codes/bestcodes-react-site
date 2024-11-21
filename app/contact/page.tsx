@@ -62,7 +62,7 @@ export default function Contact() {
     const cloudflareToken = turnstileRef.current.getResponse();
 
     try {
-      const response = await axios.post("/api/contact/create", {
+      const response = await axios.post("/api/contact", {
         ...values,
         cloudflareToken,
       });

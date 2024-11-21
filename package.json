@@ -1,6 +1,6 @@
 {
   "name": "bestcodes-react-site",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "private": true,
   "repository": {
     "type": "git",
@@ -10,15 +10,12 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "depclean": "sh depclean.sh",
-    "update": "npm update --save && npm update --save-dev && npx npm-check-updates@latest -u && npm install",
-    "maintain": "npm run depclean && npm run update"
+    "lint": "next lint"
   },
   "dependencies": {
     "@hello-pangea/dnd": "^17.0.0",
     "@hookform/resolvers": "^3.9.1",
-    "@marsidev/react-turnstile": "^1.0.2",
+    "@marsidev/react-turnstile": "^1.1.0",
     "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-label": "^2.1.0",
@@ -39,7 +36,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
-    "embla-carousel-react": "^8.3.1",
+    "embla-carousel-react": "^8.5.1",
     "framer-motion": "^11.11.17",
     "js-levenshtein": "^1.1.6",
     "lucide-react": "^0.460.0",
@@ -51,7 +48,7 @@
     "qrcode.react": "^4.1.0",
     "react": "^18.3.1",
     "react-confetti": "^6.1.0",
-    "react-day-picker": "^9.3.1",
+    "react-day-picker": "^9.3.2",
     "react-hook-form": "^7.53.2",
     "react-rough-notation": "^1.0.5",
     "react-simple-code-editor": "^0.14.1",
@@ -66,12 +63,14 @@
   },
   "devDependencies": {
     "@types/js-levenshtein": "^1.1.3",
-    "@types/node": "^22.9.0",
+    "@types/node": "^22.9.1",
+    "@types/nodemailer": "^6.4.17",
     "@types/prismjs": "^1.26.5",
     "@types/react": "^18.3.12",
     "@types/sqlite3": "^3.1.11",
     "eslint-config-next": "^15.0.3",
     "prettier": "^3.3.3",
     "tailwindcss": "^3.4.15"
-  }
+  },
+  "packageManager": "pnpm@9.14.2"
 }

@@ -1,17 +1,15 @@
-// pages/api/contact/create.js
-
+import { NextRequest, NextResponse } from "next/server";
 import nodeMailer from "nodemailer";
 
-export default async function handler(req, res) {
+export async function POST(request: NextRequest) {
     try {
-        if (req.method !== "POST") {
-            return res.status(405).json({ error: "Method not allowed" });
-        }
-
-        const { name, email, message, cloudflareToken } = req.body;
+        const { name, email, message, cloudflareToken } = await request.json();
 
         if (!name || !email || !message) {
-            return res.status(400).json({ error: "All fields are required" });
+            return NextResponse.json(
+                { error: "All fields are required" },
+                { status: 400 }
+            );
         }
 
         if (cloudflareToken) {
@@ -33,14 +31,23 @@ export default async function handler(req, res) {
                 const data = await response.json();
 
                 if (!data.success) {
-                    return res.status(401).json({ error: "Invalid captcha" });
+                    return NextResponse.json(
+                        { error: "Invalid captcha" },
+                        { status: 401 }
+                    );
                 }
             } catch (error) {
                 console.error(error);
-                return res.status(500).json({ error: "Failed to verify captcha" });
+                return NextResponse.json(
+                    { error: "Failed to verify captcha" },
+                    { status: 500 }
+                );
             }
         } else {
-            return res.status(401).json({ error: "Invalid captcha" });
+            return NextResponse.json(
+                { error: "Invalid captcha" },
+                { status: 401 }
+            );
         }
 
         try {
@@ -63,14 +70,19 @@ export default async function handler(req, res) {
 
             await transporter.sendMail(mailOptions);
 
-            return res.status(200).json({ success: true });
+            return NextResponse.json({ success: true }, { status: 200 });
         } catch (error) {
             console.error(error);
-            return res.status(500).json({ error: "Failed to send email" });
+            return NextResponse.json(
+                { error: "Failed to send email" },
+                { status: 500 }
+            );
         }
-
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ error: "Internal server error" });
+        return NextResponse.json(
+            { error: "Internal server error" },
+            { status: 500 }
+        );
     }
 }
