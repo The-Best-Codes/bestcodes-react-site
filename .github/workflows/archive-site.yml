@@ -1,0 +1,87 @@
+name: Save on Internet Archive
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5 # Overall job timeout
+
+    steps:
+      - name: Trigger Internet Archive Save
+        id: trigger
+        run: |
+          RESPONSE=$(curl -s -H "Accept: text/html" "https://web.archive.org/save/https://bestcodes.dev")
+          echo "Initial response received"
+
+          # Try to extract job ID using regex
+          if [[ $RESPONSE =~ spn\.watchJob\([\"\'](spn2-[a-f0-9]+)[\"\'] ]]; then
+            JOB_ID="${BASH_REMATCH[1]}"
+            echo "job_id=$JOB_ID" >> $GITHUB_OUTPUT
+            echo "Found job ID: $JOB_ID"
+          else
+            echo "No job ID found in response"
+          fi
+
+      - name: Monitor Archive Job
+        if: steps.trigger.outputs.job_id
+        run: |
+          JOB_ID=${{ steps.trigger.outputs.job_id }}
+          MAX_ATTEMPTS=36  # 3 minutes with 5-second intervals
+          ATTEMPT=0
+
+          while [ $ATTEMPT -lt $MAX_ATTEMPTS ]; do
+            RESPONSE=$(curl -s \
+              -H "Accept: */*" \
+              -H "X-Requested-With: XMLHttpRequest" \
+              "https://web.archive.org/save/status/$JOB_ID")
+            
+            # Check if response is valid JSON
+            if ! echo "$RESPONSE" | jq -e . >/dev/null 2>&1; then
+              echo "Invalid JSON response"
+              sleep 5
+              ATTEMPT=$((ATTEMPT + 1))
+              continue
+            fi
+            
+            STATUS=$(echo "$RESPONSE" | jq -r '.status')
+            echo "Current status: $STATUS"
+            
+            if [ "$STATUS" = "success" ]; then
+              echo "Archive job completed successfully!"
+              exit 0
+            elif [ "$STATUS" = "error" ] || [ "$STATUS" = "failed" ]; then
+              echo "Archive job failed"
+              exit 1
+            fi
+            
+            sleep 5
+            ATTEMPT=$((ATTEMPT + 1))
+          done
+
+          echo "Timeout waiting for archive job to complete"
+          exit 1
+
+      - name: Fallback Verification
+        if: always() # Run even if previous steps failed
+        run: |
+          # Wait a bit before verification if we didn't get a job ID
+          if [ -z "${{ steps.trigger.outputs.job_id }}" ]; then
+            echo "No job ID was found, waiting 60 seconds before verification..."
+            sleep 60
+          fi
+
+          RESPONSE=$(curl -s "https://archive.org/wayback/available?url=https://bestcodes.dev")
+
+          if echo "$RESPONSE" | jq -e '.archived_snapshots.closest' >/dev/null; then
+            echo "Verified: Page is archived in Wayback Machine"
+            SNAPSHOT_URL=$(echo "$RESPONSE" | jq -r '.archived_snapshots.closest.url')
+            echo "Latest snapshot: $SNAPSHOT_URL"
+          else
+            echo "Warning: Could not verify archive status"
+            # Don't fail the workflow here as the archive might still be processing
+          fi
