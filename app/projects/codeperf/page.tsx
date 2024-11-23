@@ -16,13 +16,7 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Loader2, Play, Plus, Trash2, AlertCircle } from "lucide-react";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-} from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 import {
   ChartConfig,
   ChartContainer,
@@ -150,7 +144,7 @@ const factorial = (n) => {
             } catch (error) {
               console.error(
                 `Error in worker execution for ${miniCode.id}, run ${run + 1}:`,
-                error
+                error,
               );
               // I might want to handle this error differently, e.g., skip this run or the entire miniCode
               setError(JSON.stringify(error) || "Unknown error");
@@ -160,7 +154,7 @@ const factorial = (n) => {
           }
 
           const averageIterationsPerSecond = Math.round(
-            (totalIterations / totalTime) * 1000
+            (totalIterations / totalTime) * 1000,
           );
 
           newResults.push({
@@ -266,8 +260,8 @@ const factorial = (n) => {
                           onValueChange={(code) =>
                             setMiniCodes(
                               miniCodes.map((c) =>
-                                c.id === miniCode.id ? { ...c, code: code } : c
-                              )
+                                c.id === miniCode.id ? { ...c, code: code } : c,
+                              ),
                             )
                           }
                           highlight={(code) =>
@@ -336,7 +330,7 @@ const factorial = (n) => {
                     {Math.ceil((progress / 100) * miniCodes.length) === 0
                       ? "Initializing..."
                       : `Running code ${Math.ceil(
-                          (progress / 100) * miniCodes.length
+                          (progress / 100) * miniCodes.length,
                         )} of ${miniCodes.length}`}
                   </p>
                 </div>
@@ -354,17 +348,22 @@ const factorial = (n) => {
               )}
               {results.length > 0 && (
                 <ChartContainer config={chartConfig}>
-                    <BarChart data={results} className="w-full h-full" width={800} height={500}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="id" />
-                      <YAxis />
-                      <ChartTooltip content={<ChartTooltipContent />} />
-                      <Bar
-                        dataKey="iterations"
-                        fill="var(--color-iterations)"
-                        radius={8}
-                      />
-                    </BarChart>
+                  <BarChart
+                    data={results}
+                    className="w-full h-full"
+                    width={800}
+                    height={500}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="id" />
+                    <YAxis />
+                    <ChartTooltip content={<ChartTooltipContent />} />
+                    <Bar
+                      dataKey="iterations"
+                      fill="var(--color-iterations)"
+                      radius={8}
+                    />
+                  </BarChart>
                 </ChartContainer>
               )}
               {results.length === 0 && (
@@ -381,7 +380,7 @@ const factorial = (n) => {
                     Best performance: Code{" "}
                     {
                       results.reduce((max, obj) =>
-                        obj.iterations > max.iterations ? obj : max
+                        obj.iterations > max.iterations ? obj : max,
                       ).id
                     }
                   </>
