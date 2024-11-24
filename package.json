@@ -1,6 +1,6 @@
 {
   "name": "bestcodes-react-site",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "private": true,
   "repository": {
     "type": "git",
@@ -48,7 +48,7 @@
     "qrcode.react": "^4.1.0",
     "react": "^18.3.1",
     "react-confetti": "^6.1.0",
-    "react-day-picker": "^9.3.2",
+    "react-day-picker": "^9.4.0",
     "react-hook-form": "^7.53.2",
     "react-rough-notation": "^1.0.5",
     "react-simple-code-editor": "^0.14.1",
