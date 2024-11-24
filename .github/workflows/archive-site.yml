@@ -8,6 +8,7 @@ on:
 
 jobs:
   archive:
+    name: "Save on Internet Archive"
     runs-on: ubuntu-latest
     timeout-minutes: 5 # Overall job timeout
 
