@@ -1,4 +1,4 @@
-name: Save on Internet Archive
+name: "Save on Internet Archive"
 
 on:
   push:
