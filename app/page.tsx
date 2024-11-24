@@ -193,6 +193,7 @@ export default function Home() {
                   My programming journey began several years ago when I received
                   an{" "}
                   <Link
+                    prefetch={true}
                     href="https://makeblock.com/products/buy-mbot"
                     className="text-blue-500"
                   >
@@ -276,6 +277,7 @@ export default function Home() {
                 <p>
                   I design stuff. I create stuff. I{" "}
                   <Link
+                    prefetch={true}
                     href={`https://www.printables.com/@Best_codes`}
                     className="text-blue-500"
                   >

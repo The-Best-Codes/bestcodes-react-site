@@ -53,7 +53,7 @@ export default function SocialMediaLinks() {
       <CardContent className="p-4">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4">
           {socialLinks.map((link, index) => (
-            <Link key={index} href={link.href} target="_blank">
+            <Link key={index} href={link.href} target="_blank" prefetch={true}>
               <div className="flex flex-col items-center justify-center gap-2">
                 <Image
                   src={`/image/icons/${link.icon}`}

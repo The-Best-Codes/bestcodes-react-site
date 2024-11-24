@@ -41,7 +41,9 @@ export default function BestBible() {
                 aria-label="Usage Demo"
                 className="w-fit text-3xl bg-blue-500 h-16"
               >
-                <Link href={`/projects/bestbible/demo`}>Usage Demo</Link>
+                <Link prefetch={true} href="/projects/bestbible/demo">
+                  Usage Demo
+                </Link>
               </Button>
             </div>
 
@@ -84,6 +86,7 @@ export default function BestBible() {
                 or have suggestions for improvements, please open an issue or
                 submit a pull request on the{" "}
                 <Link
+                  prefetch={true}
                   href="https://github.com/The-Best-Codes/best-bible"
                   className="text-blue-600 dark:text-blue-400 hover:underline"
                 >
@@ -98,6 +101,7 @@ export default function BestBible() {
               <p>
                 Best Bible is open-source software licensed under the{" "}
                 <Link
+                  prefetch={true}
                   href="https://www.gnu.org/licenses/gpl-3.0.en.html"
                   className="text-blue-600 dark:text-blue-400 hover:underline"
                 >

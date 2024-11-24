@@ -60,6 +60,7 @@ export default function HeaderMain() {
     <ul className={`flex ${isMobile ? "flex-col space-y-4" : "space-x-4"}`}>
       <li>
         <Link
+          prefetch={true}
           href="/"
           className="text-black text-2xl dark:text-white hover:text-blue-500 hover:underline"
         >
@@ -74,6 +75,7 @@ export default function HeaderMain() {
       </li>
       <li>
         <Link
+          prefetch={true}
           href="https://dev.to/best_codes"
           className="text-black text-2xl dark:text-white hover:text-blue-500 hover:underline"
         >
@@ -88,6 +90,7 @@ export default function HeaderMain() {
       </li>
       <li>
         <Link
+          prefetch={true}
           href="/contact"
           className="text-black text-2xl dark:text-white hover:text-blue-500"
         >
@@ -119,7 +122,7 @@ export default function HeaderMain() {
       >
         <header className="h-16 flex items-center justify-between px-6">
           <div className="flex flex-row items-center gap-4">
-            <Link href="/">
+            <Link prefetch={true} href="/">
               <div className="flex flex-row w-fit items-center gap-4">
                 <motion.img
                   src={`/image/best_codes_logo_low_res.png`}
@@ -147,15 +150,15 @@ export default function HeaderMain() {
               onClick={toggleMenu}
               className="text-2xl text-black dark:text-white"
             >
-              {isMenuOpen ? (
-                <X />
-              ) : (
-                <Menu />
-              )}
+              {isMenuOpen ? <X /> : <Menu />}
             </Button>
           ) : (
             <div className="flex flex-row items-center gap-4">
-              <Link target="_blank" href={`https://github.com/the-best-codes`}>
+              <Link
+                target="_blank"
+                href={`https://github.com/the-best-codes`}
+                prefetch={true}
+              >
                 <Image
                   src={`/image/icons/github.svg`}
                   alt="github"
@@ -164,7 +167,11 @@ export default function HeaderMain() {
                   className="h-8 w-8 dark:invert"
                 />
               </Link>
-              <Link target="_blank" href={`https://dev.to/best_codes`}>
+              <Link
+                target="_blank"
+                href={`https://dev.to/best_codes`}
+                prefetch={true}
+              >
                 <Image
                   src={`/image/icons/devdotto.svg`}
                   alt="twitter"

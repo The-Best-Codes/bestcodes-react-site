@@ -95,6 +95,7 @@ export default function SiteDataPage() {
             <p>
               <strong>Repository:</strong>{" "}
               <Link
+                prefetch={true}
                 href={siteData.repoUrl}
                 className="text-blue-500 hover:underline block max-w-full truncate"
                 target="_blank"

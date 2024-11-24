@@ -75,6 +75,7 @@ export default function PrintablesCarousel() {
             carouselData?.map((project: Project) => (
               <CarouselItem key={project.name}>
                 <Link
+                  prefetch={true}
                   href={project.url}
                   target="_blank"
                   rel="noopener"
