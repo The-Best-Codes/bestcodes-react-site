@@ -10,19 +10,49 @@ import {
   CarouselNext,
 } from "@/components/ui/carousel";
 
+interface Project {
+  name: string;
+  url: string;
+  coverImage: {
+    src: string;
+  };
+}
+
 export default function PrintablesCarousel() {
   const [isLoading, setIsLoading] = useState(true);
-  const [carouselData, setCarouselData] = useState<any>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [carouselData, setCarouselData] = useState<Project[]>([]);
 
   useEffect(() => {
     const url = `/api/printables/highlighted-projects?user_id=491469`;
+    setIsLoading(true);
+    setError(null);
+
     fetch(url)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then((data) => {
         setCarouselData(data);
         setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching printables:", error);
+        setError("Failed to load printables. Please try again later.");
+        setIsLoading(false);
       });
   }, []);
+
+  if (error) {
+    return (
+      <div className="w-full max-w-40 md:max-w-xs mx-auto text-center p-4">
+        <p className="text-red-500">{error}</p>
+      </div>
+    );
+  }
 
   return (
     <Carousel
@@ -41,27 +71,43 @@ export default function PrintablesCarousel() {
             </div>
           </CarouselItem>
         ) : (
-          carouselData.map((project: any) => (
-            <CarouselItem key={project.name}>
-              <Link
-                href={project.url}
-                target="_blank"
-                rel="noopener"
-                className="flex flex-col items-center justify-center"
-              >
+          (carouselData?.length > 0 &&
+            carouselData?.map((project: Project) => (
+              <CarouselItem key={project.name}>
+                <Link
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener"
+                  className="flex flex-col items-center justify-center"
+                >
+                  <Image
+                    src={project?.coverImage?.src || "/image/not_found.png"}
+                    alt={`${project.name} cover image`}
+                    width={256}
+                    height={256}
+                    className="w-32 h-32 md:w-64 md:h-64 object-cover rounded-lg"
+                  />
+                  <h3 className="text-xl font-bold mt-4 text-center text-blue-500 hover:underline max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
+                    {project.name}
+                  </h3>
+                </Link>
+              </CarouselItem>
+            ))) || (
+            <CarouselItem>
+              <div className="flex flex-col items-center justify-center">
                 <Image
-                  src={project?.coverImage?.src || "/image/not_found.png"}
-                  alt={`${project.name} cover image`}
+                  src="/image/not_found.png"
+                  alt="Not Found"
                   width={256}
                   height={256}
                   className="w-32 h-32 md:w-64 md:h-64 object-cover rounded-lg"
                 />
                 <h3 className="text-xl font-bold mt-4 text-center text-blue-500 hover:underline max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
-                  {project.name}
+                  Not Found
                 </h3>
-              </Link>
+              </div>
             </CarouselItem>
-          ))
+          )
         )}
       </CarouselContent>
       <CarouselPrevious className="dark:bg-slate-900" />
