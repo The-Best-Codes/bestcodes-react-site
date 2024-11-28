@@ -492,7 +492,7 @@ const AccordionEditor: React.FC = () => {
                                         e.target.value
                                       )
                                     }
-                                    className="flex-grow dark:bg-slate-700 dark:text-white dark:border-slate-500"
+                                    className="grow dark:bg-slate-700 dark:text-white dark:border-slate-500"
                                     placeholder="Enter question"
                                   />
                                   <Dialog open={itemToDelete === item.id}>

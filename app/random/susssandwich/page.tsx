@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const SussySandwichPage = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-400 to-indigo-600">
+    <div className="min-h-screen bg-linear-to-br from-purple-400 to-indigo-600">
       <Header />
       <main className="container mx-auto px-4 py-16">
         <Card className="max-w-4xl mx-auto">
@@ -24,7 +24,7 @@ const SussySandwichPage = () => {
                 Shoutout to
               </h1>
               <motion.h2
-                className="text-6xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-red-600"
+                className="text-6xl font-extrabold text-center text-transparent bg-clip-text bg-linear-to-r from-yellow-400 to-red-600"
                 animate={{
                   scale: [1, 1.2, 1],
                   rotate: [0, 5, -5, 0],

@@ -195,12 +195,12 @@ const factorial = (n) => {
   return (
     <main className="min-h-screen h-full w-full flex flex-col bg-gray-100 dark:bg-gray-900">
       <Header />
-      <div className="w-full h-full p-4 flex flex-grow flex-col bg-white dark:bg-gray-900 text-black dark:text-white">
+      <div className="w-full h-full p-4 flex grow flex-col bg-white dark:bg-gray-900 text-black dark:text-white">
         <h2 className="text-3xl font-bold mb-6 dark:text-white">
           Code Performance Analyzer
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-grow">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 grow">
           <Card className="flex flex-col h-[calc(100vh-10rem)] lg:h-auto bg-white dark:bg-gray-800 dark:border-none">
             <CardHeader>
               <CardTitle className="dark:text-white">Code Editor</CardTitle>
@@ -208,7 +208,7 @@ const factorial = (n) => {
                 Write and edit your code here
               </CardDescription>
             </CardHeader>
-            <CardContent className="flex-grow overflow-hidden">
+            <CardContent className="grow overflow-hidden">
               <Tabs
                 value={activeTab}
                 onValueChange={setActiveTab}
@@ -231,7 +231,7 @@ const factorial = (n) => {
                     </TabsTrigger>
                   ))}
                 </TabsList>
-                <div className="flex-grow overflow-auto">
+                <div className="grow overflow-auto">
                   <TabsContent value="global" className="h-full mt-0">
                     <Editor
                       value={globalCode}
@@ -322,7 +322,7 @@ const factorial = (n) => {
                 Iterations per second for each code snippet
               </CardDescription>
             </CardHeader>
-            <CardContent className="flex-grow overflow-auto">
+            <CardContent className="grow overflow-auto">
               {isRunning && (
                 <div className="mb-4">
                   <Progress value={progress} className="w-full" />

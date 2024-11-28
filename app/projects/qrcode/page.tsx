@@ -211,7 +211,7 @@ const QRCodeGenerator = () => {
                     type="text"
                     value={fgColor}
                     onChange={(e) => setFgColor(e.target.value)}
-                    className="flex-grow dark:bg-slate-700 dark:text-white dark:border-slate-900"
+                    className="grow dark:bg-slate-700 dark:text-white dark:border-slate-900"
                   />
                 </div>
               </div>
@@ -232,7 +232,7 @@ const QRCodeGenerator = () => {
                     type="text"
                     value={bgColor}
                     onChange={(e) => setBgColor(e.target.value)}
-                    className="flex-grow dark:bg-slate-700 dark:text-white dark:border-slate-900"
+                    className="grow dark:bg-slate-700 dark:text-white dark:border-slate-900"
                   />
                 </div>
               </div>
