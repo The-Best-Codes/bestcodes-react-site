@@ -70,5 +70,9 @@
   {
     "path": "/math/sine-cosine-visual",
     "name": "Sine and Cosine Visualizer"
+  },
+  {
+    "path": "/projects/thanks20k",
+    "name": "20K Dev.to Followers!"
   }
 ]

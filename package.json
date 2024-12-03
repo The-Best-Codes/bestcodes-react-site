@@ -1,6 +1,6 @@
 {
   "name": "bestcodes-react-site",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "private": true,
   "repository": {
     "type": "git",
@@ -16,6 +16,7 @@
     "@hello-pangea/dnd": "^17.0.0",
     "@hookform/resolvers": "^3.9.1",
     "@marsidev/react-turnstile": "^1.1.0",
+    "@number-flow/react": "^0.4.2",
     "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-label": "^2.1.0",
@@ -37,7 +38,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "embla-carousel-react": "^8.5.1",
-    "framer-motion": "^11.12.0",
+    "framer-motion": "^11.13.1",
     "js-levenshtein": "^1.1.6",
     "lucide-react": "^0.464.0",
     "next": "^15.0.3",
@@ -48,11 +49,11 @@
     "qrcode.react": "^4.1.0",
     "react": "^18.3.1",
     "react-confetti": "^6.1.0",
-    "react-day-picker": "^9.4.0",
+    "react-day-picker": "^9.4.1",
     "react-hook-form": "^7.53.2",
     "react-rough-notation": "^1.0.5",
     "react-simple-code-editor": "^0.14.1",
-    "recharts": "^2.13.3",
+    "recharts": "^2.14.1",
     "sharp": "^0.33.5",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7",
@@ -72,5 +73,5 @@
     "prettier": "^3.4.1",
     "tailwindcss": "^3.4.15"
   },
-  "packageManager": "bun@1.1.37"
+  "packageManager": "bun@1.1.38"
 }
