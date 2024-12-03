@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import NumberFlow from "@number-flow/react";
 import ReactConfetti from "react-confetti";
+import Link from "next/link";
 
 export default function Thanks20K() {
   const [showConfetti, setShowConfetti] = useState(false);
@@ -71,6 +72,15 @@ export default function Thanks20K() {
         >
           <h1 className="text-6xl font-bold mb-4">Thank You!</h1>
           <p className="text-2xl">For 20,000 amazing followers on dev.to</p>
+          <Link
+            href="https://dev.to/best_codes/thanks-for-20000-followers-oag"
+            className="underline text-2xl text-blue-600"
+          >
+            <p>Read the story</p>
+          </Link>
+          <Link href="/" className="underline text-2xl text-blue-600">
+            <p>Home</p>
+          </Link>
         </motion.div>
       </div>
 
