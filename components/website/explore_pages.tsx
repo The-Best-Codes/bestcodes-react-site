@@ -8,6 +8,7 @@ import {
 } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { MagicCard } from "@/components/ui/magic-card";
 import { ChevronRight, Loader2, AlertCircle, ChevronLeft } from "lucide-react";
 
 interface Page {
@@ -57,7 +58,7 @@ const ExploreMorePages: React.FC<{
 
   const displayedPages = pages.slice(
     currentPage * CARDS_PER_PAGE,
-    (currentPage + 1) * CARDS_PER_PAGE
+    (currentPage + 1) * CARDS_PER_PAGE,
   );
 
   return (
@@ -145,41 +146,17 @@ const ExploreMorePages: React.FC<{
 };
 
 const PageCard: React.FC<{ page: Page; index: number }> = ({ page, index }) => {
-  let mouseX = useMotionValue(0);
-  let mouseY = useMotionValue(0);
-
-  function handleMouseMove({
-    currentTarget,
-    clientX,
-    clientY,
-  }: React.MouseEvent) {
-    let { left, top } = currentTarget.getBoundingClientRect();
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
-  }
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <div
-        className="group relative rounded-xl bg-white dark:bg-slate-800 shadow-md overflow-hidden"
-        onMouseMove={handleMouseMove}
+      <MagicCard
+        className="group relative rounded-xl bg-white dark:bg-slate-800 dark:border-slate-600 shadow-md overflow-hidden"
+        gradientColor="rgb(14, 165, 233)"
+        gradientOpacity={0.15}
       >
-        <motion.div
-          className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100"
-          style={{
-            background: useMotionTemplate`
-              radial-gradient(
-                150px circle at ${mouseX}px ${mouseY}px,
-                rgba(14, 165, 233, 0.15),
-                transparent 80%
-              )
-            `,
-          }}
-        />
         <Card className="h-full border-0 bg-transparent">
           <CardHeader>
             <CardTitle
@@ -208,7 +185,7 @@ const PageCard: React.FC<{ page: Page; index: number }> = ({ page, index }) => {
             </Button>
           </CardContent>
         </Card>
-      </div>
+      </MagicCard>
     </motion.div>
   );
 };
