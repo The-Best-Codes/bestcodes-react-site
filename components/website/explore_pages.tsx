@@ -154,6 +154,7 @@ const PageCard: React.FC<{ page: Page; index: number }> = ({ page, index }) => {
     >
       <MagicCard
         className="group relative rounded-xl bg-white dark:bg-slate-800 dark:border-slate-600 shadow-md overflow-hidden"
+        childrenClassName="w-full"
         gradientColor="rgb(14, 165, 233)"
         gradientOpacity={0.15}
       >
