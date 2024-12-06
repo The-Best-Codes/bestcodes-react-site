@@ -7,7 +7,7 @@ import SyntaxHighlighter from "@/components/website/code_syntax";
 
 export default function BestBible() {
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+    (<div className="min-h-screen bg-gray-100 dark:bg-gray-900">
       <Header />
       <div className="py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden ">
@@ -25,7 +25,10 @@ export default function BestBible() {
                   width={100}
                   height={20}
                   className="h-8 w-auto"
-                />
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
               ))}
             </div>
 
@@ -36,7 +39,10 @@ export default function BestBible() {
                 width={200}
                 height={200}
                 className="rounded-2xl"
-              />
+                style={{
+                  maxWidth: "100%",
+                  height: "auto"
+                }} />
               <Button
                 aria-label="Usage Demo"
                 className="w-fit text-3xl bg-blue-500 h-16"
@@ -113,6 +119,6 @@ export default function BestBible() {
           </div>
         </div>
       </div>
-    </div>
+    </div>)
   );
 }

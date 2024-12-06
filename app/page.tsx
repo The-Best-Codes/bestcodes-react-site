@@ -61,7 +61,7 @@ export default function Home() {
   const waveImageScale = useTransform(scrollY, [0, 200], [1, 1.5]);
   const waveImageOpacity = useTransform(scrollY, [0, 200], [1, 0]);
   return (
-    <main className="flex min-h-screen scroll-smooth max-w-screen w-full flex-col items-center dark:bg-slate-900">
+    (<main className="flex min-h-screen scroll-smooth max-w-screen w-full flex-col items-center dark:bg-slate-900">
       <Header />
       <div className="overflow-x-hidden">
         <div className="max-w-screen w-full relative overflow-hidden">
@@ -76,7 +76,10 @@ export default function Home() {
               height={260}
               className="h-16 w-16 sm:h-16 sm:w-16 md:h-24 md:w-24 lg:h-32 lg:w-32"
               unoptimized
-            />
+              style={{
+                maxWidth: "100%",
+                height: "auto"
+              }} />
             <h1 className="text-7xl sm:text-7xl md:text-8xl lg:text-9xl text-black dark:text-white line-clamp-1 font-bold">
               Hi
             </h1>
@@ -126,7 +129,10 @@ export default function Home() {
                     height={80}
                     className="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"
                     unoptimized
-                  />
+                    style={{
+                      maxWidth: "100%",
+                      height: "auto"
+                    }} />
                   <span className="text-3xl sm:text-3xl md:text-4xl lg:text-6xl dark:text-white">
                     I&apos;m a <span className="text-blue-500">Christian</span>
                   </span>
@@ -175,7 +181,10 @@ export default function Home() {
                     height={80}
                     className="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"
                     unoptimized
-                  />
+                    style={{
+                      maxWidth: "100%",
+                      height: "auto"
+                    }} />
                   <span className="text-3xl sm:text-3xl md:text-4xl lg:text-6xl dark:text-white">
                     I&apos;m a <span className="text-blue-500">Coder</span>
                   </span>
@@ -239,7 +248,10 @@ export default function Home() {
                       height={40}
                       className="h-10 w-10"
                       unoptimized
-                    />
+                      style={{
+                        maxWidth: "100%",
+                        height: "auto"
+                      }} />
                     Pinned Projects
                   </span>
                   <PinnedCarousel />
@@ -264,7 +276,10 @@ export default function Home() {
                     height={80}
                     className="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"
                     unoptimized
-                  />
+                    style={{
+                      maxWidth: "100%",
+                      height: "auto"
+                    }} />
                   <span className="text-3xl sm:text-3xl md:text-4xl lg:text-6xl dark:text-white">
                     I&apos;m a <span className="text-blue-500">Creator</span>
                   </span>
@@ -326,7 +341,10 @@ export default function Home() {
                 height={80}
                 className="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"
                 unoptimized
-              />
+                style={{
+                  maxWidth: "100%",
+                  height: "auto"
+                }} />
               <h1 className="text-center text-3xl sm:text-3xl md:text-4xl lg:text-6xl font-bold">
                 Where to <span className="text-blue-500">find me</span>
               </h1>
@@ -348,7 +366,10 @@ export default function Home() {
                 height={80}
                 className="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"
                 unoptimized
-              />
+                style={{
+                  maxWidth: "100%",
+                  height: "auto"
+                }} />
               <h1 className="text-center text-3xl sm:text-3xl md:text-4xl lg:text-6xl font-bold dark:text-white">
                 That&apos;s all &mdash;{" "}
                 <span className="text-blue-500">for now</span>
@@ -364,6 +385,6 @@ export default function Home() {
       </div>
       <ExploreMorePages currentPath="/" />
       <Footer />
-    </main>
+    </main>)
   );
 }

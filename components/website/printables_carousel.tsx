@@ -55,7 +55,7 @@ export default function PrintablesCarousel() {
   }
 
   return (
-    <Carousel
+    (<Carousel
       opts={{
         align: "center",
         loop: true,
@@ -88,7 +88,10 @@ export default function PrintablesCarousel() {
                     height={256}
                     className="w-32 h-32 md:w-64 md:h-64 object-cover rounded-lg"
                     loading="lazy"
-                  />
+                    style={{
+                      maxWidth: "100%",
+                      height: "auto"
+                    }} />
                   <h3 className="text-xl font-bold mt-4 text-center text-blue-500 hover:underline max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
                     {project.name}
                   </h3>
@@ -103,7 +106,10 @@ export default function PrintablesCarousel() {
                   width={256}
                   height={256}
                   className="w-32 h-32 md:w-64 md:h-64 object-cover rounded-lg"
-                />
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
                 <h3 className="text-xl font-bold mt-4 text-center text-blue-500 hover:underline max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
                   Not Found
                 </h3>
@@ -114,6 +120,6 @@ export default function PrintablesCarousel() {
       </CarouselContent>
       <CarouselPrevious className="dark:bg-slate-900" />
       <CarouselNext className="dark:bg-slate-900" />
-    </Carousel>
+    </Carousel>)
   );
 }

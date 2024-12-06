@@ -107,7 +107,7 @@ export default function HeaderMain() {
   );
 
   return (
-    <motion.div
+    (<motion.div
       className="sticky z-50 mx-auto"
       style={{
         width: headerWidth,
@@ -165,7 +165,10 @@ export default function HeaderMain() {
                   width={40}
                   height={40}
                   className="h-8 w-8 dark:invert"
-                />
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
               </Link>
               <Link
                 target="_blank"
@@ -178,7 +181,10 @@ export default function HeaderMain() {
                   width={40}
                   height={40}
                   className="h-8 w-8 dark:invert"
-                />
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
               </Link>
               {/* <AuthButton /> */}
             </div>
@@ -204,6 +210,6 @@ export default function HeaderMain() {
           </motion.div>
         )}
       </motion.div>
-    </motion.div>
+    </motion.div>)
   );
 }
