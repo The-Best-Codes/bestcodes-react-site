@@ -87,6 +87,7 @@ export default function PrintablesCarousel() {
                     width={256}
                     height={256}
                     className="w-32 h-32 md:w-64 md:h-64 object-cover rounded-lg"
+                    loading="lazy"
                   />
                   <h3 className="text-xl font-bold mt-4 text-center text-blue-500 hover:underline max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
                     {project.name}
