@@ -13,8 +13,9 @@ const geistMono = localFont({
 });
 export const metadata: Metadata = {
   title: "CodePerf - Measure and optimize your code performance | BestCodes",
+
   description:
-    "CodePerf gives you detailed insights on the speed of your codes, making it easy to optimize them as needed.",
+    "CodePerf gives you detailed insights on the speed of your codes, making it easy to optimize them as needed."
 };
 
 export default function RootLayout({

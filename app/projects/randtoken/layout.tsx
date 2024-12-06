@@ -13,7 +13,7 @@ const geistMono = localFont({
 });
 export const metadata: Metadata = {
   title: "Free Random Password / Token Generator",
-  description: "Free, customizable, and secure password / token generator",
+  description: "Free, customizable, and secure password / token generator"
 };
 
 export default function RootLayout({

@@ -14,8 +14,9 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title:
     "Free typing speed test - Customizable, intuitive, and high-accuracy | BestCodes",
+
   description:
-    "Easily measure your typing speed and accuracy with our free typing speed test. It's easy to use and provides detailed results.",
+    "Easily measure your typing speed and accuracy with our free typing speed test. It's easy to use and provides detailed results."
 };
 
 export default function RootLayout({

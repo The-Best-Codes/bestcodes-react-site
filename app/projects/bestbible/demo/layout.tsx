@@ -14,7 +14,8 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title:
     "BestBible Usage Demo - Fetch, parse, and analyze the Bible easily with JavaScript | BestCodes",
-  description: "Usage examples and outputs for the best-bible npm library.",
+
+  description: "Usage examples and outputs for the best-bible npm library."
 };
 
 export default function RootLayout({

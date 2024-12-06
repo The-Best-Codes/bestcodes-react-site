@@ -14,8 +14,9 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title:
     "About BestCodes' Website - Version, Source Code, and More | BestCodes",
+
   description:
-    "Internal site statistics, information, and source code links for BestCodes Official Website.",
+    "Internal site statistics, information, and source code links for BestCodes Official Website."
 };
 
 export default function RootLayout({

@@ -13,8 +13,9 @@ const geistMono = localFont({
 });
 export const metadata: Metadata = {
   title: "Random Token Stream",
+
   description:
-    "Free token streamer - generate an infinitly long stream of random tokens",
+    "Free token streamer - generate an infinitly long stream of random tokens"
 };
 
 export default function RootLayout({

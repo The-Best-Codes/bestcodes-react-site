@@ -14,8 +14,9 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title:
     "Free Maze Generator - Generate a maze and solve it with JavaScript | BestCodes",
+
   description:
-    "Free Maze Generator with customizable size and difficulty. Easily print mazes and solutions.",
+    "Free Maze Generator with customizable size and difficulty. Easily print mazes and solutions."
 };
 
 export default function RootLayout({

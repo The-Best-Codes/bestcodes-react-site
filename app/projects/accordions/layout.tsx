@@ -13,7 +13,7 @@ const geistMono = localFont({
 });
 export const metadata: Metadata = {
   title: "FAQ Accordions Generator | BestCodes",
-  description: "Easily generate FAQ pages and save / export them.",
+  description: "Easily generate FAQ pages and save / export them."
 };
 
 export default function RootLayout({

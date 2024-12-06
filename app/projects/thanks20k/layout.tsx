@@ -9,7 +9,7 @@ const geistSans = localFont({
 
 export const metadata: Metadata = {
   title: "Thank You for 20K Dev.to Followers! | BestCodes",
-  description: "A special thank you page celebrating 20,000 followers on Dev.to",
+  description: "A special thank you page celebrating 20,000 followers on Dev.to"
 };
 
 export default function RootLayout({

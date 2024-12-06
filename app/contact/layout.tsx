@@ -13,7 +13,7 @@ const geistMono = localFont({
 });
 export const metadata: Metadata = {
   title: "Contact BestCodes - Christian, Coder, Creator | BestCodes",
-  description: "Contact BestCodes | BestCodes' Official Website",
+  description: "Contact BestCodes | BestCodes' Official Website"
 };
 
 export default function RootLayout({

@@ -15,10 +15,13 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "BestCodes' Website - Christian, Coder, Creator | Home",
+
   description:
     "BestCodes is a full-stack developer, christian and creator. This is BestCodes' Official Website.",
+
   applicationName: "BestCodes' Website",
   authors: [{ name: "BestCodes", url: "https://bestcodes.dev" }],
+
   keywords: [
     "BestCodes",
     "The-Best-Codes",
@@ -33,8 +36,10 @@ export const metadata: Metadata = {
     "best-holiday",
     "math",
   ],
+
   creator: "BestCodes",
   publisher: "BestCodes",
+
   openGraph: {
     title: "BestCodes' Website - Christian, Coder, Creator | Home",
     description: "BestCodes' Official Website | Christian, Coder, Creator",
@@ -47,7 +52,7 @@ export const metadata: Metadata = {
         height: 630,
       },
     ],
-  },
+  }
 };
 
 export default function RootLayout({
