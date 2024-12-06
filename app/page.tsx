@@ -178,7 +178,7 @@ export default function Home() {
                 <CardTitle className="flex flex-row items-center gap-2">
                   <Image
                     src={`/image/emoji/technologist.png`}
-                    alt="latin cross"
+                    alt="technologist"
                     width={80}
                     height={80}
                     className="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"
@@ -275,7 +275,7 @@ export default function Home() {
                 <CardTitle className="flex flex-row items-center gap-2">
                   <Image
                     src={`/image/emoji/artist.png`}
-                    alt="latin cross"
+                    alt="artist"
                     width={80}
                     height={80}
                     className="h-8 w-8 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-14 lg:w-14"

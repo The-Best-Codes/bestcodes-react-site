@@ -90,7 +90,6 @@ export default function PinnedCarousel() {
                     className="w-32 h-32 md:w-64 md:h-64 object-cover rounded-lg"
                     style={{
                       maxWidth: "100%",
-                      height: "auto"
                     }} />
                   <h3 className="text-xl font-bold mt-4 text-center text-blue-500 hover:underline max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
                     {project.name}

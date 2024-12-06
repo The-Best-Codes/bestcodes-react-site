@@ -90,7 +90,6 @@ export default function PrintablesCarousel() {
                     loading="lazy"
                     style={{
                       maxWidth: "100%",
-                      height: "auto"
                     }} />
                   <h3 className="text-xl font-bold mt-4 text-center text-blue-500 hover:underline max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
                     {project.name}

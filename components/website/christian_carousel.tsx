@@ -56,7 +56,7 @@ export default function ChristianCarousel() {
   }
 
   return (
-    (<Carousel
+    <Carousel
       opts={{
         align: "center",
         loop: true,
@@ -90,8 +90,8 @@ export default function ChristianCarousel() {
                     className="w-32 h-32 md:w-64 md:h-64 object-cover rounded-lg"
                     style={{
                       maxWidth: "100%",
-                      height: "auto"
-                    }} />
+                    }}
+                  />
                   <h3 className="text-xl font-bold mt-4 text-center text-blue-500 hover:underline max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
                     {project.name}
                   </h3>
@@ -108,8 +108,9 @@ export default function ChristianCarousel() {
                   className="w-32 h-32 md:w-64 md:h-64 object-cover rounded-lg"
                   style={{
                     maxWidth: "100%",
-                    height: "auto"
-                  }} />
+                    height: "auto",
+                  }}
+                />
                 <h3 className="text-xl font-bold mt-4 text-center text-blue-500 hover:underline">
                   Not Found
                 </h3>
@@ -120,6 +121,6 @@ export default function ChristianCarousel() {
       </CarouselContent>
       <CarouselPrevious className="dark:bg-slate-900" />
       <CarouselNext className="dark:bg-slate-900" />
-    </Carousel>)
+    </Carousel>
   );
 }
