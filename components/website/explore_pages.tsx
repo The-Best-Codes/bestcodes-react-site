@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {
-  motion,
-  AnimatePresence,
-  useMotionTemplate,
-  useMotionValue,
-} from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MagicCard } from "@/components/ui/magic-card";
@@ -58,7 +53,7 @@ const ExploreMorePages: React.FC<{
 
   const displayedPages = pages.slice(
     currentPage * CARDS_PER_PAGE,
-    (currentPage + 1) * CARDS_PER_PAGE,
+    (currentPage + 1) * CARDS_PER_PAGE
   );
 
   return (

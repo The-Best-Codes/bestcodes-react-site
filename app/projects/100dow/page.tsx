@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState, Suspense } from "react";
 import Header from "@/components/website/header";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { ChevronDown, Award, Smile, Loader } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import dynamic from "next/dynamic";

@@ -2,7 +2,7 @@
 import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "motion/react";
 import {
   Card,
   CardHeader,
@@ -48,7 +48,7 @@ export default function Home() {
     if (text) {
       text.innerHTML = text.textContent.replace(
         /\S/g,
-        "<span class='letter'>$&</span>",
+        "<span class='letter'>$&</span>"
       );
 
       const letters = text.querySelectorAll(".letter");
@@ -61,7 +61,7 @@ export default function Home() {
   const waveImageScale = useTransform(scrollY, [0, 200], [1, 1.5]);
   const waveImageOpacity = useTransform(scrollY, [0, 200], [1, 0]);
   return (
-    (<main className="flex min-h-screen scroll-smooth max-w-screen w-full flex-col items-center dark:bg-slate-900">
+    <main className="flex min-h-screen scroll-smooth max-w-screen w-full flex-col items-center dark:bg-slate-900">
       <Header />
       <div className="overflow-x-hidden">
         <div className="max-w-screen w-full relative overflow-hidden">
@@ -78,8 +78,9 @@ export default function Home() {
               unoptimized
               style={{
                 maxWidth: "100%",
-                height: "auto"
-              }} />
+                height: "auto",
+              }}
+            />
             <h1 className="text-7xl sm:text-7xl md:text-8xl lg:text-9xl text-black dark:text-white line-clamp-1 font-bold">
               Hi
             </h1>
@@ -131,8 +132,9 @@ export default function Home() {
                     unoptimized
                     style={{
                       maxWidth: "100%",
-                      height: "auto"
-                    }} />
+                      height: "auto",
+                    }}
+                  />
                   <span className="text-3xl sm:text-3xl md:text-4xl lg:text-6xl dark:text-white">
                     I&apos;m a <span className="text-blue-500">Christian</span>
                   </span>
@@ -183,8 +185,9 @@ export default function Home() {
                     unoptimized
                     style={{
                       maxWidth: "100%",
-                      height: "auto"
-                    }} />
+                      height: "auto",
+                    }}
+                  />
                   <span className="text-3xl sm:text-3xl md:text-4xl lg:text-6xl dark:text-white">
                     I&apos;m a <span className="text-blue-500">Coder</span>
                   </span>
@@ -250,8 +253,9 @@ export default function Home() {
                       unoptimized
                       style={{
                         maxWidth: "100%",
-                        height: "auto"
-                      }} />
+                        height: "auto",
+                      }}
+                    />
                     Pinned Projects
                   </span>
                   <PinnedCarousel />
@@ -278,8 +282,9 @@ export default function Home() {
                     unoptimized
                     style={{
                       maxWidth: "100%",
-                      height: "auto"
-                    }} />
+                      height: "auto",
+                    }}
+                  />
                   <span className="text-3xl sm:text-3xl md:text-4xl lg:text-6xl dark:text-white">
                     I&apos;m a <span className="text-blue-500">Creator</span>
                   </span>
@@ -343,8 +348,9 @@ export default function Home() {
                 unoptimized
                 style={{
                   maxWidth: "100%",
-                  height: "auto"
-                }} />
+                  height: "auto",
+                }}
+              />
               <h1 className="text-center text-3xl sm:text-3xl md:text-4xl lg:text-6xl font-bold">
                 Where to <span className="text-blue-500">find me</span>
               </h1>
@@ -368,8 +374,9 @@ export default function Home() {
                 unoptimized
                 style={{
                   maxWidth: "100%",
-                  height: "auto"
-                }} />
+                  height: "auto",
+                }}
+              />
               <h1 className="text-center text-3xl sm:text-3xl md:text-4xl lg:text-6xl font-bold dark:text-white">
                 That&apos;s all &mdash;{" "}
                 <span className="text-blue-500">for now</span>
@@ -385,6 +392,6 @@ export default function Home() {
       </div>
       <ExploreMorePages currentPath="/" />
       <Footer />
-    </main>)
+    </main>
   );
 }

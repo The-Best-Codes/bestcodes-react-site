@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "motion/react";
 import NumberFlow from "@number-flow/react";
 import ReactConfetti from "react-confetti";
 import Link from "next/link";

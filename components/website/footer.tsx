@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { ArrowUp } from "lucide-react";
 
 export default function Footer() {

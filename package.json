@@ -1,6 +1,6 @@
 {
   "name": "bestcodes-react-site",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "private": true,
   "repository": {
     "type": "git",
@@ -38,9 +38,9 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.5.1",
-    "framer-motion": "^11.13.1",
     "js-levenshtein": "^1.1.6",
     "lucide-react": "^0.468.0",
+    "motion": "^11.13.1",
     "next": "^15.0.4",
     "node-fetch": "^3.3.2",
     "node-html-parser": "^6.1.13",
