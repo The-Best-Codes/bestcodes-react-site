@@ -48,7 +48,7 @@ export async function GET() {
     console.error("Error generating site data:", error);
     return NextResponse.json(
       { error: "Failed to generate site data" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

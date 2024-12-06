@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { ArrowUp } from "lucide-react";

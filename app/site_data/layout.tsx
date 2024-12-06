@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     "About BestCodes' Website - Version, Source Code, and More | BestCodes",
 
   description:
-    "Internal site statistics, information, and source code links for BestCodes Official Website."
+    "Internal site statistics, information, and source code links for BestCodes Official Website.",
 };
 
 export default function RootLayout({
@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
       </body>

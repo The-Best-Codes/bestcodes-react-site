@@ -1,8 +1,5 @@
-"use client";
-import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
 import Header from "@/components/website/header";
 import Footer from "@/components/website/footer";
@@ -18,6 +15,7 @@ import {
   Files,
   Hash,
 } from "lucide-react";
+import { headers } from "next/headers";
 
 interface SiteData {
   version: string;
@@ -36,41 +34,44 @@ interface SiteData {
   totalLineCount: number;
 }
 
-export default function SiteDataPage() {
-  const [siteData, setSiteData] = useState<SiteData | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+async function getSiteData(): Promise<SiteData> {
+  const headersList = await headers();
+  const host = headersList.get("host") || "localhost:3000";
+  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
+  const response = await fetch(`${protocol}://${host}/api/site_data`, {
+    cache: "no-store",
+  });
 
-  useEffect(() => {
-    fetch("/api/site_data")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setSiteData(data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching site data:", error);
-        setError("Failed to load site data. Please try again later.");
-        setIsLoading(false);
-      });
-  }, []);
-
-  if (isLoading) {
-    return <LoadingSkeleton />;
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(
+      `HTTP error! status: ${response.status}, body: ${errorText}`
+    );
   }
 
-  if (error) {
-    return <ErrorMessage message={error} />;
-  }
+  const data = await response.json();
+  return data;
+}
 
-  if (!siteData) {
+export default async function SiteDataPage() {
+  let siteData: SiteData;
+
+  try {
+    siteData = await getSiteData();
+  } catch (error) {
+    console.error("Page: Error in SiteDataPage:", error);
     return (
-      <ErrorMessage message="No data available. Please try again later." />
+      <main className="bg-slate-100 dark:bg-slate-900 min-h-screen w-full flex items-center justify-center">
+        <div className="text-center p-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+          <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
+            Error
+          </h2>
+          <p className="text-gray-600 dark:text-gray-300">
+            Failed to load site data. Please try again later.
+          </p>
+        </div>
+      </main>
     );
   }
 
@@ -190,51 +191,5 @@ function InfoCard({
         {children}
       </CardContent>
     </Card>
-  );
-}
-
-function LoadingSkeleton() {
-  return (
-    <main className="bg-slate-100 dark:bg-slate-900 min-h-screen w-full">
-      <Header />
-      <div className="container mx-auto p-4 min-h-screen">
-        <h1 className="text-4xl font-bold mb-8 text-center text-gray-800 dark:text-white">
-          Site Data
-        </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[...Array(4)].map((_, index) => (
-            <Card
-              key={index}
-              className="bg-white dark:bg-gray-800 dark:border-gray-700 shadow-lg"
-            >
-              <CardHeader>
-                <Skeleton className="h-6 w-[200px]" />
-              </CardHeader>
-              <CardContent>
-                <Skeleton className="h-4 w-[250px] mb-2" />
-                <Skeleton className="h-4 w-[200px] mb-2" />
-                <Skeleton className="h-4 w-[180px] mb-2" />
-                <Skeleton className="h-4 w-[220px]" />
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-      <Footer />
-    </main>
-  );
-}
-
-function ErrorMessage({ message }: { message: string }) {
-  return (
-    <main className="bg-slate-100 dark:bg-slate-900 min-h-screen w-full flex items-center justify-center">
-      <div className="text-center p-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
-        <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
-          Error
-        </h2>
-        <p className="text-gray-600 dark:text-gray-300">{message}</p>
-      </div>
-    </main>
   );
 }
