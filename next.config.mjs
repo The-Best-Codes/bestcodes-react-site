@@ -1,5 +1,5 @@
-import MillionLint from "@million/lint";
-/** @type {import('next').NextConfig} */
+/* import MillionLint from "@million/lint";
+ *//** @type {import('next').NextConfig} */
 const nextConfig = {
     typescript: {
         ignoreBuildErrors: true,
@@ -20,9 +20,16 @@ const nextConfig = {
         ],
         "formats": ["image/avif", "image/webp"],
     },
+    experimental: {
+        turbo: {
+            useSwcCss: true,
+            treeShaking: true,
+        }
+    }
 };
 
-export default MillionLint.next({
+/* export default MillionLint.next({
     enabled: true,
     rsc: true
-})(nextConfig);
+})(nextConfig); */
+export default nextConfig;

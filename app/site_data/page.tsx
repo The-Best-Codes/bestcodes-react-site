@@ -8,14 +8,14 @@ import {
   Package,
   Code,
   FileJson,
-  GitBranch,
   Server,
   FileCode,
   FileCog,
-  Files,
   Hash,
 } from "lucide-react";
 import { headers } from "next/headers";
+
+export const revalidate = 0;
 
 interface SiteData {
   version: string;
