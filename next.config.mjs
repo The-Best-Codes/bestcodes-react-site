@@ -22,7 +22,6 @@ const nextConfig = {
     },
     experimental: {
         turbo: {
-            useSwcCss: true,
             treeShaking: true,
         }
     }
