@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { ReactMatrixAnimation } from "@/components/website/matrix_component";
 
-const MatrixThemed = React.memo(() => {
+const MatrixThemed = () => {
   const [theme, setTheme] = useState(() =>
     (typeof window === "undefined" ? "dark" : undefined) ||
     window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -40,8 +40,6 @@ const MatrixThemed = React.memo(() => {
       backgroundColor={theme === "dark" ? "#000000" : "#ffffff"}
     />
   );
-});
-
-MatrixThemed.displayName = "MatrixThemed";
+};
 
 export default MatrixThemed;

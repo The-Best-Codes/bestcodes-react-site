@@ -52,7 +52,7 @@ export const metadata: Metadata = {
         height: 630,
       },
     ],
-  }
+  },
 };
 
 export default function RootLayout({
@@ -61,7 +61,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
       </body>
