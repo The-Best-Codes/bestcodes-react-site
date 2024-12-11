@@ -29,6 +29,8 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+    --color-iterations: #1f77b4;
+    --color-iterations-hover: #5aa7f0;
   }
 
   .dark {
@@ -56,6 +58,8 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    --color-iterations: #60a5fa;
+    --color-iterations-hover: #93c5fd;
   }
 }
 

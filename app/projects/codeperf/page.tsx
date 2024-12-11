@@ -2,7 +2,7 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import Editor from "react-simple-code-editor";
 import { highlight, languages } from "prismjs";
-import "prismjs/components/prism-javascript";
+//import "prismjs/components/prism-javascript";
 import "prismjs/themes/prism.css";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,13 +16,7 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Loader2, Play, Plus, Trash2, AlertCircle } from "lucide-react";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
-import {
-  ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart";
+import ReactECharts from "echarts-for-react";
 import { Progress } from "@/components/ui/progress";
 import Header from "@/components/website/header";
 
@@ -177,13 +171,6 @@ const factorial = (n) => {
       }
     }
   }, [globalCode, miniCodes]);
-
-  const chartConfig: ChartConfig = {
-    iterations: {
-      label: "It./s",
-      color: "hsl(var(--chart-1))",
-    },
-  };
 
   const getPerformanceComparison = (iterations: number) => {
     if (results.length === 0) return "N/A";
@@ -347,24 +334,56 @@ const factorial = (n) => {
                 </Alert>
               )}
               {results.length > 0 && (
-                <ChartContainer config={chartConfig}>
-                  <BarChart
-                    data={results}
-                    className="w-full h-full"
-                    width={800}
-                    height={500}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="id" />
-                    <YAxis />
-                    <ChartTooltip content={<ChartTooltipContent />} />
-                    <Bar
-                      dataKey="iterations"
-                      fill="var(--color-iterations)"
-                      radius={8}
-                    />
-                  </BarChart>
-                </ChartContainer>
+                <ReactECharts
+                  key={`chart-${results.length}`}
+                  option={{
+                    grid: {
+                      left: "3%",
+                      right: "4%",
+                      bottom: "3%",
+                      containLabel: true,
+                    },
+                    tooltip: {
+                      trigger: "axis",
+                      axisPointer: {
+                        type: "shadow",
+                      },
+                      formatter: (params: any) => {
+                        const dataPoint = params[0];
+                        return `Code ${dataPoint.name}<br/>Iterations/s: ${dataPoint.value}`;
+                      },
+                    },
+                    xAxis: {
+                      type: "category",
+                      data: results.map((r) => `Code ${r.id}`),
+                      axisTick: {
+                        alignWithLabel: true,
+                      },
+                    },
+                    yAxis: {
+                      type: "value",
+                      name: "Iterations/s",
+                    },
+                    series: [
+                      {
+                        name: "Iterations",
+                        type: "bar",
+                        data: results.map((r) => r.iterations),
+                        itemStyle: {
+                          color: "var(--color-iterations, #1f77b4)",
+                          borderRadius: [8, 8, 0, 0],
+                        },
+                        emphasis: {
+                          itemStyle: {
+                            color: "var(--color-iterations-hover, #5aa7f0)",
+                          },
+                        },
+                      },
+                    ],
+                  }}
+                  style={{ height: "100%", width: "100%" }}
+                  className="w-full h-full"
+                />
               )}
               {results.length === 0 && (
                 <div className="flex h-full items-center justify-center dark:text-gray-300">
