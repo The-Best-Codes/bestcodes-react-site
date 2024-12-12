@@ -49,7 +49,7 @@ export default function Home() {
     if (text) {
       text.innerHTML = text.textContent.replace(
         /\S/g,
-        "<span class='letter'>$&</span>"
+        "<span class='letter'>$&</span>",
       );
 
       const letters = text.querySelectorAll(".letter");

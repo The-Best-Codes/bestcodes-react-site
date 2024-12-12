@@ -1,6 +1,6 @@
 {
   "name": "bestcodes-react-site",
-  "version": "0.6.11",
+  "version": "0.7.0",
   "private": true,
   "repository": {
     "type": "git",
@@ -42,7 +42,7 @@
     "embla-carousel-react": "^8.5.1",
     "js-levenshtein": "^1.1.6",
     "lucide-react": "^0.468.0",
-    "motion": "^11.13.5",
+    "motion": "^11.14.1",
     "next": "^15.1.0",
     "node-fetch": "^3.3.2",
     "node-html-parser": "^6.1.13",
@@ -51,7 +51,7 @@
     "qrcode.react": "^4.2.0",
     "react": "^19.0.0",
     "react-confetti": "^6.1.0",
-    "react-day-picker": "^9.4.2",
+    "react-day-picker": "^9.4.3",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.0",
     "react-rough-notation": "^1.0.5",
