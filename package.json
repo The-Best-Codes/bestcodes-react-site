@@ -32,7 +32,7 @@
     "@radix-ui/react-tabs": "^1.1.1",
     "@tailwindcss/typography": "^0.5.15",
     "@types/react-dom": "^19.0.2",
-    "@types/three": "^0.170.0",
+    "@types/three": "^0.171.0",
     "axios": "^1.7.9",
     "best-bible": "^1.7.0",
     "class-variance-authority": "^0.7.1",
