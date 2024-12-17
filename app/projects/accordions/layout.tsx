@@ -13,7 +13,7 @@ const geistMono = localFont({
 });
 export const metadata: Metadata = {
   title: "FAQ Accordions Generator | BestCodes",
-  description: "Easily generate FAQ pages and save / export them."
+  description: "Easily generate FAQ pages and save / export them.",
 };
 
 export default function RootLayout({
@@ -22,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
       </body>

@@ -1,131 +1,110 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
-import {
-  DragDropContext,
-  Droppable,
-  Draggable,
-  DropResult,
-} from "@hello-pangea/dnd";
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogFooter,
-} from "@/components/ui/dialog";
-import {
-  GripVertical,
-  Trash2,
-  Download,
-  ArrowUpRightFromSquare,
-  Copy,
-  Eye,
-  EyeOff,
-  Save,
-  FileUp,
-  FilePlus,
-  FolderOpen,
-  Loader2,
-  Check,
-  ArrowLeft,
-} from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
+import { type AccordionItem, type Project } from "./lib/types/accordion";
+import { generateHTML } from "./lib/utils/html-generator";
+import { useProjects } from "./lib/hooks/useProjects";
+import { HeaderSection } from "./lib/components/accordion/HeaderSection";
+import { AccordionItemEditor } from "./lib/components/accordion/AccordionItemEditor";
+import { ActionButtons } from "./lib/components/accordion/ActionButtons";
+import { Preview } from "./lib/components/accordion/Preview";
+import { SaveStatus } from "./lib/components/accordion/SaveStatus";
+import { ProjectsList } from "./lib/components/accordion/ProjectsList";
+import { NewProjectOptions } from "./lib/components/accordion/NewProjectOptions";
 
-interface AccordionItem {
-  id: string;
-  question: string;
-  answer: string;
-}
+const LoadingSpinner = () => (
+  <div className="flex items-center justify-center h-64">
+    <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
+  </div>
+);
 
-interface Project {
-  id: string;
-  name: string;
-  header: string;
-  subheader: string;
-  description: string;
-  items: AccordionItem[];
-}
+const ErrorMessage = ({ message }: { message: string }) => (
+  <div className="p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg mt-4">
+    {message}
+  </div>
+);
 
 const AccordionEditor: React.FC = () => {
   const [showEditor, setShowEditor] = useState(false);
-  const [projects, setProjects] = useState<Project[]>([]);
   const [currentProject, setCurrentProject] = useState<Project | null>(null);
   const [header, setHeader] = useState("FAQ Title");
   const [subheader, setSubheader] = useState("Some rule");
   const [description, setDescription] = useState(
-    "Below are some frequently asked questions..."
+    "Below are some frequently asked questions...",
   );
   const [items, setItems] = useState<AccordionItem[]>([]);
-  const [itemToDelete, setItemToDelete] = useState<string | null>(null);
   const [showPreview, setShowPreview] = useState(true);
   const [htmlContent, setHtmlContent] = useState("");
   const [savingStatus, setSavingStatus] = useState<
     "saving" | "idle" | "success"
   >("idle");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const savedProjects = localStorage.getItem("accordionProjects");
-    if (savedProjects) {
-      setProjects(JSON.parse(savedProjects));
-    }
-  }, []);
+  const { projects, addProject, updateProject, deleteProject } = useProjects();
 
+  // Update HTML content when editor content changes
   useEffect(() => {
     if (showEditor) {
-      setHtmlContent(getHTML());
+      setHtmlContent(generateHTML(header, subheader, description, items));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [header, subheader, description, items, showEditor]);
 
+  // Auto-save functionality
   useEffect(() => {
     if (currentProject) {
       const autoSave = setInterval(() => {
-        saveProject();
-      }, 60000);
+        handleSave();
+      }, 60000); // Auto-save every minute
 
       return () => clearInterval(autoSave);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentProject, header, subheader, description, items]);
 
-  const addItem = () => {
-    const newItem: AccordionItem = {
-      id: `item-${Date.now()}`,
-      question: "New Question",
-      answer: "New Answer",
-    };
-    setItems([...items, newItem]);
+  const handleSave = () => {
+    setSavingStatus("saving");
+    if (currentProject) {
+      const updatedProject = {
+        ...currentProject,
+        name: header,
+        header,
+        subheader,
+        description,
+        items,
+      };
+      updateProject(updatedProject);
+      setSavingStatus("success");
+      setTimeout(() => setSavingStatus("idle"), 2000);
+    }
   };
 
-  const updateItem = (
-    id: string,
-    field: "question" | "answer",
-    value: string
-  ) => {
-    setItems(
-      items.map((item) => (item.id === id ? { ...item, [field]: value } : item))
-    );
-  };
-
-  const deleteItem = (id: string) => {
-    setItems(items.filter((item) => item.id !== id));
-    setItemToDelete(null);
-  };
-
-  const onDragEnd = (result: DropResult) => {
-    if (!result.destination) return;
-
-    const newItems = Array.from(items);
-    const [reorderedItem] = newItems.splice(result.source.index, 1);
-    newItems.splice(result.destination.index, 0, reorderedItem);
-
-    setItems(newItems);
+  const handleCreateNew = () => {
+    try {
+      const newProject: Project = {
+        id: `project-${Date.now()}`,
+        name: "New Project",
+        header: "FAQ Title",
+        subheader: "Some rule",
+        description: "Below are some frequently asked questions...",
+        items: [],
+      };
+      setIsLoading(true);
+      setError(null);
+      setCurrentProject(newProject);
+      setHeader(newProject.header);
+      setSubheader(newProject.subheader);
+      setDescription(newProject.description);
+      setItems(newProject.items);
+      addProject(newProject);
+      setShowEditor(true);
+    } catch {
+      setError("Failed to create new project");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -137,472 +116,227 @@ const AccordionEditor: React.FC = () => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(content, "text/html");
 
-        // Extract header
         const headerElement = doc.querySelector("h1");
-        if (headerElement) setHeader(headerElement.textContent || "");
-
-        // Extract subheader
         const subheaderElement = doc.querySelector("h3 strong span");
-        if (subheaderElement) setSubheader(subheaderElement.textContent || "");
-
-        // Extract description
         const descriptionElement = doc.querySelector(".jumbotron div span");
-        if (descriptionElement)
-          setDescription(descriptionElement.textContent || "");
-
-        // Extract accordion items
         const accordionItems = doc.querySelectorAll(".my-accordion .menu");
-        const newItems: AccordionItem[] = [];
-        accordionItems.forEach((item, index) => {
-          // Remove the +/- characters and trim whitespace
-          const question = item.textContent?.replace(/[+\-]/g, "").trim() || "";
-          const answerElement = item.nextElementSibling?.querySelector("div");
-          const answer = answerElement?.innerHTML?.trim() || "";
-          newItems.push({
+
+        const newItems: AccordionItem[] = Array.from(accordionItems).map(
+          (item, index) => ({
             id: `item-${index}`,
-            question,
-            answer,
-          });
-        });
-        setItems(newItems);
-        setCurrentProject({
+            question: item.textContent?.replace(/[+\-]/g, "").trim() || "",
+            answer:
+              item.nextElementSibling
+                ?.querySelector("div")
+                ?.innerHTML?.trim() || "",
+          }),
+        );
+
+        const newProject: Project = {
           id: `project-${Date.now()}`,
           name: file.name.replace(".html", ""),
-          header: headerElement?.textContent || "",
-          subheader: subheaderElement?.textContent || "",
-          description: descriptionElement?.textContent || "",
+          header: headerElement?.textContent || "FAQ Title",
+          subheader: subheaderElement?.textContent || "Some rule",
+          description:
+            descriptionElement?.textContent ||
+            "Below are some frequently asked questions...",
           items: newItems,
-        });
+        };
+
+        setCurrentProject(newProject);
+        setHeader(newProject.header);
+        setSubheader(newProject.subheader);
+        setDescription(newProject.description);
+        setItems(newProject.items);
+        addProject(newProject);
         setShowEditor(true);
       };
       reader.readAsText(file);
     }
   };
 
-  const getHTML = () => {
-    let html = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>${header}</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <style>
-    .my-accordion .menu { background-color: #d5d5d5; color: #444; cursor: pointer; padding: 12px; width: 100%; text-align: left; border: none; outline: none; margin-top: 4px; border-radius: 8px; font-size: 1.5em; }
-    .my-accordion .panel { background-color: #FFFFFF; color: #000000; overflow: hidden; }
-    .my-accordion .open { display: block; }
-    .my-accordion .close { display: none; }
-    .my-accordion .active { background-color: #1b90bb; color: #fff; }
-    .my-accordion .arrow { float: right; display: block; }
-    .my-accordion .darrow { display: none; }
-    .my-accordion .active .darrow { display: block; }
-    .my-accordion .active .rarrow { display: none; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="jumbotron">
-      <h1>${header}</h1>
-      <h3><strong><span style="color:#FF0000;">${subheader}</span></strong></h3>
-      <div><span style="font-size:18px;">${description}</span></div>
-      <br />
-      <div class="my-accordion">
-`;
+  const handleAddItem = () => {
+    const newItem: AccordionItem = {
+      id: `item-${Date.now()}`,
+      question: "New Question",
+      answer: "New Answer",
+    };
+    setItems([...items, newItem]);
 
-    items.forEach((item, index) => {
-      html += `
-        <button class="menu" data-editor-id="${item.id}">${item.question}<span class="arrow rarrow">+</span><span class="arrow darrow">-</span></button>
-        <div class="panel close">
-          <div style="padding:10px">${item.answer}</div>
-        </div>
-`;
-    });
-
-    html += `
-      </div>
-    </div>
-  </div>
-  <script>
-    !function(){for(var l=document.querySelectorAll(".my-accordion .menu"),e=0;e<l.length;e++)l[e].addEventListener("click",n);function n(){for(var e=document.querySelectorAll(".my-accordion .panel"),n=0;n<e.length;n++)e[n].className="panel close";if(-1==this.className.indexOf("active")){for(n=0;n<l.length;n++)l[n].className="menu";this.className="menu active",this.nextElementSibling.className="panel open"}else for(n=0;n<l.length;n++)l[n].className="menu"}}();
-  </script>
-</body>
-</html>
-`;
-
-    return html;
+    // Scroll to the new item
+    setTimeout(() => {
+      const element = document.getElementById(`item-${newItem.id}`);
+      element?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
   };
 
-  const downloadHTML = () => {
-    const html = getHTML();
-    const blob = new Blob([html], { type: "text/html" });
+  const handleUpdateItem = (
+    id: string,
+    field: "question" | "answer",
+    value: string,
+  ) => {
+    setItems(
+      items.map((item) =>
+        item.id === id ? { ...item, [field]: value } : item,
+      ),
+    );
+  };
+
+  const handleDeleteItem = (id: string) => {
+    setItems(items.filter((item) => item.id !== id));
+  };
+
+  const handleDragEnd = (result: any) => {
+    if (!result.destination) return;
+
+    const newItems = Array.from(items);
+    const [reorderedItem] = newItems.splice(result.source.index, 1);
+    newItems.splice(result.destination.index, 0, reorderedItem);
+
+    setItems(newItems);
+  };
+
+  const handleDownload = () => {
+    const blob = new Blob([htmlContent], { type: "text/html" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.download = `${header}.html`;
     link.href = url;
     link.click();
+    URL.revokeObjectURL(url);
   };
 
-  const openHTML = () => {
-    const html = getHTML();
-    const blob = new Blob([html], { type: "text/html" });
+  const handleOpenPreview = () => {
+    const blob = new Blob([htmlContent], { type: "text/html" });
     const url = URL.createObjectURL(blob);
     window.open(url);
+    URL.revokeObjectURL(url);
   };
 
-  const copyHTML = () => {
-    navigator.clipboard.writeText(htmlContent).then(() => {
+  const handleCopyHTML = async () => {
+    try {
+      await navigator.clipboard.writeText(htmlContent);
       alert("HTML copied to clipboard!");
-    });
-  };
-
-  const createNewProject = () => {
-    const newProject: Project = {
-      id: `project-${Date.now()}`,
-      name: "New Project",
-      header: "FAQ Title",
-      subheader: "Some rule",
-      description: "Below are some frequently asked questions...",
-      items: [],
-    };
-    setCurrentProject(newProject);
-    setHeader(newProject.header);
-    setSubheader(newProject.subheader);
-    setDescription(newProject.description);
-    setItems(newProject.items);
-    setShowEditor(true);
-  };
-
-  const openProject = (project: Project) => {
-    setCurrentProject(project);
-    setHeader(project.header);
-    setSubheader(project.subheader);
-    setDescription(project.description);
-    setItems(project.items);
-    setShowEditor(true);
-  };
-
-  const saveProject = () => {
-    setSavingStatus("saving");
-    if (currentProject) {
-      const updatedProject = {
-        ...currentProject,
-        name: header,
-        header,
-        subheader,
-        description,
-        items,
-      };
-      const updatedProjects = projects.map((p) =>
-        p.id === updatedProject.id ? updatedProject : p
-      );
-      if (!projects.find((p) => p.id === updatedProject.id)) {
-        updatedProjects.push(updatedProject);
-      }
-      setProjects(updatedProjects);
-      localStorage.setItem(
-        "accordionProjects",
-        JSON.stringify(updatedProjects)
-      );
-      setSavingStatus("success");
-      setTimeout(() => {
-        setSavingStatus("idle");
-      }, 1000);
-    }
-  };
-
-  const deleteProject = (projectId: string) => {
-    const updatedProjects = projects.filter((p) => p.id !== projectId);
-    setProjects(updatedProjects);
-    localStorage.setItem("accordionProjects", JSON.stringify(updatedProjects));
-    if (currentProject?.id === projectId) {
-      setCurrentProject(null);
-      setShowEditor(false);
+    } catch (err) {
+      alert("Failed to copy HTML to clipboard");
     }
   };
 
   if (!showEditor) {
     return (
-      <main className="min-h-screen w-full scroll-smooth dark:bg-slate-900 dark:text-slate-300">
-        <div className="container mx-auto p-4">
-          <h1 className="text-2xl font-bold mb-4">Accordion Editor</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Card className="dark:border-none dark:bg-slate-700 dark:text-white">
-              <CardHeader>
-                <CardTitle>Create New Project</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Button onClick={createNewProject}>
-                  <FilePlus className="w-4 h-4 mr-2" /> Create New
-                </Button>
-              </CardContent>
-            </Card>
-            <Card className="dark:border-none dark:bg-slate-700 dark:text-white">
-              <CardHeader>
-                <CardTitle>Import Existing File</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Input
-                  type="file"
-                  accept=".html"
-                  id="fileInput"
-                  onChange={handleFileUpload}
-                  className="hidden"
-                />
-                <Button
-                  onClick={() => document.getElementById("fileInput")?.click()}
-                >
-                  <FileUp className="w-4 h-4 mr-2" /> Upload File
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-          <Card className="mt-4 dark:border-none dark:bg-slate-700 dark:text-white">
-            <CardHeader>
-              <CardTitle>Recent Projects</CardTitle>
-            </CardHeader>
-            <CardContent>
-              {projects.length === 0 ? (
-                <p>No recent projects</p>
-              ) : (
-                <ul>
-                  {projects.map((project) => (
-                    <li
-                      key={project.id}
-                      className="flex items-center justify-between mb-2"
-                    >
-                      <span>{project.name}</span>
-                      <div>
-                        <Button
-                          onClick={() => openProject(project)}
-                          className="mr-2"
-                        >
-                          <FolderOpen className="w-4 h-4 mr-2" /> Open
-                        </Button>
-                        <Button
-                          onClick={() => deleteProject(project.id)}
-                          variant="destructive"
-                        >
-                          <Trash2 className="w-4 h-4 mr-2" /> Delete
-                        </Button>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </CardContent>
-          </Card>
+      <main className="min-h-screen flex justify-center w-full p-6 space-y-6 dark:bg-slate-900 dark:text-slate-300">
+        <div className="container mx-auto">
+          <h1 className="text-3xl font-bold mb-6">Accordion Editor</h1>
+          <NewProjectOptions
+            onCreateNew={handleCreateNew}
+            onFileUpload={handleFileUpload}
+          />
+          <ProjectsList
+            projects={projects}
+            onOpenProject={(project: Project) => {
+              setCurrentProject(project);
+              setHeader(project.header);
+              setSubheader(project.subheader);
+              setDescription(project.description);
+              setItems(project.items);
+              setShowEditor(true);
+            }}
+            onDeleteProject={deleteProject}
+          />
         </div>
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen w-full scroll-smooth dark:bg-slate-900 dark:text-slate-300">
-      <Button
-        className="absolute top-4 right-4 z-10 dark:bg-slate-300 dark:text-slate-900 dark:hover:bg-slate-400"
-        onClick={saveProject}
-      >
-        {savingStatus === "idle" ? (
-          <Save className="w-4 h-4 mr-2" />
-        ) : savingStatus === "saving" ? (
-          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-        ) : (
-          <Check className="w-4 h-4 mr-2" />
-        )}{" "}
-        Save
-      </Button>
+    <main className="min-h-screen w-full dark:bg-slate-900 dark:text-slate-300">
+      {isLoading && <LoadingSpinner />}
+      {error && <ErrorMessage message={error} />}
+      <div className="fixed top-4 left-4 z-10">
+        <Button
+          variant="outline"
+          onClick={() => setShowEditor(false)}
+          className="dark:bg-slate-800 dark:hover:bg-slate-700 dark:border-slate-800 dark:text-white dark:hover:text-white"
+        >
+          <ArrowLeft className="w-4 h-4 mr-2" /> Back
+        </Button>
+      </div>
 
-      <Button
-        className="absolute top-4 left-4 z-10 dark:bg-slate-300 dark:text-slate-900 dark:hover:bg-slate-400"
-        onClick={() => setShowEditor(false)}
-      >
-        <ArrowLeft className="w-4 h-4 mr-2" /> Back
-      </Button>
+      <div className="fixed top-4 right-4 z-10">
+        <SaveStatus status={savingStatus} onSave={handleSave} />
+      </div>
 
-      <div className="container mx-auto">
-        <div className="flex flex-col lg:flex-row">
+      <div className="container mx-auto pt-16 pb-8 px-4">
+        <div className="flex flex-col lg:flex-row gap-6">
           <div
             className={`w-full ${
               showPreview ? "lg:w-1/2" : "lg:w-full"
-            } lg:pr-4 max-h-screen overflow-auto p-4`}
+            } space-y-6`}
           >
-            {/* Editor Section */}
-            <Card className="mb-6 dark:border-none dark:bg-slate-700 dark:text-white">
-              <CardHeader>
-                <CardTitle>Page Header</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Label htmlFor="header">Main Header</Label>
-                <Input
-                  id="header"
-                  value={header}
-                  onChange={(e) => setHeader(e.target.value)}
-                  className="mb-2 dark:bg-slate-700 dark:text-white dark:border-slate-500"
-                />
-                <Label htmlFor="subheader">Subheader</Label>
-                <Input
-                  id="subheader"
-                  value={subheader}
-                  onChange={(e) => setSubheader(e.target.value)}
-                  className="mb-2 dark:bg-slate-700 dark:text-white dark:border-slate-500"
-                />
-                <Label htmlFor="description">Description</Label>
-                <Textarea
-                  id="description"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  className="mb-2 dark:bg-slate-700 dark:text-white dark:border-slate-500"
-                />
-              </CardContent>
-            </Card>
-            <div className="w-full max-h-full overflow-auto p-4">
-              <DragDropContext onDragEnd={onDragEnd}>
-                <Droppable droppableId="items">
-                  {(provided) => (
-                    <div {...provided.droppableProps} ref={provided.innerRef}>
-                      {items.map((item, index) => (
-                        <Draggable
-                          key={item.id}
-                          draggableId={item.id}
-                          index={index}
-                        >
-                          {(provided) => (
-                            <Card
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              className="mb-4 dark:bg-slate-700 dark:text-white dark:border-slate-500"
-                            >
-                              <CardContent className="pt-4">
-                                <div className="flex items-center mb-2">
-                                  <div
-                                    {...provided.dragHandleProps}
-                                    className="mr-2"
-                                  >
-                                    <GripVertical className="text-gray-400" />
-                                  </div>
-                                  <Input
-                                    value={item.question}
-                                    onChange={(e) =>
-                                      updateItem(
-                                        item.id,
-                                        "question",
-                                        e.target.value
-                                      )
-                                    }
-                                    className="flex-grow dark:bg-slate-700 dark:text-white dark:border-slate-500"
-                                    placeholder="Enter question"
-                                  />
-                                  <Dialog open={itemToDelete === item.id}>
-                                    <DialogTrigger asChild>
-                                      <Button
-                                        variant="ghost"
-                                        size="icon"
-                                        className="ml-2"
-                                        onClick={() => setItemToDelete(item.id)}
-                                      >
-                                        <Trash2 className="w-4 h-4 text-red-500" />
-                                      </Button>
-                                    </DialogTrigger>
-                                    <DialogContent>
-                                      <DialogHeader>
-                                        <DialogTitle>
-                                          Are you sure you want to delete this
-                                          question?
-                                        </DialogTitle>
-                                        <DialogDescription>
-                                          This action cannot be undone.
-                                        </DialogDescription>
-                                      </DialogHeader>
-                                      <DialogFooter>
-                                        <Button
-                                          variant="outline"
-                                          onClick={() => setItemToDelete(null)}
-                                        >
-                                          Cancel
-                                        </Button>
-                                        <Button
-                                          variant="destructive"
-                                          onClick={() => deleteItem(item.id)}
-                                        >
-                                          Delete
-                                        </Button>
-                                      </DialogFooter>
-                                    </DialogContent>
-                                  </Dialog>
-                                </div>
-                                <Textarea
-                                  value={item.answer}
-                                  onChange={(e) =>
-                                    updateItem(
-                                      item.id,
-                                      "answer",
-                                      e.target.value
-                                    )
-                                  }
-                                  className="mt-2 dark:bg-slate-700 dark:text-white dark:border-slate-500"
-                                  placeholder="Enter answer"
-                                />
-                              </CardContent>
-                            </Card>
-                          )}
-                        </Draggable>
-                      ))}
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
-              </DragDropContext>
-            </div>
-            <div className="flex flex-col flex-wrap">
-              <Button onClick={addItem} className="my-4 dark:bg-slate-600">
+            <HeaderSection
+              header={header}
+              subheader={subheader}
+              description={description}
+              onHeaderChange={setHeader}
+              onSubheaderChange={setSubheader}
+              onDescriptionChange={setDescription}
+            />
+
+            <DragDropContext onDragEnd={handleDragEnd}>
+              <Droppable droppableId="items">
+                {(provided) => (
+                  <div
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                    className="space-y-4"
+                  >
+                    {items.map((item, index) => (
+                      <Draggable
+                        key={item.id}
+                        draggableId={item.id}
+                        index={index}
+                      >
+                        {(provided) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                          >
+                            <AccordionItemEditor
+                              item={item}
+                              onUpdate={handleUpdateItem}
+                              onDelete={handleDeleteItem}
+                              dragHandleProps={provided.dragHandleProps}
+                            />
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
+
+            <div className="space-y-4">
+              <Button
+                onClick={handleAddItem}
+                className="w-full dark:bg-slate-700 dark:hover:bg-slate-600"
+              >
                 Add New Question
               </Button>
-              <div className="space-x-2 w-full flex flex-row items-center justify-start">
-                <Button className="dark:bg-slate-600" onClick={copyHTML}>
-                  <Copy className="w-4 h-4 mr-2" /> Copy
-                </Button>
-                <Button className="dark:bg-slate-600" onClick={downloadHTML}>
-                  <Download className="w-4 h-4 mr-2" /> Download
-                </Button>
-                <Button className="dark:bg-slate-600" onClick={openHTML}>
-                  <ArrowUpRightFromSquare className="w-4 h-4 mr-2" /> Open
-                </Button>
-                <Button
-                  className="dark:bg-slate-600"
-                  onClick={() => setShowPreview(!showPreview)}
-                >
-                  {showPreview ? (
-                    <>
-                      <EyeOff className="w-4 h-4 mr-2" /> Hide Preview
-                    </>
-                  ) : (
-                    <>
-                      <Eye className="w-4 h-4 mr-2" /> Show Preview
-                    </>
-                  )}
-                </Button>
-              </div>
+              <ActionButtons
+                onCopy={handleCopyHTML}
+                onDownload={handleDownload}
+                onOpen={handleOpenPreview}
+                showPreview={showPreview}
+                onPreviewToggle={() => setShowPreview(!showPreview)}
+              />
             </div>
           </div>
 
           {showPreview && (
-            <div className="w-full lg:w-1/2 lg:pl-4 mt-4 lg:mt-0 p-4">
-              {/* Preview Section */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>Preview</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <iframe
-                    className="w-full h-[calc(100vh-200px)]"
-                    srcDoc={htmlContent}
-                    title="Output"
-                  />
-                </CardContent>
-              </Card>
+            <div className="w-full lg:w-1/2">
+              <Preview htmlContent={htmlContent} />
             </div>
           )}
         </div>
