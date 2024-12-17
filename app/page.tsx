@@ -45,6 +45,7 @@ export default function Home() {
 	const textRef = useRef(null);
 
 	useEffect(() => {
+		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 		const text: any = textRef.current;
 		if (text) {
 			text.innerHTML = text.textContent.replace(
@@ -53,6 +54,7 @@ export default function Home() {
 			);
 
 			const letters = text.querySelectorAll(".letter");
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			letters.forEach((letter: any, index: any) => {
 				letter.style.animationDelay = `${index * 50}ms`;
 			});
