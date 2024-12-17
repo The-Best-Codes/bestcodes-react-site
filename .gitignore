@@ -48,3 +48,8 @@ next-env.d.ts
 .deprecated/**/*
 
 .million
+# Sentry Config File
+.env.sentry-build-plugin
+
+# Turborepo
+.turbo
