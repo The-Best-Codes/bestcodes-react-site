@@ -1,12 +1,6 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
-import Header from "@/components/website/header";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import axios from "axios";
-import { Turnstile } from "@marsidev/react-turnstile";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -17,10 +11,17 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent } from "@/components/ui/card";
 import ExploreMorePages from "@/components/website/explore_pages";
-import { Check } from "lucide-react";
 import Footer from "@/components/website/footer";
+import Header from "@/components/website/header";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Turnstile } from "@marsidev/react-turnstile";
+import { Info } from "lucide-react";
+import axios from "axios";
+import { Check } from "lucide-react";
+import { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -39,6 +40,13 @@ export default function Contact() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
   const turnstileRef = useRef<any>(null);
+
+  const nodeEnvDev = process.env.NODE_ENV === "development";
+  let pageHost;
+  if (typeof window !== "undefined") {
+    pageHost = window.location.hostname;
+  }
+  const isDevelopment = nodeEnvDev || pageHost === "localhost";
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -161,10 +169,22 @@ export default function Contact() {
                       </FormItem>
                     )}
                   />
-                  <Turnstile
-                    ref={turnstileRef}
-                    siteKey="0x4AAAAAAAfgP80mkF0iiKza"
-                  />
+                  {isDevelopment ? (
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-2 p-4 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+                      <Info className="h-full w-full max-w-20 max-h-20 sm:w-10 sm:h-10 text-blue-500" />
+                      <p className="text-sm text-blue-700 dark:text-blue-300 w-full">
+                        Cloudflare Turnstile is disabled in development mode. It
+                        will be enabled in production. If you submit this form
+                        in development, you will receive an error due to the
+                        cloudflare turnstile not being solved.
+                      </p>
+                    </div>
+                  ) : (
+                    <Turnstile
+                      ref={turnstileRef}
+                      siteKey="0x4AAAAAAAfgP80mkF0iiKza"
+                    />
+                  )}
                   <Button type="submit" disabled={isSubmitting}>
                     {isSubmitting ? "Submitting..." : "Submit"}
                   </Button>
