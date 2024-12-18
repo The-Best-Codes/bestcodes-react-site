@@ -301,7 +301,7 @@ export default function Home() {
                   I design stuff. I create stuff. I{" "}
                   <Link
                     prefetch={true}
-                    href="https://www.printables.com/@Best_codes"
+                    href="https://makerworld.com/en/@Best_codes"
                     className="text-blue-500"
                   >
                     print stuff.
@@ -318,9 +318,8 @@ export default function Home() {
                   but thankfully there are plenty of tutorials on YouTube.
                 </p>
                 <p>
-                  I usually just use TinkerCad now for simpler models, but
-                  I&apos;m learning a few others softwares as well (since
-                  TinkerCad is quite basic).
+                  I usually use OnShape (a CAD software), but I&apos;m learning
+                  a bit more mesh modeling and other softwares.
                 </p>
                 <p>
                   Here&apos;s a few of my &apos;Highlighed Models&apos; - and

@@ -162,12 +162,6 @@ const AccordionEditor: React.FC = () => {
       answer: "New Answer",
     };
     setItems([...items, newItem]);
-
-    // Scroll to the new item
-    setTimeout(() => {
-      const element = document.getElementById(`item-${newItem.id}`);
-      element?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
   };
 
   const handleUpdateItem = (
@@ -249,7 +243,7 @@ const AccordionEditor: React.FC = () => {
   }
 
   return (
-    <main className="min-h-screen w-full dark:bg-slate-900 dark:text-slate-300">
+    <main className="min-h-screen h-full w-full dark:bg-slate-900 dark:text-slate-300">
       {isLoading && <LoadingSpinner />}
       {error && <ErrorMessage message={error} />}
       <div className="fixed top-4 left-4 z-10">
@@ -290,6 +284,14 @@ const AccordionEditor: React.FC = () => {
                     ref={provided.innerRef}
                     className="space-y-4"
                   >
+                    {items.length === 0 && (
+                      <div className="text-center p-8 bg-slate-50 dark:bg-slate-800 rounded-lg border border-dashed border-slate-300 dark:border-slate-600">
+                        <p className="text-slate-500 dark:text-slate-400">
+                          No questions added yet. Click the "Add New Question"
+                          button below to get started.
+                        </p>
+                      </div>
+                    )}
                     {items.map((item, index) => (
                       <Draggable
                         key={item.id}
