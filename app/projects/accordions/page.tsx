@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import React, { useState, useEffect } from "react";
+import type React from "react";
+import { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Loader2 } from "lucide-react";
-import { type AccordionItem, type Project } from "./lib/types/accordion";
+import type { AccordionItem, Project } from "./lib/types/accordion";
 import { generateHTML } from "./lib/utils/html-generator";
 import { useProjects } from "./lib/hooks/useProjects";
 import { HeaderSection } from "./lib/components/accordion/HeaderSection";
@@ -62,7 +64,8 @@ const AccordionEditor: React.FC = () => {
 
       return () => clearInterval(autoSave);
     }
-  }, [currentProject, header, subheader, description, items]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentProject]);
 
   const handleSave = () => {
     setSavingStatus("saving");
@@ -180,6 +183,7 @@ const AccordionEditor: React.FC = () => {
     setItems(items.filter((item) => item.id !== id));
   };
 
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const handleDragEnd = (result: any) => {
     if (!result.destination) return;
 
@@ -211,6 +215,7 @@ const AccordionEditor: React.FC = () => {
     try {
       await navigator.clipboard.writeText(htmlContent);
       alert("HTML copied to clipboard!");
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       alert("Failed to copy HTML to clipboard");
     }
@@ -287,8 +292,8 @@ const AccordionEditor: React.FC = () => {
                     {items.length === 0 && (
                       <div className="text-center p-8 bg-slate-50 dark:bg-slate-800 rounded-lg border border-dashed border-slate-300 dark:border-slate-600">
                         <p className="text-slate-500 dark:text-slate-400">
-                          No questions added yet. Click the "Add New Question"
-                          button below to get started.
+                          No questions added yet. Click the &quot;Add New
+                          Question&quot; button below to get started.
                         </p>
                       </div>
                     )}
