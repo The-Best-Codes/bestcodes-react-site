@@ -1,7 +1,83 @@
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
-import getCoverImage from "@/utils/api/github/repo-cover-image";
+import getCoverImage from "../../../../utils/api/github/repo-cover-image";
 
+/**
+ * @swagger
+ * /api/github/repos-by-topic:
+ *   get:
+ *     summary: Get GitHub repositories by topic
+ *     description: Returns a list of repositories for a given GitHub username and topic
+ *     parameters:
+ *       - in: query
+ *         name: username
+ *         required: true
+ *         description: GitHub username
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: topic
+ *         required: true
+ *         description: GitHub topic
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: includeCover
+ *         required: false
+ *         description: Whether to include cover images (defaults to true)
+ *         schema:
+ *           type: boolean
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   name:
+ *                     type: string
+ *                     description: Repository name
+ *                   description:
+ *                     type: string
+ *                     description: Repository description
+ *                   url:
+ *                     type: string
+ *                     description: Repository URL
+ *                   updatedAt:
+ *                     type: string
+ *                     description: Last updated date
+ *                   topics:
+ *                     type: array
+ *                     description: List of topics
+ *                     items:
+ *                       type: string
+ *                   language:
+ *                     type: string
+ *                     description: Primary language
+ *                   stargazersCount:
+ *                     type: number
+ *                     description: Number of stars
+ *                   forksCount:
+ *                     type: number
+ *                     description: Number of forks
+ *                   coverImage:
+ *                     type: object
+ *                     description: Cover image
+ *                     properties:
+ *                       src:
+ *                         type: string
+ *                         description: Cover image URL
+ *                       alt:
+ *                         type: string
+ *                         description: Cover image alt text
+ *       400:
+ *         description: Both GitHub username and topic are required
+ *       500:
+ *         description: Failed to fetch repositories
+ */
 const PER_PAGE = 100; // Maximum allowed by GitHub API
 
 interface GitHubRepo {

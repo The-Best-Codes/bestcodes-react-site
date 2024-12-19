@@ -1,7 +1,74 @@
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
-import getCoverImage from "@/utils/api/github/repo-cover-image";
+import getCoverImage from "../../../../utils/api/github/repo-cover-image";
 
+/**
+ * @swagger
+ * /api/github/pinned-repos:
+ *   get:
+ *     summary: Get pinned GitHub repositories for a user
+ *     description: Returns a list of pinned repositories for a given GitHub username
+ *     parameters:
+ *       - in: query
+ *         name: username
+ *         required: false
+ *         description: GitHub username (defaults to The-Best-Codes)
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: includeCover
+ *         required: false
+ *         description: Whether to include cover images (defaults to true)
+ *         schema:
+ *           type: boolean
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   name:
+ *                     type: string
+ *                     description: Repository name
+ *                   description:
+ *                     type: string
+ *                     description: Repository description
+ *                   url:
+ *                     type: string
+ *                     description: Repository URL
+ *                   stargazerCount:
+ *                     type: number
+ *                     description: Number of stars
+ *                   forkCount:
+ *                     type: number
+ *                     description: Number of forks
+ *                   primaryLanguage:
+ *                     type: object
+ *                     description: Primary language
+ *                     properties:
+ *                       name:
+ *                         type: string
+ *                         description: Language name
+ *                       color:
+ *                         type: string
+ *                         description: Language color
+ *                   coverImage:
+ *                     type: object
+ *                     description: Cover image
+ *                     properties:
+ *                       src:
+ *                         type: string
+ *                         description: Cover image URL
+ *                       alt:
+ *                         type: string
+ *                         description: Cover image alt text
+ *       500:
+ *         description: Failed to fetch pinned repositories
+ */
 interface PinnedRepo {
   name: string;
   description: string | null;

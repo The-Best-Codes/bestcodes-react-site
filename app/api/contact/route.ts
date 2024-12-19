@@ -1,6 +1,45 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodeMailer from "nodemailer";
 
+/**
+ * @swagger
+ * /api/contact:
+ *   post:
+ *     summary: Submit contact form
+ *     description: Sends an email with the contact form data
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: Name of the sender
+ *               email:
+ *                 type: string
+ *                 description: Email of the sender
+ *               message:
+ *                 type: string
+ *                 description: Message from the sender
+ *               cloudflareToken:
+ *                 type: string
+ *                 description: Cloudflare Turnstile token
+ *             required:
+ *               - name
+ *               - email
+ *               - message
+ *     responses:
+ *       200:
+ *         description: Email sent successfully
+ *       400:
+ *         description: All fields are required
+ *       401:
+ *         description: Invalid captcha
+ *       500:
+ *         description: Failed to send email or internal server error
+ */
 export async function POST(request: NextRequest) {
   try {
     const { name, email, message, cloudflareToken } = await request.json();

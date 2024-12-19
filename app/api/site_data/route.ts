@@ -2,6 +2,74 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
+/**
+ * @swagger
+ * /api/site_data:
+ *   get:
+ *     summary: Get site data
+ *     description: Returns site data such as version, dependency counts, and other project information.
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 version:
+ *                   type: string
+ *                   description: Project version
+ *                 dependencyCount:
+ *                   type: number
+ *                   description: Number of dependencies
+ *                 devDependencyCount:
+ *                   type: number
+ *                   description: Number of dev dependencies
+ *                 totalDependencies:
+ *                   type: number
+ *                   description: Total number of dependencies
+ *                 nodeVersion:
+ *                   type: string
+ *                   description: Node.js version
+ *                 nextVersion:
+ *                   type: string
+ *                   description: Next.js version
+ *                 projectName:
+ *                   type: string
+ *                   description: Project name
+ *                 author:
+ *                   type: string
+ *                   description: Project author
+ *                 license:
+ *                   type: string
+ *                   description: Project license
+ *                 scriptCount:
+ *                   type: number
+ *                   description: Number of scripts
+ *                 repoUrl:
+ *                   type: string
+ *                   description: Repository URL
+ *                 mainFile:
+ *                   type: string
+ *                   description: Main file
+ *                 isTypeScript:
+ *                   type: boolean
+ *                   description: Whether the project uses TypeScript
+ *                 hasESLint:
+ *                   type: boolean
+ *                   description: Whether the project uses ESLint
+ *                 hasPrettier:
+ *                   type: boolean
+ *                   description: Whether the project uses Prettier
+ *                 totalFileCount:
+ *                   type: number
+ *                   description: Total number of files
+ *                 totalLineCount:
+ *                   type: number
+ *                   description: Total number of lines
+ *       500:
+ *         description: Failed to generate site data
+ */
 export async function GET() {
   try {
     // Read package.json using file descriptor
@@ -15,8 +83,8 @@ export async function GET() {
       } finally {
         fs.closeSync(fd);
       }
-    } catch (error: any) {
-      throw new Error(`Failed to read package.json: ${error.message}`);
+    } catch (error: unknown) {
+      throw new Error(`Failed to read package.json: ${error instanceof Error ? error.message : String(error)}`);
     }
 
     // Calculate statistics

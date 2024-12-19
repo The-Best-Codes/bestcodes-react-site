@@ -1,6 +1,54 @@
 import { NextRequest, NextResponse } from "next/server";
 import fetch from "node-fetch";
 
+/**
+ * @swagger
+ * /api/printables/highlighted-projects:
+ *   get:
+ *     summary: Get highlighted projects from Printables
+ *     description: Returns a list of highlighted projects for a given Printables user ID
+ *     parameters:
+ *       - in: query
+ *         name: user_id
+ *         required: true
+ *         description: Printables user ID
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   name:
+ *                     type: string
+ *                     description: Project name
+ *                   url:
+ *                     type: string
+ *                     description: Project URL
+ *                   coverImage:
+ *                     type: object
+ *                     description: Cover image
+ *                     properties:
+ *                       src:
+ *                         type: string
+ *                         description: Cover image URL
+ *                       alt:
+ *                         type: string
+ *                         description: Cover image alt text
+ *                   description:
+ *                     type: string
+ *                     description: Project description
+ *                   updatedAt:
+ *                     type: string
+ *                     description: Last updated date
+ *       500:
+ *         description: Failed to fetch highlighted projects
+ */
 interface PrintablesResponse {
   data: {
     user: {

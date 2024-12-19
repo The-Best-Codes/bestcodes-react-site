@@ -2,6 +2,60 @@ import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 import { parse } from "node-html-parser";
 
+/**
+ * @swagger
+ * /api/github/repo-images:
+ *   get:
+ *     summary: Get images from a GitHub repository's README
+ *     description: Returns a list of images found in a GitHub repository's README file, including a cover image if specified.
+ *     parameters:
+ *       - in: query
+ *         name: username
+ *         required: true
+ *         description: GitHub username
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: repo
+ *         required: true
+ *         description: GitHub repository name
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 coverImage:
+ *                   type: object
+ *                   description: Cover image
+ *                   properties:
+ *                     src:
+ *                       type: string
+ *                       description: Cover image URL
+ *                     alt:
+ *                       type: string
+ *                       description: Cover image alt text
+ *                 allImages:
+ *                   type: array
+ *                   description: All images in the README
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       src:
+ *                         type: string
+ *                         description: Image URL
+ *                       alt:
+ *                         type: string
+ *                         description: Image alt text
+ *       400:
+ *         description: Both GitHub username and repository name are required
+ *       500:
+ *         description: Failed to fetch repository images
+ */
 interface ImageInfo {
   src: string;
   alt: string | null;

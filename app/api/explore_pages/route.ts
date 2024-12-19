@@ -1,8 +1,18 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
-import PagePathNames from "@/public/assets/explore_pages/names.json";
+import PagePathNames from "../../../public/assets/explore_pages/names.json";
 
+/**
+ * @swagger
+ * /api/explore_pages:
+ *   get:
+ *     summary: Get all explore pages
+ *     description: Returns a list of all explore pages
+ *     responses:
+ *       200:
+ *         description: Successful response
+ */
 export const revalidate = 0;
 
 export async function GET() {
@@ -46,5 +56,5 @@ function getPageName(path: string): string {
   const defaultName =
     parts.length > 0 ? parts[parts.length - 1].replace(/-/g, " ") : "Home";
 
-  return PagePathNames.find((page) => page.path === path)?.name || defaultName;
+  return PagePathNames.find((page: { path: string, name: string }) => page.path === path)?.name || defaultName;
 }
