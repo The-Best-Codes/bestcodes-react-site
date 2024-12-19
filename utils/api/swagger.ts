@@ -8,6 +8,12 @@ const options = {
       version: "1.0.0",
       description: "API documentation for my Next.js website",
     },
+    servers: [
+      {
+        url: "https://bestcodes.dev",
+        description: "Production server",
+      },
+    ],
   },
   apis: ["./app/api/**/*.ts"],
 };
