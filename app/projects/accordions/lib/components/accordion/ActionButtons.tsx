@@ -25,24 +25,27 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
   <div className="flex flex-wrap gap-2">
     <Button
       variant="secondary"
-      className="dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-slate-100 dark:border-slate-600"
+      className="dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-slate-100 dark:border-slate-600 hidden sm:flex"
       onClick={onCopy}
     >
-      <Copy className="w-4 h-4 mr-2" /> Copy HTML
+      <Copy className="w-4 h-4 mr-0 sm:mr-2" />{" "}
+      <span className="sr-only sm:not-sr-only">Copy HTML</span>
     </Button>
     <Button
       variant="secondary"
       className="dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-slate-100 dark:border-slate-600"
       onClick={onDownload}
     >
-      <Download className="w-4 h-4 mr-2" /> Download
+      <Download className="w-4 h-4 mr-0 sm:mr-2" />{" "}
+      <span className="sr-only sm:not-sr-only">Download</span>
     </Button>
     <Button
       variant="secondary"
-      className="dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-slate-100 dark:border-slate-600"
+      className="dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-slate-100 dark:border-slate-600 hidden sm:flex"
       onClick={onOpen}
     >
-      <ArrowUpRightFromSquare className="w-4 h-4 mr-2" /> Open
+      <ArrowUpRightFromSquare className="w-4 h-4 mr-0 sm:mr-2" />{" "}
+      <span className="sr-only sm:not-sr-only">Open</span>
     </Button>
     <Button
       variant="secondary"
@@ -51,11 +54,13 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
     >
       {showPreview ? (
         <>
-          <EyeOff className="w-4 h-4 mr-2" /> Hide Preview
+          <EyeOff className="w-4 h-4 mr-0 sm:mr-2" />{" "}
+          <span className="sr-only sm:not-sr-only">Hide Preview</span>
         </>
       ) : (
         <>
-          <Eye className="w-4 h-4 mr-2" /> Show Preview
+          <Eye className="w-4 h-4 mr-0 sm:mr-2" />{" "}
+          <span className="sr-only sm:not-sr-only">Show Preview</span>
         </>
       )}
     </Button>

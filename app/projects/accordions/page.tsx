@@ -35,7 +35,7 @@ const AccordionEditor: React.FC = () => {
   const [header, setHeader] = useState("FAQ Title");
   const [subheader, setSubheader] = useState("Some rule");
   const [description, setDescription] = useState(
-    "Below are some frequently asked questions..."
+    "Below are some frequently asked questions...",
   );
   const [items, setItems] = useState<AccordionItem[]>([]);
   const [showPreview, setShowPreview] = useState(true);
@@ -110,6 +110,24 @@ const AccordionEditor: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    if (currentProject) {
+      setHeader(currentProject.header);
+      setSubheader(currentProject.subheader);
+      setDescription(currentProject.description);
+      setItems(currentProject.items);
+      setHtmlContent(
+        generateHTML(
+          currentProject.header,
+          currentProject.subheader,
+          currentProject.description,
+          currentProject.items,
+        ),
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentProject]);
+
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -132,7 +150,7 @@ const AccordionEditor: React.FC = () => {
               item.nextElementSibling
                 ?.querySelector("div")
                 ?.innerHTML?.trim() || "",
-          })
+          }),
         );
 
         const newProject: Project = {
@@ -170,10 +188,12 @@ const AccordionEditor: React.FC = () => {
   const handleUpdateItem = (
     id: string,
     field: "question" | "answer",
-    value: string
+    value: string,
   ) => {
     setItems(
-      items.map((item) => (item.id === id ? { ...item, [field]: value } : item))
+      items.map((item) =>
+        item.id === id ? { ...item, [field]: value } : item,
+      ),
     );
   };
 
@@ -253,89 +273,89 @@ const AccordionEditor: React.FC = () => {
         <Button
           variant="outline"
           onClick={() => setShowEditor(false)}
-          className="dark:bg-slate-800 dark:hover:bg-slate-700 dark:border-slate-800 dark:text-white dark:hover:text-white"
+          className="dark:bg-slate-800 dark:hover:bg-slate-700 dark:border-slate-800 dark:text-white dark:hover:text-white gap-2"
         >
-          <ArrowLeft className="w-4 h-4 mr-2" /> Back
+          <ArrowLeft className="w-4 h-4" />
+          <span className="sr-only sm:not-sr-only">Back</span>
         </Button>
       </div>
-
-      <div className="fixed top-4 right-4 z-10">
+      <div className="fixed top-4 right-4 z-10 flex gap-2">
+        <ActionButtons
+          onCopy={handleCopyHTML}
+          onDownload={handleDownload}
+          onOpen={handleOpenPreview}
+          showPreview={showPreview}
+          onPreviewToggle={() => setShowPreview(!showPreview)}
+        />
         <SaveStatus status={savingStatus} onSave={handleSave} />
       </div>
 
-      <div className="container mx-auto pt-16 pb-8 px-4">
-        <div className="flex flex-col lg:flex-row gap-6">
+      <div className="container mx-auto pt-16 pb-8 px-4 flex flex-col h-full">
+        <div className="flex flex-col lg:flex-row gap-6 h-full">
           <div
             className={`w-full ${
               showPreview ? "lg:w-1/2" : "lg:w-full"
-            } space-y-6`}
+            } flex flex-col h-full`}
           >
-            <HeaderSection
-              header={header}
-              subheader={subheader}
-              description={description}
-              onHeaderChange={setHeader}
-              onSubheaderChange={setSubheader}
-              onDescriptionChange={setDescription}
-            />
-
-            <DragDropContext onDragEnd={handleDragEnd}>
-              <Droppable droppableId="items">
-                {(provided) => (
-                  <div
-                    {...provided.droppableProps}
-                    ref={provided.innerRef}
-                    className="space-y-4"
-                  >
-                    {items.length === 0 && (
-                      <div className="text-center p-8 bg-slate-50 dark:bg-slate-800 rounded-lg border border-dashed border-slate-300 dark:border-slate-600">
-                        <p className="text-slate-500 dark:text-slate-400">
-                          No questions added yet. Click the &quot;Add New
-                          Question&quot; button below to get started.
-                        </p>
-                      </div>
-                    )}
-                    {items.map((item, index) => (
-                      <Draggable
-                        key={item.id}
-                        draggableId={item.id}
-                        index={index}
-                      >
-                        {(provided) => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                          >
-                            <AccordionItemEditor
-                              item={item}
-                              onUpdate={handleUpdateItem}
-                              onDelete={handleDeleteItem}
-                              dragHandleProps={provided.dragHandleProps}
-                            />
-                          </div>
-                        )}
-                      </Draggable>
-                    ))}
-                    {provided.placeholder}
-                  </div>
-                )}
-              </Droppable>
-            </DragDropContext>
-
-            <div className="space-y-4">
+            <div className="space-y-6 flex-grow mb-2">
+              <HeaderSection
+                header={header}
+                subheader={subheader}
+                description={description}
+                onHeaderChange={setHeader}
+                onSubheaderChange={setSubheader}
+                onDescriptionChange={setDescription}
+              />
+              <DragDropContext onDragEnd={handleDragEnd}>
+                <Droppable droppableId="items">
+                  {(provided) => (
+                    <div
+                      {...provided.droppableProps}
+                      ref={provided.innerRef}
+                      className="space-y-4 overflow-y-auto min-h-40 max-h-[calc(100vh-36rem)]" // Add scroll and max-h
+                    >
+                      {items.length === 0 && (
+                        <div className="text-center p-8 bg-slate-50 dark:bg-slate-800 rounded-lg border border-dashed border-slate-300 dark:border-slate-600">
+                          <p className="text-slate-500 dark:text-slate-400">
+                            No questions added yet. Click the &quot;Add New
+                            Question&quot; button below to get started.
+                          </p>
+                        </div>
+                      )}
+                      {items.map((item, index) => (
+                        <Draggable
+                          key={item.id}
+                          draggableId={item.id}
+                          index={index}
+                        >
+                          {(provided) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                            >
+                              <AccordionItemEditor
+                                item={item}
+                                onUpdate={handleUpdateItem}
+                                onDelete={handleDeleteItem}
+                                dragHandleProps={provided.dragHandleProps}
+                              />
+                            </div>
+                          )}
+                        </Draggable>
+                      ))}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </DragDropContext>
+            </div>
+            <div className="space-y-4 sticky bottom-2">
               <Button
                 onClick={handleAddItem}
                 className="w-full dark:bg-slate-700 dark:hover:bg-slate-600"
               >
                 Add New Question
               </Button>
-              <ActionButtons
-                onCopy={handleCopyHTML}
-                onDownload={handleDownload}
-                onOpen={handleOpenPreview}
-                showPreview={showPreview}
-                onPreviewToggle={() => setShowPreview(!showPreview)}
-              />
             </div>
           </div>
 
