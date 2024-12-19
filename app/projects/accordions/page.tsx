@@ -35,7 +35,7 @@ const AccordionEditor: React.FC = () => {
   const [header, setHeader] = useState("FAQ Title");
   const [subheader, setSubheader] = useState("Some rule");
   const [description, setDescription] = useState(
-    "Below are some frequently asked questions...",
+    "Below are some frequently asked questions..."
   );
   const [items, setItems] = useState<AccordionItem[]>([]);
   const [showPreview, setShowPreview] = useState(true);
@@ -132,7 +132,7 @@ const AccordionEditor: React.FC = () => {
               item.nextElementSibling
                 ?.querySelector("div")
                 ?.innerHTML?.trim() || "",
-          }),
+          })
         );
 
         const newProject: Project = {
@@ -170,12 +170,10 @@ const AccordionEditor: React.FC = () => {
   const handleUpdateItem = (
     id: string,
     field: "question" | "answer",
-    value: string,
+    value: string
   ) => {
     setItems(
-      items.map((item) =>
-        item.id === id ? { ...item, [field]: value } : item,
-      ),
+      items.map((item) => (item.id === id ? { ...item, [field]: value } : item))
     );
   };
 
