@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import fetch from "node-fetch";
 
 /**
  * @swagger
@@ -49,21 +48,23 @@ import fetch from "node-fetch";
  *       500:
  *         description: Failed to fetch highlighted projects
  */
+
 interface PrintablesResponse {
-  data: {
-    user: {
-      highlightedModels: {
-        models: Array<{
-          name: string;
-          id: string;
-          image: {
-            filePath: string;
+  data?: {
+    user?: {
+      highlightedModels?: {
+        models?: Array<{
+          name?: string;
+          id?: string;
+          image?: {
+            filePath?: string;
           };
-          datePublished: string;
+          datePublished?: string;
         }>;
       };
     };
   };
+  errors?: Array<{ message: string }>;
 }
 
 interface ProjectResponse {
@@ -78,41 +79,90 @@ interface ProjectResponse {
 }
 
 export async function GET(request: NextRequest) {
-  const searchParams = request.nextUrl.searchParams;
-  const userID = searchParams.get("user_id");
+  try {
+    // Validate user_id parameter
+    const searchParams = request.nextUrl.searchParams;
+    const userID = searchParams.get("user_id");
 
-  const url = `https://api.printables.com/graphql/`;
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      operationName: "ProfileHighlightedModels",
-      variables: {
-        userId: userID,
+    if (!userID) {
+      return NextResponse.json(
+        { error: "Missing required parameter: user_id" },
+        { status: 400 },
+      );
+    }
+
+    // Make API request
+    const url = "https://api.printables.com/graphql/";
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-      query:
-        "query ProfileHighlightedModels($userId: ID!) {\n  user(id: $userId) {\n    id\n    highlightedModels {\n      models {\n        ...PrintListFragment\n        __typename\n      }\n      featured\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment PrintListFragment on PrintType {\n  id\n  name\n  slug\n  ratingAvg\n  likesCount\n  liked\n  datePublished\n  dateFeatured\n  firstPublish\n  downloadCount\n  category {\n    id\n    path {\n      id\n      name\n      __typename\n    }\n    __typename\n  }\n  modified\n  image {\n    ...ImageSimpleFragment\n    __typename\n  }\n  nsfw\n  premium\n  price\n  user {\n    ...AvatarUserFragment\n    __typename\n  }\n  ...LatestCompetitionResult\n  __typename\n}\n\nfragment AvatarUserFragment on UserType {\n  id\n  publicUsername\n  avatarFilePath\n  handle\n  company\n  verified\n  badgesProfileLevel {\n    profileLevel\n    __typename\n  }\n  __typename\n}\n\nfragment LatestCompetitionResult on PrintType {\n  latestCompetitionResult {\n    placement\n    competitionId\n    __typename\n  }\n  __typename\n}\n\nfragment ImageSimpleFragment on PrintImageType {\n  id\n  filePath\n  rotation\n  __typename\n}",
-    }),
-  });
+      body: JSON.stringify({
+        operationName: "ProfileHighlightedModels",
+        variables: {
+          userId: userID,
+        },
+        query:
+          "query ProfileHighlightedModels($userId: ID!) {\n  user(id: $userId) {\n    id\n    highlightedModels {\n      models {\n        ...PrintListFragment\n        __typename\n      }\n      featured\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment PrintListFragment on PrintType {\n  id\n  name\n  slug\n  ratingAvg\n  likesCount\n  liked\n  datePublished\n  dateFeatured\n  firstPublish\n  downloadCount\n  category {\n    id\n    path {\n      id\n      name\n      __typename\n    }\n    __typename\n  }\n  modified\n  image {\n    ...ImageSimpleFragment\n    __typename\n  }\n  nsfw\n  premium\n  price\n  user {\n    ...AvatarUserFragment\n    __typename\n  }\n  ...LatestCompetitionResult\n  __typename\n}\n\nfragment AvatarUserFragment on UserType {\n  id\n  publicUsername\n  avatarFilePath\n  handle\n  company\n  verified\n  badgesProfileLevel {\n    profileLevel\n    __typename\n  }\n  __typename\n}\n\nfragment LatestCompetitionResult on PrintType {\n  latestCompetitionResult {\n    placement\n    competitionId\n    __typename\n  }\n  __typename\n}\n\nfragment ImageSimpleFragment on PrintImageType {\n  id\n  filePath\n  rotation\n  __typename\n}",
+      }),
+    });
 
-  const data = (await response.json()) as PrintablesResponse;
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
-  const resData = data.data.user.highlightedModels.models;
+    const data = (await response.json()) as PrintablesResponse;
 
-  const resDataMap: ProjectResponse[] = resData.map((project) => {
-    return {
-      name: project.name,
-      url: `https://www.printables.com/model/${project.id}`,
-      coverImage: {
-        src: `https://media.printables.com/${project.image.filePath}`,
-        alt: project.name,
-      },
-      description: project.name,
-      updatedAt: project.datePublished,
-    };
-  });
+    // Check for GraphQL errors
+    if (data.errors) {
+      return NextResponse.json(
+        { error: data.errors[0].message },
+        { status: 400 },
+      );
+    }
 
-  return NextResponse.json(resDataMap);
+    // Validate response data structure
+    if (!data.data?.user?.highlightedModels?.models) {
+      return NextResponse.json(
+        { error: "No highlighted projects found" },
+        { status: 404 },
+      );
+    }
+
+    const resData = data.data.user.highlightedModels.models;
+
+    const resDataMap: ProjectResponse[] = resData
+      .filter((project) => {
+        // Filter out invalid projects
+        return project.name && project.id && project.image?.filePath;
+      })
+      .map((project) => {
+        return {
+          name: project.name!,
+          url: `https://www.printables.com/model/${project.id}`,
+          coverImage: {
+            src: `https://media.printables.com/${project.image!.filePath}`,
+            alt: project.name!,
+          },
+          description: project.name!,
+          updatedAt: project.datePublished || new Date().toISOString(),
+        };
+      });
+
+    if (resDataMap.length === 0) {
+      return NextResponse.json(
+        { error: "No valid highlighted projects found" },
+        { status: 404 },
+      );
+    }
+
+    return NextResponse.json(resDataMap);
+  } catch (error) {
+    console.error("Error fetching highlighted projects:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch highlighted projects" },
+      { status: 500 },
+    );
+  }
 }
