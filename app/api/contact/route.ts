@@ -51,39 +51,39 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (cloudflareToken) {
-      try {
-        const response = await fetch(
-          "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              secret: process.env.CLOUDFLARE_TURNSTILE_SECRET_KEY,
-              response: cloudflareToken,
-            }),
+    if (!cloudflareToken) {
+      return NextResponse.json(
+        { error: "Please verify that you are human." },
+        { status: 401 },
+      );
+    }
+
+    try {
+      const response = await fetch(
+        "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-        );
+          body: JSON.stringify({
+            secret: process.env.CLOUDFLARE_TURNSTILE_SECRET_KEY,
+            response: cloudflareToken,
+          }),
+        },
+      );
 
-        const data = await response.json();
+      const data = await response.json();
 
-        if (!data.success) {
-          return NextResponse.json(
-            { error: "Invalid captcha" },
-            { status: 401 },
-          );
-        }
-      } catch (error) {
-        console.error(error);
-        return NextResponse.json(
-          { error: "Failed to verify captcha" },
-          { status: 500 },
-        );
+      if (!data.success) {
+        return NextResponse.json({ error: "Invalid captcha" }, { status: 401 });
       }
-    } else {
-      return NextResponse.json({ error: "Invalid captcha" }, { status: 401 });
+    } catch (error) {
+      console.error("Turnstile verification failed:", error);
+      return NextResponse.json(
+        { error: "Failed to verify captcha." },
+        { status: 500 },
+      );
     }
 
     try {
@@ -108,16 +108,16 @@ export async function POST(request: NextRequest) {
 
       return NextResponse.json({ success: true }, { status: 200 });
     } catch (error) {
-      console.error(error);
+      console.error("Email sending failed:", error);
       return NextResponse.json(
-        { error: "Failed to send email" },
+        { error: "Failed to send email. Please try again later." },
         { status: 500 },
       );
     }
   } catch (error) {
-    console.error(error);
+    console.error("Unexpected error during submission:", error);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Internal server error. Please try again later." },
       { status: 500 },
     );
   }

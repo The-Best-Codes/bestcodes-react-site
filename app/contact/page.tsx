@@ -22,6 +22,7 @@ import { Check } from "lucide-react";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useToast } from "@/hooks/use-toast";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -38,8 +39,9 @@ const formSchema = z.object({
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState<string | null>(null); // Detailed error messages
   const turnstileRef = useRef<any>(null);
+  const { toast } = useToast();
 
   const nodeEnvDev = process.env.NODE_ENV === "development";
   let pageHost;
@@ -59,11 +61,12 @@ export default function Contact() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
-    setIsError(false);
+    setError(null); // Clear any previous error
+    setIsSuccess(false); // Ensure the success message is hidden
 
     if (!turnstileRef.current) {
+      setError("Please verify that you are human.");
       setIsSubmitting(false);
-      setIsError(true);
       return;
     }
 
@@ -78,13 +81,23 @@ export default function Contact() {
         setIsSuccess(true);
         form.reset();
         turnstileRef.current.reset();
+        toast({
+          variant: "default",
+          title: "Message sent successfully!",
+          description: "I will get back to you as soon as possible.",
+        });
       } else {
-        setIsError(true);
+        setError("Failed to send message. Please try again.");
       }
-    } catch (error) {
-      setIsError(true);
+    } catch (error: any) {
+      if (error.response && error.response.data && error.response.data.error) {
+        setError(error.response.data.error); // Get error from the backend
+      } else if (error.message === "Network Error") {
+        setError("Failed to connect to server. Please try again.");
+      } else {
+        setError("An unexpected error occurred. Please try again later.");
+      }
     }
-
     setIsSubmitting(false);
   }
 
@@ -188,11 +201,7 @@ export default function Contact() {
                   <Button type="submit" disabled={isSubmitting}>
                     {isSubmitting ? "Submitting..." : "Submit"}
                   </Button>
-                  {isError && (
-                    <p className="text-red-500 mt-2">
-                      An error occurred. Please try again.
-                    </p>
-                  )}
+                  {error && <p className="text-red-500 mt-2">{error}</p>}
                 </form>
               </Form>
             )}
