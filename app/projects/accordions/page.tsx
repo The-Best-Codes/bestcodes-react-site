@@ -266,7 +266,7 @@ const AccordionEditor: React.FC = () => {
   }
 
   return (
-    <main className="h-screen overflow-hidden w-full dark:bg-slate-900 dark:text-slate-300">
+    <main className="h-screen overflow-auto sm:overflow-hidden w-full dark:bg-slate-900 dark:text-slate-300">
       {isLoading && <LoadingSpinner />}
       {error && <ErrorMessage message={error} />}
       <div className="fixed top-4 left-4 z-10">
