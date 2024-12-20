@@ -17,42 +17,12 @@ export const generateHTML = (
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <style>
-    .my-accordion .menu {
-      background-color: #eaeaea;
-      color: #333;
-      cursor: pointer;
-      padding: 16px;
-      width: 100%;
-      text-align: left;
-      border: none;
-      outline: none;
-      margin-top: 8px;
-      border-radius: 8px;
-      font-size: 1.2em;
-      transition: all 0.3s ease;
-    }
-    .my-accordion .panel {
-      background-color: #FFFFFF;
-      color: #333;
-      overflow: hidden;
-      padding: 0 16px;
-      border-radius: 0 0 8px 8px;
-    }
-    .my-accordion .open {
-      display: block;
-      padding: 16px;
-    }
+    .my-accordion .menu { background-color: #d5d5d5; color: #444; cursor: pointer; padding: 12px; width: 100%; text-align: left; border: none; outline: none; margin-top: 4px; border-radius: 8px; font-size: 1.5em; }
+    .my-accordion .panel { background-color: #FFFFFF; color: #000000; overflow: hidden; }
+    .my-accordion .open { display: block; }
     .my-accordion .close { display: none; }
-    .my-accordion .active {
-      background-color: #2563eb;
-      color: #fff;
-      border-radius: 8px 8px 0 0;
-    }
-    .my-accordion .arrow {
-      float: right;
-      display: block;
-      transition: transform 0.3s ease;
-    }
+    .my-accordion .active { background-color: #1b90bb; color: #fff; }
+    .my-accordion .arrow { float: right; display: block; }
     .my-accordion .darrow { display: none; }
     .my-accordion .active .darrow { display: block; }
     .my-accordion .active .rarrow { display: none; }
@@ -62,20 +32,16 @@ export const generateHTML = (
   <div class="container">
     <div class="jumbotron">
       <h1>${header}</h1>
-      <h3><strong><span style="color:#2563eb;">${subheader}</span></strong></h3>
+      <h3><strong><span style="color:#FF0000;">${subheader}</span></strong></h3>
       <div><span style="font-size:18px;">${description}</span></div>
       <br />
       <div class="my-accordion">
         ${items
           .map(
             (item) => `
-          <button class="menu" data-editor-id="${item.id}">
-            ${item.question}
-            <span class="arrow rarrow">+</span>
-            <span class="arrow darrow">-</span>
-          </button>
+          <button class="menu" data-editor-id="${item.id}">${item.question}<span class="arrow rarrow">+</span><span class="arrow darrow">-</span></button>
           <div class="panel close">
-            <div>${item.answer}</div>
+            <div style="padding:10px">${item.answer}</div>
           </div>
         `,
           )
