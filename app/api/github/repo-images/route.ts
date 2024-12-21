@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 import { parse } from "node-html-parser";
 
+export const runtime = "edge";
+export const revalidate = 86400;
+
 /**
  * @swagger
  * /api/github/repo-images:
@@ -56,6 +59,7 @@ import { parse } from "node-html-parser";
  *       500:
  *         description: Failed to fetch repository images
  */
+
 interface ImageInfo {
   src: string;
   alt: string | null;

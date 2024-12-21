@@ -72,6 +72,7 @@ export const revalidate = false;
  *       500:
  *         description: Failed to generate site data
  */
+
 export async function GET() {
   try {
     // Read package.json using file descriptor

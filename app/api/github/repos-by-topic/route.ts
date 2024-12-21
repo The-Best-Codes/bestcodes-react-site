@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 import getCoverImage from "../../../../utils/api/github/repo-cover-image";
 
+export const runtime = "edge";
+export const revalidate = 3600;
+
 /**
  * @swagger
  * /api/github/repos-by-topic:
@@ -78,6 +81,7 @@ import getCoverImage from "../../../../utils/api/github/repo-cover-image";
  *       500:
  *         description: Failed to fetch repositories
  */
+
 const PER_PAGE = 100; // Maximum allowed by GitHub API
 
 interface GitHubRepo {

@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 import getCoverImage from "../../../../utils/api/github/repo-cover-image";
 
+export const runtime = "edge";
+export const revalidate = 1800;
+
 /**
  * @swagger
  * /api/github/pinned-repos:
@@ -69,6 +72,7 @@ import getCoverImage from "../../../../utils/api/github/repo-cover-image";
  *       500:
  *         description: Failed to fetch pinned repositories
  */
+
 interface PinnedRepo {
   name: string;
   description: string | null;
