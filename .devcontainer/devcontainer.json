@@ -1,0 +1,23 @@
+{
+  "name": "bestcodes-react-site Dev",
+  "image": "mcr.microsoft.com/devcontainers/javascript-with-bun:1",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "18"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "ms-vscode.vscode-typescript-next",
+        "bradlc.vscode-tailwindcss",
+        "dsznajder.es7-react-js-snippets"
+      ]
+    }
+  },
+  "forwardPorts": [3000],
+  "postCreateCommand": "bun install",
+  "remoteUser": "node"
+}
