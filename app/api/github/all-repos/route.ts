@@ -1,11 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 
+export const runtime = "edge";
+export const revalidate = 3600;
+
 /**
  * @swagger
  * /api/github/all-repos:
  *   get:
- *     summary: Get all GitHub repositories for a user
+ *     summary: Get all public GitHub repositories for a user
  *     description: Returns a list of all public repositories for a given GitHub username
  *     parameters:
  *       - in: query
@@ -57,6 +60,7 @@ import axios from "axios";
  *       500:
  *         description: Failed to fetch repositories
  */
+
 interface Repository {
   name: string;
   description: string | null;
@@ -95,7 +99,7 @@ export async function GET(request: NextRequest) {
     const query = `
       query($username: String!) {
         user(login: $username) {
-          repositories(first: 100, orderBy: {field: UPDATED_AT, direction: DESC}) {
+          repositories(first: 100, privacy: PUBLIC, orderBy: {field: UPDATED_AT, direction: DESC}) {
             nodes {
               name
               description

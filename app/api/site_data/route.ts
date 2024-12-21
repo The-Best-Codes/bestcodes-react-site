@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
+export const revalidate = false;
+
 /**
  * @swagger
  * /api/site_data:
@@ -84,7 +86,9 @@ export async function GET() {
         fs.closeSync(fd);
       }
     } catch (error: unknown) {
-      throw new Error(`Failed to read package.json: ${error instanceof Error ? error.message : String(error)}`);
+      throw new Error(
+        `Failed to read package.json: ${error instanceof Error ? error.message : String(error)}`,
+      );
     }
 
     // Calculate statistics
@@ -116,7 +120,7 @@ export async function GET() {
     console.error("Error generating site data:", error);
     return NextResponse.json(
       { error: "Failed to generate site data" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
