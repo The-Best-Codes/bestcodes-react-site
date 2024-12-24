@@ -84,6 +84,7 @@ const config = {
     },
   },
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  safelist: ["bg-red-500", "bg-yellow-400", "bg-blue-400"],
 } satisfies Config;
 
 export default config;
