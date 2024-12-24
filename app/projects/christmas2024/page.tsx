@@ -85,7 +85,7 @@ const ChristmasGlobe = () => {
         <div
           ref={globeRef}
           className="w-[320px] h-[320px] sm:w-[500px] sm:h-[500px] lg:w-[600px] lg:h-[600px]
-                       rounded-full bg-gradient-to-br from-blue-100 to-blue-200
+                       rounded-full bg-gradient-to-br from-blue-200 to-blue-300
                        overflow-hidden shadow-2xl relative"
         >
           {/* Snow on ground */}
