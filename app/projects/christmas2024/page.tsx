@@ -1,14 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-
-interface OrnamentPosition {
-  top: number;
-  left: number;
-}
-
-interface OrnamentPositions {
-  [key: string]: OrnamentPosition;
-}
+import { useEffect, useRef } from "react";
 
 interface Ornament {
   id: string;
@@ -19,14 +10,6 @@ interface Ornament {
 
 const ChristmasGlobe = () => {
   const globeRef = useRef<HTMLDivElement>(null);
-  const [ornamentPositions, setOrnamentPositions] = useState<OrnamentPositions>(
-    {},
-  );
-  const [isDragging, setIsDragging] = useState(false);
-  const [activeOrnament, setActiveOrnament] = useState<string | null>(null);
-  const [dragOffset, setDragOffset] = useState<{ x: number; y: number } | null>(
-    null,
-  );
 
   const ornaments: Ornament[] = [
     { id: "ornament-1", color: "red-500", initialTop: -101, initialLeft: -6 },
@@ -92,76 +75,6 @@ const ChristmasGlobe = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>, id: string) => {
-    const ornament = document.getElementById(id);
-    if (!ornament || !globeRef.current) return;
-
-    const ornamentRect = ornament.getBoundingClientRect();
-    const globeRect = globeRef.current.getBoundingClientRect();
-
-    const offsetX = e.clientX - ornamentRect.left;
-    const offsetY = e.clientY - ornamentRect.top;
-
-    setDragOffset({ x: offsetX, y: offsetY });
-    setIsDragging(true);
-    setActiveOrnament(id);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isDragging || !activeOrnament || !globeRef.current || !dragOffset)
-      return;
-
-    const ornament = document.getElementById(activeOrnament);
-    if (ornament) {
-      const globeRect = globeRef.current.getBoundingClientRect();
-      const treeContainer = ornament.parentElement;
-      if (!treeContainer) return;
-
-      const treeRect = treeContainer.getBoundingClientRect();
-
-      const newTop = e.clientY - treeRect.top - dragOffset.y;
-      const newLeft = e.clientX - treeRect.left - dragOffset.x;
-
-      ornament.style.top = `${newTop}px`;
-      ornament.style.left = `${newLeft}px`;
-    }
-  };
-
-  const handleMouseUp = () => {
-    if (!isDragging || !activeOrnament) return;
-
-    // Gather all current ornament positions
-    const updatedPositions: OrnamentPositions = {};
-    ornaments.forEach((ornament) => {
-      const elem = document.getElementById(ornament.id);
-      if (elem) {
-        const style = window.getComputedStyle(elem);
-        const top = Math.round(parseFloat(style.top));
-        const left = Math.round(parseFloat(style.left));
-        updatedPositions[ornament.id] = { top, left };
-      }
-    });
-
-    setOrnamentPositions(updatedPositions);
-    console.log("All ornament positions:", updatedPositions);
-
-    setIsDragging(false);
-    setActiveOrnament(null);
-    setDragOffset(null);
-  };
-
-  // Add mouse up listener to window to handle releases outside the component
-  useEffect(() => {
-    const handleGlobalMouseUp = () => {
-      if (isDragging) {
-        handleMouseUp();
-      }
-    };
-
-    window.addEventListener("mouseup", handleGlobalMouseUp);
-    return () => window.removeEventListener("mouseup", handleGlobalMouseUp);
-  }, [isDragging]);
-
   return (
     <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center p-4 sm:p-8">
       <h1 className="text-4xl sm:text-7xl font-bold text-green-500 mb-8 sm:mb-12">
@@ -174,7 +87,6 @@ const ChristmasGlobe = () => {
           className="w-[320px] h-[320px] sm:w-[500px] sm:h-[500px] lg:w-[600px] lg:h-[600px]
                        rounded-full bg-gradient-to-br from-blue-100 to-blue-200
                        overflow-hidden shadow-2xl relative"
-          onMouseMove={handleMouseMove}
         >
           {/* Snow on ground */}
           <div className="absolute bottom-0 left-0 right-0 h-[25%] bg-white rounded-full transform translate-y-[40%]" />
@@ -195,11 +107,10 @@ const ChristmasGlobe = () => {
                 <div
                   key={ornament.id}
                   id={ornament.id}
-                  onMouseDown={(e) => handleMouseDown(e, ornament.id)}
-                  className={`absolute w-2.5 h-2.5 rounded-full bg-${ornament.color} cursor-pointer`}
+                  className={`absolute w-2.5 h-2.5 rounded-full bg-${ornament.color}`}
                   style={{
-                    top: `${ornamentPositions[ornament.id]?.top ?? ornament.initialTop}px`,
-                    left: `${ornamentPositions[ornament.id]?.left ?? ornament.initialLeft}px`,
+                    top: `${ornament.initialTop}px`,
+                    left: `${ornament.initialLeft}px`,
                     position: "absolute",
                   }}
                 ></div>
