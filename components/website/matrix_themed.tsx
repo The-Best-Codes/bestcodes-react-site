@@ -1,37 +1,29 @@
 "use client";
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { ReactMatrixAnimation } from "@/components/website/matrix_component";
 
 const MatrixThemed = () => {
-  const [theme, setTheme] = useState(() =>
-    (typeof window === "undefined" ? "dark" : undefined) ||
-    window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light"
-  );
-  const prevThemeRef = useRef(theme);
-
-  const checkSystemTheme = useCallback(() => {
-    if (typeof window === "undefined") return;
-    const newTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-    if (newTheme !== prevThemeRef.current) {
-      setTheme(newTheme);
-      prevThemeRef.current = newTheme;
-    }
-  }, []);
+  const [theme, setTheme] = useState("dark"); // Set a default value
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    // Only run this on client-side
+    setMounted(true);
+    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    setTheme(isDark ? "dark" : "light");
+
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    mediaQuery.addEventListener("change", checkSystemTheme);
+    const handler = (e: MediaQueryListEvent) =>
+      setTheme(e.matches ? "dark" : "light");
 
-    // Initial check
-    checkSystemTheme();
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, []);
 
-    return () => mediaQuery.removeEventListener("change", checkSystemTheme);
-  }, [checkSystemTheme]);
+  // Don't render anything until mounted (client-side)
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <ReactMatrixAnimation
