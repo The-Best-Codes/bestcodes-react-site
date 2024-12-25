@@ -1,6 +1,6 @@
 {
   "name": "bestcodes-react-site",
-  "version": "0.7.13",
+  "version": "0.7.14",
   "private": true,
   "repository": {
     "type": "git",
@@ -63,7 +63,7 @@
     "sharp": "^0.33.5",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-react": "^5.18.2",
-    "tailwind-merge": "^2.5.5",
+    "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.171.0",
     "zod": "^3.24.1"
