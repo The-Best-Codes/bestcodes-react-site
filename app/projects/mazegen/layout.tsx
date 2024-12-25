@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     "Free Maze Generator - Generate a maze and solve it with JavaScript | BestCodes",
 
   description:
-    "Free Maze Generator with customizable size and difficulty. Easily print mazes and solutions."
+    "Free Maze Generator with customizable size and difficulty. Easily print mazes and solutions.",
 };
 
 export default function RootLayout({
@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
       </body>

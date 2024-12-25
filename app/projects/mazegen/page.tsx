@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { RefreshCcw, Printer } from "lucide-react";
+import { RefreshCcw, Printer, Download } from "lucide-react";
 import Header from "@/components/website/header";
 import Head from "next/head";
 
@@ -64,7 +64,7 @@ const MazeGenerator: React.FC = () => {
         currentCell,
         newMaze,
         newWidth,
-        newHeight
+        newHeight,
       );
 
       if (neighbors.length > 0) {
@@ -86,7 +86,7 @@ const MazeGenerator: React.FC = () => {
     cell: Cell,
     maze: Cell[][],
     width: number,
-    height: number
+    height: number,
   ) => {
     const { x, y } = cell;
     const neighbors: Cell[] = [];
@@ -123,12 +123,12 @@ const MazeGenerator: React.FC = () => {
   const solveMaze = (
     maze: Cell[][],
     width: number,
-    height: number
+    height: number,
   ): [number, number][] => {
     const stack: [number, number][] = [[0, 0]];
     const visited: boolean[][] = maze.map((row) => row.map(() => false));
     const parent: ([number, number] | null)[][] = maze.map((row) =>
-      row.map(() => null)
+      row.map(() => null),
     );
 
     while (stack.length > 0) {
@@ -186,9 +186,23 @@ const MazeGenerator: React.FC = () => {
     solution: [number, number][],
     currentCellSize: number,
     currentWidth: number,
-    currentHeight: number
+    currentHeight: number,
   ) => {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    const borderWidth = 1;
+
+    // Fill the background with white
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+    // Draw border around the maze
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = borderWidth;
+    ctx.strokeRect(
+      borderWidth / 2,
+      borderWidth / 2,
+      currentWidth * currentCellSize + borderWidth,
+      currentHeight * currentCellSize + borderWidth,
+    );
 
     // Draw maze
     ctx.strokeStyle = "black";
@@ -197,26 +211,50 @@ const MazeGenerator: React.FC = () => {
       row.forEach((cell, x) => {
         if (cell.walls[0]) {
           ctx.beginPath();
-          ctx.moveTo(x * currentCellSize, y * currentCellSize);
-          ctx.lineTo((x + 1) * currentCellSize, y * currentCellSize);
+          ctx.moveTo(
+            x * currentCellSize + borderWidth,
+            y * currentCellSize + borderWidth,
+          );
+          ctx.lineTo(
+            (x + 1) * currentCellSize + borderWidth,
+            y * currentCellSize + borderWidth,
+          );
           ctx.stroke();
         }
         if (cell.walls[1]) {
           ctx.beginPath();
-          ctx.moveTo((x + 1) * currentCellSize, y * currentCellSize);
-          ctx.lineTo((x + 1) * currentCellSize, (y + 1) * currentCellSize);
+          ctx.moveTo(
+            (x + 1) * currentCellSize + borderWidth,
+            y * currentCellSize + borderWidth,
+          );
+          ctx.lineTo(
+            (x + 1) * currentCellSize + borderWidth,
+            (y + 1) * currentCellSize + borderWidth,
+          );
           ctx.stroke();
         }
         if (cell.walls[2]) {
           ctx.beginPath();
-          ctx.moveTo(x * currentCellSize, (y + 1) * currentCellSize);
-          ctx.lineTo((x + 1) * currentCellSize, (y + 1) * currentCellSize);
+          ctx.moveTo(
+            x * currentCellSize + borderWidth,
+            (y + 1) * currentCellSize + borderWidth,
+          );
+          ctx.lineTo(
+            (x + 1) * currentCellSize + borderWidth,
+            (y + 1) * currentCellSize + borderWidth,
+          );
           ctx.stroke();
         }
         if (cell.walls[3]) {
           ctx.beginPath();
-          ctx.moveTo(x * currentCellSize, y * currentCellSize);
-          ctx.lineTo(x * currentCellSize, (y + 1) * currentCellSize);
+          ctx.moveTo(
+            x * currentCellSize + borderWidth,
+            y * currentCellSize + borderWidth,
+          );
+          ctx.lineTo(
+            x * currentCellSize + borderWidth,
+            (y + 1) * currentCellSize + borderWidth,
+          );
           ctx.stroke();
         }
       });
@@ -227,9 +265,15 @@ const MazeGenerator: React.FC = () => {
       ctx.strokeStyle = "orange";
       ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.moveTo(currentCellSize / 2, currentCellSize / 2);
+      ctx.moveTo(
+        currentCellSize / 2 + borderWidth,
+        currentCellSize / 2 + borderWidth,
+      );
       solution.forEach(([x, y]) => {
-        ctx.lineTo((x + 0.5) * currentCellSize, (y + 0.5) * currentCellSize);
+        ctx.lineTo(
+          (x + 0.5) * currentCellSize + borderWidth,
+          (y + 0.5) * currentCellSize + borderWidth,
+        );
       });
       ctx.stroke();
     }
@@ -238,22 +282,22 @@ const MazeGenerator: React.FC = () => {
     ctx.fillStyle = "green";
     ctx.beginPath();
     ctx.arc(
-      currentCellSize / 2,
-      currentCellSize / 2,
+      currentCellSize / 2 + borderWidth,
+      currentCellSize / 2 + borderWidth,
       currentCellSize / 4,
       0,
-      2 * Math.PI
+      2 * Math.PI,
     );
     ctx.fill();
 
     ctx.fillStyle = "red";
     ctx.beginPath();
     ctx.arc(
-      currentWidth * currentCellSize - currentCellSize / 2,
-      currentHeight * currentCellSize - currentCellSize / 2,
+      currentWidth * currentCellSize - currentCellSize / 2 + borderWidth,
+      currentHeight * currentCellSize - currentCellSize / 2 + borderWidth,
       currentCellSize / 4,
       0,
-      2 * Math.PI
+      2 * Math.PI,
     );
     ctx.fill();
   };
@@ -262,14 +306,14 @@ const MazeGenerator: React.FC = () => {
     const printWindow = window.open("", "_blank");
     if (printWindow) {
       printWindow.document.write(
-        "<html><head><title>Maze</title></head><body>"
+        "<html><head><title>Maze</title></head><body>",
       );
       printWindow.document.write('<canvas id="printCanvas"></canvas>');
       printWindow.document.write("<script>");
       printWindow.document.write(`
       const canvas = document.getElementById('printCanvas');
-      canvas.width = ${currentWidth * currentCellSize};
-      canvas.height = ${currentHeight * currentCellSize};
+      canvas.width = ${currentWidth * currentCellSize + 2};
+      canvas.height = ${currentHeight * currentCellSize + 2};
       const ctx = canvas.getContext('2d');
       const maze = ${JSON.stringify(maze)};
       const showSolution = ${showSolution ? "true" : "false"};
@@ -277,71 +321,84 @@ const MazeGenerator: React.FC = () => {
       const currentCellSize = ${currentCellSize};
       const currentWidth = ${currentWidth};
       const currentHeight = ${currentHeight};
-      
-      // Define the drawMaze function
-      function drawMaze(ctx, maze, showSolution, solution, currentCellSize, currentWidth, currentHeight) {
-        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+      const borderWidth = 1;
 
-        // Draw maze
-        ctx.strokeStyle = "black";
-        ctx.lineWidth = 1;
-        maze.forEach((row, y) => {
-          row.forEach((cell, x) => {
-            if (cell.walls[0]) {
-              ctx.beginPath();
-              ctx.moveTo(x * currentCellSize, y * currentCellSize);
-              ctx.lineTo((x + 1) * currentCellSize, y * currentCellSize);
-              ctx.stroke();
-            }
-            if (cell.walls[1]) {
-              ctx.beginPath();
-              ctx.moveTo((x + 1) * currentCellSize, y * currentCellSize);
-              ctx.lineTo((x + 1) * currentCellSize, (y + 1) * currentCellSize);
-              ctx.stroke();
-            }
-            if (cell.walls[2]) {
-              ctx.beginPath();
-              ctx.moveTo(x * currentCellSize, (y + 1) * currentCellSize);
-              ctx.lineTo((x + 1) * currentCellSize, (y + 1) * currentCellSize);
-              ctx.stroke();
-            }
-            if (cell.walls[3]) {
-              ctx.beginPath();
-              ctx.moveTo(x * currentCellSize, y * currentCellSize);
-              ctx.lineTo(x * currentCellSize, (y + 1) * currentCellSize);
-              ctx.stroke();
-            }
-          });
-        });
+       function drawMaze(ctx, maze, showSolution, solution, currentCellSize, currentWidth, currentHeight) {
+            // Fill the background with white
+           ctx.fillStyle = "white";
+           ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-        // Draw start indicator
-        ctx.fillStyle = "green";
-        ctx.beginPath();
-        ctx.arc(currentCellSize / 2, currentCellSize / 2, currentCellSize / 4, 0, Math.PI * 2);
-        ctx.fill();
+             // Draw border around the maze
+             ctx.strokeStyle = "black";
+             ctx.lineWidth = borderWidth;
+             ctx.strokeRect(
+               borderWidth / 2,
+               borderWidth / 2,
+               currentWidth * currentCellSize + borderWidth,
+               currentHeight * currentCellSize + borderWidth
+             );
 
-        // Draw finish indicator
-        ctx.fillStyle = "red";
-        ctx.beginPath();
-        ctx.arc((currentWidth - 0.5) * currentCellSize, (currentHeight - 0.5) * currentCellSize, currentCellSize / 4, 0, Math.PI * 2);
-        ctx.fill();
 
-        // Draw solution
-        if (showSolution) {
-          ctx.strokeStyle = "orange";
-          ctx.lineWidth = 2;
-          ctx.beginPath();
-          ctx.moveTo(currentCellSize / 2, currentCellSize / 2);
-          solution.forEach(([x, y]) => {
-            ctx.lineTo(x * currentCellSize + currentCellSize / 2, y * currentCellSize + currentCellSize / 2);
-          });
-          ctx.stroke();
-        }
-      }
-      
+           // Draw maze
+           ctx.strokeStyle = "black";
+           ctx.lineWidth = 1;
+           maze.forEach((row, y) => {
+             row.forEach((cell, x) => {
+               if (cell.walls[0]) {
+                 ctx.beginPath();
+                 ctx.moveTo(x * currentCellSize + borderWidth, y * currentCellSize + borderWidth);
+                 ctx.lineTo((x + 1) * currentCellSize + borderWidth, y * currentCellSize + borderWidth);
+                 ctx.stroke();
+               }
+               if (cell.walls[1]) {
+                 ctx.beginPath();
+                 ctx.moveTo((x + 1) * currentCellSize + borderWidth, y * currentCellSize + borderWidth);
+                 ctx.lineTo((x + 1) * currentCellSize + borderWidth, (y + 1) * currentCellSize + borderWidth);
+                 ctx.stroke();
+               }
+               if (cell.walls[2]) {
+                 ctx.beginPath();
+                 ctx.moveTo(x * currentCellSize + borderWidth, (y + 1) * currentCellSize + borderWidth);
+                 ctx.lineTo((x + 1) * currentCellSize + borderWidth, (y + 1) * currentCellSize + borderWidth);
+                 ctx.stroke();
+               }
+               if (cell.walls[3]) {
+                 ctx.beginPath();
+                 ctx.moveTo(x * currentCellSize + borderWidth, y * currentCellSize + borderWidth);
+                 ctx.lineTo(x * currentCellSize + borderWidth, (y + 1) * currentCellSize + borderWidth);
+                 ctx.stroke();
+               }
+             });
+           });
+
+           // Draw start indicator
+           ctx.fillStyle = "green";
+           ctx.beginPath();
+           ctx.arc(currentCellSize / 2 + borderWidth, currentCellSize / 2 + borderWidth, currentCellSize / 4, 0, Math.PI * 2);
+           ctx.fill();
+
+           // Draw finish indicator
+           ctx.fillStyle = "red";
+           ctx.beginPath();
+           ctx.arc((currentWidth - 0.5) * currentCellSize + borderWidth, (currentHeight - 0.5) * currentCellSize + borderWidth, currentCellSize / 4, 0, Math.PI * 2);
+           ctx.fill();
+
+           // Draw solution
+           if (showSolution) {
+             ctx.strokeStyle = "orange";
+             ctx.lineWidth = 2;
+             ctx.beginPath();
+             ctx.moveTo(currentCellSize / 2 + borderWidth, currentCellSize / 2 + borderWidth);
+             solution.forEach(([x, y]) => {
+               ctx.lineTo(x * currentCellSize + currentCellSize / 2 + borderWidth, y * currentCellSize + currentCellSize / 2 + borderWidth);
+             });
+             ctx.stroke();
+           }
+         }
+
       // Call the drawMaze function
       drawMaze(ctx, maze, showSolution, solution, currentCellSize, currentWidth, currentHeight);
-      
+
       // Print and close
       setTimeout(() => {
         window.print();
@@ -351,6 +408,38 @@ const MazeGenerator: React.FC = () => {
       printWindow.document.write("</script>");
       printWindow.document.write("</body></html>");
       printWindow.document.close();
+    }
+  };
+
+  const downloadMaze = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    // Create a temporary canvas
+    const tempCanvas = document.createElement("canvas");
+    tempCanvas.width = currentWidth * currentCellSize + 2;
+    tempCanvas.height = currentHeight * currentCellSize + 2;
+    const tempCtx = tempCanvas.getContext("2d");
+
+    if (tempCtx) {
+      // Draw the maze with white background on the temp canvas
+      drawMaze(
+        tempCtx,
+        maze,
+        showSolution,
+        solution,
+        currentCellSize,
+        currentWidth,
+        currentHeight,
+      );
+      const dataURL = tempCanvas.toDataURL("image/png");
+
+      const link = document.createElement("a");
+      link.href = dataURL;
+      link.download = "maze.png";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   };
 
@@ -375,7 +464,7 @@ const MazeGenerator: React.FC = () => {
       solution,
       currentCellSize,
       currentWidth,
-      currentHeight
+      currentHeight,
     );
   }, [
     maze,
@@ -444,11 +533,15 @@ const MazeGenerator: React.FC = () => {
             <div className="flex justify-between items-center mb-8">
               <div className="flex items-center space-x-2">
                 <Button onClick={generateMaze}>
-                  <RefreshCcw className="mr-2" />
+                  <RefreshCcw className="mr-0 sm:mr-2" />
                   <span className="hidden sm:block">Generate</span>
                 </Button>
+                <Button onClick={downloadMaze}>
+                  <Download className="mr-0 sm:mr-2" />
+                  <span className="hidden sm:block">Download</span>
+                </Button>
                 <Button onClick={printMaze}>
-                  <Printer className="mr-2" />
+                  <Printer className="mr-0 sm:mr-2" />
                   <span className="hidden sm:block">Print</span>
                 </Button>
               </div>
@@ -469,8 +562,8 @@ const MazeGenerator: React.FC = () => {
             <div className="flex max-w-full p-4 overflow-auto">
               <canvas
                 ref={canvasRef}
-                width={currentWidth * currentCellSize}
-                height={currentHeight * currentCellSize}
+                width={currentWidth * currentCellSize + 2}
+                height={currentHeight * currentCellSize + 2}
                 className="border border-black mx-auto dark:invert dark:hue-rotate-180"
               />
             </div>
