@@ -196,6 +196,7 @@ export default function Contact() {
                     <Turnstile
                       ref={turnstileRef}
                       siteKey="0x4AAAAAAAfgP80mkF0iiKza"
+                      onError={console.error}
                     />
                   )}
                   <Button type="submit" disabled={isSubmitting}>
