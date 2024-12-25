@@ -19,6 +19,7 @@ import SocialMediaLinks from "@/components/website/socials";
 import MatrixThemed from "@/components/website/matrix_themed";
 import ExploreMorePages from "@/components/website/explore_pages";
 import Footer from "@/components/website/footer";
+import Snow from "@/components/christmas/Snow";
 
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -65,6 +66,7 @@ export default function Home() {
   const waveImageOpacity = useTransform(scrollY, [0, 200], [1, 0]);
   return (
     <main className="flex min-h-screen scroll-smooth max-w-screen w-full flex-col items-center dark:bg-slate-900">
+      <Snow />
       <Header />
       <div className="overflow-x-hidden">
         <div className="max-w-screen w-full relative overflow-hidden">

@@ -80,7 +80,7 @@ const HomePageContent: React.FC = () => {
         window.history.pushState({}, "", `?url=${encodeURIComponent(url)}`);
       } catch (err) {
         setError(
-          "Failed to load STL file. Please check the URL and try again."
+          "Failed to load STL file. Please check the URL and try again.",
         );
       } finally {
         setIsLoading(false);
@@ -111,7 +111,7 @@ const HomePageContent: React.FC = () => {
   };
 
   return (
-    <main className="min-h-screen w-full bg-gray-100 bg-white dark:bg-gray-900">
+    <main className="min-h-screen w-full bg-gray-100 dark:bg-gray-900">
       <Header />
       <div className="container mx-auto p-4 h-full">
         <div className="lg:flex lg:space-x-8">
