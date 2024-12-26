@@ -1,12 +1,12 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
-import { Slider } from "@/components/ui/slider";
-import { Check, X, Copy, RefreshCw } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider";
+import { Switch } from "@/components/ui/switch";
 import Header from "@/components/website/header";
+import { Check, Copy, RefreshCw, X } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
 
 const RandomTokenGenerator = () => {
   const [token, setToken] = useState("");
@@ -18,7 +18,7 @@ const RandomTokenGenerator = () => {
     symbols: { enabled: false, frequency: 25 },
   });
   const [copyStatus, setCopyStatus] = useState<"idle" | "success" | "error">(
-    "idle"
+    "idle",
   );
 
   const generateToken = useCallback(() => {
@@ -31,11 +31,11 @@ const RandomTokenGenerator = () => {
 
     let result = "";
     const enabledTypes = Object.entries(charTypes).filter(
-      ([_, { enabled }]) => enabled
+      ([_, { enabled }]) => enabled,
     );
     const totalFrequency = enabledTypes.reduce(
       (sum, [_, { frequency }]) => sum + frequency,
-      0
+      0,
     );
 
     for (let i = 0; i < length; i++) {
@@ -47,8 +47,8 @@ const RandomTokenGenerator = () => {
         if (randomNum <= accumulatedFrequency) {
           result += charSets[type as keyof typeof charSets].charAt(
             Math.floor(
-              Math.random() * charSets[type as keyof typeof charSets].length
-            )
+              Math.random() * charSets[type as keyof typeof charSets].length,
+            ),
           );
           break;
         }
@@ -75,7 +75,7 @@ const RandomTokenGenerator = () => {
   const handleCharTypeChange = (
     type: string,
     field: "enabled" | "frequency",
-    value: boolean | number
+    value: boolean | number,
   ) => {
     setCharTypes((prev) => ({
       ...prev,
@@ -107,8 +107,8 @@ const RandomTokenGenerator = () => {
                   copyStatus === "idle"
                     ? "Copy to Clipboard"
                     : copyStatus === "success"
-                    ? "Copied!"
-                    : "Error"
+                      ? "Copied!"
+                      : "Error"
                 }
               >
                 {copyStatus === "success" ? (
@@ -172,7 +172,7 @@ const RandomTokenGenerator = () => {
                       handleCharTypeChange(
                         type,
                         "frequency",
-                        parseInt(e.target.value)
+                        parseInt(e.target.value),
                       )
                     }
                     disabled={!enabled}

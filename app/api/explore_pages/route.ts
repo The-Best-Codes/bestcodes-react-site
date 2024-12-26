@@ -27,7 +27,7 @@ async function getPages() {
 
 async function scanDirectory(
   dir: string,
-  currentPath: string
+  currentPath: string,
 ): Promise<{ name: string; path: string }[]> {
   const entries = await fs.promises.readdir(dir, { withFileTypes: true });
   const pages: { name: string; path: string }[] = [];
@@ -56,5 +56,9 @@ function getPageName(path: string): string {
   const defaultName =
     parts.length > 0 ? parts[parts.length - 1].replace(/-/g, " ") : "Home";
 
-  return PagePathNames.find((page: { path: string, name: string }) => page.path === path)?.name || defaultName;
+  return (
+    PagePathNames.find(
+      (page: { path: string; name: string }) => page.path === path,
+    )?.name || defaultName
+  );
 }

@@ -1,7 +1,12 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import {
   Select,
   SelectContent,
@@ -9,23 +14,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
+import Header from "@/components/website/header";
+import { useEffect, useRef, useState } from "react";
 import {
-  BarChart,
   Bar,
+  BarChart,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  Tooltip,
-  ResponsiveContainer,
 } from "recharts";
-import Header from "@/components/website/header";
 
 import levenshtein from "js-levenshtein";
 
@@ -168,7 +168,9 @@ export default function Home() {
       .map(([letter, times]) => ({
         letter,
         time: Number(
-          (times.reduce((sum, time) => sum + time, 0) / times.length).toFixed(2)
+          (times.reduce((sum, time) => sum + time, 0) / times.length).toFixed(
+            2,
+          ),
         ),
       }))
       .sort((a, b) => a.letter.localeCompare(b.letter));

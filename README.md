@@ -7,6 +7,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ---
 
 ## BestCodes Website - React
+
 This is the open source code for my website. I used `motion` (previously `framer-motion`) for the animations, `nodemailer` for the contact page, and tailwind for styling.
 Check it out here:
 **[https://bestcodes.dev](https://bestcodes.dev)**
@@ -29,5 +30,3 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new) from the creators of Next.js.
 
 ---
-
-

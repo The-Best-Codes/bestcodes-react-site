@@ -1,18 +1,18 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import Link from "next/link";
-import Header from "@/components/website/header";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Footer from "@/components/website/footer";
+import Header from "@/components/website/header";
+import { getSiteData } from "@/utils/siteData";
 import {
-  Package,
   Code,
-  FileJson,
-  Server,
   FileCode,
   FileCog,
+  FileJson,
   Hash,
+  Package,
+  Server,
 } from "lucide-react";
-import { getSiteData } from "@/utils/siteData";
+import Link from "next/link";
 
 interface SiteData {
   version: string;

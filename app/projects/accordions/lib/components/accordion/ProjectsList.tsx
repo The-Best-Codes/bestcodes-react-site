@@ -1,16 +1,16 @@
-import { Project } from "../../types/accordion";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FolderOpen, Trash2 } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
-  DialogTitle,
   DialogDescription,
   DialogFooter,
+  DialogHeader,
+  DialogTitle,
 } from "@/components/ui/dialog";
+import { FolderOpen, Trash2 } from "lucide-react";
 import { useState } from "react";
+import { Project } from "../../types/accordion";
 
 interface ProjectsListProps {
   projects: Project[];

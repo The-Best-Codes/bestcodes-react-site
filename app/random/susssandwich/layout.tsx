@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: "Random Shoutout to a Random Cool Person - SussSandwich",
 
   description:
-    "SussSandwich is a cool friend, so I'm making a random shoutout!"
+    "SussSandwich is a cool friend, so I'm making a random shoutout!",
 };
 
 export default function RootLayout({

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: "Free, No Registration QR Code Generator | BestCodes",
 
   description:
-    "Easily generate and download QR codes for free. No account needed."
+    "Easily generate and download QR codes for free. No account needed.",
 };
 
 export default function RootLayout({

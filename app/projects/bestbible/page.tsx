@@ -1,9 +1,9 @@
 "use client";
+import { Button } from "@/components/ui/button";
+import SyntaxHighlighter from "@/components/website/code_syntax";
+import Header from "@/components/website/header";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import Header from "@/components/website/header";
-import SyntaxHighlighter from "@/components/website/code_syntax";
 
 export default function BestBible() {
   return (

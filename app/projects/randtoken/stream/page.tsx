@@ -1,12 +1,12 @@
 "use client";
-import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
-import { Slider } from "@/components/ui/slider";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { PlayCircle, PauseCircle, Trash2 } from "lucide-react";
+import { Slider } from "@/components/ui/slider";
+import { Switch } from "@/components/ui/switch";
 import Header from "@/components/website/header";
+import { PauseCircle, PlayCircle, Trash2 } from "lucide-react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 interface CharType {
   enabled: boolean;
@@ -40,11 +40,11 @@ const RandomTokenStreamGenerator: React.FC = () => {
 
     let result = "";
     const enabledTypes = Object.entries(charTypes).filter(
-      ([_, { enabled }]) => enabled
+      ([_, { enabled }]) => enabled,
     );
     const totalFrequency = enabledTypes.reduce(
       (sum, [_, { frequency }]) => sum + frequency,
-      0
+      0,
     );
 
     for (let i = 0; i < chunkSize; i++) {
@@ -56,8 +56,8 @@ const RandomTokenStreamGenerator: React.FC = () => {
         if (randomNum <= accumulatedFrequency) {
           result += charSets[type as keyof typeof charSets].charAt(
             Math.floor(
-              Math.random() * charSets[type as keyof typeof charSets].length
-            )
+              Math.random() * charSets[type as keyof typeof charSets].length,
+            ),
           );
           break;
         }
@@ -83,7 +83,7 @@ const RandomTokenStreamGenerator: React.FC = () => {
   const handleCharTypeChange = (
     type: string,
     field: "enabled" | "frequency",
-    value: boolean | number
+    value: boolean | number,
   ) => {
     setCharTypes((prev) => ({
       ...prev,
@@ -183,7 +183,7 @@ const RandomTokenStreamGenerator: React.FC = () => {
                       handleCharTypeChange(
                         type,
                         "frequency",
-                        parseInt(e.target.value)
+                        parseInt(e.target.value),
                       )
                     }
                     disabled={!enabled}

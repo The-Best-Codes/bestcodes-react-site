@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { motion, AnimatePresence } from "motion/react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MagicCard } from "@/components/ui/magic-card";
-import { ChevronRight, Loader2, AlertCircle, ChevronLeft } from "lucide-react";
+import axios from "axios";
+import { AlertCircle, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import React, { useEffect, useState } from "react";
 
 interface Page {
   name: string;
@@ -53,7 +53,7 @@ const ExploreMorePages: React.FC<{
 
   const displayedPages = pages.slice(
     currentPage * CARDS_PER_PAGE,
-    (currentPage + 1) * CARDS_PER_PAGE
+    (currentPage + 1) * CARDS_PER_PAGE,
   );
 
   return (

@@ -1,8 +1,6 @@
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
-import UnderlineText from "@/components/website/underline-text";
+import Image from "next/image";
+import Link from "next/link";
 
 const socialLinks = [
   {
@@ -49,7 +47,7 @@ const socialLinks = [
 
 export default function SocialMediaLinks() {
   return (
-    (<Card className="w-full max-w-4xl mx-auto dark:bg-slate-700 dark:border-none">
+    <Card className="w-full max-w-4xl mx-auto dark:bg-slate-700 dark:border-none">
       <CardContent className="p-4">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4">
           {socialLinks.map((link, index) => (
@@ -63,8 +61,9 @@ export default function SocialMediaLinks() {
                   className="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 lg:h-32 lg:w-32 hover:scale-105 hover:drop-shadow-2xl transition-transform dark:invert"
                   style={{
                     maxWidth: "100%",
-                    height: "auto"
-                  }} />
+                    height: "auto",
+                  }}
+                />
                 <span className="text-sm sm:text-md text-blue-500 text-center">
                   {link.username}
                 </span>
@@ -73,6 +72,6 @@ export default function SocialMediaLinks() {
           ))}
         </div>
       </CardContent>
-    </Card>)
+    </Card>
   );
 }

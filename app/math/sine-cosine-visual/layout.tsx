@@ -13,7 +13,7 @@ const geistMono = localFont({
 });
 export const metadata: Metadata = {
   title: "Sine and Cosine Visualizer | BestCodes",
-  description: "Visualize the sine and cosine functions with circles | Math"
+  description: "Visualize the sine and cosine functions with circles | Math",
 };
 
 export default function RootLayout({

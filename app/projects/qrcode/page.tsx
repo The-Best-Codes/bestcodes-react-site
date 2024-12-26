@@ -1,8 +1,15 @@
 "use client";
-import { useState, useEffect } from "react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -10,22 +17,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
-import { Switch } from "@/components/ui/switch";
 import { Slider } from "@/components/ui/slider";
-import { Label } from "@/components/ui/label";
-import { AlertCircle, Download, Copy, Check, Printer } from "lucide-react";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import Header from "@/components/website/header";
-import { QRCodeSVG } from "qrcode.react";
+import { Textarea } from "@/components/ui/textarea";
 import ExploreMorePages from "@/components/website/explore_pages";
 import Footer from "@/components/website/footer";
+import Header from "@/components/website/header";
+import { AlertCircle, Check, Copy, Download, Printer } from "lucide-react";
+import { QRCodeSVG } from "qrcode.react";
+import { useEffect, useState } from "react";
 
 const QRCodeGenerator = () => {
   const [text, setText] = useState("https://bestcodes.dev");

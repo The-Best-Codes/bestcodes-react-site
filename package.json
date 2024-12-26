@@ -1,6 +1,6 @@
 {
   "name": "bestcodes-react-site",
-  "version": "0.7.13",
+  "version": "0.8.0",
   "private": true,
   "repository": {
     "type": "git",
@@ -48,7 +48,7 @@
     "next": "^15.1.2",
     "next-swagger-doc": "^0.4.1",
     "node-fetch": "^3.3.2",
-    "node-html-parser": "^6.1.13",
+    "node-html-parser": "^7.0.1",
     "nodemailer": "^6.9.16",
     "prismjs": "^1.29.0",
     "qrcode.react": "^4.2.0",

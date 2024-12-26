@@ -1,21 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import type React from "react";
-import { useState, useEffect } from "react";
-import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { Button } from "@/components/ui/button";
+import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { ArrowLeft, Loader2 } from "lucide-react";
-import type { AccordionItem, Project } from "./lib/types/accordion";
-import { generateHTML } from "./lib/utils/html-generator";
-import { useProjects } from "./lib/hooks/useProjects";
-import { HeaderSection } from "./lib/components/accordion/HeaderSection";
+import type React from "react";
+import { useEffect, useState } from "react";
 import { AccordionItemEditor } from "./lib/components/accordion/AccordionItemEditor";
 import { ActionButtons } from "./lib/components/accordion/ActionButtons";
-import { Preview } from "./lib/components/accordion/Preview";
-import { SaveStatus } from "./lib/components/accordion/SaveStatus";
-import { ProjectsList } from "./lib/components/accordion/ProjectsList";
+import { HeaderSection } from "./lib/components/accordion/HeaderSection";
 import { NewProjectOptions } from "./lib/components/accordion/NewProjectOptions";
+import { Preview } from "./lib/components/accordion/Preview";
+import { ProjectsList } from "./lib/components/accordion/ProjectsList";
+import { SaveStatus } from "./lib/components/accordion/SaveStatus";
+import { useProjects } from "./lib/hooks/useProjects";
+import type { AccordionItem, Project } from "./lib/types/accordion";
+import { generateHTML } from "./lib/utils/html-generator";
 
 const LoadingSpinner = () => (
   <div className="flex items-center justify-center h-64">

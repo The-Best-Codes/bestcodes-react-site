@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Save, Loader2, Check } from "lucide-react";
+import { Check, Loader2, Save } from "lucide-react";
 
 interface SaveStatusProps {
   status: "idle" | "saving" | "success";

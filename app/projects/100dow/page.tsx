@@ -1,10 +1,10 @@
 "use client";
-import React, { useEffect, useState, Suspense } from "react";
 import Header from "@/components/website/header";
+import { Award, ChevronDown, Loader, Smile } from "lucide-react";
 import { motion } from "motion/react";
-import { ChevronDown, Award, Smile, Loader } from "lucide-react";
-import { useSearchParams } from "next/navigation";
 import dynamic from "next/dynamic";
+import { useSearchParams } from "next/navigation";
+import React, { Suspense, useEffect, useState } from "react";
 
 const Confetti = dynamic(() => import("react-confetti"), { ssr: false });
 
@@ -131,8 +131,8 @@ const Section3 = () => {
               index < 4
                 ? "bg-white text-black"
                 : index < 5
-                ? "bg-yellow-500"
-                : "bg-green-500"
+                  ? "bg-yellow-500"
+                  : "bg-green-500"
             }`}
             initial={{ scale: 0, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}

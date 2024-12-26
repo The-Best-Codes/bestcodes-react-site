@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
 import NumberFlow from "@number-flow/react";
-import ReactConfetti from "react-confetti";
+import { motion, useScroll, useTransform } from "motion/react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import ReactConfetti from "react-confetti";
 
 export default function Thanks20K() {
   const [showConfetti, setShowConfetti] = useState(false);

@@ -1,15 +1,15 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { Skeleton } from "@/components/ui/skeleton";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselPrevious,
   CarouselNext,
+  CarouselPrevious,
 } from "@/components/ui/carousel";
+import { Skeleton } from "@/components/ui/skeleton";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 interface Project {
   name: string;
@@ -56,7 +56,7 @@ export default function PrintablesCarousel() {
   }
 
   return (
-    (<Carousel
+    <Carousel
       opts={{
         align: "center",
         loop: true,
@@ -91,7 +91,8 @@ export default function PrintablesCarousel() {
                     loading="lazy"
                     style={{
                       maxWidth: "100%",
-                    }} />
+                    }}
+                  />
                   <h3 className="text-xl font-bold mt-4 text-center text-blue-500 hover:underline max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
                     {project.name}
                   </h3>
@@ -108,8 +109,9 @@ export default function PrintablesCarousel() {
                   className="w-32 h-32 md:w-64 md:h-64 object-cover rounded-lg"
                   style={{
                     maxWidth: "100%",
-                    height: "auto"
-                  }} />
+                    height: "auto",
+                  }}
+                />
                 <h3 className="text-xl font-bold mt-4 text-center text-blue-500 hover:underline max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
                   Not Found
                 </h3>
@@ -120,6 +122,6 @@ export default function PrintablesCarousel() {
       </CarouselContent>
       <CarouselPrevious className="dark:bg-slate-900" />
       <CarouselNext className="dark:bg-slate-900" />
-    </Carousel>)
+    </Carousel>
   );
 }

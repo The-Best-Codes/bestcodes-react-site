@@ -41,7 +41,7 @@ const UnderlineText: React.FC<UnderlineTextProps> = ({
         ([entry]) => {
           setShow(entry.isIntersecting);
         },
-        { threshold: 0.1 }
+        { threshold: 0.1 },
       );
       if (currentRef) {
         observer.observe(currentRef);

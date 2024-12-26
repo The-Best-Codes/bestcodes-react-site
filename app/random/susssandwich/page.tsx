@@ -1,8 +1,7 @@
 "use client";
-import React from "react";
-import { motion } from "motion/react";
-import Header from "@/components/website/header";
 import { Card, CardContent } from "@/components/ui/card";
+import Header from "@/components/website/header";
+import { motion } from "motion/react";
 
 const SussySandwichPage = () => {
   return (

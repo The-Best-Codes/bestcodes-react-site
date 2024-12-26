@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion } from "motion/react";
 import { ArrowUp } from "lucide-react";
+import { motion } from "motion/react";
+import { useEffect, useState } from "react";
 
 export default function Footer() {
   const [isVisible, setIsVisible] = useState(false);

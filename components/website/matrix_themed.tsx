@@ -1,6 +1,6 @@
 "use client";
-import React, { useState, useEffect } from "react";
 import { ReactMatrixAnimation } from "@/components/website/matrix_component";
+import { useEffect, useState } from "react";
 
 const MatrixThemed = () => {
   const [theme, setTheme] = useState("dark"); // Set a default value

@@ -40,7 +40,7 @@ jobs:
               -H "Accept: */*" \
               -H "X-Requested-With: XMLHttpRequest" \
               "https://web.archive.org/save/status/$JOB_ID")
-            
+
             # Check if response is valid JSON
             if ! echo "$RESPONSE" | jq -e . >/dev/null 2>&1; then
               echo "Invalid JSON response"
@@ -48,10 +48,10 @@ jobs:
               ATTEMPT=$((ATTEMPT + 1))
               continue
             fi
-            
+
             STATUS=$(echo "$RESPONSE" | jq -r '.status')
             echo "Current status: $STATUS"
-            
+
             if [ "$STATUS" = "success" ]; then
               echo "Archive job completed successfully!"
               exit 0
@@ -59,7 +59,7 @@ jobs:
               echo "Archive job failed"
               exit 1
             fi
-            
+
             sleep 5
             ATTEMPT=$((ATTEMPT + 1))
           done

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 // @ts-ignore
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
@@ -12,7 +12,12 @@ interface STLViewerProps {
   screenshotRef: React.MutableRefObject<(() => void) | null>;
 }
 
-const STLViewer: React.FC<STLViewerProps> = ({ url, color, rotationSpeed, screenshotRef }) => {
+const STLViewer: React.FC<STLViewerProps> = ({
+  url,
+  color,
+  rotationSpeed,
+  screenshotRef,
+}) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const [scene, setScene] = useState<THREE.Scene | null>(null);
   const [camera, setCamera] = useState<THREE.PerspectiveCamera | null>(null);
@@ -22,10 +27,18 @@ const STLViewer: React.FC<STLViewerProps> = ({ url, color, rotationSpeed, screen
     if (!mountRef.current) return;
 
     const newScene = new THREE.Scene();
-    const newCamera = new THREE.PerspectiveCamera(75, mountRef.current.clientWidth / mountRef.current.clientHeight, 0.1, 1000);
+    const newCamera = new THREE.PerspectiveCamera(
+      75,
+      mountRef.current.clientWidth / mountRef.current.clientHeight,
+      0.1,
+      1000,
+    );
     const newRenderer = new THREE.WebGLRenderer();
 
-    newRenderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
+    newRenderer.setSize(
+      mountRef.current.clientWidth,
+      mountRef.current.clientHeight,
+    );
     mountRef.current.appendChild(newRenderer.domElement);
 
     const controls = new OrbitControls(newCamera, newRenderer.domElement);
@@ -80,18 +93,22 @@ const STLViewer: React.FC<STLViewerProps> = ({ url, color, rotationSpeed, screen
 
     const handleResize = () => {
       if (mountRef.current) {
-        newCamera.aspect = mountRef.current.clientWidth / mountRef.current.clientHeight;
+        newCamera.aspect =
+          mountRef.current.clientWidth / mountRef.current.clientHeight;
         newCamera.updateProjectionMatrix();
-        newRenderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
+        newRenderer.setSize(
+          mountRef.current.clientWidth,
+          mountRef.current.clientHeight,
+        );
       }
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     const mountElement = mountRef.current;
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
       mountElement?.removeChild(newRenderer.domElement);
     };
   }, [url, color, rotationSpeed]);
@@ -100,10 +117,10 @@ const STLViewer: React.FC<STLViewerProps> = ({ url, color, rotationSpeed, screen
     if (scene && camera && renderer) {
       screenshotRef.current = () => {
         renderer.render(scene, camera);
-        const screenshot = renderer.domElement.toDataURL('image/png');
-        const link = document.createElement('a');
+        const screenshot = renderer.domElement.toDataURL("image/png");
+        const link = document.createElement("a");
         link.href = screenshot;
-        link.download = 'stl_screenshot.png';
+        link.download = "stl_screenshot.png";
         link.click();
       };
     }

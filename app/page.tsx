@@ -1,25 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import React, { useEffect, useRef } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { motion, useScroll, useTransform } from "motion/react";
+import Snow from "@/components/christmas/Snow";
 import {
   Card,
+  CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
-  CardDescription,
-  CardContent,
 } from "@/components/ui/card";
-import Header from "@/components/website/header";
 import ChristianCarousel from "@/components/website/christian_carousel";
+import ExploreMorePages from "@/components/website/explore_pages";
+import Footer from "@/components/website/footer";
+import Header from "@/components/website/header";
+import MatrixThemed from "@/components/website/matrix_themed";
 import PinnedCarousel from "@/components/website/pinned_carousel";
 import PrintablesCarousel from "@/components/website/printables_carousel";
 import SocialMediaLinks from "@/components/website/socials";
-import MatrixThemed from "@/components/website/matrix_themed";
-import ExploreMorePages from "@/components/website/explore_pages";
-import Footer from "@/components/website/footer";
-import Snow from "@/components/christmas/Snow";
+import { motion, useScroll, useTransform } from "motion/react";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useRef } from "react";
 
 const container = {
   hidden: { opacity: 1, scale: 0 },

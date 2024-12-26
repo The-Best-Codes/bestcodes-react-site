@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title:
     "Scroll Animation Demo - Animate on scroll with Framer Motion | BestCodes",
 
-  description: "Scroll Animation Demo - Animate on scroll with Framer Motion"
+  description: "Scroll Animation Demo - Animate on scroll with Framer Motion",
 };
 
 export default function RootLayout({

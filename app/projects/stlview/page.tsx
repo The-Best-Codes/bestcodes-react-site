@@ -1,11 +1,9 @@
 "use client";
-import React, { useState, useEffect, useRef, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
-import dynamic from "next/dynamic";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -14,10 +12,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
-import { Upload, Loader2, Camera, Download, X } from "lucide-react";
-import { Label } from "@/components/ui/label";
-import Header from "@/components/website/header";
 import ExploreMorePages from "@/components/website/explore_pages";
+import Header from "@/components/website/header";
+import { Camera, Loader2, Upload, X } from "lucide-react";
+import dynamic from "next/dynamic";
+import { useSearchParams } from "next/navigation";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 
 const STLViewer = dynamic(() => import("@/components/stlview/STLViewer"), {
   ssr: false,

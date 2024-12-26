@@ -1,12 +1,12 @@
 "use client";
-import React, { useState, useCallback, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { RefreshCcw, Printer, Download } from "lucide-react";
 import Header from "@/components/website/header";
+import { Download, Printer, RefreshCcw } from "lucide-react";
 import Head from "next/head";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 interface Cell {
   x: number;

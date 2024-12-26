@@ -1,18 +1,18 @@
-import { AccordionItem } from "../../types/accordion";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
-  DialogTitle,
   DialogDescription,
   DialogFooter,
+  DialogHeader,
+  DialogTitle,
 } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { GripVertical, Trash2 } from "lucide-react";
 import { useState } from "react";
+import { AccordionItem } from "../../types/accordion";
 
 interface AccordionItemEditorProps {
   item: AccordionItem;

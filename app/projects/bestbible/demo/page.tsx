@@ -1,14 +1,14 @@
-import Header from "@/components/website/header";
 import SyntaxHighlighter from "@/components/website/code_syntax";
+import Header from "@/components/website/header";
 import {
-  getChapter,
-  getVerse,
-  getBook,
-  getRange,
-  getBibleBooks,
-  getChapterCount,
-  getVerseCount,
   bibleStats,
+  getBibleBooks,
+  getBook,
+  getChapter,
+  getChapterCount,
+  getRange,
+  getVerse,
+  getVerseCount,
 } from "best-bible";
 
 export default function BestBible() {
@@ -28,7 +28,7 @@ export default function BestBible() {
             {`const { getVerse } = require("best-bible");
 // Fetch data
 const dataResult = getVerse("Genesis", 1, 1);
-            
+
 // Log the result
 console.log(dataResult);`}
           </SyntaxHighlighter>
@@ -50,7 +50,7 @@ console.log(dataResult);`}
             {`const { getVerse } = require("best-bible");
 // Fetch data
 const dataResult = getVerse("Genesis", 1, 1, "indexed");
-            
+
 // Log the result
 console.log(dataResult);`}
           </SyntaxHighlighter>
@@ -72,7 +72,7 @@ console.log(dataResult);`}
             {`const { getChapter } = require("best-bible");
 // Fetch data
 const dataResult = getChapter("Genesis", 1);
-            
+
 // Log the result
 console.log(dataResult);`}
           </SyntaxHighlighter>
@@ -94,7 +94,7 @@ console.log(dataResult);`}
             {`const { getChapter } = require("best-bible");
 // Fetch data
 const dataResult = getChapter("Genesis", 1, "indexed");
-            
+
 // Log the result
 console.log(dataResult);`}
           </SyntaxHighlighter>
@@ -116,7 +116,7 @@ console.log(dataResult);`}
             {`const { getBook } = require("best-bible");
 // Fetch data
 const dataResult = getBook("Jude"); // Jude is a lot shorter than Genesis, it only has one chapter
-            
+
 // Log the result
 console.log(dataResult);`}
           </SyntaxHighlighter>
@@ -138,7 +138,7 @@ console.log(dataResult);`}
             {`const { getBook } = require("best-bible");
 // Fetch data
 const dataResult = getBook("Jude", "indexed"); // Jude is a lot shorter than Genesis, it only has one chapter
-            
+
 // Log the result
 console.log(dataResult);`}
           </SyntaxHighlighter>
@@ -160,7 +160,7 @@ console.log(dataResult);`}
             {`const { getRange } = require("best-bible");
 // Fetch data
 const dataResult = getRange("Genesis", 1, 1, "Genesis", 1, 10);
-            
+
 // Log the result
 console.log(dataResult);`}
           </SyntaxHighlighter>
@@ -173,7 +173,7 @@ console.log(dataResult);`}
             {`${JSON.stringify(
               getRange("Genesis", 1, 1, "Genesis", 1, 10),
               null,
-              2
+              2,
             )}`}
           </SyntaxHighlighter>
         </div>
@@ -186,7 +186,7 @@ console.log(dataResult);`}
             {`const { getRange } = require("best-bible");
 // Fetch data
 const dataResult = getRange("Genesis", 1, 1, "Genesis", 1, 10, "indexed");
-            
+
 // Log the result
 console.log(dataResult);`}
           </SyntaxHighlighter>
@@ -199,7 +199,7 @@ console.log(dataResult);`}
             {`${JSON.stringify(
               getRange("Genesis", 1, 1, "Genesis", 1, 10, "indexed"),
               null,
-              2
+              2,
             )}`}
           </SyntaxHighlighter>
         </div>
@@ -212,7 +212,7 @@ console.log(dataResult);`}
             {`const { getBibleBooks } = require("best-bible");
 // Fetch data
 const dataResult = getBibleBooks();
-            
+
 // Log the result
 console.log(dataResult);`}
           </SyntaxHighlighter>
@@ -234,7 +234,7 @@ console.log(dataResult);`}
             {`const { getChapterCount } = require("best-bible");
 // Fetch data
 const dataResult = getChapterCount("Genesis");
-            
+
 // Log the result
 console.log(dataResult);`}
           </SyntaxHighlighter>
@@ -256,7 +256,7 @@ console.log(dataResult);`}
             {`const { getVerseCount } = require("best-bible");
 // Fetch data
 const dataResult = getVerseCount("Genesis", 1);
-            
+
 // Log the result
 console.log(dataResult);`}
           </SyntaxHighlighter>
@@ -278,7 +278,7 @@ console.log(dataResult);`}
             {`const { bibleStats } = require("best-bible");
 // Fetch data
 const dataResult = bibleStats();
-            
+
 // Log the result
 console.log(dataResult);`}
           </SyntaxHighlighter>

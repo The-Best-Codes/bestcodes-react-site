@@ -1,7 +1,7 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Snowflake, Slash } from "lucide-react";
+import { Slash, Snowflake } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 interface Snowflake {
   x: number;

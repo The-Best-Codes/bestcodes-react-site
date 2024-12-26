@@ -14,15 +14,14 @@ import { Textarea } from "@/components/ui/textarea";
 import ExploreMorePages from "@/components/website/explore_pages";
 import Footer from "@/components/website/footer";
 import Header from "@/components/website/header";
+import { useToast } from "@/hooks/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Turnstile } from "@marsidev/react-turnstile";
-import { Info } from "lucide-react";
 import axios from "axios";
-import { Check } from "lucide-react";
+import { Check, Info } from "lucide-react";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useToast } from "@/hooks/use-toast";
 
 const formSchema = z.object({
   name: z.string().min(2, {
