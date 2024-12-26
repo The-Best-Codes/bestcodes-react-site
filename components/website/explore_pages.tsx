@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MagicCard } from "@/components/ui/magic-card";
-import axios from "axios";
+import PagePathNames from "@/public/assets/explore_pages/names.json";
 import { AlertCircle, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 interface Page {
   name: string;
@@ -16,29 +16,24 @@ const ExploreMorePages: React.FC<{
   className?: string;
 }> = ({ currentPath, className }) => {
   const [pages, setPages] = useState<Page[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(0);
 
   const CARDS_PER_PAGE = 6;
+  const allPages = PagePathNames as Page[];
 
-  useEffect(() => {
-    const fetchPages = async () => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        const response = await axios.get("/api/explore_pages");
-        const allPages = response.data;
-        setPages(allPages.filter((page: Page) => page.path !== currentPath));
-      } catch (error) {
-        console.error("Error fetching pages:", error);
-        setError("Failed to fetch pages. Please try again later.");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchPages();
+  React.useEffect(() => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      setPages(allPages.filter((page) => page.path !== currentPath));
+    } catch (err) {
+      console.log(err);
+      setError("Failed to fetch pages");
+    } finally {
+      setIsLoading(false);
+    }
   }, [currentPath]);
 
   const totalPages = Math.ceil(pages.length / CARDS_PER_PAGE);

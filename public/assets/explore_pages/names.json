@@ -8,10 +8,6 @@
     "name": "Contact"
   },
   {
-    "path": "/blog",
-    "name": "Blog"
-  },
-  {
     "path": "/projects/accordions",
     "name": "Accordion FAQ Generator"
   },
