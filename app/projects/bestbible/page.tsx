@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import SyntaxHighlighter from "@/components/website/code_syntax";
 import Header from "@/components/website/header";
 import Image from "next/image";
@@ -45,14 +44,6 @@ export default function BestBible() {
                   height: "auto",
                 }}
               />
-              <Button
-                aria-label="Usage Demo"
-                className="w-fit text-3xl bg-blue-500 h-16"
-              >
-                <Link prefetch={true} href="/projects/bestbible/demo">
-                  Usage Demo
-                </Link>
-              </Button>
             </div>
 
             <p className="text-center italic mb-8 text-gray-600 dark:text-gray-300">
