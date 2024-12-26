@@ -1,8 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
+import { NextRequest, NextResponse } from "next/server";
 import getCoverImage from "../../../../utils/api/github/repo-cover-image";
 
-export const runtime = "edge";
 export const revalidate = 1800;
 
 /**
