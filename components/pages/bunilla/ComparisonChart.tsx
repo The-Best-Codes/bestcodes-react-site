@@ -57,7 +57,11 @@ export function ComparisonChart() {
                 <h3 className="text-xl font-semibold">{comparison.metric}</h3>
                 <span className="text-cyan-400 font-mono">
                   {comparison.difference}{" "}
-                  {nextjsWidth > bunillaWidth ? "Faster" : "Smaller"}
+                  {comparison.metric === "Dist Folder Size"
+                    ? "Smaller"
+                    : nextjsWidth > bunillaWidth
+                      ? "Faster"
+                      : "Smaller"}
                 </span>
               </div>
               <div className="space-y-3">
