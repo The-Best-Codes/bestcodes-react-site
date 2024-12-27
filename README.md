@@ -8,7 +8,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## BestCodes Website - React
 
-This is the open source code for my website. I used `motion` (previously `framer-motion`) for the animations, `nodemailer` for the contact page, and tailwind for styling.
+This is the open source code for my website. I used `motion` for the animations, `nodemailer` for the contact page, and tailwind for styling.
 Check it out here:
 **[https://bestcodes.dev](https://bestcodes.dev)**
 
