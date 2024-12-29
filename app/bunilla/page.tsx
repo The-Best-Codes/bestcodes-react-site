@@ -123,7 +123,7 @@ export default function Home() {
             onClick={handleGetStarted}
             className="px-8 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold hover:opacity-90 transition-opacity"
           >
-            Request Access
+            Request to Join Waitlist
           </button>
         </motion.div>
       </div>

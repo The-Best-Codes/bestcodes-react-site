@@ -34,9 +34,9 @@ export default function Snow() {
   // Responsive snowflake count
   const getSnowflakeCount = () => {
     if (typeof window === "undefined") return 200; // Default for SSR
-    if (window.innerWidth < 768) return 50; // Mobile
-    if (window.innerWidth < 1024) return 100; // Tablet
-    return 200; // Desktop
+    if (window.innerWidth < 768) return 40; // Mobile
+    if (window.innerWidth < 1024) return 80; // Tablet
+    return 120; // Desktop
   };
 
   useEffect(() => {
