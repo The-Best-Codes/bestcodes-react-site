@@ -1,6 +1,6 @@
 {
   "name": "bestcodes-react-site",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "private": true,
   "repository": {
     "type": "git",
@@ -38,7 +38,7 @@
     "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "echarts": "^5.5.1",
+    "echarts": "^5.6.0",
     "echarts-for-react": "^3.0.2",
     "embla-carousel-react": "^8.5.1",
     "js-levenshtein": "^1.1.6",
@@ -50,7 +50,7 @@
     "prismjs": "^1.29.0",
     "qrcode.react": "^4.2.0",
     "react": "^19.0.0",
-    "react-confetti": "^6.1.0",
+    "react-confetti": "^6.2.2",
     "react-day-picker": "^9.4.4",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
