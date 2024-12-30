@@ -112,33 +112,36 @@ export default function Home() {
 
   // Generate an array of years for the dropdown
   const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: 10 }, (_, i) => currentYear + i);
+  const years = Array.from({ length: 4 }, (_, i) => currentYear + i);
 
   return (
     <main>
       <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-4">
-        <h1 className="text-4xl font-bold mb-8">New Year Countdown</h1>
-        <Select
-          value={selectedYear.toString()}
-          onValueChange={(value) => setSelectedYear(parseInt(value, 10))}
-        >
-          <SelectTrigger className="w-[180px] mb-4 bg-gray-800 border-gray-700 text-white rounded-lg">
-            <SelectValue placeholder="Select a year" />
-          </SelectTrigger>
-          <SelectContent className="bg-gray-800 border-gray-700 text-white rounded-lg">
-            {years.map((year) => (
-              <SelectItem key={year} value={year.toString()}>
-                {year}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <h1 className="text-4xl font-bold mb-2">New Year Countdown</h1>
         <Countdown
           days={timeLeft.days}
           hours={timeLeft.hours}
           minutes={timeLeft.minutes}
           seconds={timeLeft.seconds}
         />
+        <div className="text-sm text-gray-400 flex items-center">
+          Counting down to January 1st,
+          <Select
+            value={selectedYear.toString()}
+            onValueChange={(value) => setSelectedYear(parseInt(value, 10))}
+          >
+            <SelectTrigger className="bg-gray-800 border-gray-700 text-white rounded-lg h-6 w-16 text-sm ml-1 p-1">
+              <SelectValue placeholder="Year" />
+            </SelectTrigger>
+            <SelectContent className="bg-gray-800 border-gray-700 text-white rounded-lg">
+              {years.map((year) => (
+                <SelectItem key={year} value={year.toString()}>
+                  {year}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
         {showFireworks && (
           <Fireworks
             options={{
