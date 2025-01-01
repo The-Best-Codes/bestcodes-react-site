@@ -157,6 +157,7 @@ export default function Home() {
               height: "100%",
               position: "fixed",
               background: "transparent",
+              pointerEvents: "none",
               zIndex: 10,
             }}
           />
