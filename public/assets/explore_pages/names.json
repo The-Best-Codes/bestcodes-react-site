@@ -8,6 +8,10 @@
     "name": "Contact"
   },
   {
+    "path": "/projects/new-year-countdown",
+    "name": "New Year Countdown with Fireworks"
+  },
+  {
     "path": "/projects/accordions",
     "name": "Accordion FAQ Generator"
   },
@@ -57,7 +61,7 @@
   },
   {
     "path": "/random/susssandwich",
-    "name": "Random Shoutout to SussSandwich"
+    "name": "Random Page"
   },
   {
     "path": "/math/sine-cosine-visual",
