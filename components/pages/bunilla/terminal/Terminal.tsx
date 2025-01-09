@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Terminal as TerminalIcon } from "lucide-react";
+import { motion } from "motion/react";
 import { TerminalOutput } from "./TerminalOutput";
 
 interface TerminalProps {
