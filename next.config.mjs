@@ -1,6 +1,11 @@
 import { withSentryConfig } from "@sentry/nextjs";
+import ReactComponentName from "react-scan/react-component-name/webpack";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  webpack: (config) => {
+    config.plugins.push(ReactComponentName({}));
+    return config;
+  },
   typescript: {
     ignoreBuildErrors: true,
   },
