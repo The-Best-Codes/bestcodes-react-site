@@ -1,7 +1,9 @@
+import ClientOnly from "@/components/client-only";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Monitoring } from "react-scan/monitoring/next";
 import "./globals.css";
+import ServiceWorker from "./sw";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -68,7 +70,9 @@ export default function RootLayout({
           apiKey="AWmxfYKd6GJbhpEEBTXRyo9n3Cn9TlSr" // Safe to expose publically
           url="https://monitoring.react-scan.com/api/v1/ingest"
         />
-        {children}
+        <ClientOnly>
+          <ServiceWorker>{children}</ServiceWorker>
+        </ClientOnly>
       </body>
     </html>
   );

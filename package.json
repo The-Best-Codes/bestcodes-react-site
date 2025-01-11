@@ -1,6 +1,6 @@
 {
   "name": "bestcodes-react-site",
-  "version": "0.8.8",
+  "version": "0.8.9",
   "private": true,
   "repository": {
     "type": "git",
@@ -8,7 +8,8 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "prebuild": "echo \"IMPORTANT: Increment the version number in package.json before each deployment to invalidate the service worker cache.\"",
+    "build": "npm run prebuild && next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -44,7 +45,7 @@
     "embla-carousel-react": "^8.5.2",
     "js-levenshtein": "^1.1.6",
     "lucide-react": "^0.471.0",
-    "motion": "^11.16.7",
+    "motion": "^11.17.0",
     "next": "^15.1.4",
     "node-html-parser": "^7.0.1",
     "nodemailer": "^6.9.16",
