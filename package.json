@@ -1,6 +1,6 @@
 {
   "name": "bestcodes-react-site",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "private": true,
   "repository": {
     "type": "git",
@@ -8,8 +8,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "prebuild": "echo \"IMPORTANT: Increment the version number in package.json before each deployment to invalidate the service worker cache.\"",
-    "build": "npm run prebuild && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -34,6 +33,7 @@
     "@radix-ui/react-tabs": "^1.1.2",
     "@radix-ui/react-toast": "^1.2.5",
     "@sentry/nextjs": "^8.51.0",
+    "@tailwindcss/postcss": "^4.0.0",
     "@tailwindcss/typography": "^0.5.16",
     "@types/react-dom": "^19.0.3",
     "@types/three": "^0.172.0",
@@ -68,7 +68,6 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.0.0",
     "@types/js-levenshtein": "^1.1.3",
     "@types/node": "^22.10.10",
     "@types/nodemailer": "^6.4.17",
