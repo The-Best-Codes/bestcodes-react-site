@@ -49,7 +49,7 @@ const CongratulationsPageContent: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 to-green-600 text-white pb-8">
+    <div className="min-h-screen bg-linear-to-br from-purple-600 to-green-600 text-white pb-8">
       <Header />
       {showConfetti && <Confetti style={{ position: "fixed" }} />}
       <Section1 />

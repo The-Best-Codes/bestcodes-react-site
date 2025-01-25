@@ -159,7 +159,7 @@ const PageCard: React.FC<{ page: Page; index: number }> = ({ page, index }) => {
           </CardHeader>
           <CardContent className="flex justify-between items-center">
             <p
-              className="text-sm text-gray-500 dark:text-gray-400 truncate flex-grow mr-2"
+              className="text-sm text-gray-500 dark:text-gray-400 truncate grow mr-2"
               title={page.path}
             >
               {page.path}
@@ -168,7 +168,7 @@ const PageCard: React.FC<{ page: Page; index: number }> = ({ page, index }) => {
               variant="outline"
               size="sm"
               asChild
-              className="bg-white text-gray-800 border-gray-300 hover:bg-gray-100 dark:bg-slate-700 dark:text-gray-100 dark:border-slate-600 dark:hover:bg-slate-600 dark:hover:text-white transition-colors duration-200 flex-shrink-0"
+              className="bg-white text-gray-800 border-gray-300 hover:bg-gray-100 dark:bg-slate-700 dark:text-gray-100 dark:border-slate-600 dark:hover:bg-slate-600 dark:hover:text-white transition-colors duration-200 shrink-0"
             >
               <a href={page.path} className="flex items-center">
                 Visit <ChevronRight className="ml-2 h-4 w-4" />

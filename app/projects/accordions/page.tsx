@@ -297,7 +297,7 @@ const AccordionEditor: React.FC = () => {
               showPreview ? "lg:w-1/2" : "lg:w-full"
             } flex flex-col h-full`}
           >
-            <div className="space-y-6 flex-grow mb-2">
+            <div className="space-y-6 grow mb-2">
               <HeaderSection
                 header={header}
                 subheader={subheader}

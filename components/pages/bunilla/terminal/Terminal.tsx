@@ -22,7 +22,7 @@ export function Terminal({ title, isActive = true, lines }: TerminalProps) {
         animate={{ opacity: 1 }}
         className="font-mono bg-gray-900/50 p-4 rounded-lg border border-gray-800 relative"
       >
-        <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-gray-900/50 to-transparent z-10" />
+        <div className="absolute top-0 left-0 right-0 h-6 bg-linear-to-b from-gray-900/50 to-transparent z-10" />
         <TerminalOutput lines={lines} />
       </motion.div>
     </div>

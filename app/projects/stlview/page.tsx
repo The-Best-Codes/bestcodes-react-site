@@ -147,7 +147,7 @@ const HomePageContent: React.FC = () => {
                     >
                       Upload STL File
                     </Button>
-                    <span className="text-sm flex-grow">
+                    <span className="text-sm grow">
                       {file ? file.name : "No file chosen"}
                     </span>
                     {file && (

@@ -115,7 +115,7 @@ export default function HeaderMain() {
       }}
     >
       <motion.div
-        className="bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm shadow-lg overflow-hidden"
+        className="bg-white/50 dark:bg-slate-900/50 backdrop-blur-xs shadow-lg overflow-hidden"
         style={{
           borderRadius: headerBorderRadius,
         }}

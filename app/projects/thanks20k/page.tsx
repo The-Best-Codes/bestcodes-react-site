@@ -50,7 +50,7 @@ export default function Thanks20K() {
   }, [scrollYProgress, showConfetti]);
 
   return (
-    <div className="min-h-[500vh] relative bg-gradient-to-b from-blue-500 via-pink-400 to-orange-400">
+    <div className="min-h-[500vh] relative bg-linear-to-b from-blue-500 via-pink-400 to-orange-400">
       <div className="fixed inset-0 flex items-center justify-center">
         <motion.p
           style={{ opacity: initialTextOpacity }}

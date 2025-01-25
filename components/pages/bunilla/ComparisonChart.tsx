@@ -78,7 +78,7 @@ export function ComparisonChart() {
                     whileInView={{ width: `${bunillaWidth}%` }}
                     viewport={{ once: true }}
                     transition={{ duration: 1, delay: index * 0.2 }}
-                    className="h-8 bg-gradient-to-r from-cyan-500 to-cyan-400 rounded-md flex items-center justify-end px-3"
+                    className="h-8 bg-linear-to-r from-cyan-500 to-cyan-400 rounded-md flex items-center justify-end px-3"
                   />
                 </div>
                 <div className="space-y-2">

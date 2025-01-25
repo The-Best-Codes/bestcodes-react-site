@@ -194,7 +194,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center bg-gradient-to-b from-white to-slate-100 dark:from-slate-800 dark:to-slate-900">
+    <main className="flex min-h-screen flex-col items-center bg-linear-to-b from-white to-slate-100 dark:from-slate-800 dark:to-slate-900">
       <Header />
       <div className="container mx-auto p-4 mt-10">
         <Card className="max-w-4xl mx-auto dark:bg-slate-800 dark:text-slate-100 dark:border-slate-700">

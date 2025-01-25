@@ -149,7 +149,7 @@ export default function Snow() {
       )}
       <Button
         onClick={() => setIsSnowing(!isSnowing)}
-        className="fixed bottom-4 left-4 z-50 text-black dark:text-white bg-slate-400/50 hover:bg-slate-300/50 dark:bg-slate-800/50 dark:hover:bg-slate-700/50 backdrop-blur-sm"
+        className="fixed bottom-4 left-4 z-50 text-black dark:text-white bg-slate-400/50 hover:bg-slate-300/50 dark:bg-slate-800/50 dark:hover:bg-slate-700/50 backdrop-blur-xs"
         size="icon"
       >
         {isSnowing ? (

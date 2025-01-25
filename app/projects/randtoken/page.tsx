@@ -97,7 +97,7 @@ const RandomTokenGenerator = () => {
                 value={token}
                 readOnly
                 aria-label="Generated Token"
-                className="flex-grow bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                className="grow bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
               />
               <Button
                 onClick={copyToClipboard}
