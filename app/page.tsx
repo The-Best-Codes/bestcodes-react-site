@@ -19,48 +19,9 @@ import SocialMediaLinks from "@/components/website/socials";
 import { motion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
-
-const container = {
-  hidden: { opacity: 1, scale: 0 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      delayChildren: 0.3,
-      staggerChildren: 0.5,
-    },
-  },
-};
-
-const item = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-  },
-};
 
 export default function Home() {
   const { scrollY } = useScroll();
-  const textRef = useRef(null);
-
-  useEffect(() => {
-    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    const text: any = textRef.current;
-    if (text) {
-      text.innerHTML = text.textContent.replace(
-        /\S/g,
-        "<span class='letter'>$&</span>",
-      );
-
-      const letters = text.querySelectorAll(".letter");
-      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-      letters.forEach((letter: any, index: any) => {
-        letter.style.animationDelay = `${index * 50}ms`;
-      });
-    }
-  }, []);
 
   const waveImageScale = useTransform(scrollY, [0, 200], [1, 1.5]);
   const waveImageOpacity = useTransform(scrollY, [0, 200], [1, 0]);
@@ -95,36 +56,23 @@ export default function Home() {
           </div>
         </div>
         <section className="flex flex-col items-center text-center p-16">
-          <motion.div className="mb-4 w-fit">
-            <motion.img
+          <div className="mb-4 w-fit">
+            <img
               src="/image/best_codes_logo_low_res.png"
               alt="logo"
-              initial={{ scale: 0 }}
-              animate={{ scale: 2 }}
-              whileInView={{ scale: 1 }}
-              whileHover={{ scale: 1.2 }}
               className="h-16 w-16 sm:h-16 sm:w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 rounded-full"
             />
-          </motion.div>
+          </div>
           <h2 className="text-5xl sm:text-5xl md:text-6xl lg:text-8xl text-blue-500 font-bold mb-4">
             I&apos;m BestCodes
           </h2>
-          <motion.div variants={container} initial="hidden" animate="visible">
-            <motion.span
-              variants={item}
-              className="text-xl sm:text-xl md:text-3xl lg:text-5xl"
-              ref={textRef}
-            >
-              Christian, Coder, Creator
-            </motion.span>
-          </motion.div>
+
+          <span className="text-xl sm:text-xl md:text-3xl lg:text-5xl text-blue-500">
+            Christian, Coder, Creator
+          </span>
         </section>
         <div className="h-fit w-full p-8">
-          <motion.div
-            initial={{ x: -100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            className="w-full sm:w-full md:w-3/4 lg:w-2/3"
-          >
+          <div className="w-full sm:w-full md:w-3/4 lg:w-2/3">
             <Card className="dark:bg-slate-800 dark:border-none">
               <CardHeader>
                 <CardTitle className="flex flex-row items-center gap-2">
@@ -170,14 +118,10 @@ export default function Home() {
                 </div>
               </CardContent>
             </Card>
-          </motion.div>
+          </div>
         </div>
         <div className="h-fit w-full flex justify-center items-center p-8">
-          <motion.div
-            initial={{ y: 100, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            className="w-full sm:w-full md:w-3/4 lg:w-2/3"
-          >
+          <div className="w-full sm:w-full md:w-3/4 lg:w-2/3">
             <Card className="dark:bg-slate-800 dark:border-none">
               <CardHeader>
                 <CardTitle className="flex flex-row items-center gap-2">
@@ -267,14 +211,10 @@ export default function Home() {
                 </div>
               </CardContent>
             </Card>
-          </motion.div>
+          </div>
         </div>
         <div className="h-fit w-full flex justify-end items-end p-8">
-          <motion.div
-            initial={{ x: 100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            className="w-full sm:w-full md:w-3/4 lg:w-2/3"
-          >
+          <div className="w-full sm:w-full md:w-3/4 lg:w-2/3">
             <Card className="dark:bg-slate-800 dark:border-none">
               <CardHeader>
                 <CardTitle className="flex flex-row items-center gap-2">
@@ -334,14 +274,10 @@ export default function Home() {
                 </div>
               </CardContent>
             </Card>
-          </motion.div>
+          </div>
         </div>
         <section className="h-fit w-full flex justify-center items-center p-8 mt-32 dark:text-white">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="w-full flex flex-col gap-4 justify-center items-center"
-          >
+          <div className="w-full flex flex-col gap-4 justify-center items-center">
             <div className="flex flex-row items-center justify-center gap-2">
               <Image
                 src="/image/emoji/email.png"
@@ -360,14 +296,10 @@ export default function Home() {
               </h1>
             </div>
             <SocialMediaLinks />
-          </motion.div>
+          </div>
         </section>
         <section className="h-fit w-full flex justify-center items-center p-8 mt-32">
-          <motion.div
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            className="w-full flex flex-col gap-4 justify-center items-center"
-          >
+          <div className="w-full flex flex-col gap-4 justify-center items-center">
             <div className="flex flex-row items-center justify-center gap-2">
               <Image
                 src="/image/emoji/winking_face.png"
@@ -391,7 +323,7 @@ export default function Home() {
               For now, you can just check out some of my other pages on this
               site.
             </p>
-          </motion.div>
+          </div>
         </section>
       </div>
       <ExploreMorePages currentPath="/" />
