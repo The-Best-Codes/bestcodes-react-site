@@ -29,6 +29,7 @@ const nextConfig = {
     turbo: {
       treeShaking: true,
     },
+    reactCompiler: true,
   },
 };
 
