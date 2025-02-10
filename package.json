@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@fireworks-js/react": "^2.10.8",
-    "@hello-pangea/dnd": "^17.0.0",
+    "@hello-pangea/dnd": "^18.0.1",
     "@hookform/resolvers": "^3.10.0",
     "@marsidev/react-turnstile": "^1.1.0",
     "@number-flow/react": "^0.5.5",
