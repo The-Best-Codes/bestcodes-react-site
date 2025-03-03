@@ -60,8 +60,8 @@ export function ComparisonChart() {
                   {comparison.metric === "Dist Folder Size"
                     ? "Smaller"
                     : nextjsWidth > bunillaWidth
-                      ? "Faster"
-                      : "Smaller"}
+                    ? "Faster"
+                    : "Smaller"}
                 </span>
               </div>
               <div className="space-y-3">

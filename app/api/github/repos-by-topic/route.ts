@@ -123,7 +123,9 @@ async function fetchReposByTopic(
   page = 1,
 ): Promise<SearchResponse> {
   const query = `topic:${topic} user:${username}`;
-  const url = `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}&sort=updated&order=desc&per_page=${PER_PAGE}&page=${page}`;
+  const url = `https://api.github.com/search/repositories?q=${
+    encodeURIComponent(query)
+  }&sort=updated&order=desc&per_page=${PER_PAGE}&page=${page}`;
 
   const response = await axios.get(url, {
     headers: {
@@ -159,7 +161,7 @@ export async function GET(request: NextRequest) {
 
       if (includeCover) {
         const repoPromises = data.items.map((repo) =>
-          getCoverImage(repo.html_url),
+          getCoverImage(repo.html_url)
         );
         const coverImagePaths = await Promise.all(repoPromises);
         data.items.forEach((repo, index) => {

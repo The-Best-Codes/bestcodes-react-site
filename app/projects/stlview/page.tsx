@@ -200,17 +200,19 @@ const HomePageContent: React.FC = () => {
                   />
                 </div>
                 <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Loading
-                    </>
-                  ) : (
-                    <>
-                      <Upload className="mr-2 h-4 w-4" />
-                      Load STL
-                    </>
-                  )}
+                  {isLoading
+                    ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Loading
+                      </>
+                    )
+                    : (
+                      <>
+                        <Upload className="mr-2 h-4 w-4" />
+                        Load STL
+                      </>
+                    )}
                 </Button>
               </form>
               {error && (

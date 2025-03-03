@@ -115,96 +115,101 @@ export default function Contact() {
         </div>
         <Card className="dark:bg-slate-800 dark:text-white dark:border-none w-full max-w-3xl mx-auto">
           <CardContent className="rounded-lg flex flex-col p-4 sm:p-4 md:p-6 lg:p-8">
-            {isSuccess ? (
-              <div className="max-w-lg w-lg mx-auto">
-                <div className="flex items-center justify-center mb-4">
-                  <Check className="w-8 h-8 text-green-500" />
+            {isSuccess
+              ? (
+                <div className="max-w-lg w-lg mx-auto">
+                  <div className="flex items-center justify-center mb-4">
+                    <Check className="w-8 h-8 text-green-500" />
+                  </div>
+                  <p className="text-xl text-center dark:text-white">
+                    Message sent successfully!
+                  </p>
                 </div>
-                <p className="text-xl text-center dark:text-white">
-                  Message sent successfully!
-                </p>
-              </div>
-            ) : (
-              <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-8 w-full"
-                >
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-col justify-left">
-                        <FormLabel className="text-left">Name</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="Your name"
-                            className="text-black dark:text-white dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-300"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-col justify-left">
-                        <FormLabel className="text-left">Email</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="Your email"
-                            className="text-black dark:text-white dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-300"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-col justify-left">
-                        <FormLabel className="text-left">Message</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="Your message"
-                            className="max-h-96 text-black dark:text-white dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-300"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  {isDevelopment ? (
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-2 p-4 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-                      <Info className="h-full w-full max-w-20 max-h-20 sm:w-10 sm:h-10 text-blue-500" />
-                      <p className="text-sm text-blue-700 dark:text-blue-300 w-full">
-                        Cloudflare Turnstile is disabled in development mode. It
-                        will be enabled in production. If you submit this form
-                        in development, you will receive an error due to the
-                        cloudflare turnstile not being solved.
-                      </p>
-                    </div>
-                  ) : (
-                    <Turnstile
-                      ref={turnstileRef}
-                      siteKey="0x4AAAAAAAfgP80mkF0iiKza"
-                      onError={console.error}
+              )
+              : (
+                <Form {...form}>
+                  <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-8 w-full"
+                  >
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-col justify-left">
+                          <FormLabel className="text-left">Name</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Your name"
+                              className="text-black dark:text-white dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-300"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
-                  )}
-                  <Button type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? "Submitting..." : "Submit"}
-                  </Button>
-                  {error && <p className="text-red-500 mt-2">{error}</p>}
-                </form>
-              </Form>
-            )}
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-col justify-left">
+                          <FormLabel className="text-left">Email</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Your email"
+                              className="text-black dark:text-white dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-300"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="message"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-col justify-left">
+                          <FormLabel className="text-left">Message</FormLabel>
+                          <FormControl>
+                            <Textarea
+                              placeholder="Your message"
+                              className="max-h-96 text-black dark:text-white dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-300"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    {isDevelopment
+                      ? (
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 p-4 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+                          <Info className="h-full w-full max-w-20 max-h-20 sm:w-10 sm:h-10 text-blue-500" />
+                          <p className="text-sm text-blue-700 dark:text-blue-300 w-full">
+                            Cloudflare Turnstile is disabled in development
+                            mode. It will be enabled in production. If you
+                            submit this form in development, you will receive an
+                            error due to the cloudflare turnstile not being
+                            solved.
+                          </p>
+                        </div>
+                      )
+                      : (
+                        <Turnstile
+                          ref={turnstileRef}
+                          siteKey="0x4AAAAAAAfgP80mkF0iiKza"
+                          onError={console.error}
+                        />
+                      )}
+                    <Button type="submit" disabled={isSubmitting}>
+                      {isSubmitting ? "Submitting..." : "Submit"}
+                    </Button>
+                    {error && <p className="text-red-500 mt-2">{error}</p>}
+                  </form>
+                </Form>
+              )}
           </CardContent>
         </Card>
       </section>

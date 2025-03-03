@@ -67,7 +67,7 @@ export default function RootLayout({
         <Monitoring
           apiKey="AWmxfYKd6GJbhpEEBTXRyo9n3Cn9TlSr" // Safe to expose publically
           url="https://monitoring.react-scan.com/api/v1/ingest"
-	  commit={process.env.GIT_COMMIT_HASH}
+          commit={process.env.GIT_COMMIT_HASH}
           branch={process.env.GIT_BRANCH}
         />
         {children}

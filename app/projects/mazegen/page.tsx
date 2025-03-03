@@ -92,10 +92,12 @@ const MazeGenerator: React.FC = () => {
     const neighbors: Cell[] = [];
 
     if (y > 0 && !maze[y - 1][x].visited) neighbors.push(maze[y - 1][x]); // Top
-    if (x < width - 1 && !maze[y][x + 1].visited)
+    if (x < width - 1 && !maze[y][x + 1].visited) {
       neighbors.push(maze[y][x + 1]); // Right
-    if (y < height - 1 && !maze[y + 1][x].visited)
+    }
+    if (y < height - 1 && !maze[y + 1][x].visited) {
       neighbors.push(maze[y + 1][x]); // Bottom
+    }
     if (x > 0 && !maze[y][x - 1].visited) neighbors.push(maze[y][x - 1]); // Left
 
     return neighbors;
@@ -128,7 +130,7 @@ const MazeGenerator: React.FC = () => {
     const stack: [number, number][] = [[0, 0]];
     const visited: boolean[][] = maze.map((row) => row.map(() => false));
     const parent: ([number, number] | null)[][] = maze.map((row) =>
-      row.map(() => null),
+      row.map(() => null)
     );
 
     while (stack.length > 0) {

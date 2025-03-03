@@ -52,17 +52,19 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
       className="dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-slate-100 dark:border-slate-600"
       onClick={onPreviewToggle}
     >
-      {showPreview ? (
-        <>
-          <EyeOff className="w-4 h-4 mr-0 sm:mr-2" />{" "}
-          <span className="sr-only sm:not-sr-only">Hide Preview</span>
-        </>
-      ) : (
-        <>
-          <Eye className="w-4 h-4 mr-0 sm:mr-2" />{" "}
-          <span className="sr-only sm:not-sr-only">Show Preview</span>
-        </>
-      )}
+      {showPreview
+        ? (
+          <>
+            <EyeOff className="w-4 h-4 mr-0 sm:mr-2" />{" "}
+            <span className="sr-only sm:not-sr-only">Hide Preview</span>
+          </>
+        )
+        : (
+          <>
+            <Eye className="w-4 h-4 mr-0 sm:mr-2" />{" "}
+            <span className="sr-only sm:not-sr-only">Show Preview</span>
+          </>
+        )}
     </Button>
   </div>
 );

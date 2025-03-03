@@ -272,7 +272,8 @@ const QRCodeGenerator = () => {
                   marginSize={marginSize}
                 />
               )}
-            </div>{" "}
+            </div>
+            {" "}
           </CardContent>
           <CardFooter className="flex flex-wrap justify-center gap-2">
             <Button

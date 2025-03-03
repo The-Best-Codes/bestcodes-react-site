@@ -107,15 +107,13 @@ const RandomTokenStreamGenerator: React.FC = () => {
             <Button
               onClick={() => setIsGenerating(!isGenerating)}
               size="icon"
-              aria-label={
-                isGenerating ? "Pause Generation" : "Start Generation"
-              }
+              aria-label={isGenerating
+                ? "Pause Generation"
+                : "Start Generation"}
             >
-              {isGenerating ? (
-                <PauseCircle className="w-6 h-6" />
-              ) : (
-                <PlayCircle className="w-6 h-6" />
-              )}
+              {isGenerating
+                ? <PauseCircle className="w-6 h-6" />
+                : <PlayCircle className="w-6 h-6" />}
             </Button>
             <Button onClick={clearOutput} size="icon" aria-label="Clear Output">
               <Trash2 className="w-6 h-6" />
@@ -164,8 +162,7 @@ const RandomTokenStreamGenerator: React.FC = () => {
                     id={type}
                     checked={enabled}
                     onCheckedChange={(checked) =>
-                      handleCharTypeChange(type, "enabled", checked)
-                    }
+                      handleCharTypeChange(type, "enabled", checked)}
                   />
                   <Label htmlFor={type} className="capitalize">
                     {type}
@@ -184,8 +181,7 @@ const RandomTokenStreamGenerator: React.FC = () => {
                         type,
                         "frequency",
                         parseInt(e.target.value),
-                      )
-                    }
+                      )}
                     disabled={!enabled}
                     className="w-16 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                   />

@@ -93,8 +93,8 @@ const STLViewer: React.FC<STLViewerProps> = ({
 
     const handleResize = () => {
       if (mountRef.current) {
-        newCamera.aspect =
-          mountRef.current.clientWidth / mountRef.current.clientHeight;
+        newCamera.aspect = mountRef.current.clientWidth /
+          mountRef.current.clientHeight;
         newCamera.updateProjectionMatrix();
         newRenderer.setSize(
           mountRef.current.clientWidth,

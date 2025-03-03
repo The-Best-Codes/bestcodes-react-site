@@ -57,79 +57,85 @@ const ExploreMorePages: React.FC<{
         Explore More Pages
       </h2>
       <AnimatePresence mode="wait">
-        {isLoading ? (
-          <motion.div
-            key="loading"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="flex justify-center items-center h-64"
-          >
-            <Loader2 className="h-16 w-16 animate-spin text-gray-900 dark:text-gray-100" />
-          </motion.div>
-        ) : error ? (
-          <motion.div
-            key="error"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="flex flex-col justify-center items-center h-64"
-          >
-            <AlertCircle className="h-16 w-16 text-red-500 mb-4" />
-            <p className="text-center text-red-500">{error}</p>
-          </motion.div>
-        ) : pages.length === 0 ? (
-          <motion.div
-            key="no-pages"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="flex justify-center items-center h-64"
-          >
-            <p className="text-center text-gray-500 dark:text-gray-400">
-              No other pages available to explore.
-            </p>
-          </motion.div>
-        ) : (
-          <motion.div
-            key="page-cards"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {displayedPages.map((page, index) => (
-                <PageCard key={page.path} page={page} index={index} />
-              ))}
-            </div>
-            <div className="flex justify-center items-center mt-8 space-x-4">
-              <Button
-                onClick={handlePrevPage}
-                disabled={currentPage === 0}
-                variant="outline"
-                size="sm"
-                className="bg-white text-gray-800 border-gray-300 hover:bg-gray-100 dark:bg-slate-700 dark:text-gray-100 dark:border-slate-600 dark:hover:bg-slate-600 dark:hover:text-white transition-colors duration-200"
-              >
-                <ChevronLeft className="h-4 w-4" />
-                <span className="ml-2 hidden sm:block"> Previous</span>
-              </Button>
-              <span className="text-gray-500 dark:text-gray-400">
-                <span className="sr-only sm:not-sr-only">Page</span>{" "}
-                {currentPage + 1} of {totalPages}
-              </span>
-              <Button
-                onClick={handleNextPage}
-                disabled={currentPage === totalPages - 1}
-                variant="outline"
-                size="sm"
-                className="bg-white text-gray-800 border-gray-300 hover:bg-gray-100 dark:bg-slate-700 dark:text-gray-100 dark:border-slate-600 dark:hover:bg-slate-600 dark:hover:text-white transition-colors duration-200"
-              >
-                <span className="mr-2 hidden sm:block">Next </span>
-                <ChevronRight className="h-4 w-4" />
-              </Button>
-            </div>
-          </motion.div>
-        )}
+        {isLoading
+          ? (
+            <motion.div
+              key="loading"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="flex justify-center items-center h-64"
+            >
+              <Loader2 className="h-16 w-16 animate-spin text-gray-900 dark:text-gray-100" />
+            </motion.div>
+          )
+          : error
+          ? (
+            <motion.div
+              key="error"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="flex flex-col justify-center items-center h-64"
+            >
+              <AlertCircle className="h-16 w-16 text-red-500 mb-4" />
+              <p className="text-center text-red-500">{error}</p>
+            </motion.div>
+          )
+          : pages.length === 0
+          ? (
+            <motion.div
+              key="no-pages"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="flex justify-center items-center h-64"
+            >
+              <p className="text-center text-gray-500 dark:text-gray-400">
+                No other pages available to explore.
+              </p>
+            </motion.div>
+          )
+          : (
+            <motion.div
+              key="page-cards"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {displayedPages.map((page, index) => (
+                  <PageCard key={page.path} page={page} index={index} />
+                ))}
+              </div>
+              <div className="flex justify-center items-center mt-8 space-x-4">
+                <Button
+                  onClick={handlePrevPage}
+                  disabled={currentPage === 0}
+                  variant="outline"
+                  size="sm"
+                  className="bg-white text-gray-800 border-gray-300 hover:bg-gray-100 dark:bg-slate-700 dark:text-gray-100 dark:border-slate-600 dark:hover:bg-slate-600 dark:hover:text-white transition-colors duration-200"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                  <span className="ml-2 hidden sm:block">Previous</span>
+                </Button>
+                <span className="text-gray-500 dark:text-gray-400">
+                  <span className="sr-only sm:not-sr-only">Page</span>{" "}
+                  {currentPage + 1} of {totalPages}
+                </span>
+                <Button
+                  onClick={handleNextPage}
+                  disabled={currentPage === totalPages - 1}
+                  variant="outline"
+                  size="sm"
+                  className="bg-white text-gray-800 border-gray-300 hover:bg-gray-100 dark:bg-slate-700 dark:text-gray-100 dark:border-slate-600 dark:hover:bg-slate-600 dark:hover:text-white transition-colors duration-200"
+                >
+                  <span className="mr-2 hidden sm:block">Next</span>
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
+              </div>
+            </motion.div>
+          )}
       </AnimatePresence>
     </section>
   );
