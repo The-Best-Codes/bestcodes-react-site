@@ -24,7 +24,7 @@ const socialLinks = [
     username: "@best_codes",
   },
   {
-    href: "https://discord.gg/HCZJVrrR",
+    href: "https://discord.gg/dKeuR9yfBs",
     icon: "discord.svg",
     username: "@best_codes",
   },
