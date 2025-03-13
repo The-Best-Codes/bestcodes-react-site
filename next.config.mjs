@@ -27,7 +27,7 @@ const nextConfig = {
   },
   experimental: {
     turbo: {
-      treeShaking: true,
+      treeShaking: false,
     },
     reactCompiler: true,
   },

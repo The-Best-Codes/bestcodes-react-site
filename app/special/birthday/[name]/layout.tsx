@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
+export async function generateStaticParams() {
+  return [{ name: "Alice" }, { name: "Bob" }, { name: "Stacy" }];
+}
+
 const geistSans = localFont({
   src: "../../../fonts/GeistVF.woff",
   variable: "--font-geist-sans",
