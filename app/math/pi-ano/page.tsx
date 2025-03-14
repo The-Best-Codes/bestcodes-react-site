@@ -2,17 +2,25 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 interface PiAnoProps {}
 
 const PiAno: React.FC<PiAnoProps> = () => {
   const [piDigits, setPiDigits] = useState<number[]>([]);
-  const [calculationInterval, setCalculationInterval] = useState<number>(50);
-  const [noteDuration, setNoteDuration] = useState<number>(60);
-  const [silenceDuration, setSilenceDuration] = useState<number>(10);
+  const [speed, setSpeed] = useState<number>(50); // Renamed for clarity
+  const [noteLength, setNoteLength] = useState<number>(60); // Renamed for clarity
+  const [pauseLength, setPauseLength] = useState<number>(10); // Renamed for clarity
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
   const audioContext = useRef<AudioContext | null>(null);
+  const piDisplayRef = useRef<HTMLParagraphElement>(null);
 
   const frequencies = {
     0: 261.63,
@@ -32,7 +40,12 @@ const PiAno: React.FC<PiAnoProps> = () => {
       audioContext.current = new (window.AudioContext ||
         (window as any).webkitAudioContext)();
     }
-  }, []);
+
+    // Scroll to the end of piDisplay when digits change
+    if (piDisplayRef.current) {
+      piDisplayRef.current.scrollLeft = piDisplayRef.current.scrollWidth;
+    }
+  }, [piDigits]);
 
   // Simplified Pi digit generator using BigInt (constructed with BigInt())
   function* generateDigitsOfPi() {
@@ -88,14 +101,14 @@ const PiAno: React.FC<PiAnoProps> = () => {
     gainNode.gain.setValueAtTime(0.5, audioContext.current.currentTime);
     gainNode.gain.linearRampToValueAtTime(
       0,
-      audioContext.current.currentTime + noteDuration / 1000,
+      audioContext.current.currentTime + noteLength / 1000,
     );
 
     oscillator.connect(gainNode);
     gainNode.connect(audioContext.current.destination);
 
     oscillator.start();
-    oscillator.stop(audioContext.current.currentTime + noteDuration / 1000);
+    oscillator.stop(audioContext.current.currentTime + noteLength / 1000);
   };
 
   const startPlaying = () => {
@@ -110,7 +123,7 @@ const PiAno: React.FC<PiAnoProps> = () => {
         setPiDigits((prevDigits) => [...prevDigits, nextDigit]);
         playNote(nextDigit);
       },
-      calculationInterval + noteDuration + silenceDuration,
+      speed + noteLength + pauseLength,
     );
 
     setIntervalId(id);
@@ -129,89 +142,118 @@ const PiAno: React.FC<PiAnoProps> = () => {
     setPiDigits([]); // Reset to empty array.
   };
 
-  const handleCalculationIntervalChange = (value: number[]) => {
-    setCalculationInterval(value[0]);
+  const handleSpeedChange = (value: number[]) => {
+    setSpeed(value[0]);
   };
 
-  const handleNoteDurationChange = (value: number[]) => {
-    setNoteDuration(value[0]);
+  const handleNoteLengthChange = (value: number[]) => {
+    setNoteLength(value[0]);
   };
 
-  const handleSilenceDurationChange = (value: number[]) => {
-    setSilenceDuration(value[0]);
+  const handlePauseLengthChange = (value: number[]) => {
+    setPauseLength(value[0]);
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Pi-ano</h1>
-      <p className="mb-2">
-        Listen to the music of π - each digit plays a different note
-      </p>
-      <p className="mb-4">π = {piDigits.join("")}</p>
+    <main className="bg-white dark:bg-gray-900">
+      <div className="container mx-auto p-4 flex justify-center items-center min-h-screen">
+        <Card className="w-full max-w-3xl rounded-lg shadow-md dark:bg-slate-800 dark:text-slate-100 dark:border-gray-700">
+          <CardHeader>
+            <CardTitle className="text-2xl font-semibold">Pi-ano</CardTitle>
+            <CardDescription className="dark:text-slate-300">
+              <span>
+                Listen to the music of Pi - each digit plays a different note.
+              </span>
+              <br />
+              <span className="text-sm italic text-gray-500 dark:text-gray-400">
+                (Note: The calculation of Pi might not be perfectly precise,
+                especially for a large number of digits.)
+              </span>
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="mb-4">
+              <label
+                htmlFor="piDisplay"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-200"
+              >
+                π =
+              </label>
+              <div
+                ref={piDisplayRef}
+                className="overflow-auto whitespace-nowrap min-h-8 border dark:border-gray-700 rounded p-2 bg-gray-100 text-gray-800 dark:bg-slate-700 dark:text-slate-200"
+              >
+                {piDigits.join("") || "Click 'play' to start!"}
+              </div>
+            </div>
 
-      <div className="mb-4">
-        <label
-          htmlFor="calculationInterval"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Calculation Interval (ms): {calculationInterval}
-        </label>
-        <Slider
-          defaultValue={[calculationInterval]}
-          max={100}
-          min={5}
-          step={5}
-          onValueChange={handleCalculationIntervalChange}
-          className="w-full"
-        />
-      </div>
+            <div className="mb-4">
+              <label
+                htmlFor="speed"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-200"
+              >
+                Speed: {speed} ms between digits
+              </label>
+              <Slider
+                defaultValue={[speed]}
+                max={500}
+                min={10}
+                step={10}
+                onValueChange={handleSpeedChange}
+                className="w-full"
+              />
+            </div>
 
-      <div className="mb-4">
-        <label
-          htmlFor="noteDuration"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Note Duration (ms): {noteDuration}
-        </label>
-        <Slider
-          defaultValue={[noteDuration]}
-          max={500}
-          min={5}
-          step={5}
-          onValueChange={handleNoteDurationChange}
-          className="w-full"
-        />
-      </div>
+            <div className="mb-4">
+              <label
+                htmlFor="noteLength"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-200"
+              >
+                Note Length: {noteLength} ms
+              </label>
+              <Slider
+                defaultValue={[noteLength]}
+                max={500}
+                min={10}
+                step={10}
+                onValueChange={handleNoteLengthChange}
+                className="w-full"
+              />
+            </div>
 
-      <div className="mb-4">
-        <label
-          htmlFor="silenceDuration"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Silence Duration (ms): {silenceDuration}
-        </label>
-        <Slider
-          defaultValue={[silenceDuration]}
-          max={200}
-          min={0}
-          step={1}
-          onValueChange={handleSilenceDurationChange}
-          className="w-full"
-        />
-      </div>
+            <div className="mb-4">
+              <label
+                htmlFor="pauseLength"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-200"
+              >
+                Pause Length: {pauseLength} ms
+              </label>
+              <Slider
+                defaultValue={[pauseLength]}
+                max={200}
+                min={0}
+                step={1}
+                onValueChange={handlePauseLengthChange}
+                className="w-full"
+              />
+            </div>
 
-      <div className="flex gap-2">
-        <Button
-          variant="outline"
-          onClick={isPlaying ? pausePlaying : startPlaying}
-        >
-          {isPlaying ? "Pause" : "Play"}
-        </Button>
-        <Button variant="destructive" onClick={reset}>
-          Reset
-        </Button>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                onClick={isPlaying ? pausePlaying : startPlaying}
+                className="dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600 dark:border-gray-700 dark:hover:text-slate-200"
+              >
+                {isPlaying ? "Pause" : "Play"}
+              </Button>
+              <Button variant="destructive" onClick={reset}>
+                Reset
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       </div>
-    </div>
+    </main>
   );
 };
 
