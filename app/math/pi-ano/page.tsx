@@ -158,44 +158,40 @@ const PiAno: React.FC<PiAnoProps> = () => {
     <main className="bg-white dark:bg-gray-900">
       <div className="container mx-auto p-4 flex justify-center items-center min-h-screen">
         <Card className="w-full max-w-3xl rounded-lg shadow-md dark:bg-slate-800 dark:text-slate-100 dark:border-gray-700">
-          <CardHeader>
-            <CardTitle className="text-2xl font-semibold">Pi-ano</CardTitle>
+          <CardHeader className="p-4">
+            <CardTitle className="text-2xl font-semibold flex flex-row items-center justify-between">
+              <span>Pi-ano</span>
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  onClick={isPlaying ? pausePlaying : startPlaying}
+                  className="dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600 dark:border-gray-700 dark:hover:text-slate-200"
+                >
+                  {isPlaying ? "Pause" : "Play"}
+                </Button>
+                <Button variant="destructive" onClick={reset}>
+                  Reset
+                </Button>
+              </div>
+            </CardTitle>
             <CardDescription className="dark:text-slate-300">
               <span>
                 Listen to the music of Pi &#x2014; each digit plays a different
                 note.
               </span>
-              <br />
-              <span className="text-sm italic text-gray-500 dark:text-gray-400">
-                (Note: The calculation of Pi might not be perfectly precise,
-                especially for a large number of digits.)
-              </span>
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="flex gap-2 mb-4">
-              <Button
-                variant="outline"
-                onClick={isPlaying ? pausePlaying : startPlaying}
-                className="dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600 dark:border-gray-700 dark:hover:text-slate-200"
-              >
-                {isPlaying ? "Pause" : "Play"}
-              </Button>
-              <Button variant="destructive" onClick={reset}>
-                Reset
-              </Button>
-            </div>
-
-            <div className="mb-4">
+          <CardContent className="p-4 pt-0">
+            <div className="mb-4 flex flex-row items-center justify-between">
               <label
                 htmlFor="piDisplay"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-200"
+                className="block mr-2 text-base font-medium text-gray-700 dark:text-gray-200"
               >
                 &#x03C0; =
               </label>
               <div
                 ref={piDisplayRef}
-                className="overflow-auto whitespace-nowrap min-h-8 border dark:border-gray-700 rounded p-2 bg-gray-100 text-gray-800 dark:bg-slate-700 dark:text-slate-200"
+                className="overflow-auto whitespace-nowrap w-full min-h-8 border dark:border-gray-700 rounded p-2 bg-gray-100 text-gray-800 dark:bg-slate-700 dark:text-slate-200"
               >
                 {piDigits.join("") || "Click 'play' to start!"}
               </div>
