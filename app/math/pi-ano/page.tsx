@@ -14,9 +14,9 @@ interface PiAnoProps {}
 
 const PiAno: React.FC<PiAnoProps> = () => {
   const [piDigits, setPiDigits] = useState<number[]>([]);
-  const [speed, setSpeed] = useState<number>(50); // Renamed for clarity
-  const [noteLength, setNoteLength] = useState<number>(60); // Renamed for clarity
-  const [pauseLength, setPauseLength] = useState<number>(10); // Renamed for clarity
+  const [speed, setSpeed] = useState<number>(50);
+  const [noteLength, setNoteLength] = useState<number>(60);
+  const [pauseLength, setPauseLength] = useState<number>(10);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
   const audioContext = useRef<AudioContext | null>(null);
@@ -162,7 +162,8 @@ const PiAno: React.FC<PiAnoProps> = () => {
             <CardTitle className="text-2xl font-semibold">Pi-ano</CardTitle>
             <CardDescription className="dark:text-slate-300">
               <span>
-                Listen to the music of Pi - each digit plays a different note.
+                Listen to the music of Pi &#x2014; each digit plays a different
+                note.
               </span>
               <br />
               <span className="text-sm italic text-gray-500 dark:text-gray-400">
@@ -177,7 +178,7 @@ const PiAno: React.FC<PiAnoProps> = () => {
                 htmlFor="piDisplay"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-200"
               >
-                π =
+                &#x03C0; =
               </label>
               <div
                 ref={piDisplayRef}
@@ -196,9 +197,9 @@ const PiAno: React.FC<PiAnoProps> = () => {
               </label>
               <Slider
                 defaultValue={[speed]}
-                max={500}
-                min={10}
-                step={10}
+                max={200}
+                min={5}
+                step={5}
                 onValueChange={handleSpeedChange}
                 className="w-full"
               />
@@ -214,8 +215,8 @@ const PiAno: React.FC<PiAnoProps> = () => {
               <Slider
                 defaultValue={[noteLength]}
                 max={500}
-                min={10}
-                step={10}
+                min={5}
+                step={5}
                 onValueChange={handleNoteLengthChange}
                 className="w-full"
               />
@@ -232,7 +233,7 @@ const PiAno: React.FC<PiAnoProps> = () => {
                 defaultValue={[pauseLength]}
                 max={200}
                 min={0}
-                step={1}
+                step={5}
                 onValueChange={handlePauseLengthChange}
                 className="w-full"
               />
