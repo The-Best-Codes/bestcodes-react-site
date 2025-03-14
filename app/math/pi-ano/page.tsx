@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/button";
 interface PiAnoProps {}
 
 const PiAno: React.FC<PiAnoProps> = () => {
-  const [piDigits, setPiDigits] = useState<number[]>([]); // Initialize as empty array
-  const [calculationInterval, setCalculationInterval] = useState<number>(100);
-  const [noteDuration, setNoteDuration] = useState<number>(200);
-  const [silenceDuration, setSilenceDuration] = useState<number>(50);
+  const [piDigits, setPiDigits] = useState<number[]>([]);
+  const [calculationInterval, setCalculationInterval] = useState<number>(50);
+  const [noteDuration, setNoteDuration] = useState<number>(60);
+  const [silenceDuration, setSilenceDuration] = useState<number>(10);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
   const audioContext = useRef<AudioContext | null>(null);
@@ -158,9 +158,9 @@ const PiAno: React.FC<PiAnoProps> = () => {
         </label>
         <Slider
           defaultValue={[calculationInterval]}
-          max={500}
-          min={50}
-          step={1}
+          max={100}
+          min={5}
+          step={5}
           onValueChange={handleCalculationIntervalChange}
           className="w-full"
         />
@@ -176,8 +176,8 @@ const PiAno: React.FC<PiAnoProps> = () => {
         <Slider
           defaultValue={[noteDuration]}
           max={500}
-          min={50}
-          step={1}
+          min={5}
+          step={5}
           onValueChange={handleNoteDurationChange}
           className="w-full"
         />
