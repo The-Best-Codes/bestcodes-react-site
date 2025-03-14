@@ -173,6 +173,19 @@ const PiAno: React.FC<PiAnoProps> = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
+            <div className="flex gap-2 mb-4">
+              <Button
+                variant="outline"
+                onClick={isPlaying ? pausePlaying : startPlaying}
+                className="dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600 dark:border-gray-700 dark:hover:text-slate-200"
+              >
+                {isPlaying ? "Pause" : "Play"}
+              </Button>
+              <Button variant="destructive" onClick={reset}>
+                Reset
+              </Button>
+            </div>
+
             <div className="mb-4">
               <label
                 htmlFor="piDisplay"
@@ -186,6 +199,12 @@ const PiAno: React.FC<PiAnoProps> = () => {
               >
                 {piDigits.join("") || "Click 'play' to start!"}
               </div>
+            </div>
+
+            <div className="mt-4">
+              <span className="text-sm dark:text-slate-300">
+                Pause the music before adjusting controls.
+              </span>
             </div>
 
             <div className="mb-4">
@@ -222,7 +241,7 @@ const PiAno: React.FC<PiAnoProps> = () => {
               />
             </div>
 
-            <div className="mb-4">
+            <div>
               <label
                 htmlFor="pauseLength"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-200"
@@ -237,19 +256,6 @@ const PiAno: React.FC<PiAnoProps> = () => {
                 onValueChange={handlePauseLengthChange}
                 className="w-full"
               />
-            </div>
-
-            <div className="flex gap-2">
-              <Button
-                variant="outline"
-                onClick={isPlaying ? pausePlaying : startPlaying}
-                className="dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600 dark:border-gray-700 dark:hover:text-slate-200"
-              >
-                {isPlaying ? "Pause" : "Play"}
-              </Button>
-              <Button variant="destructive" onClick={reset}>
-                Reset
-              </Button>
             </div>
           </CardContent>
         </Card>
