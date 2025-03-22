@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Monitoring } from "react-scan/monitoring/next";
 import "./globals.css";
+import Script from "next/script";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -70,6 +71,12 @@ export default function RootLayout({
           commit={process.env.GIT_COMMIT_HASH}
           branch={process.env.GIT_BRANCH}
         />
+        <Script
+          src="https://script.refix.ai/script.min.js"
+          type="text/javascript"
+          data-refix-token="80bd8d00-0359-4790-957f-8652ef233fbf"
+          defer
+        ></Script>
         {children}
       </body>
     </html>
