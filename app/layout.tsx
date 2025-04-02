@@ -15,12 +15,11 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "BestCodes' Website - Christian, Coder, Creator | Home",
+  title: "BestCodes' Legacy Website",
 
   description:
-    "BestCodes is a full-stack developer, christian and creator. This is BestCodes' Official Website.",
+    "The legacy website of BestCodes, a full-stack developer, christian and creator. This site contains old projects and resources.",
 
-  applicationName: "BestCodes' Website",
   authors: [{ name: "BestCodes", url: "https://bestcodes.dev" }],
 
   keywords: [
@@ -42,10 +41,11 @@ export const metadata: Metadata = {
   publisher: "BestCodes",
 
   openGraph: {
-    title: "BestCodes' Website - Christian, Coder, Creator | Home",
-    description: "BestCodes' Official Website | Christian, Coder, Creator",
-    url: "https://bestcodes.dev",
-    siteName: "BestCodes' Website",
+    title: "BestCodes' Legacy Website",
+    description:
+      "The legacy website of BestCodes, a full-stack developer, christian and creator. This site contains old projects and resources.",
+    url: "https://old-site.bestcodes.dev",
+    siteName: "BestCodes' Legacy Website",
     images: [
       {
         url: "https://bestcodes.dev/image/og-image.png",
