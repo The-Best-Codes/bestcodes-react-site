@@ -51,3 +51,6 @@ next-env.d.ts
 .env.sentry-build-plugin
 
 certificates
+
+public/sitemap*.xml
+public/robots.txt
