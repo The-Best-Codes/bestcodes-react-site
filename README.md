@@ -7,11 +7,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with
 
 ---
 
-## BestCodes Website - React
+## BestCodes Legacy Website
 
 This is the open source code for my website. I used `motion` for the animations,
 `nodemailer` for the contact page, and tailwind for styling. Check it out here:
-**[https://bestcodes.dev](https://bestcodes.dev)**
+**[https://old-site.bestcodes.dev](https://old-site.bestcodes.dev)**
 
 ---
 
