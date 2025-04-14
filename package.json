@@ -63,7 +63,7 @@
     "react-scan": "^0.3.3",
     "react-simple-code-editor": "^0.14.1",
     "recharts": "^2.15.1",
-    "sharp": "^0.33.5",
+    "sharp": "^0.34.1",
     "swagger-jsdoc": "^6.2.8",
     "tailwind-merge": "^3.1.0",
     "tailwindcss-animate": "^1.0.7",
