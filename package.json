@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build && npm run sitemap",
+    "build": "next build --turbo && npm run sitemap",
     "start": "next start",
     "sitemap": "rm -rf public/sitemap*.xml public/robots.txt && next-sitemap --config next-sitemap.config.cjs",
     "lint": "next lint"
