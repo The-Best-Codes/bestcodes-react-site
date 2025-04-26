@@ -16,7 +16,7 @@ jobs:
       - name: Trigger Internet Archive Save
         id: trigger
         run: |
-          RESPONSE=$(curl -s -H "Accept: text/html" "https://web.archive.org/save/https://bestcodes.dev")
+          RESPONSE=$(curl -s -H "Accept: text/html" "https://web.archive.org/save/https://old-site.bestcodes.dev")
           echo "Initial response received"
 
           # Try to extract job ID using regex
@@ -76,7 +76,7 @@ jobs:
             sleep 60
           fi
 
-          RESPONSE=$(curl -s "https://archive.org/wayback/available?url=https://bestcodes.dev")
+          RESPONSE=$(curl -s "https://archive.org/wayback/available?url=https://old-site.bestcodes.dev")
 
           if echo "$RESPONSE" | jq -e '.archived_snapshots.closest' >/dev/null; then
             echo "Verified: Page is archived in Wayback Machine"
