@@ -93,6 +93,15 @@ export async function GET(request: NextRequest) {
   const username = searchParams.get("username") || "The-Best-Codes";
   const includeCover = searchParams.get("includeCover") !== "false";
 
+  // Validate the username to ensure it is a safe string
+  const isValidUsername = /^[a-zA-Z0-9-_]+$/.test(username);
+  if (!isValidUsername) {
+    return NextResponse.json(
+      { error: "Invalid username provided" },
+      { status: 400 },
+    );
+  }
+
   const query = `
     {
       user(login: "${username}") {
