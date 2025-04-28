@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Monitoring } from "react-scan/monitoring/next";
 import "./globals.css";
+import Script from "next/script";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -70,6 +71,11 @@ export default function RootLayout({
           commit={process.env.GIT_COMMIT_HASH}
           branch={process.env.GIT_BRANCH}
         />
+	<Script
+  	  defer
+  	  data-domain="old-site.bestcodes.dev"
+  	  src="https://webtracker.avikmukherjee.tech/tracking-script.js"
+	/>
         {children}
       </body>
     </html>
