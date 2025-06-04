@@ -14,6 +14,9 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Sine and Cosine Visualizer | BestCodes",
   description: "Visualize the sine and cosine functions with circles | Math",
+  alternates: {
+    canonical: "https://old-site.bestcodes.dev/math/sine-cosine-visual",
+  },
 };
 
 export default function RootLayout({

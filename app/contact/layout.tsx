@@ -15,6 +15,9 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Contact BestCodes - Christian, Coder, Creator | BestCodes",
   description: "Contact BestCodes | BestCodes' Official Website",
+  alternates: {
+    canonical: "https://old-site.bestcodes.dev/contact",
+  },
 };
 
 export default function RootLayout({

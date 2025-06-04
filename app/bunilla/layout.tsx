@@ -43,6 +43,10 @@ export const metadata: Metadata = {
     siteName: "Bunilla",
     images: [],
   },
+
+  alternates: {
+    canonical: "https://old-site.bestcodes.dev/bunilla",
+  },
 };
 
 export default function RootLayout({

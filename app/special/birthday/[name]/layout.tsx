@@ -16,6 +16,9 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Happy Birthday!",
   description: "Wishing you a happy birthday!",
+  alternates: {
+    canonical: "https://old-site.bestcodes.dev/special/birthday/[name]",
+  },
 };
 
 export default function RootLayout({

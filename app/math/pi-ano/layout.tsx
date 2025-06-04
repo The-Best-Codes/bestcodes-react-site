@@ -16,6 +16,9 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Pi-ano - Listen to the music of Pi",
   description: "Wishing you a happy Pi Day!",
+  alternates: {
+    canonical: "https://old-site.bestcodes.dev/math/pi-ano",
+  },
 };
 
 export default function RootLayout({

@@ -17,6 +17,9 @@ export const metadata: Metadata = {
 
   description:
     "Internal site statistics, information, and source code links for BestCodes Official Website.",
+  alternates: {
+    canonical: "https://old-site.bestcodes.dev/site_data",
+  },
 };
 
 export default function RootLayout({

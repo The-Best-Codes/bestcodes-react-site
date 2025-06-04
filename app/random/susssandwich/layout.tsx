@@ -16,6 +16,9 @@ export const metadata: Metadata = {
 
   description:
     "SussSandwich is a cool friend, so I'm making a random shoutout!",
+  alternates: {
+    canonical: "https://old-site.bestcodes.dev/random/susssandwich",
+  },
 };
 
 export default function RootLayout({
