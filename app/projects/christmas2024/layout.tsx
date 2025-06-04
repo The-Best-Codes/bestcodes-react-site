@@ -15,6 +15,9 @@ export const metadata: Metadata = {
   title: "Christmas Animation for 2024 - BestCodes",
 
   description: "A christmas animation for 2024 made with motion and react.",
+  alternates: {
+    canonical: "https://old-site.bestcodes.dev/projects/christmas2024",
+  },
 };
 
 export default function RootLayout({

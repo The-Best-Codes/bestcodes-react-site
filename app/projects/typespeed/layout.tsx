@@ -17,6 +17,9 @@ export const metadata: Metadata = {
 
   description:
     "Easily measure your typing speed and accuracy with our free typing speed test. It's easy to use and provides detailed results.",
+  alternates: {
+    canonical: "https://old-site.bestcodes.dev/projects/typespeed",
+  },
 };
 
 export default function RootLayout({

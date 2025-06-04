@@ -17,6 +17,9 @@ export const metadata: Metadata = {
 
   description:
     "Free Maze Generator with customizable size and difficulty. Easily print mazes and solutions.",
+  alternates: {
+    canonical: "https://old-site.bestcodes.dev/projects/mazegen",
+  },
 };
 
 export default function RootLayout({

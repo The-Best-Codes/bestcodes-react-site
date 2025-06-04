@@ -23,6 +23,9 @@ const nextYear = getNextYear();
 export const metadata: Metadata = {
   title: `New Year Countdown ${nextYear}`,
   description: `Count down to the ${nextYear} New Year with fireworks`,
+  alternates: {
+    canonical: "https://old-site.bestcodes.dev/projects/new-year-countdown",
+  },
 };
 
 export default function RootLayout({

@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   title: "Thank You for 20K Dev.to Followers! | BestCodes",
   description:
     "A special thank you page celebrating 20,000 followers on Dev.to",
+  alternates: {
+    canonical: "https://old-site.bestcodes.dev/projects/thanks20k",
+  },
 };
 
 export default function RootLayout({

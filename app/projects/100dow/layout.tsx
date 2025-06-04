@@ -16,6 +16,9 @@ export const metadata: Metadata = {
 
   description:
     "Easily customize this simple animation to send to your Wordle-playing friends.",
+  alternates: {
+    canonical: "https://old-site.bestcodes.dev/projects/100dow",
+  },
 };
 
 export default function RootLayout({

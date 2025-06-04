@@ -14,6 +14,9 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Free STL Viewer | BestCodes",
   description: "Easily display your STL files in your browser.",
+  alternates: {
+    canonical: "https://old-site.bestcodes.dev/projects/stlview",
+  },
 };
 
 export default function RootLayout({

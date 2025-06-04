@@ -17,6 +17,9 @@ export const metadata: Metadata = {
 
   description:
     "The BestBible npm library is a free, open-source library for accessing Bible data. It has a simple and intuitive API, and is easily extensible.",
+  alternates: {
+    canonical: "https://old-site.bestcodes.dev/projects/bestbible",
+  },
 };
 
 export default function RootLayout({

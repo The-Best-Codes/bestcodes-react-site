@@ -16,6 +16,9 @@ export const metadata: Metadata = {
 
   description:
     "Easily generate and download QR codes for free. No account needed.",
+  alternates: {
+    canonical: "https://old-site.bestcodes.dev/projects/qrcode",
+  },
 };
 
 export default function RootLayout({

@@ -16,6 +16,9 @@ export const metadata: Metadata = {
 
   description:
     "CodePerf gives you detailed insights on the speed of your codes, making it easy to optimize them as needed.",
+  alternates: {
+    canonical: "https://old-site.bestcodes.dev/projects/codeperf",
+  },
 };
 
 export default function RootLayout({
