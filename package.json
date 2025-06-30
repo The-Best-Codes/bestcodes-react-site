@@ -60,7 +60,7 @@
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.58.1",
     "react-rough-notation": "^1.0.5",
-    "react-scan": "^0.3.4",
+    "react-scan": "^0.4.3",
     "react-simple-code-editor": "^0.14.1",
     "recharts": "^3.0.0",
     "sharp": "^0.34.2",
