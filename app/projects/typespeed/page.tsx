@@ -38,8 +38,7 @@ const textOptions = {
     "The manager, who was responsible for overseeing the project, ensured that all team members were aware of their roles and responsibilities. The project's success was contingent upon everyone's cooperation; therefore, it was essential that each person understood their tasks and deadlines. Meanwhile, the marketing team was busy creating promotional materials, including brochures, flyers, and social media posts. After all, the launch date was quickly approaching, and everything needed to be perfect! Nevertheless, the team remained confident and focused, knowing that their hard work would ultimately pay off.",
   random:
     "Alice said why. I wonder if the phone is real. I doubt this issue is compact. Try not to smile as we tickle the cat. Hats are a Western staple. Do go on and check if your chair is stable.",
-  chat:
-    "Hey! How's it going? I hope you're having a great day. Did you see that new movie that just came out? It's supposed to be really good. We should totally check it out sometime. Maybe grab dinner before? Let me know what you think!",
+  chat: "Hey! How's it going? I hope you're having a great day. Did you see that new movie that just came out? It's supposed to be really good. We should totally check it out sometime. Maybe grab dinner before? Let me know what you think!",
   formal:
     "Dear esteemed colleagues, I hope this message finds you well. I am writing to cordially invite you to our annual conference, which will be held on the 15th of next month. We have an impressive lineup of speakers and engaging workshops planned. Your presence would be greatly appreciated.",
 };
@@ -134,8 +133,8 @@ export default function Home() {
       const wordsTyped = inputText.trim().split(/\s+/).length;
       setWpm(Math.round(wordsTyped / timeInMinutes));
 
-      const accuracyPercentage = 100 -
-        (levenshtein(targetText, inputText) / targetText.length) * 100;
+      const accuracyPercentage =
+        100 - (levenshtein(targetText, inputText) / targetText.length) * 100;
       setAccuracy(Math.round(accuracyPercentage * 100) / 100);
 
       setMaxLetterTime(0);
@@ -153,7 +152,8 @@ export default function Home() {
       const timeTaken = wordEndTime - currentTime;
 
       const letterTimesForWord = word.split("").map((letter, letterIndex) => {
-        const letterTime = currentTime +
+        const letterTime =
+          currentTime +
           (timeTaken * (letterIndex + 1)) / word.length -
           currentTime;
         if (!letterTimes[letter]) letterTimes[letter] = [];
@@ -239,7 +239,7 @@ export default function Home() {
 
             <div className="mb-4">
               <Textarea
-                ref={inputRef}
+                ref={inputRef as React.RefObject<HTMLTextAreaElement>}
                 value={inputText}
                 onChange={handleInput}
                 onKeyDown={handleKeyDown}
