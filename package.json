@@ -14,6 +14,9 @@
     "sitemap": "rm -rf public/sitemap*.xml public/robots.txt && next-sitemap --config next-sitemap.config.cjs",
     "lint": "next lint"
   },
+  "engines": {
+    "node": ">=22"
+  },
   "dependencies": {
     "@fireworks-js/react": "^2.10.8",
     "@hello-pangea/dnd": "^18.0.1",
@@ -81,7 +84,7 @@
     "next-sitemap": "^4.2.3",
     "tailwindcss": "^4.1.13"
   },
-  "packageManager": "bun@1.2.5",
+  "packageManager": "bun@1.2.22",
   "trustedDependencies": [
     "@nestjs/core",
     "@openapitools/openapi-generator-cli",
