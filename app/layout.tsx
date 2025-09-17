@@ -74,13 +74,6 @@ export default function RootLayout({
           commit={process.env.GIT_COMMIT_HASH}
           branch={process.env.GIT_BRANCH}
         />
-        <div className="w-full h-16 flex flex-row gap-1 text-xl justify-center items-center fixed bottom-0 left-0 bg-yellow-500 opacity-75 hover:opacity-90 z-50">
-          This site has moved to{" "}
-          <a className="text-blue-500 underline" href="https://bestcodes.dev">
-            bestcodes.dev
-          </a>
-          .
-        </div>
         {children}
       </body>
     </html>
