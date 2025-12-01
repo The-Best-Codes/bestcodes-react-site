@@ -43,11 +43,12 @@ export async function getSiteData(): Promise<SiteData> {
     version: packageJson.version,
     dependencyCount: Object.keys(packageJson.dependencies || {}).length,
     devDependencyCount: Object.keys(packageJson.devDependencies || {}).length,
-    totalDependencies: Object.keys(packageJson.dependencies || {}).length +
+    totalDependencies:
+      Object.keys(packageJson.dependencies || {}).length +
       Object.keys(packageJson.devDependencies || {}).length,
     nodeVersion: process.version,
-    nextVersion: packageJson.dependencies["next"] ||
-      packageJson.devDependencies["next"],
+    nextVersion:
+      packageJson.dependencies["next"] || packageJson.devDependencies["next"],
     projectName: packageJson.name,
     scriptCount: Object.keys(packageJson.scripts || {}).length,
     repoUrl: packageJson.repository ? packageJson.repository.url : null,

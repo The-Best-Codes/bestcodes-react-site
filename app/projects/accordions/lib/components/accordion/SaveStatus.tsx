@@ -12,17 +12,19 @@ export const SaveStatus: React.FC<SaveStatusProps> = ({ status, onSave }) => (
     className="dark:bg-slate-700 dark:hover:bg-slate-600 gap-2 flex flex-row justify-center items-center"
     disabled={status !== "idle"}
   >
-    {status === "idle"
-      ? <Save className="w-4 h-4" />
-      : status === "saving"
-      ? <Loader2 className="w-4 h-4 animate-spin" />
-      : <Check className="w-4 h-4" />}
+    {status === "idle" ? (
+      <Save className="w-4 h-4" />
+    ) : status === "saving" ? (
+      <Loader2 className="w-4 h-4 animate-spin" />
+    ) : (
+      <Check className="w-4 h-4" />
+    )}
     <span className="sr-only sm:not-sr-only">
       {status === "saving"
         ? "Saving..."
         : status === "success"
-        ? "Saved"
-        : "Save"}
+          ? "Saved"
+          : "Save"}
     </span>
   </Button>
 );

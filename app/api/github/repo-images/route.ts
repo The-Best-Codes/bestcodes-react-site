@@ -74,10 +74,14 @@ export async function GET(request: NextRequest) {
   const username = searchParams.get("username");
   const repo = searchParams.get("repo");
 
-  const isValidGitHubName = (name: string) =>
-    /^[a-zA-Z0-9-_.]+$/.test(name); // GitHub usernames and repo names can include alphanumeric characters, hyphens, underscores, and periods.
+  const isValidGitHubName = (name: string) => /^[a-zA-Z0-9-_.]+$/.test(name); // GitHub usernames and repo names can include alphanumeric characters, hyphens, underscores, and periods.
 
-  if (!username || !repo || !isValidGitHubName(username) || !isValidGitHubName(repo)) {
+  if (
+    !username ||
+    !repo ||
+    !isValidGitHubName(username) ||
+    !isValidGitHubName(repo)
+  ) {
     return NextResponse.json(
       { error: "Invalid GitHub username or repository name" },
       { status: 400 },

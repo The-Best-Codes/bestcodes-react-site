@@ -34,7 +34,7 @@ const CongratulationsPageContent: React.FC = () => {
     const handleScroll = () => {
       if (
         window.innerHeight + window.scrollY >=
-          document.body.offsetHeight - 300
+        document.body.offsetHeight - 300
       ) {
         setShowConfetti(true);
       }
@@ -131,8 +131,8 @@ const Section3 = () => {
               index < 4
                 ? "bg-white text-black"
                 : index < 5
-                ? "bg-yellow-500"
-                : "bg-green-500"
+                  ? "bg-yellow-500"
+                  : "bg-green-500"
             }`}
             initial={{ scale: 0, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}

@@ -37,8 +37,9 @@ const PiAno: React.FC<PiAnoProps> = () => {
 
   useEffect(() => {
     if (!audioContext.current) {
-      audioContext.current = new (window.AudioContext ||
-        (window as any).webkitAudioContext)();
+      audioContext.current = new (
+        window.AudioContext || (window as any).webkitAudioContext
+      )();
     }
 
     // Scroll to the end of piDisplay when digits change

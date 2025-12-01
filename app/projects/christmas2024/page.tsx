@@ -113,8 +113,7 @@ const ChristmasGlobe = () => {
                     left: `${ornament.initialLeft}px`,
                     position: "absolute",
                   }}
-                >
-                </div>
+                ></div>
               ))}
             </div>
           </div>

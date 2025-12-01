@@ -142,57 +142,55 @@ export default function HeaderMain() {
               </nav>
             )}
           </div>
-          {isMobile
-            ? (
-              <Button
-                aria-label="Menu"
-                variant="ghost"
-                size="icon"
-                onClick={toggleMenu}
-                className="text-2xl text-black dark:text-white"
+          {isMobile ? (
+            <Button
+              aria-label="Menu"
+              variant="ghost"
+              size="icon"
+              onClick={toggleMenu}
+              className="text-2xl text-black dark:text-white"
+            >
+              {isMenuOpen ? <X /> : <Menu />}
+            </Button>
+          ) : (
+            <div className="flex flex-row items-center gap-4">
+              <Link
+                target="_blank"
+                href={`https://github.com/the-best-codes`}
+                prefetch={true}
               >
-                {isMenuOpen ? <X /> : <Menu />}
-              </Button>
-            )
-            : (
-              <div className="flex flex-row items-center gap-4">
-                <Link
-                  target="_blank"
-                  href={`https://github.com/the-best-codes`}
-                  prefetch={true}
-                >
-                  <Image
-                    src={`/image/icons/github.svg`}
-                    alt="github"
-                    width={40}
-                    height={40}
-                    className="h-8 w-8 dark:invert"
-                    style={{
-                      maxWidth: "100%",
-                      height: "auto",
-                    }}
-                  />
-                </Link>
-                <Link
-                  target="_blank"
-                  href={`https://dev.to/best_codes`}
-                  prefetch={true}
-                >
-                  <Image
-                    src={`/image/icons/devdotto.svg`}
-                    alt="twitter"
-                    width={40}
-                    height={40}
-                    className="h-8 w-8 dark:invert"
-                    style={{
-                      maxWidth: "100%",
-                      height: "auto",
-                    }}
-                  />
-                </Link>
-                {/* <AuthButton /> */}
-              </div>
-            )}
+                <Image
+                  src={`/image/icons/github.svg`}
+                  alt="github"
+                  width={40}
+                  height={40}
+                  className="h-8 w-8 dark:invert"
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto",
+                  }}
+                />
+              </Link>
+              <Link
+                target="_blank"
+                href={`https://dev.to/best_codes`}
+                prefetch={true}
+              >
+                <Image
+                  src={`/image/icons/devdotto.svg`}
+                  alt="twitter"
+                  width={40}
+                  height={40}
+                  className="h-8 w-8 dark:invert"
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto",
+                  }}
+                />
+              </Link>
+              {/* <AuthButton /> */}
+            </div>
+          )}
         </header>
         {isMobile && (
           <motion.div

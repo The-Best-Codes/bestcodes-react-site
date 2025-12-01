@@ -65,62 +65,60 @@ export default function PinnedCarousel() {
       className="w-full max-w-40 md:max-w-xs mx-auto"
     >
       <CarouselContent>
-        {isLoading
-          ? (
-            <CarouselItem>
-              <div className="flex flex-col items-center justify-center">
-                <Skeleton className="w-32 h-32 md:w-64 md:h-64 rounded-lg object-cover" />
-                <Skeleton className="w-24 md:w-48 h-10 mt-4" />
-              </div>
-            </CarouselItem>
-          )
-          : (
-            (carouselData &&
-              carouselData.map((project: Project) => (
-                <CarouselItem key={project.name}>
-                  <Link
-                    prefetch={true}
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener"
-                    className="flex flex-col items-center justify-center"
-                  >
-                    <Image
-                      src={project?.coverImage?.src || "/image/not_found.png"}
-                      alt={`${project.name} cover image`}
-                      width={256}
-                      height={256}
-                      className="w-32 h-32 md:w-64 md:h-64 object-cover rounded-lg"
-                      style={{
-                        maxWidth: "100%",
-                      }}
-                    />
-                    <h3 className="text-xl font-bold mt-4 text-center text-blue-500 hover:underline max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
-                      {project.name}
-                    </h3>
-                  </Link>
-                </CarouselItem>
-              ))) || (
-              <CarouselItem>
-                <div className="flex flex-col items-center justify-center">
+        {isLoading ? (
+          <CarouselItem>
+            <div className="flex flex-col items-center justify-center">
+              <Skeleton className="w-32 h-32 md:w-64 md:h-64 rounded-lg object-cover" />
+              <Skeleton className="w-24 md:w-48 h-10 mt-4" />
+            </div>
+          </CarouselItem>
+        ) : (
+          (carouselData &&
+            carouselData.map((project: Project) => (
+              <CarouselItem key={project.name}>
+                <Link
+                  prefetch={true}
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener"
+                  className="flex flex-col items-center justify-center"
+                >
                   <Image
-                    src="/image/not_found.png"
-                    alt="Not Found"
+                    src={project?.coverImage?.src || "/image/not_found.png"}
+                    alt={`${project.name} cover image`}
                     width={256}
                     height={256}
                     className="w-32 h-32 md:w-64 md:h-64 object-cover rounded-lg"
                     style={{
                       maxWidth: "100%",
-                      height: "auto",
                     }}
                   />
                   <h3 className="text-xl font-bold mt-4 text-center text-blue-500 hover:underline max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
-                    Not Found
+                    {project.name}
                   </h3>
-                </div>
+                </Link>
               </CarouselItem>
-            )
-          )}
+            ))) || (
+            <CarouselItem>
+              <div className="flex flex-col items-center justify-center">
+                <Image
+                  src="/image/not_found.png"
+                  alt="Not Found"
+                  width={256}
+                  height={256}
+                  className="w-32 h-32 md:w-64 md:h-64 object-cover rounded-lg"
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto",
+                  }}
+                />
+                <h3 className="text-xl font-bold mt-4 text-center text-blue-500 hover:underline max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
+                  Not Found
+                </h3>
+              </div>
+            </CarouselItem>
+          )
+        )}
       </CarouselContent>
       <CarouselPrevious className="dark:bg-slate-900" />
       <CarouselNext className="dark:bg-slate-900" />

@@ -23,7 +23,7 @@ export const useProjects = () => {
 
   const updateProject = (project: Project) => {
     const updatedProjects = projects.map((p) =>
-      p.id === project.id ? project : p
+      p.id === project.id ? project : p,
     );
     saveProjects(updatedProjects);
   };

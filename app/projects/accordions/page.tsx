@@ -146,9 +146,10 @@ const AccordionEditor: React.FC = () => {
           (item, index) => ({
             id: `item-${index}`,
             question: item.textContent?.replace(/[+\-]/g, "").trim() || "",
-            answer: item.nextElementSibling
-              ?.querySelector("div")
-              ?.innerHTML?.trim() || "",
+            answer:
+              item.nextElementSibling
+                ?.querySelector("div")
+                ?.innerHTML?.trim() || "",
           }),
         );
 
@@ -157,7 +158,8 @@ const AccordionEditor: React.FC = () => {
           name: file.name.replace(".html", ""),
           header: headerElement?.textContent || "FAQ Title",
           subheader: subheaderElement?.textContent || "Some rule",
-          description: descriptionElement?.textContent ||
+          description:
+            descriptionElement?.textContent ||
             "Below are some frequently asked questions...",
           items: newItems,
         };
@@ -189,7 +191,9 @@ const AccordionEditor: React.FC = () => {
     value: string,
   ) => {
     setItems(
-      items.map((item) => item.id === id ? { ...item, [field]: value } : item),
+      items.map((item) =>
+        item.id === id ? { ...item, [field]: value } : item,
+      ),
     );
   };
 

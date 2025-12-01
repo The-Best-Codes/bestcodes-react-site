@@ -130,7 +130,7 @@ const MazeGenerator: React.FC = () => {
     const stack: [number, number][] = [[0, 0]];
     const visited: boolean[][] = maze.map((row) => row.map(() => false));
     const parent: ([number, number] | null)[][] = maze.map((row) =>
-      row.map(() => null)
+      row.map(() => null),
     );
 
     while (stack.length > 0) {

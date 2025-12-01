@@ -28,17 +28,19 @@ export function TerminalOutput({ lines, className }: TerminalOutputProps) {
       {lines.map((line, i) => (
         <p
           key={i}
-          className={line.startsWith("✔") || line.startsWith(" ✓")
-            ? "text-cyan-400"
-            : line === "$"
-            ? "text-green-400"
-            : line.includes("Total size")
-            ? "text-yellow-400 font-bold"
-            : line.match(/^[├└┌]/)
-            ? "text-blue-400"
-            : line.startsWith("du")
-            ? "text-purple-400"
-            : "text-gray-400"}
+          className={
+            line.startsWith("✔") || line.startsWith(" ✓")
+              ? "text-cyan-400"
+              : line === "$"
+                ? "text-green-400"
+                : line.includes("Total size")
+                  ? "text-yellow-400 font-bold"
+                  : line.match(/^[├└┌]/)
+                    ? "text-blue-400"
+                    : line.startsWith("du")
+                      ? "text-purple-400"
+                      : "text-gray-400"
+          }
         >
           {line}
         </p>

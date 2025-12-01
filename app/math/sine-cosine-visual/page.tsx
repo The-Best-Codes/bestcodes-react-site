@@ -102,8 +102,8 @@ export default function Component() {
       ctx.beginPath();
       for (let i = 0; i <= graphWidth; i++) {
         const x = centerX + radius + 30 + i;
-        const y = centerY +
-          Math.sin(angle - (i / graphWidth) * 4 * Math.PI) * radius;
+        const y =
+          centerY + Math.sin(angle - (i / graphWidth) * 4 * Math.PI) * radius;
         if (i === 0) {
           ctx.moveTo(x, y);
         } else {
@@ -118,8 +118,8 @@ export default function Component() {
     function drawCosineWave(angle: number) {
       ctx.beginPath();
       for (let i = 0; i <= graphHeight; i++) {
-        const x = centerX +
-          Math.cos(angle - (i / graphHeight) * 4 * Math.PI) * radius;
+        const x =
+          centerX + Math.cos(angle - (i / graphHeight) * 4 * Math.PI) * radius;
         const y = centerY + radius + 30 + i;
         if (i === 0) {
           ctx.moveTo(x, y);

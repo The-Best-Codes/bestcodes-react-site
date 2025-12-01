@@ -94,9 +94,11 @@ export default async function SiteDataPage() {
             </p>
             <div className="mt-2">
               <Badge variant="default" className="mr-2">
-                {siteData.isTypeScript
-                  ? <FileCode className="w-4 h-4 inline mr-1" />
-                  : <Code className="w-4 h-4 inline mr-1" />}
+                {siteData.isTypeScript ? (
+                  <FileCode className="w-4 h-4 inline mr-1" />
+                ) : (
+                  <Code className="w-4 h-4 inline mr-1" />
+                )}
                 {siteData.isTypeScript ? "TypeScript" : "JavaScript"}
               </Badge>
               {siteData.hasESLint && (

@@ -22,10 +22,12 @@ const Countdown = ({ days, hours, minutes, seconds }: Props) => {
   return (
     <NumberFlowGroup>
       <div
-        style={{
-          fontVariantNumeric: "tabular-nums",
-          "--number-flow-char-height": "0.85em",
-        } as CSSProperties}
+        style={
+          {
+            fontVariantNumeric: "tabular-nums",
+            "--number-flow-char-height": "0.85em",
+          } as CSSProperties
+        }
         className="text-6xl sm:text-8xl flex items-baseline font-semibold"
       >
         <NumberFlow

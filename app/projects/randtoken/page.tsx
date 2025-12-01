@@ -103,17 +103,21 @@ const RandomTokenGenerator = () => {
                 onClick={copyToClipboard}
                 disabled={copyStatus !== "idle"}
                 size="icon"
-                aria-label={copyStatus === "idle"
-                  ? "Copy to Clipboard"
-                  : copyStatus === "success"
-                  ? "Copied!"
-                  : "Error"}
+                aria-label={
+                  copyStatus === "idle"
+                    ? "Copy to Clipboard"
+                    : copyStatus === "success"
+                      ? "Copied!"
+                      : "Error"
+                }
               >
-                {copyStatus === "success"
-                  ? <Check className="w-4 h-4 text-green-500" />
-                  : copyStatus === "error"
-                  ? <X className="w-4 h-4 text-red-500" />
-                  : <Copy className="w-4 h-4" />}
+                {copyStatus === "success" ? (
+                  <Check className="w-4 h-4 text-green-500" />
+                ) : copyStatus === "error" ? (
+                  <X className="w-4 h-4 text-red-500" />
+                ) : (
+                  <Copy className="w-4 h-4" />
+                )}
               </Button>
             </div>
           </div>
@@ -149,7 +153,8 @@ const RandomTokenGenerator = () => {
                     id={type}
                     checked={enabled}
                     onCheckedChange={(checked) =>
-                      handleCharTypeChange(type, "enabled", checked)}
+                      handleCharTypeChange(type, "enabled", checked)
+                    }
                   />
                   <Label htmlFor={type} className="capitalize">
                     {type}
@@ -168,7 +173,8 @@ const RandomTokenGenerator = () => {
                         type,
                         "frequency",
                         parseInt(e.target.value),
-                      )}
+                      )
+                    }
                     disabled={!enabled}
                     className="w-16 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                   />

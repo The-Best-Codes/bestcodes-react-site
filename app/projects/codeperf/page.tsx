@@ -43,8 +43,7 @@ const factorial = (n) => {
     },
     {
       id: 3,
-      code:
-        "const result = 2432902008176640000; // Pre-calculated factorial of 20; this should be faster",
+      code: "const result = 2432902008176640000; // Pre-calculated factorial of 20; this should be faster",
     },
   ]);
 
@@ -227,7 +226,8 @@ const factorial = (n) => {
                       value={globalCode}
                       onValueChange={(code) => setGlobalCode(code)}
                       highlight={(code) =>
-                        highlight(code, languages.javascript, "javascript")}
+                        highlight(code, languages.javascript, "javascript")
+                      }
                       padding={10}
                       style={{
                         fontFamily: '"Fira code", "Fira Mono", monospace',
@@ -249,11 +249,13 @@ const factorial = (n) => {
                           onValueChange={(code) =>
                             setMiniCodes(
                               miniCodes.map((c) =>
-                                c.id === miniCode.id ? { ...c, code: code } : c
+                                c.id === miniCode.id ? { ...c, code: code } : c,
                               ),
-                            )}
+                            )
+                          }
                           highlight={(code) =>
-                            highlight(code, languages.javascript, "javascript")}
+                            highlight(code, languages.javascript, "javascript")
+                          }
                           padding={10}
                           style={{
                             fontFamily: '"Fira code", "Fira Mono", monospace',
@@ -290,9 +292,11 @@ const factorial = (n) => {
                 disabled={isRunning}
                 className="dark:bg-gray-700 dark:text-white"
               >
-                {isRunning
-                  ? <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  : <Play className="h-4 w-4 mr-2" />}
+                {isRunning ? (
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                ) : (
+                  <Play className="h-4 w-4 mr-2" />
+                )}
                 {isRunning ? "Running..." : "Run Tests"}
               </Button>
             </CardFooter>
@@ -314,11 +318,9 @@ const factorial = (n) => {
                   <p className="text-sm text-center mt-2 dark:text-gray-300">
                     {Math.ceil((progress / 100) * miniCodes.length) === 0
                       ? "Initializing..."
-                      : `Running code ${
-                        Math.ceil(
+                      : `Running code ${Math.ceil(
                           (progress / 100) * miniCodes.length,
-                        )
-                      } of ${miniCodes.length}`}
+                        )} of ${miniCodes.length}`}
                   </p>
                 </div>
               )}
@@ -369,9 +371,7 @@ const factorial = (n) => {
                       {
                         name: "Iterations",
                         type: "bar",
-                        data: results.map((r) =>
-                          r.iterations
-                        ),
+                        data: results.map((r) => r.iterations),
                         itemStyle: {
                           color: "var(--color-iterations, #1f77b4)",
                           borderRadius: [8, 8, 0, 0],
@@ -399,9 +399,12 @@ const factorial = (n) => {
               <div className="flex gap-2 font-medium leading-none text-xl dark:text-white">
                 {results.length > 0 && (
                   <>
-                    Best performance: Code {results.reduce((max, obj) =>
-                      obj.iterations > max.iterations ? obj : max
-                    ).id}
+                    Best performance: Code{" "}
+                    {
+                      results.reduce((max, obj) =>
+                        obj.iterations > max.iterations ? obj : max,
+                      ).id
+                    }
                   </>
                 )}
               </div>

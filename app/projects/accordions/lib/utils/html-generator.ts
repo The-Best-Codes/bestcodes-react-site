@@ -36,18 +36,16 @@ export const generateHTML = (
       <div><span style="font-size:18px;">${description}</span></div>
       <br />
       <div class="my-accordion">
-        ${
-    items
-      .map(
-        (item) => `
+        ${items
+          .map(
+            (item) => `
           <button class="menu" data-editor-id="${item.id}">${item.question}<span class="arrow rarrow">+</span><span class="arrow darrow">-</span></button>
           <div class="panel close">
             <div style="padding:10px">${item.answer}</div>
           </div>
         `,
-      )
-      .join("")
-  }
+          )
+          .join("")}
       </div>
     </div>
   </div>
