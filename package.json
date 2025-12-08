@@ -50,7 +50,7 @@
     "echarts-for-react": "^3.0.5",
     "embla-carousel-react": "^8.6.0",
     "js-levenshtein": "^1.1.6",
-    "lucide-react": "^0.555.0",
+    "lucide-react": "^0.556.0",
     "motion": "^12.23.25",
     "next": "^16.0.7",
     "node-html-parser": "^7.0.1",
