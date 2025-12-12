@@ -81,16 +81,16 @@ export default async function SiteDataPage() {
               <strong>Dev Dependencies:</strong> {siteData.devDependencyCount}
             </p>
             <p>
-              <strong>Scripts:</strong> {siteData.scriptCount}
+              <strong>Scripts:</strong> Redacted
             </p>
           </InfoCard>
 
           <InfoCard title="Environment" icon={<Server className="w-6 h-6" />}>
             <p>
-              <strong>Node.js:</strong> {siteData.nodeVersion}
+              <strong>Node.js:</strong> Redacted
             </p>
             <p>
-              <strong>Next.js:</strong> {siteData.nextVersion}
+              <strong>Next.js:</strong> Redacted
             </p>
             <div className="mt-2">
               <Badge variant="default" className="mr-2">
