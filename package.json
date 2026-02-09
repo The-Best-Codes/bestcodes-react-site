@@ -49,7 +49,7 @@
     "motion": "^12.28.1",
     "next": "^16.1.4",
     "node-html-parser": "^7.0.2",
-    "nodemailer": "^7.0.12",
+    "nodemailer": "^8.0.1",
     "prismjs": "^1.30.0",
     "qrcode.react": "^4.2.0",
     "react": "^19.2.3",
