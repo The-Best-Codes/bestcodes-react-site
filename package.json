@@ -57,7 +57,7 @@
     "react-dom": "^19.2.3",
     "react-hook-form": "^7.71.1",
     "react-rough-notation": "^1.0.8",
-    "react-scan": "^0.4.3",
+    "react-scan": "^0.5.3",
     "react-simple-code-editor": "^0.14.1",
     "recharts": "^3.6.0",
     "sharp": "^0.34.5",
