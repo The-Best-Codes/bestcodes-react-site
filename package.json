@@ -22,7 +22,7 @@
     "@hello-pangea/dnd": "^18.0.1",
     "@hookform/resolvers": "^5.2.2",
     "@marsidev/react-turnstile": "^1.4.1",
-    "@number-flow/react": "^0.5.11",
+    "@number-flow/react": "^0.6.0",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-label": "^2.1.8",
     "@radix-ui/react-progress": "^1.1.8",
