@@ -1,5 +1,10 @@
 <img src="https://github.com/user-attachments/assets/51c946e3-7342-4075-8cc6-95092b1d17fe" alt="screenshot" for="cover" width=480 />
 
+
+> [!NOTE]
+> This website is no longer maintained. You can view the last snapshot of the website here:
+> https://web.archive.org/web/20260426135442/https://old-site.bestcodes.dev/
+
 ---
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with
