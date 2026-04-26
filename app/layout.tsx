@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { Monitoring } from "react-scan/monitoring/next";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -68,12 +67,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Monitoring
-          apiKey="AWmxfYKd6GJbhpEEBTXRyo9n3Cn9TlSr" // Safe to expose publically
-          url="https://monitoring.react-scan.com/api/v1/ingest"
-          commit={process.env.GIT_COMMIT_HASH}
-          branch={process.env.GIT_BRANCH}
-        />
         {children}
       </body>
     </html>
