@@ -1,11 +1,11 @@
-import { withSentryConfig } from "@sentry/nextjs";
-import ReactComponentName from "react-scan/react-component-name/webpack";
+// import { withSentryConfig } from "@sentry/nextjs";
+// import ReactComponentName from "react-scan/react-component-name/webpack";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  webpack: (config) => {
-    config.plugins.push(ReactComponentName({}));
-    return config;
-  },
+  // webpack: (config) => {
+  //   config.plugins.push(ReactComponentName({}));
+  //   return config;
+  // },
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -25,6 +25,7 @@ const nextConfig = {
   reactCompiler: true,
 };
 
+/*
 export default withSentryConfig(nextConfig, {
   // For all available options, see:
   // https://github.com/getsentry/sentry-webpack-plugin#options
@@ -58,3 +59,4 @@ export default withSentryConfig(nextConfig, {
   // Automatically tree-shake Sentry logger statements to reduce bundle size
   disableLogger: true,
 });
+*/
